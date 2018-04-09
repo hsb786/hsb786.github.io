@@ -1,0 +1,18 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> 一些小技巧 · HuShengBin’s blog</title><meta name="description" content="一些小技巧 - HuShengBin"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/tx.jpg"><link rel="stylesheet" href="/css/prontera.css"><link rel="search" type="application/opensearchdescription+xml" href="https://hsb786.github.io/atom.xml" title="HuShengBin’s blog"></head><body><header class="feature-header"><nav class="component-nav"><ul><div class="logo-container"><a href="/"><h2 class="title">HuShengBin’s blog</h2></a></div><a href="/" target="_self" class="li component-nav-item"><p>主页</p></a><a href="/archives" target="_self" class="li component-nav-item"><p>归档</p></a><ul class="shortcut-icons"><a href="https://github.com/hsb786" target="_blank"><img src="/images/github.svg" class="icon"></a><a href="https://www.douban.com/people/122973953/" target="_blank"><img src="/images/douban.png" class="icon"></a></ul></ul></nav></header><main class="container"><div id="post-container"><div class="post"><article class="post-block"><h1 class="post-title">一些小技巧</h1><div class="post-info">2018年4月8日</div><div class="post-content"><p><strong>一些小技巧</strong></p>
+<hr>
+<p>位运算直接对内存数据进行操作，不需要转成十进制，因此处理速度非常快</p>
+<p> X % 2^n = X &amp; (2^n-1)</p>
+<hr>
+<p><strong>判段一个数组是否包含某个值</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Set&lt;String&gt; set=new HashSet&lt;String&gt;(Arrays.asList(arr));  </span><br><span class="line">return set.contains(targetValue);</span><br></pre></td></tr></table></figure></p>
+<p>效率慢，要将数组压入Collection类型中，首先要将数组元素便利一遍，然后再使用集合类做其它操作。</p>
+<p>可以使用Apache Commons类库中提供的<strong>ArrayUtils</strong>类的<strong>contains</strong>方法<br>contains内部调用indexOf方法</p>
+<p><img src="https://github.com/hsb786/DOC/blob/master/files/img/indexOf.png" alt="indexOf"></p>
+</div></article></div><div id="disqus_thread"></div></div><script>var disqus_shortname = 'angrypowman';
+var disqus_identifier = '2018/04/08/skills/';
+var disqus_title = '一些小技巧';
+var disqus_url = 'https://hsb786.github.io/2018/04/08/skills/';
+(function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();</script><script id="dsq-count-scr" src="//angrypowman.disqus.com/count.js" async></script></main><footer class="footer-container"><div class="paginator"><a href="/2018/04/08/SpringMVC/" class="prev">prev_post</a><a href="/2018/04/08/passByValue/" class="next">next_post</a></div><div class="copyright"><p>© 2017 - 2018 <a href="https://hsb786.github.io">HuShengBin</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/AngryPowman/hexo-theme-prontera" target="_blank">hexo-theme-prontera</a>.</p></div></footer><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"angrypowman",'auto');ga('send','pageview');</script></body></html>

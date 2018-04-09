@@ -1,0 +1,40 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> 值传递和引用传递 · HuShengBin’s blog</title><meta name="description" content="值传递和引用传递 - HuShengBin"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/tx.jpg"><link rel="stylesheet" href="/css/prontera.css"><link rel="search" type="application/opensearchdescription+xml" href="https://hsb786.github.io/atom.xml" title="HuShengBin’s blog"></head><body><header class="feature-header"><nav class="component-nav"><ul><div class="logo-container"><a href="/"><h2 class="title">HuShengBin’s blog</h2></a></div><a href="/" target="_self" class="li component-nav-item"><p>主页</p></a><a href="/archives" target="_self" class="li component-nav-item"><p>归档</p></a><ul class="shortcut-icons"><a href="https://github.com/hsb786" target="_blank"><img src="/images/github.svg" class="icon"></a><a href="https://www.douban.com/people/122973953/" target="_blank"><img src="/images/douban.png" class="icon"></a></ul></ul></nav></header><main class="container"><div id="post-container"><div class="post"><article class="post-block"><h1 class="post-title">值传递和引用传递</h1><div class="post-info">2018年4月8日</div><div class="post-content"><p><strong>值传递和引用传递</strong></p>
+<hr>
+<p><strong>值传递</strong>  指在调用函数时将实际参数<em>复制</em>一份传递到函数中，那么在函数中对参数所进行的修改，将不会影响到实际参数。  </p>
+<p><strong>引用传递</strong> 指在调用函数时将实际参数的地址<em>直接</em>传递到函数中，那么在函数中对参数所进行的修改，将影响到实际参数。</p>
+<table>
+<thead>
+<tr>
+<th>求值策略</th>
+<th>求值时间</th>
+<th>求值方式</th>
+<th>根本区别</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>值传递</td>
+<td>调用前</td>
+<td>值的结果（原值的副本）</td>
+<td>会创建副本</td>
+</tr>
+<tr>
+<td>引用传递</td>
+<td>调用前</td>
+<td>原值（原始对象，无副本）</td>
+<td>不创建副本</td>
+</tr>
+</tbody>
+</table>
+<p><strong>值传递和引用传递的区别并不是传递的内容，而是实参到底有没有被复制一份到形参</strong></p>
+<p>java只有值传递，不存在引用传递</p>
+<p>java在传递引用类型数据时，把实际参数的内存地址复制了一份，传递给了形参</p>
+</div></article></div><div id="disqus_thread"></div></div><script>var disqus_shortname = 'angrypowman';
+var disqus_identifier = '2018/04/08/passByValue/';
+var disqus_title = '值传递和引用传递';
+var disqus_url = 'https://hsb786.github.io/2018/04/08/passByValue/';
+(function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();</script><script id="dsq-count-scr" src="//angrypowman.disqus.com/count.js" async></script></main><footer class="footer-container"><div class="paginator"><a href="/2018/04/08/skills/" class="prev">prev_post</a><a href="/2018/04/08/performsSyn/" class="next">next_post</a></div><div class="copyright"><p>© 2017 - 2018 <a href="https://hsb786.github.io">HuShengBin</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/AngryPowman/hexo-theme-prontera" target="_blank">hexo-theme-prontera</a>.</p></div></footer><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"angrypowman",'auto');ga('send','pageview');</script></body></html>

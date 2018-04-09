@@ -1,0 +1,150 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> 区别 · HuShengBin’s blog</title><meta name="description" content="区别 - HuShengBin"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/tx.jpg"><link rel="stylesheet" href="/css/prontera.css"><link rel="search" type="application/opensearchdescription+xml" href="https://hsb786.github.io/atom.xml" title="HuShengBin’s blog"></head><body><header class="feature-header"><nav class="component-nav"><ul><div class="logo-container"><a href="/"><h2 class="title">HuShengBin’s blog</h2></a></div><a href="/" target="_self" class="li component-nav-item"><p>主页</p></a><a href="/archives" target="_self" class="li component-nav-item"><p>归档</p></a><ul class="shortcut-icons"><a href="https://github.com/hsb786" target="_blank"><img src="/images/github.svg" class="icon"></a><a href="https://www.douban.com/people/122973953/" target="_blank"><img src="/images/douban.png" class="icon"></a></ul></ul></nav></header><main class="container"><div id="post-container"><div class="post"><article class="post-block"><h1 class="post-title">区别</h1><div class="post-info">2018年4月9日</div><div class="post-content"><p><strong>一些区别</strong></p>
+<hr>
+<p><strong>sleep和wait区别</strong></p>
+<ol>
+<li>sleep是Thread类的static方法； wait是Object类的方法</li>
+<li>sleep()睡眠时保持对象锁； wait释放锁</li>
+<li>sleep可以放在任何地方； wait()必须放在synchronized block中，否则会在runtime是扔出IllegalMonitorStateExcetion异常</li>
+</ol>
+<hr>
+<p><strong>synchronized和volatile区别</strong></p>
+<ol>
+<li>volatile是线程同步的轻量级实现，性能比synchronized好</li>
+<li>volatile只能修饰变量； synchronized可修饰方法和代码块</li>
+<li>volatile能保证数据可见性，不保证原子性； synchronized可以保证原子性，也可以间接保证可见性。<br><em>synchronized会将私有内存和公共内存中的数据进行同步</em></li>
+<li>volatile解决的是变量在多个线程间的可见性； synchronized解决的是多个线程访问资源的同步性</li>
+</ol>
+<hr>
+<p><strong>内部类</strong></p>
+<p>在类中定义一个类(私有内部类，静态内部类)<br>在方法中定义一个类(局部内部类，匿名内部类)  </p>
+<ol>
+<li>私有内部类<br>编译器做的手脚<ul>
+<li>在内部类中创建了包可见构造器，从而使外部类获得了创建权限</li>
+<li>在外部类中创建了访问私有变量的静态方法，从而使内部类获得了范围权限</li>
+</ul>
+</li>
+<li>静态内部类<br>只能访问其外部类的静态成员</li>
+<li>局部内部类<br>没有修饰符，局部内部类只能范围该方法中的局部变量，并且这些局部变量一定要是final修饰的产量或者隐含是final的(java8)</li>
+<li>匿名内部类<br>不能抽象；仅能被使用一次；不能存在静态成员变量和方法<br><em>只有静态内部类可以访问静态成员变量</em></li>
+</ol>
+<hr>
+<p> <strong>Session和Cookie的区别</strong></p>
+<p> <strong>Session</strong>是在服务端保存的一个数据结构，用来跟踪用户的状态，这个数据可以保存在集群、数据库、文件中。<br> <strong>Cookie</strong>是客户端保存用户信息的一种机制，用来记录用户的一些信息，也是实现Session的一种方式。<br> 客户端传JSESSIONID，服务端就可以通过这个ID，来将存储到服务端的数据取出</p>
+<hr>
+<p> <strong>Servlet和Filter的区别</strong></p>
+<p> Filter对用户请求进行预处理，接着将请求交给Servlet进行处理并生成响应，最后Filter再对响应的数据进行后处理。</p>
+<hr>
+<p> <strong>强、软、弱、虚引用</strong>  </p>
+<p><strong>强引用</strong> Object obj=new Object()，只要引用还在，就不会被回收<br><strong>软引用</strong>内存不够才会被回收<br><strong>弱引用</strong>下一次垃圾收集器工作时会被回收。<br><strong>虚引用</strong>随时可能被回收，目的是能在这个对象被回收时收到一个系统通知。<br>垃圾回收期是一个优先级较低的线程，并不一定能迅速发现弱引用对象  </p>
+<hr>
+<p><strong>HashMap和Hashtable的区别</strong></p>
+<p><em>先吐槽一下Hashtable的命名，为啥t要小写</em>  </p>
+<ol>
+<li>Hashtable是线程安全的； HashMap不是</li>
+<li>Hashtable不允许有null的KV； HashMap运行</li>
+<li>Hashtable继承Dictionary类； HashMap继承AbstractMap</li>
+<li>HashMap有一个子类LinkedHashMap，对这个类对象进行迭代时，它的顺序是有序的。可以轻易的将LinkedHashMap转换成HashMap； Hashtable不好实现</li>
+</ol>
+<hr>
+<p><strong>join和sleep的区别</strong>  </p>
+<p>join底层调用wait方法，执行到wait释放锁<br>sleep在睡眠时不释放锁</p>
+<hr>
+<p><strong>JDK动态代理和CGLIB代理的区别</strong></p>
+<ol>
+<li>JDK动态动态代理是利用反射机制生存一个实现代理接口的匿名类，在调用具体方法前调用InvokeHandler来处理。JDK动态代理只能对<em>实现了接口的类生成代理，而不能针对类</em></li>
+<li>CGLIB动态代理是利用ASM开源包，将目标对象类的class文件加载进来，通过修改其字节码生成子类来处理。CGLIB是<em>针对类实现代理</em>，主要是对指定的类生成一个子类，覆盖其中的方法。</li>
+<li>JDK动态代理是面向接口的，在创建代理实现类时比CGLIB要快，创建代理速度快。CGLIB动态代理是通过字节码底层继承要代理类的目标类来实现，<em>创建速度没有JDK动态代理快，但是运行速度比JDK动态代理快</em>。</li>
+</ol>
+<hr>
+<p><strong>重载和重写的区别</strong></p>
+<p><strong>重载</strong>： 方法有同样的名称，但是参数列表不同</p>
+<p><strong>重写</strong>：在java的子类与父类中有两个名称、参数列表都相同的方法的情况。由于它们具有相同的方法签名，所以子类中的新方法将覆盖父类中原有的方法</p>
+<p><strong>区别</strong></p>
+<table>
+<thead>
+<tr>
+<th>重载</th>
+<th>重写</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>编译期概念，遵循“编译期绑定”，即在编译时根据参数变量的类型判断应该调用哪个方法</td>
+<td>运行期概念，遵循“运行期绑定”，即在运行的时候，根据引用变量所指向的实际对象的类型来调用方法  </td>
+</tr>
+<tr>
+<td>方法签名必须不同</td>
+<td>方法签名必须一样  </td>
+</tr>
+<tr>
+<td>返回类型可以不同</td>
+<td>返回类型必须相同</td>
+</tr>
+<tr>
+<td>无限制</td>
+<td>更好的访问，不能抛出更广泛的异常（遵循里式替换原则）</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<p><strong>组合与继承的区别和联系</strong></p>
+<blockquote>
+<p>在继承结构中，父类的内部细节对于子类是可见的。所以我们通常也可以说通过继承的代码复用是一种白盒式代码复用。（如果基类的实现发生改变，那么派生类的实现也将随之改变。这样就导致了子类行为的不可预知性；)  </p>
+<p>组合是通过对现有的对象进行拼装（组合）产生新的、更复杂的功能。因为在对象之间，各自的内部细节是不可见的，所以我们也说这种方式的代码复用是黑盒式代码复用。（因为组合中一般都定义一个类型，所以在编译期根本不知道具体会调用哪个实现类的方法）  </p>
+<p>继承，在写代码的时候就要指名具体继承哪个类，所以，在编译期就确定了关系。（从基类继承来的实现是无法在运行期动态改变的，因此降低了应用的灵活性。）</p>
+<p>组合，在写代码的时候可以采用面向接口编程。所以，类的组合关系一般在运行期确定。  </p>
+</blockquote>
+<p><strong>优缺点对比</strong></p>
+<table>
+<thead>
+<tr>
+<th>组 合 关 系</th>
+<th>继 承 关 系</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>优点：不破坏封装，整体类与局部类之间松耦合，彼此相对独立</td>
+<td>缺点：破坏封装，子类与父类之间紧密耦合，子类依赖于父类的实现，子类缺乏独立性</td>
+</tr>
+<tr>
+<td>优点：具有较好的可扩展性</td>
+<td>缺点：支持扩展，但是往往以增加系统结构的复杂度为代价</td>
+</tr>
+<tr>
+<td>优点：支持动态组合。在运行时，整体对象可以选择不同类型的局部对象</td>
+<td>缺点：不支持动态继承。在运行时，子类无法选择不同的父类</td>
+</tr>
+<tr>
+<td>优点：整体类可以对局部类进行包装，封装局部类的接口，提供新的接口</td>
+<td>缺点：子类不能改变父类的接口</td>
+</tr>
+<tr>
+<td>缺点：整体类不能自动获得和局部类同样的接口</td>
+<td>优点：子类能自动继承父类的接口</td>
+</tr>
+<tr>
+<td>缺点：创建整体类的对象时，需要创建所有局部类的对象</td>
+<td>优点：创建子类的对象时，无须创建父类的对象</td>
+</tr>
+</tbody>
+</table>
+<p><strong>如何选择</strong></p>
+<blockquote>
+<p>继承要慎用，其使用场合仅限于你确信使用该技术有效的情况。一个判断方法是，问一问自己是否需要从新类向基类进行向上转型。如果是必须的，则继承是必要的。反之则应该好好考虑是否需要继承。&lt;&lt;java编程思想&gt;&gt;  </p>
+<p>只有当子类真正是超类的子类型时，才适合用继承。换句话说，对于两个类A和B，只有当两者之间确实存在is-a关系的时候，类B才应该继承类A。&lt;<effective java="">&gt;</effective></p>
+</blockquote>
+<hr>
+<p><strong>Compareable和Comparator</strong></p>
+<p><strong>Comparable</strong>：一个实现了Comparable接口的类，可以让其自身的对象和其它对象进行比较。也就是说，同一个类的对象之间要想比较，对应的类就要实现Compareable接口，并实现<em>compareTo()</em>方法。  </p>
+<p><strong>Comparator</strong>：不改变原有的类。通过定义一个类实现Comparator接口，重写<em>compare()</em>方法。  </p>
+<p>Comparator通常用于排序。Java中的Collectinos和Arrays都包括排序的sort方法，该方法可以接受一个Comparator的实例(比较器)来进行排序；new TreeSet&lt;&gt;(new Comparator())</p>
+</div></article></div><div id="disqus_thread"></div></div><script>var disqus_shortname = 'angrypowman';
+var disqus_identifier = '2018/04/09/distinguish/';
+var disqus_title = '区别';
+var disqus_url = 'https://hsb786.github.io/2018/04/09/distinguish/';
+(function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();</script><script id="dsq-count-scr" src="//angrypowman.disqus.com/count.js" async></script></main><footer class="footer-container"><div class="paginator"><a href="/2018/04/09/needFocus/" class="prev">prev_post</a><a href="/2018/04/09/easyForget/" class="next">next_post</a></div><div class="copyright"><p>© 2017 - 2018 <a href="https://hsb786.github.io">HuShengBin</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/AngryPowman/hexo-theme-prontera" target="_blank">hexo-theme-prontera</a>.</p></div></footer><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"angrypowman",'auto');ga('send','pageview');</script></body></html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> 需要注意的一些东西 · HuShengBin’s blog</title><meta name="description" content="需要注意的一些东西 - HuShengBin"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/tx.jpg"><link rel="stylesheet" href="/css/prontera.css"><link rel="search" type="application/opensearchdescription+xml" href="https://hsb786.github.io/atom.xml" title="HuShengBin’s blog"></head><body><header class="feature-header"><nav class="component-nav"><ul><div class="logo-container"><a href="/"><h2 class="title">HuShengBin’s blog</h2></a></div><a href="/" target="_self" class="li component-nav-item"><p>主页</p></a><a href="/archives" target="_self" class="li component-nav-item"><p>归档</p></a><ul class="shortcut-icons"><a href="https://github.com/hsb786" target="_blank"><img src="/images/github.svg" class="icon"></a><a href="https://www.douban.com/people/122973953/" target="_blank"><img src="/images/douban.png" class="icon"></a></ul></ul></nav></header><main class="container"><div id="post-container"><div class="post"><article class="post-block"><h1 class="post-title">需要注意的一些东西</h1><div class="post-info">2018年4月9日</div><div class="post-content"><p><strong>需要注意的一些东西</strong></p>
+<hr>
+<p><strong>Streams</strong></p>
+<ul>
+<li>引入的原因<ul>
+<li>声明性方式处理数据集合</li>
+<li>透明的进行处理，提高性能  </li>
+</ul>
+</li>
+<li>流与集合<ul>
+<li>集合与流的差异就在于什么时候进行计算<ul>
+<li>集合是内存中的数据结构，包含数据结构中目前所有的值</li>
+<li>流的元素则是按需计算/生存</li>
+</ul>
+</li>
+<li>遍历数据的方式<ul>
+<li>集合使用Collection接口，需要用户去做迭代，称为外部迭代</li>
+<li>流的Streams库使用内部迭代  </li>
+</ul>
+</li>
+</ul>
+</li>
+<li>流的使用<ul>
+<li>一个数据源（如集合）来执行一个查询</li>
+<li>一个中间操作链，形成一条流的流水线</li>
+<li>一个终端操作，执行流水线，并能生产结果</li>
+</ul>
+</li>
+<li>流的操作类型<ul>
+<li><strong>Intermediate</strong> : 一个流后面跟随零个或多个intermediate操作。其目的主要是打开流，做出某种程度的数据映射/过滤，然后返回一个新的流，交给下一个操作使用。这类操作都是<em>惰性化的</em>，也就是说，仅仅调用到这类方法，并没有真正开始流的遍历</li>
+<li><strong>Terminal</strong> ： 一个流只能有一个terminal操作，当这个操作执行后，流就被使用“光”了，无法再被操作。所以这必定是流的<em>最后一根操作</em>。terminal操作的执行，<em>才会真正开始流的变量</em>  </li>
+</ul>
+</li>
+</ul>
+<hr>
+<p><strong>happens-before</strong></p>
+<p>在JMM中，如果一个操作执行的结果需要对另一个操作可见，那么这两个操作之间必须要存在happens-before关系<br>需要注意的是，上面提到的两个操作可以是在不同线程之间的，而且并不意味着前一个操作必须要在后一个操作之前执行，仅仅要求前一个操作的执行结果对后一个操作可见  </p>
+<ul>
+<li>happends-before规则<ul>
+<li>程序顺序规则： 单个线程中的每个操作，happens-before于该线程中的任意后续操作</li>
+<li>监视器锁规则： 对一个锁的解锁，happens-before于随后对这个锁的加锁</li>
+<li>volatile变量规则： 对一个volatile变量的写，happends-before于任意后续对这个volatile变量的读  </li>
+<li>传递性： 如果A happeens-before B，且 B happeend-before C，那么A happeens-before C  </li>
+<li>join规则： 如果线程A执行操作ThreadB.join()成功返回，那么线程B中的任意操作happeens-before与线程A从ThreadB.join()操作成功返回  </li>
+</ul>
+</li>
+</ul>
+<hr>
+<p><strong>fail-fast</strong></p>
+<p>fail-fast机制是java集合(Collection)中的一种错误机制。当多个线程对同一集合的内容进行操作时，就可能会产生fail-fast事件。  </p>
+<p>例如：当某一个线程A通过iterator去遍历某集合的过程中，若该集合的内容被其他线程所改变了；那么线程A访问集合时，就会抛出ConcurrentModificationException异常，产生fail-fast事件  </p>
+<p>要了解fail-fast机制，我们首先要对ConcurrentModificationException 异常有所了解。当方法检测到对象的并发修改，但不允许这种修改时就抛出该异常。同时需要注意的是，该异常不会始终指出对象已经由不同线程并发修改，如果单线程违反了规则，同样也有可能会抛出改异常。<br>诚然，迭代器的快速失败行为无法得到保证，它不能保证一定会出现该错误，但是快速失败操作会尽最大努力抛出ConcurrentModificationException异常</p>
+<p>当使用fail-fast iterator对Collection或对Map进行操作过程中尝试直接修改Collection/Map的内容时，即使是在单线程下运行，java.util.ConcurrentModificationException异常也将抛出  </p>
+<p>Iterator是工作在一个独立的线程，并且拥有一个mutex锁。<em>Iterator被创建之后会建立一个指向原来对象的单链索引表，当原来对象发生变化时，这个索引表的内容不会同步该表，所以当索引指针往后移动的时候就找不到要迭代的对象，所以按照fail-fast原则Iterator会马上抛出ConsurrentModificationException异常</em>。</p>
+<p>所以Iterator在工作的时候是不允许被迭代的对象被改变的。但你可以使用Iterator本身的方法remove()来删除对象，Iteraror.remove()方法会在删除当前迭代对象的同时维护索引的一致性。</p>
+<hr>
+<p><strong>数据库三大范式</strong></p>
+<ol>
+<li>1NF：字段不可再分</li>
+<li>2NF：主键依赖，一张表里的数据，必须是跟主键相关的</li>
+<li>3NF：任意两个表不能出现重复的非主键字段</li>
+</ol>
+<hr>
+<p><strong>设计模式六大原则</strong></p>
+<p><strong>单一职责(Single Responsibility Principle)</strong>：一个类只负责一个功能领域中的相应职责</p>
+<p><strong>开闭(Open-Closed Principle)</strong>：对扩展开放，对修改关闭</p>
+<p><strong>里氏替换(Liskov Subsitution Principle)</strong>：子类能出现在基类出现的地方</p>
+<p><strong>依赖倒置(Dependency Inversion Principle)</strong>：针对接口编程，而不是针对实现类编程</p>
+<p><strong>接口隔离(Interface Segregation Principle)</strong>：使用多个专门的接口，而不使用单一的总接口</p>
+<p><strong>迪米特(Law of Demeter)</strong>：一个类尽可能少的与其它类发生相互作用</p>
+</div></article></div><div id="disqus_thread"></div></div><script>var disqus_shortname = 'angrypowman';
+var disqus_identifier = '2018/04/09/needFocus/';
+var disqus_title = '需要注意的一些东西';
+var disqus_url = 'https://hsb786.github.io/2018/04/09/needFocus/';
+(function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();</script><script id="dsq-count-scr" src="//angrypowman.disqus.com/count.js" async></script></main><footer class="footer-container"><div class="paginator"><a href="/2018/04/09/distinguish/" class="next">next_post</a></div><div class="copyright"><p>© 2017 - 2018 <a href="https://hsb786.github.io">HuShengBin</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/AngryPowman/hexo-theme-prontera" target="_blank">hexo-theme-prontera</a>.</p></div></footer><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"angrypowman",'auto');ga('send','pageview');</script></body></html>
