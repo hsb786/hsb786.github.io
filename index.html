@@ -215,7 +215,7 @@
         
             
             <p>或者直接用Stack</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">   /**</span><br><span class="line"> * 维护两个节点，一个指向当前节点，一个指向下一个节点 </span><br><span class="line"> * 缺点，需要new 对象，占用内存</span><br><span class="line"> * @author: husb</span><br><span class="line"> * @date: 2018年4月10日 下午7:44:22</span><br><span class="line"> */</span><br><span class="line">private static ListNode reverseList(ListNode head) &#123;</span><br><span class="line">	ListNode result = new ListNode(head.data);</span><br><span class="line">	ListNode t;</span><br><span class="line">	while (head.next != null) &#123;</span><br><span class="line">		t = result;</span><br><span class="line">		result = new ListNode(head.next.data);</span><br><span class="line">		result.next = t;</span><br><span class="line">		head = head.next;</span><br><span class="line">	&#125;</span><br><span class="line">	return result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * @Description: 需要维护三个节点，当前，前一个，下一个</span><br><span class="line"> * @author: husb   </span><br><span class="line"> * @date: 2018年4月10日 下午7:57:58 </span><br><span class="line"> */</span><br><span class="line">private static ListNode reverseList2(ListNode head) &#123;</span><br><span class="line">	ListNode result = null;</span><br><span class="line">	ListNode t = head;</span><br><span class="line">	ListNode preNode = null;</span><br><span class="line">	while (t != null) &#123;</span><br><span class="line">		ListNode nextNode = t.next;</span><br><span class="line">		if (nextNode == null) &#123;</span><br><span class="line">			result = t;</span><br><span class="line">		&#125;</span><br><span class="line">		t.next = preNode;</span><br><span class="line">		preNode = t;</span><br><span class="line">		t = nextNode;</span><br><span class="line">	&#125;</span><br><span class="line">	return result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"> /**</span><br><span class="line"> * 维护两个节点，一个指向当前节点，一个指向下一个节点 </span><br><span class="line"> * 缺点，需要new 对象，占用内存</span><br><span class="line"> * @author: husb</span><br><span class="line"> * @date: 2018年4月10日 下午7:44:22</span><br><span class="line"> */</span><br><span class="line">private static ListNode reverseList(ListNode head) &#123;</span><br><span class="line">	ListNode result = new ListNode(head.data);</span><br><span class="line">	ListNode t;</span><br><span class="line">	while (head.next != null) &#123;</span><br><span class="line">		t = result;</span><br><span class="line">		result = new ListNode(head.next.data);</span><br><span class="line">		result.next = t;</span><br><span class="line">		head = head.next;</span><br><span class="line">	&#125;</span><br><span class="line">	return result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * @Description: 需要维护三个节点，当前，前一个，下一个</span><br><span class="line"> * @author: husb   </span><br><span class="line"> * @date: 2018年4月10日 下午7:57:58 </span><br><span class="line"> */</span><br><span class="line">private static ListNode reverseList2(ListNode head) &#123;</span><br><span class="line">	ListNode result = null;</span><br><span class="line">	ListNode t = head;</span><br><span class="line">	ListNode preNode = null;</span><br><span class="line">	while (t != null) &#123;</span><br><span class="line">		ListNode nextNode = t.next;</span><br><span class="line">		if (nextNode == null) &#123;</span><br><span class="line">			result = t;</span><br><span class="line">		&#125;</span><br><span class="line">		t.next = preNode;</span><br><span class="line">		preNode = t;</span><br><span class="line">		t = nextNode;</span><br><span class="line">	&#125;</span><br><span class="line">	return result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
         
         </div>
         <footer class="article-footer">
@@ -225,7 +225,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/10/T16/" data-id="cjftmqy6m000o14mypqxrra43" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/10/T16/" data-id="cjftmsyav000n8omy2l43qqez" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -339,7 +339,7 @@
         <div class="article-entry" itemprop="articleBody">
         
             
-            <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">   /**</span><br><span class="line"> * 维护两个节点，后一个在前一个的后k位。</span><br><span class="line"> * 之后一起走，如果后一个节点为最后一个节点就停下</span><br><span class="line"> * @author: husb   </span><br><span class="line"> * @date: 2018年4月10日 下午7:29:09 </span><br><span class="line"> */</span><br><span class="line">public static ListNode findKthNodeFromEnd(ListNode head, int k) &#123;</span><br><span class="line">	ListNode node2 = head;</span><br><span class="line">	int i = 1;</span><br><span class="line">	if(k&lt;=0) &#123;</span><br><span class="line">		System.out.println(&quot;必须从1开始&quot;);</span><br><span class="line">		return null;</span><br><span class="line">	&#125;</span><br><span class="line">	while (i++ &lt; k) &#123;</span><br><span class="line">		if (node2.next == null) &#123;</span><br><span class="line">			return null;</span><br><span class="line">		&#125;</span><br><span class="line">		node2 = node2.next;</span><br><span class="line">	&#125;</span><br><span class="line">	while (node2.next != null) &#123;</span><br><span class="line">		head = head.next;</span><br><span class="line">		node2 = node2.next;</span><br><span class="line">	&#125;</span><br><span class="line">	return head;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"> /**</span><br><span class="line"> * 维护两个节点，后一个在前一个的后k位。</span><br><span class="line"> * 之后一起走，如果后一个节点为最后一个节点就停下</span><br><span class="line"> * @author: husb   </span><br><span class="line"> * @date: 2018年4月10日 下午7:29:09 </span><br><span class="line"> */</span><br><span class="line">public static ListNode findKthNodeFromEnd(ListNode head, int k) &#123;</span><br><span class="line">	ListNode node2 = head;</span><br><span class="line">	int i = 1;</span><br><span class="line">	if(k&lt;=0) &#123;</span><br><span class="line">		System.out.println(&quot;必须从1开始&quot;);</span><br><span class="line">		return null;</span><br><span class="line">	&#125;</span><br><span class="line">	while (i++ &lt; k) &#123;</span><br><span class="line">		if (node2.next == null) &#123;</span><br><span class="line">			return null;</span><br><span class="line">		&#125;</span><br><span class="line">		node2 = node2.next;</span><br><span class="line">	&#125;</span><br><span class="line">	while (node2.next != null) &#123;</span><br><span class="line">		head = head.next;</span><br><span class="line">		node2 = node2.next;</span><br><span class="line">	&#125;</span><br><span class="line">	return head;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
         
         </div>
         <footer class="article-footer">
@@ -349,7 +349,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/10/T15/" data-id="cjftmqy72000q14mydmtogaz0" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/10/T15/" data-id="cjftmsyav000k8omy8xq0tcdw" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -475,7 +475,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/10/T14/" data-id="cjftmqy6m000j14mym3nk0boc" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/10/T14/" data-id="cjftmsyav000i8omy4jbyobs7" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -599,7 +599,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/10/T13/" data-id="cjftmqy6m000l14my8naag7ik" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/10/T13/" data-id="cjftmsyav000p8omyo0gjy9z8" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -724,7 +724,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/10/T10/" data-id="cjftmqy6m000e14myyqx6jr1l" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/10/T10/" data-id="cjftmsyav000g8omyfjb6epjm" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -854,7 +854,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/10/T08/" data-id="cjftmqy6m000g14mya9yuxhia" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/10/T08/" data-id="cjftmsyav000e8omynmieoejk" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -978,7 +978,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/10/T0701/" data-id="cjftmqy6m000c14myvplmgy62" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/10/T0701/" data-id="cjftmsyav00088omyyx6eobl2" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1103,7 +1103,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/10/T07/" data-id="cjftmqy6m000714myri74kn6l" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/10/T07/" data-id="cjftmsyag00078omyagwz0bij" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1229,7 +1229,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/10/T04/" data-id="cjftmqy6m000b14myzq6icc3i" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/10/T04/" data-id="cjftmsyav000c8omy400whecu" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1354,7 +1354,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/10/T03/" data-id="cjftmqy66000514mykh3iksm9" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/10/T03/" data-id="cjftmsyav000b8omy16g6gb70" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
