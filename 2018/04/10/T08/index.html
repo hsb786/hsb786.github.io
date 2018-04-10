@@ -13,14 +13,12 @@
 <meta property="og:site_name" content="HuShengBin’s blog">
 <meta property="og:description" content="题目描述把一个数组最开始的若干个元素搬到数组的末尾，我们称之为数组的旋转。输入一个递增排序数组的一个旋转，输出旋转数组的最小元素。  旋转数组的特点：  旋转之后的数组可以分为两个排序的子数组，且前面的子数组的元素都大于或等于后面子数组的元素。  最小或者最大元素位于两个子数组的分界  12345678910111213141516171819202122232425262728293031323">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-04-10T08:16:37.285Z">
+<meta property="og:updated_time" content="2018-04-10T08:28:32.421Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="旋转数组的最小数字">
 <meta name="twitter:description" content="题目描述把一个数组最开始的若干个元素搬到数组的末尾，我们称之为数组的旋转。输入一个递增排序数组的一个旋转，输出旋转数组的最小元素。  旋转数组的特点：  旋转之后的数组可以分为两个排序的子数组，且前面的子数组的元素都大于或等于后面子数组的元素。  最小或者最大元素位于两个子数组的分界  12345678910111213141516171819202122232425262728293031323">
     
 
-    
-        <link rel="alternate" href="/" title="HuShengBin’s blog" type="application/atom+xml" />
     
 
     
@@ -179,30 +177,6 @@
                         </a>
                     </td>
                     
-                    <td>
-                        <a href="/" target="_blank" title="twitter" class=tooltip>
-                            <i class="fa fa-twitter"></i>
-                        </a>
-                    </td>
-                    
-                    <td>
-                        <a href="/" target="_blank" title="facebook" class=tooltip>
-                            <i class="fa fa-facebook"></i>
-                        </a>
-                    </td>
-                    
-                    <td>
-                        <a href="/" target="_blank" title="dribbble" class=tooltip>
-                            <i class="fa fa-dribbble"></i>
-                        </a>
-                    </td>
-                    
-                    <td>
-                        <a href="/" target="_blank" title="rss" class=tooltip>
-                            <i class="fa fa-rss"></i>
-                        </a>
-                    </td>
-                    
                 </tr>
             </table>
         </div>
@@ -255,7 +229,7 @@
 <li>旋转之后的数组可以分为两个排序的子数组，且前面的子数组的元素都大于或等于后面子数组的元素。 </li>
 <li>最小或者最大元素位于两个子数组的分界</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line">public class T08 &#123;</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		int[] array1 = &#123; 3, 4, 5, 1, 2 &#125;;</span><br><span class="line">		System.out.println(&quot;升序排序数组的一个旋转数组，无重复数字：&quot; + findMin(array1));</span><br><span class="line">		int[] array2 = &#123; 1, 2, 3, 4, 5 &#125;;</span><br><span class="line">		System.out.println(&quot;升序排序数组：&quot; + findMin(array2));</span><br><span class="line">		int[] array3 = &#123; 1 &#125;;</span><br><span class="line">		System.out.println(&quot;只包含一个数字的数组：&quot; + findMin(array3));</span><br><span class="line">		int[] array4 = &#123; 2, 4, 2, 2, 2, 2, 2 &#125;;</span><br><span class="line">		System.out.println(&quot;包含重复元素的数组：&quot; + findMin(array4));</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	/**</span><br><span class="line">	 * 由于旋转数组的特点，前一个数组一定大于后一个数组。数组内部是升序的。</span><br><span class="line">	 * 所以就可以使用二分查找。</span><br><span class="line">	 * 定义minIndex为0，highIndex为length-1</span><br><span class="line">	 * 若中间位大于array[minIndex]，则代表中间位处于前面部分,将minIndex设为midIndex；</span><br><span class="line">	 * 小于则处于后面部分,将highIndex设为midIndex</span><br><span class="line">	 * 最终minIndex位于前一个数组的最后一位，highIndex位于后一个数组的第一位</span><br><span class="line">	 * 显然最小值就是highIndex所在的值。</span><br><span class="line">	 * 特殊情况，但minIndex与highIndex上的值相等时，无法判断中间值是在前，还是在后。</span><br><span class="line">	 * 所以只能用顺序查找</span><br><span class="line">	 * @author: husb   </span><br><span class="line">	 * @date: 2018年4月10日 下午2:56:26 </span><br><span class="line">	 */</span><br><span class="line">	public static int findMin(int[] array) &#123;</span><br><span class="line">		int lowIndex = 0;</span><br><span class="line">		int highIndex = array.length - 1;</span><br><span class="line">		int midIndex = (lowIndex + highIndex) / 2;</span><br><span class="line">		// 当代查找数组第一位大于最后一位时，代表是旋转数组</span><br><span class="line">		while (array[lowIndex] &gt;= array[highIndex]) &#123;</span><br><span class="line">			// 临界条件 前面最后一位，后面第一位。 后面第一位就是最小值</span><br><span class="line">			if (highIndex - lowIndex == 1) &#123;</span><br><span class="line">				return array[highIndex];</span><br><span class="line">			&#125;</span><br><span class="line">			// 当左下标的元素等于右下标的元素时，无法判断中间位是位于前面还是后面的。</span><br><span class="line">			// 只能用顺序查找</span><br><span class="line">			if (array[lowIndex] == array[highIndex]) &#123;</span><br><span class="line">				return findMinInOrder(array, lowIndex, highIndex);</span><br><span class="line">			&#125;</span><br><span class="line">			// 当中间位大于前面第一位时，代表处于前面</span><br><span class="line">			if (array[midIndex] &gt; array[lowIndex]) &#123;</span><br><span class="line">				lowIndex = midIndex;</span><br><span class="line">			&#125; else &#123;</span><br><span class="line">				// 否则处于后面</span><br><span class="line">				highIndex = midIndex;</span><br><span class="line">			&#125;</span><br><span class="line">			// 计算中间位</span><br><span class="line">			midIndex = (lowIndex + highIndex) / 2;</span><br><span class="line">		&#125;</span><br><span class="line">		//已排好序，返回低位即可</span><br><span class="line">		return array[lowIndex];</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	/**</span><br><span class="line">	 * @Description: 当有重复元素的时候，无法确定中间的元素是前面的还是后面的</span><br><span class="line">	 * @author: husb</span><br><span class="line">	 * @date: 2018年4月10日 下午2:33:52</span><br><span class="line">	 */</span><br><span class="line">	private static int findMinInOrder(int[] array, int lowIndex, int highIndex) &#123;</span><br><span class="line">		int result = array[lowIndex];</span><br><span class="line">		for (int i = lowIndex + 1; i &lt;= highIndex; i++) &#123;</span><br><span class="line">			if (result &gt; array[i]) &#123;</span><br><span class="line">				result = array[i];</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		return result;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 由于旋转数组的特点，前一个数组一定大于后一个数组。数组内部是升序的。</span><br><span class="line"> * 所以就可以使用二分查找。</span><br><span class="line"> * 定义minIndex为0，highIndex为length-1</span><br><span class="line"> * 若中间位大于array[minIndex]，则代表中间位处于前面部分,将minIndex设为midIndex；</span><br><span class="line"> * 小于则处于后面部分,将highIndex设为midIndex</span><br><span class="line"> * 最终minIndex位于前一个数组的最后一位，highIndex位于后一个数组的第一位</span><br><span class="line"> * 显然最小值就是highIndex所在的值。</span><br><span class="line"> * 特殊情况，但minIndex与highIndex上的值相等时，无法判断中间值是在前，还是在后。</span><br><span class="line"> * 所以只能用顺序查找</span><br><span class="line"> * @author: husb   </span><br><span class="line"> * @date: 2018年4月10日 下午2:56:26 </span><br><span class="line"> */</span><br><span class="line">public static int findMin(int[] array) &#123;</span><br><span class="line">	int lowIndex = 0;</span><br><span class="line">	int highIndex = array.length - 1;</span><br><span class="line">	int midIndex = (lowIndex + highIndex) / 2;</span><br><span class="line">	// 当代查找数组第一位大于最后一位时，代表是旋转数组</span><br><span class="line">	while (array[lowIndex] &gt;= array[highIndex]) &#123;</span><br><span class="line">		// 临界条件 前面最后一位，后面第一位。 后面第一位就是最小值</span><br><span class="line">		if (highIndex - lowIndex == 1) &#123;</span><br><span class="line">			return array[highIndex];</span><br><span class="line">		&#125;</span><br><span class="line">		// 当左下标的元素等于右下标的元素时，无法判断中间位是位于前面还是后面的。</span><br><span class="line">		// 只能用顺序查找</span><br><span class="line">		if (array[lowIndex] == array[highIndex]) &#123;</span><br><span class="line">			return findMinInOrder(array, lowIndex, highIndex);</span><br><span class="line">		&#125;</span><br><span class="line">		// 当中间位大于前面第一位时，代表处于前面</span><br><span class="line">		if (array[midIndex] &gt; array[lowIndex]) &#123;</span><br><span class="line">			lowIndex = midIndex;</span><br><span class="line">		&#125; else &#123;</span><br><span class="line">			// 否则处于后面</span><br><span class="line">			highIndex = midIndex;</span><br><span class="line">		&#125;</span><br><span class="line">		// 计算中间位</span><br><span class="line">		midIndex = (lowIndex + highIndex) / 2;</span><br><span class="line">	&#125;</span><br><span class="line">	//已排好序，返回低位即可</span><br><span class="line">	return array[lowIndex];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * @Description: 当有重复元素的时候，无法确定中间的元素是前面的还是后面的</span><br><span class="line"> * @author: husb</span><br><span class="line"> * @date: 2018年4月10日 下午2:33:52</span><br><span class="line"> */</span><br><span class="line">private static int findMinInOrder(int[] array, int lowIndex, int highIndex) &#123;</span><br><span class="line">	int result = array[lowIndex];</span><br><span class="line">	for (int i = lowIndex + 1; i &lt;= highIndex; i++) &#123;</span><br><span class="line">		if (result &gt; array[i]) &#123;</span><br><span class="line">			result = array[i];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	return result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
         
         </div>
         <footer class="article-footer">
@@ -265,7 +239,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/10/T08/" data-id="cjfte7z98000epcmy0ta7i9ws" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/10/T08/" data-id="cjften6by0009y0mydgt44e39" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -510,10 +484,6 @@
         <h3 class="widget-title">链接</h3>
         <div class="widget">
             <ul>
-                
-                    <li>
-                        <a href="http://hexo.io">Hexo</a>
-                    </li>
                 
             </ul>
         </div>

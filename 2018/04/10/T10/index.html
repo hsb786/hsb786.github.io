@@ -5,22 +5,20 @@
     
     <title>二进制中1的个数 | HuShengBin’s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="题目描述请实现一个函数，输入一个整数，输出该整数二进制表示中1的个数。 12345678910111213141516171819202122public class T10 &amp;#123;	public static void main(String[] args) &amp;#123;		System.out.println(numberOfOne(9));		System.out.println(nu">
+    <meta name="description" content="题目描述请实现一个函数，输入一个整数，输出该整数二进制表示中1的个数。 1234567891011121314/** * @Description: n&amp;amp;(n-1)，将二进制表示中的最低位的1变为0 * @author: husb    * @date: 2018年4月10日 下午3:23:02  */private static int numberOfOne(int n) &amp;#123;">
 <meta name="keywords" content="剑指Offer">
 <meta property="og:type" content="article">
 <meta property="og:title" content="二进制中1的个数">
 <meta property="og:url" content="https://hsb786.github.io/2018/04/10/T10/index.html">
 <meta property="og:site_name" content="HuShengBin’s blog">
-<meta property="og:description" content="题目描述请实现一个函数，输入一个整数，输出该整数二进制表示中1的个数。 12345678910111213141516171819202122public class T10 &amp;#123;	public static void main(String[] args) &amp;#123;		System.out.println(numberOfOne(9));		System.out.println(nu">
+<meta property="og:description" content="题目描述请实现一个函数，输入一个整数，输出该整数二进制表示中1的个数。 1234567891011121314/** * @Description: n&amp;amp;(n-1)，将二进制表示中的最低位的1变为0 * @author: husb    * @date: 2018年4月10日 下午3:23:02  */private static int numberOfOne(int n) &amp;#123;">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-04-10T08:17:19.172Z">
+<meta property="og:updated_time" content="2018-04-10T08:28:42.178Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="二进制中1的个数">
-<meta name="twitter:description" content="题目描述请实现一个函数，输入一个整数，输出该整数二进制表示中1的个数。 12345678910111213141516171819202122public class T10 &amp;#123;	public static void main(String[] args) &amp;#123;		System.out.println(numberOfOne(9));		System.out.println(nu">
+<meta name="twitter:description" content="题目描述请实现一个函数，输入一个整数，输出该整数二进制表示中1的个数。 1234567891011121314/** * @Description: n&amp;amp;(n-1)，将二进制表示中的最低位的1变为0 * @author: husb    * @date: 2018年4月10日 下午3:23:02  */private static int numberOfOne(int n) &amp;#123;">
     
 
-    
-        <link rel="alternate" href="/" title="HuShengBin’s blog" type="application/atom+xml" />
     
 
     
@@ -179,30 +177,6 @@
                         </a>
                     </td>
                     
-                    <td>
-                        <a href="/" target="_blank" title="twitter" class=tooltip>
-                            <i class="fa fa-twitter"></i>
-                        </a>
-                    </td>
-                    
-                    <td>
-                        <a href="/" target="_blank" title="facebook" class=tooltip>
-                            <i class="fa fa-facebook"></i>
-                        </a>
-                    </td>
-                    
-                    <td>
-                        <a href="/" target="_blank" title="dribbble" class=tooltip>
-                            <i class="fa fa-dribbble"></i>
-                        </a>
-                    </td>
-                    
-                    <td>
-                        <a href="/" target="_blank" title="rss" class=tooltip>
-                            <i class="fa fa-rss"></i>
-                        </a>
-                    </td>
-                    
                 </tr>
             </table>
         </div>
@@ -250,7 +224,7 @@
         
             
             <h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>请实现一个函数，输入一个整数，输出该整数二进制表示中1的个数。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">public class T10 &#123;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		System.out.println(numberOfOne(9));</span><br><span class="line">		System.out.println(numberOfOne(13));</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	/**</span><br><span class="line">	 * @Description: n&amp;(n-1)，将二进制表示中的最低位的1变为0</span><br><span class="line">	 * @author: husb   </span><br><span class="line">	 * @date: 2018年4月10日 下午3:23:02 </span><br><span class="line">	 */</span><br><span class="line">	private static int numberOfOne(int n) &#123;</span><br><span class="line">		int count=0;</span><br><span class="line">		while(n!=0) &#123;</span><br><span class="line">			n=n&amp;(n-1);</span><br><span class="line">			count++;</span><br><span class="line">		&#125;</span><br><span class="line">		return count;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * @Description: n&amp;(n-1)，将二进制表示中的最低位的1变为0</span><br><span class="line"> * @author: husb   </span><br><span class="line"> * @date: 2018年4月10日 下午3:23:02 </span><br><span class="line"> */</span><br><span class="line">private static int numberOfOne(int n) &#123;</span><br><span class="line">	int count=0;</span><br><span class="line">	while(n!=0) &#123;</span><br><span class="line">		n=n&amp;(n-1);</span><br><span class="line">		count++;</span><br><span class="line">	&#125;</span><br><span class="line">	return count;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
         
         </div>
         <footer class="article-footer">
@@ -260,7 +234,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/10/T10/" data-id="cjfte7z980008pcmycyb180zt" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/10/T10/" data-id="cjften6by000ay0myixqweiwd" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -496,10 +470,6 @@
         <h3 class="widget-title">链接</h3>
         <div class="widget">
             <ul>
-                
-                    <li>
-                        <a href="http://hexo.io">Hexo</a>
-                    </li>
                 
             </ul>
         </div>
