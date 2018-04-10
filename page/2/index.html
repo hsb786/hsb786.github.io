@@ -364,7 +364,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/09/distinguish/" data-id="cjftio9d0000o0smygoruwsix" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/09/distinguish/" data-id="cjftiupg6000lc8my6hls4v70" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -496,7 +496,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/08/DispatchServlet/" data-id="cjftio9cl00020smy8v888ml5" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/08/DispatchServlet/" data-id="cjftiupfq0005c8mygh2l0dff" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -626,7 +626,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/08/hash/" data-id="cjftio9d0000t0smy1akni3v5" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/08/hash/" data-id="cjftiupg6000sc8myb691caw5" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -878,272 +878,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/08/sqlTransaction/" data-id="cjftio9dg001k0smyiily1gmm" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-
-        </footer>
-    </div>
-    
-</article>
-
-
-
-    <article id="post-spring" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2018/04/08/spring/">Spring整理</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2018/04/08/spring/">
-            <time datetime="2018-04-08T09:58:41.000Z" itemprop="datePublished">2018-04-08</time>
-        </a>
-    </div>
-
-
-                        
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/Spring/">Spring</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            
-            <hr>
-<h2 id="Spring结构"><a href="#Spring结构" class="headerlink" title="Spring结构"></a>Spring结构</h2><p>Spring框架的核心组件只有三个：<strong>Bean，Context，Core</strong></p>
-<p>Spring是面向Bean编程，自然Bean组件就是Spring对Java对象Object的封装，在Spring容器中管理的就是被Bean封装了的Java对象。Bean组件解决了Bean的定义，Bean的创建以及Bean的解析。</p>
-<p>Context组件就是我们常说的IOC容器，也就是Spring容器。Context组件可以发现每个Bean之间的关系，为它们建立好Bean之间的依赖关系，为Bean提供生存环境。</p>
-<p>Core组件，它是Context组件与Bean组件的工具包，可以把Core组件理解为Util工具包</p>
-<h2 id="Spring容器"><a href="#Spring容器" class="headerlink" title="Spring容器"></a>Spring容器</h2><p>Spring容器有时候也称为IOC容器。IOC: Inverse of Control，控制反转。<br>控制：控制就是调用类对某一个接口具体实现类的选择控制权<br>反转：选择控制权交给第三方决定，由Spring容器来统一配置管理Bean。</p>
-<p>为了更好理解IOC，大家经常使用依赖注入来代替控制反转这个概念，即让调用类对某一接口的实现类的依赖关系由第三方容器注入，以移除调用类对某一接口实现类的依赖。那么IOC容器的工作就是通过配置文件和注解来描述类和类之间的依赖关系。利用反射机制完成类的初始化和依赖注入。</p>
-<h2 id="BeanFactory和ApplicationContext"><a href="#BeanFactory和ApplicationContext" class="headerlink" title="BeanFactory和ApplicationContext"></a>BeanFactory和ApplicationContext</h2><p>BeanFactory是Spring框架核心接口，提供了IOC的配置机制，是Spring的基础设施，面向Spring本身</p>
-<p>ApplicationContext是建立在BeanFactory之上，提供了更多的面向应用的功能，是Spring给开发者提高了IOC容器接口</p>
-
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="https://hsb786.github.io/2018/04/08/spring/" data-id="cjftio9dg001f0smy389eme3k" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-
-        </footer>
-    </div>
-    
-</article>
-
-
-
-    <article id="post-preventDupAjax" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2018/04/08/preventDupAjax/">防止重复发送 Ajax 请求的解决方案</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2018/04/08/preventDupAjax/">
-            <time datetime="2018-04-08T09:58:41.000Z" itemprop="datePublished">2018-04-08</time>
-        </a>
-    </div>
-
-
-                        
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/前端/">前端</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            
-            <hr>
-<p>连续点击多个按钮，可能导致先请求的数据后显示出来。</p>
-<hr>
-<p><strong>解决方案</strong></p>
-<p><strong>1. 将ajsx请求的async设置为false</strong></p>
-<p><strong>2. 利用jquery ajaxPrefilter中断请求</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">var pendingRequests = &#123;&#125;;</span><br><span class="line">$.ajaxPrefilter(function( options, originalOptions, jqXHR ) &#123;</span><br><span class="line">    var key = options.url;</span><br><span class="line">    console.log(key);</span><br><span class="line">    if (!pendingRequests[key]) &#123;</span><br><span class="line">        pendingRequests[key] = jqXHR;</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        //jqXHR.abort();    //放弃后触发的提交</span><br><span class="line">        pendingRequests[key].abort();   // 放弃先触发的提交</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    var complete = options.complete;</span><br><span class="line">    options.complete = function(jqXHR, textStatus) &#123;</span><br><span class="line">        pendingRequests[key] = null;</span><br><span class="line">        if ($.isFunction(complete)) &#123;</span><br><span class="line">        complete.apply(this, arguments);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
-<p>核心思想是维护一个队列，发送请求时，将请求加入队列，请求响应后，从队列中清楚，这就保证了在任一时刻只能有一个同样的请求发送</p>
-<p>局限性：仅对jquery的ajax有作用</p>
-
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="https://hsb786.github.io/2018/04/08/preventDupAjax/" data-id="cjftio9dg001a0smyu2ng4b99" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/08/sqlTransaction/" data-id="cjftiupgl001hc8myf2v894js" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1278,7 +1013,272 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/08/SpringMVC/" data-id="cjftio9cl00070smypqwkyvgw" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/08/SpringMVC/" data-id="cjftiupfq0002c8myhfl49dwv" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
+    <article id="post-spring" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2018/04/08/spring/">Spring整理</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2018/04/08/spring/">
+            <time datetime="2018-04-08T09:58:41.000Z" itemprop="datePublished">2018-04-08</time>
+        </a>
+    </div>
+
+
+                        
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Spring/">Spring</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <hr>
+<h2 id="Spring结构"><a href="#Spring结构" class="headerlink" title="Spring结构"></a>Spring结构</h2><p>Spring框架的核心组件只有三个：<strong>Bean，Context，Core</strong></p>
+<p>Spring是面向Bean编程，自然Bean组件就是Spring对Java对象Object的封装，在Spring容器中管理的就是被Bean封装了的Java对象。Bean组件解决了Bean的定义，Bean的创建以及Bean的解析。</p>
+<p>Context组件就是我们常说的IOC容器，也就是Spring容器。Context组件可以发现每个Bean之间的关系，为它们建立好Bean之间的依赖关系，为Bean提供生存环境。</p>
+<p>Core组件，它是Context组件与Bean组件的工具包，可以把Core组件理解为Util工具包</p>
+<h2 id="Spring容器"><a href="#Spring容器" class="headerlink" title="Spring容器"></a>Spring容器</h2><p>Spring容器有时候也称为IOC容器。IOC: Inverse of Control，控制反转。<br>控制：控制就是调用类对某一个接口具体实现类的选择控制权<br>反转：选择控制权交给第三方决定，由Spring容器来统一配置管理Bean。</p>
+<p>为了更好理解IOC，大家经常使用依赖注入来代替控制反转这个概念，即让调用类对某一接口的实现类的依赖关系由第三方容器注入，以移除调用类对某一接口实现类的依赖。那么IOC容器的工作就是通过配置文件和注解来描述类和类之间的依赖关系。利用反射机制完成类的初始化和依赖注入。</p>
+<h2 id="BeanFactory和ApplicationContext"><a href="#BeanFactory和ApplicationContext" class="headerlink" title="BeanFactory和ApplicationContext"></a>BeanFactory和ApplicationContext</h2><p>BeanFactory是Spring框架核心接口，提供了IOC的配置机制，是Spring的基础设施，面向Spring本身</p>
+<p>ApplicationContext是建立在BeanFactory之上，提供了更多的面向应用的功能，是Spring给开发者提高了IOC容器接口</p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="https://hsb786.github.io/2018/04/08/spring/" data-id="cjftiupgl001dc8myka096ene" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
+    <article id="post-skills" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2018/04/08/skills/">一些小技巧</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2018/04/08/skills/">
+            <time datetime="2018-04-08T09:58:41.000Z" itemprop="datePublished">2018-04-08</time>
+        </a>
+    </div>
+
+
+                        
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/爪哇/">爪哇</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <hr>
+<p>位运算直接对内存数据进行操作，不需要转成十进制，因此处理速度非常快</p>
+<p> X % 2^n = X &amp; (2^n-1)</p>
+<hr>
+<p><strong>判段一个数组是否包含某个值</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Set&lt;String&gt; set=new HashSet&lt;String&gt;(Arrays.asList(arr));  </span><br><span class="line">return set.contains(targetValue);</span><br></pre></td></tr></table></figure></p>
+<p>效率慢，要将数组压入Collection类型中，首先要将数组元素便利一遍，然后再使用集合类做其它操作。</p>
+<p>可以使用Apache Commons类库中提供的<strong>ArrayUtils</strong>类的<strong>contains</strong>方法<br>contains内部调用indexOf方法</p>
+<p><img src="https://github.com/hsb786/hsb786.github.io/tree/master/images/indexOf.png" alt=""></p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="https://hsb786.github.io/2018/04/08/skills/" data-id="cjftiupgl001ac8myn1j8tw5d" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1432,7 +1432,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/08/passByValue/" data-id="cjftio9dg00150smyrvfonkpj" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/08/passByValue/" data-id="cjftiupgl0014c8my60eb36ls" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1508,7 +1508,7 @@
 
 
 
-    <article id="post-skills" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-preventDupAjax" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -1516,7 +1516,7 @@
                 
     
         <h1 itemprop="name">
-            <a class="article-title" href="/2018/04/08/skills/">一些小技巧</a>
+            <a class="article-title" href="/2018/04/08/preventDupAjax/">防止重复发送 Ajax 请求的解决方案</a>
         </h1>
     
 
@@ -1525,7 +1525,7 @@
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/2018/04/08/skills/">
+        <a href="/2018/04/08/preventDupAjax/">
             <time datetime="2018-04-08T09:58:41.000Z" itemprop="datePublished">2018-04-08</time>
         </a>
     </div>
@@ -1535,7 +1535,7 @@
                         
     <div class="article-tag">
         <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/爪哇/">爪哇</a>
+        <a class="tag-link" href="/tags/前端/">前端</a>
     </div>
 
                     </div>
@@ -1547,13 +1547,13 @@
         
             
             <hr>
-<p>位运算直接对内存数据进行操作，不需要转成十进制，因此处理速度非常快</p>
-<p> X % 2^n = X &amp; (2^n-1)</p>
+<p>连续点击多个按钮，可能导致先请求的数据后显示出来。</p>
 <hr>
-<p><strong>判段一个数组是否包含某个值</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Set&lt;String&gt; set=new HashSet&lt;String&gt;(Arrays.asList(arr));  </span><br><span class="line">return set.contains(targetValue);</span><br></pre></td></tr></table></figure></p>
-<p>效率慢，要将数组压入Collection类型中，首先要将数组元素便利一遍，然后再使用集合类做其它操作。</p>
-<p>可以使用Apache Commons类库中提供的<strong>ArrayUtils</strong>类的<strong>contains</strong>方法<br>contains内部调用indexOf方法</p>
-<p><img src="https://github.com/hsb786/DOC/blob/master/files/img/indexOf.png" alt="indexOf"></p>
+<p><strong>解决方案</strong></p>
+<p><strong>1. 将ajsx请求的async设置为false</strong></p>
+<p><strong>2. 利用jquery ajaxPrefilter中断请求</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">var pendingRequests = &#123;&#125;;</span><br><span class="line">$.ajaxPrefilter(function( options, originalOptions, jqXHR ) &#123;</span><br><span class="line">    var key = options.url;</span><br><span class="line">    console.log(key);</span><br><span class="line">    if (!pendingRequests[key]) &#123;</span><br><span class="line">        pendingRequests[key] = jqXHR;</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        //jqXHR.abort();    //放弃后触发的提交</span><br><span class="line">        pendingRequests[key].abort();   // 放弃先触发的提交</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    var complete = options.complete;</span><br><span class="line">    options.complete = function(jqXHR, textStatus) &#123;</span><br><span class="line">        pendingRequests[key] = null;</span><br><span class="line">        if ($.isFunction(complete)) &#123;</span><br><span class="line">        complete.apply(this, arguments);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>核心思想是维护一个队列，发送请求时，将请求加入队列，请求响应后，从队列中清楚，这就保证了在任一时刻只能有一个同样的请求发送</p>
+<p>局限性：仅对jquery的ajax有作用</p>
 
         
         </div>
@@ -1564,7 +1564,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/08/skills/" data-id="cjftio9dg001d0smy8an0d8km" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/08/preventDupAjax/" data-id="cjftiupgl0018c8myoxmbyl9o" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1713,7 +1713,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/08/performsSyn/" data-id="cjftio9dg00180smytc7ynk1z" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/08/performsSyn/" data-id="cjftiupgl0016c8mylgx6ff9a" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
