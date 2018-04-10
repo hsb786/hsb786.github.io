@@ -225,7 +225,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/10/T03/" data-id="cjftne4mi0005okmyjtjwbzoh" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/10/T03/" data-id="cjftnjq9u0005vsmyj3c04ik4" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -350,7 +350,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/10/threadPool/" data-id="cjftne4ne001rokmysonvsrny" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/10/threadPool/" data-id="cjftnjqap001rvsmyx0edn06q" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -493,7 +493,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/09/javaBase/" data-id="cjftne4my0013okmyj8gw4bmr" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/09/javaBase/" data-id="cjftnjqaa001avsmys6jku9h1" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -686,7 +686,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/09/needFocus/" data-id="cjftne4my001dokmy7578yb17" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/09/needFocus/" data-id="cjftnjqap001evsmyrpvtds5p" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -837,7 +837,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/09/easyForget/" data-id="cjftne4my000wokmy0yz9kod6" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/09/easyForget/" data-id="cjftnjqaa000yvsmyvienc5el" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1101,7 +1101,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/09/distinguish/" data-id="cjftne4my000zokmypoqa32hf" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/09/distinguish/" data-id="cjftnjqaa000tvsmysiauhg03" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1233,7 +1233,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/08/DispatchServlet/" data-id="cjftne4m30000okmy7mh60n3w" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/08/DispatchServlet/" data-id="cjftnjq9u0002vsmy2us3h81c" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1363,161 +1363,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/08/hash/" data-id="cjftne4my0015okmyjkrutrrg" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-
-        </footer>
-    </div>
-    
-</article>
-
-
-
-    <article id="post-passByValue" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2018/04/08/passByValue/">值传递和引用传递</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2018/04/08/passByValue/">
-            <time datetime="2018-04-08T09:58:41.000Z" itemprop="datePublished">2018-04-08</time>
-        </a>
-    </div>
-
-
-                        
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/爪哇/">爪哇</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            
-            <hr>
-<p><strong>值传递</strong>  指在调用函数时将实际参数<em>复制</em>一份传递到函数中，那么在函数中对参数所进行的修改，将不会影响到实际参数。  </p>
-<p><strong>引用传递</strong> 指在调用函数时将实际参数的地址<em>直接</em>传递到函数中，那么在函数中对参数所进行的修改，将影响到实际参数。</p>
-<table>
-<thead>
-<tr>
-<th>求值策略</th>
-<th>求值时间</th>
-<th>求值方式</th>
-<th>根本区别</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>值传递</td>
-<td>调用前</td>
-<td>值的结果（原值的副本）</td>
-<td>会创建副本</td>
-</tr>
-<tr>
-<td>引用传递</td>
-<td>调用前</td>
-<td>原值（原始对象，无副本）</td>
-<td>不创建副本</td>
-</tr>
-</tbody>
-</table>
-<p><strong>值传递和引用传递的区别并不是传递的内容，而是实参到底有没有被复制一份到形参</strong></p>
-<p>java只有值传递，不存在引用传递</p>
-<p>java在传递引用类型数据时，把实际参数的内存地址复制了一份，传递给了形参</p>
-
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="https://hsb786.github.io/2018/04/08/passByValue/" data-id="cjftne4ne001gokmytzic8qmw" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/08/hash/" data-id="cjftnjqaa0010vsmygz5uhvbs" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1652,7 +1498,139 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/08/SpringMVC/" data-id="cjftne4mi0008okmyckulmvxf" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/08/SpringMVC/" data-id="cjftnjq9u0007vsmyhknp0dao" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
+    <article id="post-skills" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2018/04/08/skills/">一些小技巧</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2018/04/08/skills/">
+            <time datetime="2018-04-08T09:58:41.000Z" itemprop="datePublished">2018-04-08</time>
+        </a>
+    </div>
+
+
+                        
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/爪哇/">爪哇</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <hr>
+<p>位运算直接对内存数据进行操作，不需要转成十进制，因此处理速度非常快</p>
+<p> X % 2^n = X &amp; (2^n-1)</p>
+<hr>
+<p><strong>判段一个数组是否包含某个值</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Set&lt;String&gt; set=new HashSet&lt;String&gt;(Arrays.asList(arr));  </span><br><span class="line">return set.contains(targetValue);</span><br></pre></td></tr></table></figure></p>
+<p>效率慢，要将数组压入Collection类型中，首先要将数组元素便利一遍，然后再使用集合类做其它操作。</p>
+<p>可以使用Apache Commons类库中提供的<strong>ArrayUtils</strong>类的<strong>contains</strong>方法<br>contains内部调用indexOf方法</p>
+<p><img src="https://github.com/hsb786/hsb786.github.io/tree/master/images/indexOf.png" alt=""></p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="https://hsb786.github.io/2018/04/08/skills/" data-id="cjftnjqap001mvsmyw9tu5n6a" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
