@@ -147,7 +147,7 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                25
+                29
                 <span>文章</span>
             </div>
             <div class="article-info-block">
@@ -176,6 +176,505 @@
 
             
             <section id="main">
+    <article id="post-T16" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2018/04/10/T16/">反转链表</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2018/04/10/T16/">
+            <time datetime="2018-04-10T12:14:31.000Z" itemprop="datePublished">2018-04-10</time>
+        </a>
+    </div>
+
+
+                        
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/剑指Offer/">剑指Offer</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p>或者直接用Stack</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">   /**</span><br><span class="line"> * 维护两个节点，一个指向当前节点，一个指向下一个节点 </span><br><span class="line"> * 缺点，需要new 对象，占用内存</span><br><span class="line"> * @author: husb</span><br><span class="line"> * @date: 2018年4月10日 下午7:44:22</span><br><span class="line"> */</span><br><span class="line">private static ListNode reverseList(ListNode head) &#123;</span><br><span class="line">	ListNode result = new ListNode(head.data);</span><br><span class="line">	ListNode t;</span><br><span class="line">	while (head.next != null) &#123;</span><br><span class="line">		t = result;</span><br><span class="line">		result = new ListNode(head.next.data);</span><br><span class="line">		result.next = t;</span><br><span class="line">		head = head.next;</span><br><span class="line">	&#125;</span><br><span class="line">	return result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * @Description: 需要维护三个节点，当前，前一个，下一个</span><br><span class="line"> * @author: husb   </span><br><span class="line"> * @date: 2018年4月10日 下午7:57:58 </span><br><span class="line"> */</span><br><span class="line">private static ListNode reverseList2(ListNode head) &#123;</span><br><span class="line">	ListNode result = null;</span><br><span class="line">	ListNode t = head;</span><br><span class="line">	ListNode preNode = null;</span><br><span class="line">	while (t != null) &#123;</span><br><span class="line">		ListNode nextNode = t.next;</span><br><span class="line">		if (nextNode == null) &#123;</span><br><span class="line">			result = t;</span><br><span class="line">		&#125;</span><br><span class="line">		t.next = preNode;</span><br><span class="line">		preNode = t;</span><br><span class="line">		t = nextNode;</span><br><span class="line">	&#125;</span><br><span class="line">	return result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="https://hsb786.github.io/2018/04/10/T16/" data-id="cjftmqy6m000o14mypqxrra43" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
+    <article id="post-T15" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2018/04/10/T15/">链表中倒数第K个节点</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2018/04/10/T15/">
+            <time datetime="2018-04-10T12:13:03.000Z" itemprop="datePublished">2018-04-10</time>
+        </a>
+    </div>
+
+
+                        
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/剑指Offer/">剑指Offer</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">   /**</span><br><span class="line"> * 维护两个节点，后一个在前一个的后k位。</span><br><span class="line"> * 之后一起走，如果后一个节点为最后一个节点就停下</span><br><span class="line"> * @author: husb   </span><br><span class="line"> * @date: 2018年4月10日 下午7:29:09 </span><br><span class="line"> */</span><br><span class="line">public static ListNode findKthNodeFromEnd(ListNode head, int k) &#123;</span><br><span class="line">	ListNode node2 = head;</span><br><span class="line">	int i = 1;</span><br><span class="line">	if(k&lt;=0) &#123;</span><br><span class="line">		System.out.println(&quot;必须从1开始&quot;);</span><br><span class="line">		return null;</span><br><span class="line">	&#125;</span><br><span class="line">	while (i++ &lt; k) &#123;</span><br><span class="line">		if (node2.next == null) &#123;</span><br><span class="line">			return null;</span><br><span class="line">		&#125;</span><br><span class="line">		node2 = node2.next;</span><br><span class="line">	&#125;</span><br><span class="line">	while (node2.next != null) &#123;</span><br><span class="line">		head = head.next;</span><br><span class="line">		node2 = node2.next;</span><br><span class="line">	&#125;</span><br><span class="line">	return head;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="https://hsb786.github.io/2018/04/10/T15/" data-id="cjftmqy72000q14mydmtogaz0" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
+    <article id="post-T14" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2018/04/10/T14/">调整数组顺序使奇数位于偶数之前</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2018/04/10/T14/">
+            <time datetime="2018-04-10T12:10:37.000Z" itemprop="datePublished">2018-04-10</time>
+        </a>
+    </div>
+
+
+                        
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/剑指Offer/">剑指Offer</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p><strong>快速排序的思想</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">  /**</span><br><span class="line">    * 快速排序的思想</span><br><span class="line">    * 左边一个指针向右移，遇到偶数停止；</span><br><span class="line">    * 右边一直指针向左移，遇到奇数停止。</span><br><span class="line">    * 两个值交换</span><br><span class="line">    * @author: husb   </span><br><span class="line">    * @date: 2018年4月10日 下午7:12:45 </span><br><span class="line">    */</span><br><span class="line">private static void reorderOddEven(int[] arr) &#123;</span><br><span class="line">    int left = -1;</span><br><span class="line">    int right = arr.length ;</span><br><span class="line">    while (left != right&amp;&amp;left&lt;=right) &#123;</span><br><span class="line">        while(arr[++left]%2!=0&amp;&amp;left&lt;arr.length-1);</span><br><span class="line">        while(arr[--right]%2==0&amp;&amp;right&gt;=0);</span><br><span class="line">        if(left&lt;right) &#123;</span><br><span class="line">            int t=arr[left];</span><br><span class="line">            arr[left]=arr[right];</span><br><span class="line">            arr[right]=t;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="https://hsb786.github.io/2018/04/10/T14/" data-id="cjftmqy6m000j14mym3nk0boc" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
+    <article id="post-T13" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2018/04/10/T13/">在O(1)时间内删除链表节点</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2018/04/10/T13/">
+            <time datetime="2018-04-10T12:04:16.000Z" itemprop="datePublished">2018-04-10</time>
+        </a>
+    </div>
+
+
+                        
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/剑指Offer/">剑指Offer</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"> /**</span><br><span class="line"> *  由于时间复杂度要求为O(1)，</span><br><span class="line"> * 只能将加一个节点的值复制到要删除的节点，之后再将下一个节点删除</span><br><span class="line"> * @author: husb   </span><br><span class="line"> * @date: 2018年4月10日 下午3:43:23</span><br><span class="line"> */</span><br><span class="line">public static void deleteNode(ListNode head, ListNode node) &#123;</span><br><span class="line">	//若为头节点，则将头节点设为head.next</span><br><span class="line">	if (node == head) &#123;</span><br><span class="line">		head = head.next;</span><br><span class="line">	//若为未节点，只能遍历了</span><br><span class="line">	&#125; else if (node.next == null) &#123;</span><br><span class="line">		ListNode t=head;</span><br><span class="line">		while(t.next!=node) &#123;</span><br><span class="line">			t=t.next;</span><br><span class="line">		&#125;</span><br><span class="line">		t.next=null;</span><br><span class="line">	&#125; else &#123;</span><br><span class="line">		//若为中间节点，则将下个节点的值复制到要删除的阶段，并且移除一个节点</span><br><span class="line">		node.data = node.next.data;</span><br><span class="line">		node.next = node.next.next;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="https://hsb786.github.io/2018/04/10/T13/" data-id="cjftmqy6m000l14my8naag7ik" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
     <article id="post-T10" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
@@ -225,7 +724,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/10/T10/" data-id="cjftiupg6000gc8myn9ilfez7" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/10/T10/" data-id="cjftmqy6m000e14myyqx6jr1l" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -355,7 +854,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/10/T08/" data-id="cjftiupfq000bc8my45h44s6f" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/10/T08/" data-id="cjftmqy6m000g14mya9yuxhia" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -479,7 +978,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/10/T0701/" data-id="cjftiupfq0008c8my3qjp3qau" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/10/T0701/" data-id="cjftmqy6m000c14myvplmgy62" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -604,7 +1103,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/10/T07/" data-id="cjftiupfq000dc8my4cllh624" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/10/T07/" data-id="cjftmqy6m000714myri74kn6l" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -730,7 +1229,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/10/T04/" data-id="cjftiupfa0000c8myiuufjcee" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/10/T04/" data-id="cjftmqy6m000b14myzq6icc3i" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -855,620 +1354,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/10/T03/" data-id="cjftiupg6000ic8myh9gwv433" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-
-        </footer>
-    </div>
-    
-</article>
-
-
-
-    <article id="post-threadPool" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2018/04/10/threadPool/">threadPool</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2018/04/10/threadPool/">
-            <time datetime="2018-04-10T02:13:01.000Z" itemprop="datePublished">2018-04-10</time>
-        </a>
-    </div>
-
-
-                        
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/爪哇/">爪哇</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            
-            <h2 id="Executor框架"><a href="#Executor框架" class="headerlink" title="Executor框架"></a>Executor框架</h2><p>Exexutor框架是一个根据一组执行策略调用，调度，执行和控制的异步任务的框架，可以用来控制线程的启动、执行和关闭，可以简化并发编程的操作。无限制的创建线程会引起应用程序内存溢出。所以创建一个线程池是个更好的解决方案，因为可以限制线程的数量并且可以回收再利用这些线程。Executor框架包括：线程池、Executor、Exexutors、ExecutorService、CompletionService、Future、Callable等。</p>
-
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="https://hsb786.github.io/2018/04/10/threadPool/" data-id="cjftiupgl001fc8myosdlnpot" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-
-        </footer>
-    </div>
-    
-</article>
-
-
-
-    <article id="post-javaBase" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2018/04/09/javaBase/">java基础总结</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2018/04/09/javaBase/">
-            <time datetime="2018-04-09T13:28:54.000Z" itemprop="datePublished">2018-04-09</time>
-        </a>
-    </div>
-
-
-                        
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/爪哇/">爪哇</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            
-            <p><strong>初始化顺序</strong></p>
-<ol>
-<li>父类（静态变量，静态语句块）</li>
-<li>子类（静态变量，静态语句块）</li>
-<li>父类（实例变量，普通语句块）</li>
-<li>父类（构造函数）</li>
-<li>子类（实例变量，普通语句块）</li>
-<li>子类（构造函数）</li>
-</ol>
-<hr>
-<p><strong>Object</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">public final native Class&lt;?&gt; getClass()</span><br><span class="line"></span><br><span class="line">public native int hashCode()</span><br><span class="line"></span><br><span class="line">public boolean equals(Object obj)</span><br><span class="line"></span><br><span class="line">protected native Object clone() throws CloneNotSupportedException</span><br><span class="line"></span><br><span class="line">public String toString()</span><br><span class="line"></span><br><span class="line">public final native void notify()</span><br><span class="line"></span><br><span class="line">public final native void notifyAll()</span><br><span class="line"></span><br><span class="line">public final native void wait(long timeout) throws InterruptedException</span><br><span class="line"></span><br><span class="line">public final void wait(long timeout, int nanos) throws InterruptedException</span><br><span class="line"></span><br><span class="line">public final void wait() throws InterruptedException</span><br><span class="line"></span><br><span class="line">protected void finalize() throws Throwable &#123;&#125;</span><br></pre></td></tr></table></figure>
-<hr>
-<p><strong>异常</strong></p>
-<p>Throwable可以用来表示任何可以作为异常抛出的类，分为两种：Error和Exception。其中Error用来表示JVM无法处理的错误，Exception分为两种：</p>
-<ol>
-<li><strong>受检异常（checked exception）</strong>：需要try…catch…语句捕获并进行处理，并且可以从一场恢复</li>
-<li><strong>非受检异常（unchecked exception）</strong>：是程序运行时错误，例如除0会引发Arithmetic Exceptino，此时程序崩溃并且无法恢复 </li>
-</ol>
-<p><img src="https://github.com/hsb786/hsb786.github.io/tree/master/images/Throwable.png" alt="Throwable"></p>
-
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="https://hsb786.github.io/2018/04/09/javaBase/" data-id="cjftiupg6000yc8myoi3f0q4u" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-
-        </footer>
-    </div>
-    
-</article>
-
-
-
-    <article id="post-needFocus" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2018/04/09/needFocus/">需要注意的一些东西</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2018/04/09/needFocus/">
-            <time datetime="2018-04-09T05:53:41.000Z" itemprop="datePublished">2018-04-09</time>
-        </a>
-    </div>
-
-
-                        
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/爪哇/">爪哇</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            
-            <hr>
-<p><strong>Streams</strong></p>
-<ul>
-<li>引入的原因<ul>
-<li>声明性方式处理数据集合</li>
-<li>透明的进行处理，提高性能  </li>
-</ul>
-</li>
-<li>流与集合<ul>
-<li>集合与流的差异就在于什么时候进行计算<ul>
-<li>集合是内存中的数据结构，包含数据结构中目前所有的值</li>
-<li>流的元素则是按需计算/生存</li>
-</ul>
-</li>
-<li>遍历数据的方式<ul>
-<li>集合使用Collection接口，需要用户去做迭代，称为外部迭代</li>
-<li>流的Streams库使用内部迭代  </li>
-</ul>
-</li>
-</ul>
-</li>
-<li>流的使用<ul>
-<li>一个数据源（如集合）来执行一个查询</li>
-<li>一个中间操作链，形成一条流的流水线</li>
-<li>一个终端操作，执行流水线，并能生产结果</li>
-</ul>
-</li>
-<li>流的操作类型<ul>
-<li><strong>Intermediate</strong> : 一个流后面跟随零个或多个intermediate操作。其目的主要是打开流，做出某种程度的数据映射/过滤，然后返回一个新的流，交给下一个操作使用。这类操作都是<em>惰性化的</em>，也就是说，仅仅调用到这类方法，并没有真正开始流的遍历</li>
-<li><strong>Terminal</strong> ： 一个流只能有一个terminal操作，当这个操作执行后，流就被使用“光”了，无法再被操作。所以这必定是流的<em>最后一根操作</em>。terminal操作的执行，<em>才会真正开始流的变量</em>  </li>
-</ul>
-</li>
-</ul>
-<hr>
-<p><strong>happens-before</strong></p>
-<p>在JMM中，如果一个操作执行的结果需要对另一个操作可见，那么这两个操作之间必须要存在happens-before关系<br>需要注意的是，上面提到的两个操作可以是在不同线程之间的，而且并不意味着前一个操作必须要在后一个操作之前执行，仅仅要求前一个操作的执行结果对后一个操作可见  </p>
-<ul>
-<li>happends-before规则<ul>
-<li>程序顺序规则： 单个线程中的每个操作，happens-before于该线程中的任意后续操作</li>
-<li>监视器锁规则： 对一个锁的解锁，happens-before于随后对这个锁的加锁</li>
-<li>volatile变量规则： 对一个volatile变量的写，happends-before于任意后续对这个volatile变量的读  </li>
-<li>传递性： 如果A happeens-before B，且 B happeend-before C，那么A happeens-before C  </li>
-<li>join规则： 如果线程A执行操作ThreadB.join()成功返回，那么线程B中的任意操作happeens-before与线程A从ThreadB.join()操作成功返回  </li>
-</ul>
-</li>
-</ul>
-<hr>
-<p><strong>fail-fast</strong></p>
-<p>fail-fast机制是java集合(Collection)中的一种错误机制。当多个线程对同一集合的内容进行操作时，就可能会产生fail-fast事件。  </p>
-<p>例如：当某一个线程A通过iterator去遍历某集合的过程中，若该集合的内容被其他线程所改变了；那么线程A访问集合时，就会抛出ConcurrentModificationException异常，产生fail-fast事件  </p>
-<p>要了解fail-fast机制，我们首先要对ConcurrentModificationException 异常有所了解。当方法检测到对象的并发修改，但不允许这种修改时就抛出该异常。同时需要注意的是，该异常不会始终指出对象已经由不同线程并发修改，如果单线程违反了规则，同样也有可能会抛出改异常。<br>诚然，迭代器的快速失败行为无法得到保证，它不能保证一定会出现该错误，但是快速失败操作会尽最大努力抛出ConcurrentModificationException异常</p>
-<p>当使用fail-fast iterator对Collection或对Map进行操作过程中尝试直接修改Collection/Map的内容时，即使是在单线程下运行，java.util.ConcurrentModificationException异常也将抛出  </p>
-<p>Iterator是工作在一个独立的线程，并且拥有一个mutex锁。<em>Iterator被创建之后会建立一个指向原来对象的单链索引表，当原来对象发生变化时，这个索引表的内容不会同步该表，所以当索引指针往后移动的时候就找不到要迭代的对象，所以按照fail-fast原则Iterator会马上抛出ConsurrentModificationException异常</em>。</p>
-<p>所以Iterator在工作的时候是不允许被迭代的对象被改变的。但你可以使用Iterator本身的方法remove()来删除对象，Iteraror.remove()方法会在删除当前迭代对象的同时维护索引的一致性。</p>
-<hr>
-<p><strong>数据库三大范式</strong></p>
-<ol>
-<li>1NF：字段不可再分</li>
-<li>2NF：主键依赖，一张表里的数据，必须是跟主键相关的</li>
-<li>3NF：任意两个表不能出现重复的非主键字段</li>
-</ol>
-<hr>
-<p><strong>设计模式六大原则</strong></p>
-<p><strong>单一职责(Single Responsibility Principle)</strong>：一个类只负责一个功能领域中的相应职责</p>
-<p><strong>开闭(Open-Closed Principle)</strong>：对扩展开放，对修改关闭</p>
-<p><strong>里氏替换(Liskov Subsitution Principle)</strong>：子类能出现在基类出现的地方</p>
-<p><strong>依赖倒置(Dependency Inversion Principle)</strong>：针对接口编程，而不是针对实现类编程</p>
-<p><strong>接口隔离(Interface Segregation Principle)</strong>：使用多个专门的接口，而不使用单一的总接口</p>
-<p><strong>迪米特(Law of Demeter)</strong>：一个类尽可能少的与其它类发生相互作用</p>
-
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="https://hsb786.github.io/2018/04/09/needFocus/" data-id="cjftiupgl0012c8my8kv0e6xx" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-
-        </footer>
-    </div>
-    
-</article>
-
-
-
-    <article id="post-easyForget" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2018/04/09/easyForget/">记录一些容易忘记的东西</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2018/04/09/easyForget/">
-            <time datetime="2018-04-09T00:42:41.000Z" itemprop="datePublished">2018-04-09</time>
-        </a>
-    </div>
-
-
-                        
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/爪哇/">爪哇</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            
-            <hr>
-<p>接口不可以实现接口，可以继承多个接口</p>
-<p>抽象类可以继承具体类</p>
-<p>static不能被重写，重写是运行时动态绑定的</p>
-<p>static变量发生在静态解析阶段，此时已经将字段的符号引用转换成了内存引用，将它与对应的类关联在了一起</p>
-<p>子类构造方法默认会寻找父类无参构造方法，若没有，编译不通过</p>
-<p>抽象方法必须为public否则protected，缺省情况下默认为public</p>
-<p>java8中接口可以含有default方法和static方法</p>
-<p>volatile 禁止指令重排序： 添加内存屏障，保证前面已经完成，后面都没开始</p>
-<p>内部类访问外部类      外部类.this.成员XX</p>
-<p>重载静态绑定，根据参数的静态类型而不是实际类型作为判断依据的</p>
-<p>java的8中基本类型，除了float和double之外，其它6种都实现了常量池</p>
-<p>boolean类型不允许进行任何类型的转换处理</p>
-<p>java7以后，常量池被放入到堆空间中。导致Intern()函数的功能不同。intern()检查常量池时候存在该字符串，存在的话就直接返回；否则返回首次在堆中声明的相同字符串的引用</p>
-<p>ArrayList 默认容器 10                HashMap   16</p>
-<p>newInstance 低效率，只能调用<em>无参</em>构造。<br>将new这个方式分解为两步： 首先调用class的加载方式加载某个类，然后实例化  </p>
-<p>HashSet底层借用HashMap  </p>
-<blockquote>
-<p>private static final Object PRESENT=new Object();<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public boolean add(E e) &#123;</span><br><span class="line">    return map.put(e, PRESENT)==null;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<p>字符只有在内存中才会形成，其它都是以字节的方式进行的</p>
-<p>强引用： Object obj=new Object()，只要引用还在，就不会被回收<br>软引用： 内存不够才会被回收<br>弱引用： 下一次垃圾收集器工作时会被回收。<br>虚引用： 随时可能被回收，目的是能在这个对象被回收时收到一个系统通知</p>
-<p>内加载器： JVM动态加载所需的类。  委托、可见、单一。<br>交给父加载器；父加载器加载的类子加载器都能看到；一个类只能被一个加载一次</p>
-<p>每个对象有两个队列： 就绪队列、阻塞队列</p>
-<p>ReentrantLock结合Condition可以有选择性地进行通知，在调度上更加灵活</p>
-<p>指令重排序： 编译器和处理器为了优化程序性能而对指令序列进行重新排序的一种手段</p>
-<p>null可以强制转换为任何java类类型<br>其返回值还是null，可以调用static方法</p>
-
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="https://hsb786.github.io/2018/04/09/easyForget/" data-id="cjftiupg6000pc8myn83ro6qq" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/10/T03/" data-id="cjftmqy66000514mykh3iksm9" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1561,6 +1447,82 @@
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/2018/04/10/T16/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/04/10/T16/" class="title">反转链表</a></p>
+                            <p class="item-date"><time datetime="2018-04-10T12:14:31.000Z" itemprop="datePublished">2018-04-10</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/04/10/T15/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/04/10/T15/" class="title">链表中倒数第K个节点</a></p>
+                            <p class="item-date"><time datetime="2018-04-10T12:13:03.000Z" itemprop="datePublished">2018-04-10</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/04/10/T14/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/04/10/T14/" class="title">调整数组顺序使奇数位于偶数之前</a></p>
+                            <p class="item-date"><time datetime="2018-04-10T12:10:37.000Z" itemprop="datePublished">2018-04-10</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/04/10/T13/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/04/10/T13/" class="title">在O(1)时间内删除链表节点</a></p>
+                            <p class="item-date"><time datetime="2018-04-10T12:04:16.000Z" itemprop="datePublished">2018-04-10</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/2018/04/10/T10/" class="thumbnail">
     
     
@@ -1577,82 +1539,6 @@
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2018/04/10/T08/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"></p>
-                            <p class="item-title"><a href="/2018/04/10/T08/" class="title">旋转数组的最小数字</a></p>
-                            <p class="item-date"><time datetime="2018-04-10T08:11:33.000Z" itemprop="datePublished">2018-04-10</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2018/04/10/T0701/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"></p>
-                            <p class="item-title"><a href="/2018/04/10/T0701/" class="title">用两个队列实现一个栈</a></p>
-                            <p class="item-date"><time datetime="2018-04-10T08:11:19.000Z" itemprop="datePublished">2018-04-10</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2018/04/10/T07/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"></p>
-                            <p class="item-title"><a href="/2018/04/10/T07/" class="title">用两个栈实现队列</a></p>
-                            <p class="item-date"><time datetime="2018-04-10T08:10:52.000Z" itemprop="datePublished">2018-04-10</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2018/04/10/T04/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"></p>
-                            <p class="item-title"><a href="/2018/04/10/T04/" class="title">替换空格</a></p>
-                            <p class="item-date"><time datetime="2018-04-10T08:08:27.000Z" itemprop="datePublished">2018-04-10</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -1664,7 +1550,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">归档</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a><span class="archive-list-count">25</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a><span class="archive-list-count">29</span></li></ul>
         </div>
     </div>
 
@@ -1673,7 +1559,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">标签</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql/">sql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/剑指Offer/">剑指Offer</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爪哇/">爪哇</a><span class="tag-list-count">10</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql/">sql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/剑指Offer/">剑指Offer</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爪哇/">爪哇</a><span class="tag-list-count">10</span></li></ul>
         </div>
     </div>
 
@@ -1682,7 +1568,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">标签云</h3>
         <div class="widget tagcloud">
-            <a href="/tags/Spring/" style="font-size: 12.5px;">Spring</a> <a href="/tags/sql/" style="font-size: 10px;">sql</a> <a href="/tags/前端/" style="font-size: 10px;">前端</a> <a href="/tags/剑指Offer/" style="font-size: 17.5px;">剑指Offer</a> <a href="/tags/工具/" style="font-size: 15px;">工具</a> <a href="/tags/爪哇/" style="font-size: 20px;">爪哇</a>
+            <a href="/tags/Spring/" style="font-size: 13.33px;">Spring</a> <a href="/tags/sql/" style="font-size: 10px;">sql</a> <a href="/tags/前端/" style="font-size: 10px;">前端</a> <a href="/tags/剑指Offer/" style="font-size: 20px;">剑指Offer</a> <a href="/tags/工具/" style="font-size: 16.67px;">工具</a> <a href="/tags/爪哇/" style="font-size: 20px;">爪哇</a>
         </div>
     </div>
 

@@ -147,7 +147,7 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                25
+                29
                 <span>文章</span>
             </div>
             <div class="article-info-block">
@@ -176,6 +176,618 @@
 
             
             <section id="main">
+    <article id="post-threadPool" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2018/04/10/threadPool/">threadPool</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2018/04/10/threadPool/">
+            <time datetime="2018-04-10T02:13:01.000Z" itemprop="datePublished">2018-04-10</time>
+        </a>
+    </div>
+
+
+                        
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/爪哇/">爪哇</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h2 id="Executor框架"><a href="#Executor框架" class="headerlink" title="Executor框架"></a>Executor框架</h2><p>Exexutor框架是一个根据一组执行策略调用，调度，执行和控制的异步任务的框架，可以用来控制线程的启动、执行和关闭，可以简化并发编程的操作。无限制的创建线程会引起应用程序内存溢出。所以创建一个线程池是个更好的解决方案，因为可以限制线程的数量并且可以回收再利用这些线程。Executor框架包括：线程池、Executor、Exexutors、ExecutorService、CompletionService、Future、Callable等。</p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="https://hsb786.github.io/2018/04/10/threadPool/" data-id="cjftmqy7h001r14myv1ypdza4" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
+    <article id="post-javaBase" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2018/04/09/javaBase/">java基础总结</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2018/04/09/javaBase/">
+            <time datetime="2018-04-09T13:28:54.000Z" itemprop="datePublished">2018-04-09</time>
+        </a>
+    </div>
+
+
+                        
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/爪哇/">爪哇</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p><strong>初始化顺序</strong></p>
+<ol>
+<li>父类（静态变量，静态语句块）</li>
+<li>子类（静态变量，静态语句块）</li>
+<li>父类（实例变量，普通语句块）</li>
+<li>父类（构造函数）</li>
+<li>子类（实例变量，普通语句块）</li>
+<li>子类（构造函数）</li>
+</ol>
+<hr>
+<p><strong>Object</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">public final native Class&lt;?&gt; getClass()</span><br><span class="line"></span><br><span class="line">public native int hashCode()</span><br><span class="line"></span><br><span class="line">public boolean equals(Object obj)</span><br><span class="line"></span><br><span class="line">protected native Object clone() throws CloneNotSupportedException</span><br><span class="line"></span><br><span class="line">public String toString()</span><br><span class="line"></span><br><span class="line">public final native void notify()</span><br><span class="line"></span><br><span class="line">public final native void notifyAll()</span><br><span class="line"></span><br><span class="line">public final native void wait(long timeout) throws InterruptedException</span><br><span class="line"></span><br><span class="line">public final void wait(long timeout, int nanos) throws InterruptedException</span><br><span class="line"></span><br><span class="line">public final void wait() throws InterruptedException</span><br><span class="line"></span><br><span class="line">protected void finalize() throws Throwable &#123;&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<p><strong>异常</strong></p>
+<p>Throwable可以用来表示任何可以作为异常抛出的类，分为两种：Error和Exception。其中Error用来表示JVM无法处理的错误，Exception分为两种：</p>
+<ol>
+<li><strong>受检异常（checked exception）</strong>：需要try…catch…语句捕获并进行处理，并且可以从一场恢复</li>
+<li><strong>非受检异常（unchecked exception）</strong>：是程序运行时错误，例如除0会引发Arithmetic Exceptino，此时程序崩溃并且无法恢复 </li>
+</ol>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="https://hsb786.github.io/2018/04/09/javaBase/" data-id="cjftmqy72001314my96dmdur6" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
+    <article id="post-needFocus" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2018/04/09/needFocus/">需要注意的一些东西</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2018/04/09/needFocus/">
+            <time datetime="2018-04-09T05:53:41.000Z" itemprop="datePublished">2018-04-09</time>
+        </a>
+    </div>
+
+
+                        
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/爪哇/">爪哇</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <hr>
+<p><strong>Streams</strong></p>
+<ul>
+<li>引入的原因<ul>
+<li>声明性方式处理数据集合</li>
+<li>透明的进行处理，提高性能  </li>
+</ul>
+</li>
+<li>流与集合<ul>
+<li>集合与流的差异就在于什么时候进行计算<ul>
+<li>集合是内存中的数据结构，包含数据结构中目前所有的值</li>
+<li>流的元素则是按需计算/生存</li>
+</ul>
+</li>
+<li>遍历数据的方式<ul>
+<li>集合使用Collection接口，需要用户去做迭代，称为外部迭代</li>
+<li>流的Streams库使用内部迭代  </li>
+</ul>
+</li>
+</ul>
+</li>
+<li>流的使用<ul>
+<li>一个数据源（如集合）来执行一个查询</li>
+<li>一个中间操作链，形成一条流的流水线</li>
+<li>一个终端操作，执行流水线，并能生产结果</li>
+</ul>
+</li>
+<li>流的操作类型<ul>
+<li><strong>Intermediate</strong> : 一个流后面跟随零个或多个intermediate操作。其目的主要是打开流，做出某种程度的数据映射/过滤，然后返回一个新的流，交给下一个操作使用。这类操作都是<em>惰性化的</em>，也就是说，仅仅调用到这类方法，并没有真正开始流的遍历</li>
+<li><strong>Terminal</strong> ： 一个流只能有一个terminal操作，当这个操作执行后，流就被使用“光”了，无法再被操作。所以这必定是流的<em>最后一根操作</em>。terminal操作的执行，<em>才会真正开始流的变量</em>  </li>
+</ul>
+</li>
+</ul>
+<hr>
+<p><strong>happens-before</strong></p>
+<p>在JMM中，如果一个操作执行的结果需要对另一个操作可见，那么这两个操作之间必须要存在happens-before关系<br>需要注意的是，上面提到的两个操作可以是在不同线程之间的，而且并不意味着前一个操作必须要在后一个操作之前执行，仅仅要求前一个操作的执行结果对后一个操作可见  </p>
+<ul>
+<li>happends-before规则<ul>
+<li>程序顺序规则： 单个线程中的每个操作，happens-before于该线程中的任意后续操作</li>
+<li>监视器锁规则： 对一个锁的解锁，happens-before于随后对这个锁的加锁</li>
+<li>volatile变量规则： 对一个volatile变量的写，happends-before于任意后续对这个volatile变量的读  </li>
+<li>传递性： 如果A happeens-before B，且 B happeend-before C，那么A happeens-before C  </li>
+<li>join规则： 如果线程A执行操作ThreadB.join()成功返回，那么线程B中的任意操作happeens-before与线程A从ThreadB.join()操作成功返回  </li>
+</ul>
+</li>
+</ul>
+<hr>
+<p><strong>fail-fast</strong></p>
+<p>fail-fast机制是java集合(Collection)中的一种错误机制。当多个线程对同一集合的内容进行操作时，就可能会产生fail-fast事件。  </p>
+<p>例如：当某一个线程A通过iterator去遍历某集合的过程中，若该集合的内容被其他线程所改变了；那么线程A访问集合时，就会抛出ConcurrentModificationException异常，产生fail-fast事件  </p>
+<p>要了解fail-fast机制，我们首先要对ConcurrentModificationException 异常有所了解。当方法检测到对象的并发修改，但不允许这种修改时就抛出该异常。同时需要注意的是，该异常不会始终指出对象已经由不同线程并发修改，如果单线程违反了规则，同样也有可能会抛出改异常。<br>诚然，迭代器的快速失败行为无法得到保证，它不能保证一定会出现该错误，但是快速失败操作会尽最大努力抛出ConcurrentModificationException异常</p>
+<p>当使用fail-fast iterator对Collection或对Map进行操作过程中尝试直接修改Collection/Map的内容时，即使是在单线程下运行，java.util.ConcurrentModificationException异常也将抛出  </p>
+<p>Iterator是工作在一个独立的线程，并且拥有一个mutex锁。<em>Iterator被创建之后会建立一个指向原来对象的单链索引表，当原来对象发生变化时，这个索引表的内容不会同步该表，所以当索引指针往后移动的时候就找不到要迭代的对象，所以按照fail-fast原则Iterator会马上抛出ConsurrentModificationException异常</em>。</p>
+<p>所以Iterator在工作的时候是不允许被迭代的对象被改变的。但你可以使用Iterator本身的方法remove()来删除对象，Iteraror.remove()方法会在删除当前迭代对象的同时维护索引的一致性。</p>
+<hr>
+<p><strong>数据库三大范式</strong></p>
+<ol>
+<li>1NF：字段不可再分</li>
+<li>2NF：主键依赖，一张表里的数据，必须是跟主键相关的</li>
+<li>3NF：任意两个表不能出现重复的非主键字段</li>
+</ol>
+<hr>
+<p><strong>设计模式六大原则</strong></p>
+<p><strong>单一职责(Single Responsibility Principle)</strong>：一个类只负责一个功能领域中的相应职责</p>
+<p><strong>开闭(Open-Closed Principle)</strong>：对扩展开放，对修改关闭</p>
+<p><strong>里氏替换(Liskov Subsitution Principle)</strong>：子类能出现在基类出现的地方</p>
+<p><strong>依赖倒置(Dependency Inversion Principle)</strong>：针对接口编程，而不是针对实现类编程</p>
+<p><strong>接口隔离(Interface Segregation Principle)</strong>：使用多个专门的接口，而不使用单一的总接口</p>
+<p><strong>迪米特(Law of Demeter)</strong>：一个类尽可能少的与其它类发生相互作用</p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="https://hsb786.github.io/2018/04/09/needFocus/" data-id="cjftmqy72001e14my6vtp12sx" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
+    <article id="post-easyForget" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2018/04/09/easyForget/">记录一些容易忘记的东西</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2018/04/09/easyForget/">
+            <time datetime="2018-04-09T00:42:41.000Z" itemprop="datePublished">2018-04-09</time>
+        </a>
+    </div>
+
+
+                        
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/爪哇/">爪哇</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <hr>
+<p>接口不可以实现接口，可以继承多个接口</p>
+<p>抽象类可以继承具体类</p>
+<p>static不能被重写，重写是运行时动态绑定的</p>
+<p>static变量发生在静态解析阶段，此时已经将字段的符号引用转换成了内存引用，将它与对应的类关联在了一起</p>
+<p>子类构造方法默认会寻找父类无参构造方法，若没有，编译不通过</p>
+<p>抽象方法必须为public否则protected，缺省情况下默认为public</p>
+<p>java8中接口可以含有default方法和static方法</p>
+<p>volatile 禁止指令重排序： 添加内存屏障，保证前面已经完成，后面都没开始</p>
+<p>内部类访问外部类      外部类.this.成员XX</p>
+<p>重载静态绑定，根据参数的静态类型而不是实际类型作为判断依据的</p>
+<p>java的8中基本类型，除了float和double之外，其它6种都实现了常量池</p>
+<p>boolean类型不允许进行任何类型的转换处理</p>
+<p>java7以后，常量池被放入到堆空间中。导致Intern()函数的功能不同。intern()检查常量池时候存在该字符串，存在的话就直接返回；否则返回首次在堆中声明的相同字符串的引用</p>
+<p>ArrayList 默认容器 10                HashMap   16</p>
+<p>newInstance 低效率，只能调用<em>无参</em>构造。<br>将new这个方式分解为两步： 首先调用class的加载方式加载某个类，然后实例化  </p>
+<p>HashSet底层借用HashMap  </p>
+<blockquote>
+<p>private static final Object PRESENT=new Object();<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public boolean add(E e) &#123;</span><br><span class="line">    return map.put(e, PRESENT)==null;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>字符只有在内存中才会形成，其它都是以字节的方式进行的</p>
+<p>强引用： Object obj=new Object()，只要引用还在，就不会被回收<br>软引用： 内存不够才会被回收<br>弱引用： 下一次垃圾收集器工作时会被回收。<br>虚引用： 随时可能被回收，目的是能在这个对象被回收时收到一个系统通知</p>
+<p>内加载器： JVM动态加载所需的类。  委托、可见、单一。<br>交给父加载器；父加载器加载的类子加载器都能看到；一个类只能被一个加载一次</p>
+<p>每个对象有两个队列： 就绪队列、阻塞队列</p>
+<p>ReentrantLock结合Condition可以有选择性地进行通知，在调度上更加灵活</p>
+<p>指令重排序： 编译器和处理器为了优化程序性能而对指令序列进行重新排序的一种手段</p>
+<p>null可以强制转换为任何java类类型<br>其返回值还是null，可以调用static方法</p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="https://hsb786.github.io/2018/04/09/easyForget/" data-id="cjftmqy72000v14myq7cspkzd" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
     <article id="post-distinguish" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
@@ -364,7 +976,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/09/distinguish/" data-id="cjftiupg6000lc8my6hls4v70" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/09/distinguish/" data-id="cjftmqy72000y14mym7c7vz73" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -496,7 +1108,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/08/DispatchServlet/" data-id="cjftiupfq0005c8mygh2l0dff" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/08/DispatchServlet/" data-id="cjftmqy66000214mylmylato2" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -626,394 +1238,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/08/hash/" data-id="cjftiupg6000sc8myb691caw5" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-
-        </footer>
-    </div>
-    
-</article>
-
-
-
-    <article id="post-sqlTransaction" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2018/04/08/sqlTransaction/">事务</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2018/04/08/sqlTransaction/">
-            <time datetime="2018-04-08T09:58:41.000Z" itemprop="datePublished">2018-04-08</time>
-        </a>
-    </div>
-
-
-                        
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/sql/">sql</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            
-            <hr>
-<blockquote>
-<p>事务（Transaction），一般是指要做的或所做的事情。在计算机术语中是指访问并可能更新数据库中各种数据项的一个程序执行单元（unit）。在计算机术语中，事务通常就是指数据库事务。</p>
-</blockquote>
-<p><strong>概念</strong></p>
-<p>一个数据库事务通常包含对数据库进行读或写的一个操作序列。它的存在包括有以下两个目的</p>
-<blockquote>
-<ol>
-<li>为数据库提供了一个从失败中恢复到正常状态的方法，同时提供了数据库即使在异常状态下仍能保持一致性的方法。</li>
-<li>当多个应用程序在并发访问数据库时，可以在这些应用程序之间提供一个隔离的方法，以防止彼此的操作互相干扰。</li>
-</ol>
-</blockquote>
-<p>当一个事务被提交给了DBMS（数据库管理系统），则DBMS需要确保该事务中的所有操作都成功完成且其结果被永久保存在数据库中，如果事务中有的操作没有成功完成，则事务中的所有操作都需要被回滚，回到事务执行前的状态（要么全执行，要么全都不执行）;同时，该事务对数据库或者其他事务的执行无影响，所有的事务都好像在独立的运行。</p>
-<p>但在现实情况下，失败的风险很高。在一个数据库事务的执行过程中，有可能会遇上事务操作失败、数据库系统/操作系统失败，甚至是存储介质失败等情况。这便需要DBMS对一个执行失败的事务执行恢复操作，将其数据库状态恢复到一致状态（数据的一致性得到保证的状态）。为了实现将数据库状态恢复到一致状态的功能，DBMS通常需要维护事务日志以追踪事务中所有影响数据库数据的操作。</p>
-<p><strong>特性</strong></p>
-<p>并非任意的对数据库的操作序列都是数据库事务。事务应该具有4个属性：原子性、一致性、隔离性、持久性。这四个属性通常称为ACID特性。</p>
-<blockquote>
-<p>原子性（Atomicity）：事务作为一个整体被执行，包含在其中的对数据库的操作要么全部被执行，要么都不执行。<br>一致性（Consistency）：事务应确保数据库的状态从一个一致状态转变为另一个一致状态。一致状态的含义是数据库中的数据应满足完整性约束。<br>隔离性（Isolation）：多个事务并发执行时，一个事务的执行不应影响其他事务的执行。<br>持久性（Durability）：一个事务一旦提交，他对数据库的修改应该永久保存在数据库中。</p>
-</blockquote>
-<hr>
-<p><strong>脏读</strong>：又称无效数据的读出。指一个事务对数据进行了修改，还没有提交到数据库中，另外一个事务访问并使用了该数据。由于这个数据还没有提交，所以另外一个事务读到的这个数据是脏数据。</p>
-<p><strong>不可重复读</strong>：一个事务范围内对两个相同的查询却返回了不同数据。这是因为其它事务修改的提交而引起的。</p>
-<p><strong>幻读</strong>：指当事务不是独立执行时发生的一种现象。例如第一个事务涉及到表中全部数据行的修改，另一个事务添加了一行新数据，那么执行第一个事务后，发现表中还有没有被修改的数据行。</p>
-<hr>
-<p><strong>隔离级别</strong></p>
-<ol>
-<li><p>未提交读(Read uncommitted)：一个事务可以读取另一个事务未提交的数据</p>
-</li>
-<li><p>提交读(Read committed)：在一个事务修改数据过程中，其它事务不能读该数据</p>
-</li>
-</ol>
-<p>数据库锁情况</p>
-<blockquote>
-<p>事务对当前读取的数据加行级共享锁（当读到时才加锁），一旦读完该行，立即释放该行级共享锁</p>
-<p>事务在更新某数据的瞬间（就是发生更新的瞬间），必须先对其加行级排他锁，直到事务结束才释放。</p>
-</blockquote>
-<ol start="3">
-<li>可重复读(Repeatable reads)：解决不可重复读的问题</li>
-</ol>
-<p>数据库锁情况</p>
-<blockquote>
-<p>事务在读取某数据的瞬间，必须先对其加行级共享锁，直到事务结束才释放</p>
-<p>事务在更新某数据的瞬间，必须先对其加行级排他锁，直到事务结束才释放</p>
-</blockquote>
-<ol start="4">
-<li>序列化(Serializable)：最高的隔离级别</li>
-</ol>
-<p>数据库锁情况</p>
-<blockquote>
-<p>事务在读取数据时，必须先对其加表级共享锁，直到事务结束才释放</p>
-<p>事务在更新数据时，必须先对其加表级排他锁，直到事务结束才释放</p>
-</blockquote>
-<p>隔离级别越高，同时在并发现上也越低</p>
-<hr>
-<p><strong>锁的分类</strong></p>
-<p>按锁级别划分：</p>
-<p><strong>共享锁(Share Lock)</strong></p>
-<p>又称读锁，是读取操作创建的锁。其它用户可以并发读取数据，但任何事务都不能对数据进行修改，直到已释放所有共享锁</p>
-<p>如果事务T对数据A加上共享锁后，则其它事务只能对A再加共享锁，不能加排他锁。获取共享锁的事务只能读数据，不能修改数据</p>
-<p><strong>用法</strong></p>
-<p><em>select   …    LOCK IN SHARE MODE</em>，</p>
-<p>当没有其它线程对查询结果集中的任何一行使用排他锁时，可以成功申请共享锁，否则会被阻塞。其它线程也可以读取使用了共享锁的表，而且这些线程读取的是同一个版本的数据</p>
-<hr>
-<p><strong>排他锁(eXclusive Lock)</strong></p>
-<p>又称写锁，如果事务T对数据A加上排他锁后，则其他事务不能再对A加任何类型的锁。获取排他锁的事务既能读数据，又能修改数据</p>
-<p><strong>用法</strong></p>
-<p><em>select …  FOR UPDATE</em></p>
-<p>当没有其它线程对查询结果集中的任何一行使用排他锁时，可以成功申请排他锁，否则会被阻塞</p>
-<hr>
-<p>按锁的粒度划分</p>
-<p><strong>行级锁</strong></p>
-<p>对当前操作的行进行加锁。加锁粒度最小，但加锁的开销最大。行级锁分为共享锁和排他锁</p>
-<p><strong>特点</strong></p>
-<p>开销大，加锁慢；会出现死锁；锁定力度最小，发生锁冲突的概率最低，并发度也最高。</p>
-<hr>
-<p><strong>表级锁</strong></p>
-<p>对当前操作的整张表加锁，它实现简单，资源消耗较少，被大部分MySQL引擎支持。最常使用的MYISAM与INNODB都支持表级锁定。表级锁定分为表共享读锁（共享锁）与表独占写锁（排他锁）。</p>
-<p><strong>特点</strong></p>
-<p>开销小，加锁快；不会出现死锁；锁定粒度大，发出锁冲突的概率最高，并发度最低。</p>
-<hr>
-<p><strong>页级锁</strong></p>
-<p>页级锁是MySQL中锁定粒度介于行级锁和表级锁中间的一种锁。表级锁速度快，但冲突多，行级冲突少，但速度慢。所以取了折衷的页级，一次锁定相邻的一组记录。BDB支持页级锁</p>
-<p><strong>特点</strong></p>
-<p>开销和加锁时间界于表锁和行锁之间；会出现死锁；锁定粒度界于表锁和行锁之间，并发度一般</p>
-<hr>
-<p><strong>Innodb中的行锁与表锁</strong></p>
-<p>InnoDB行锁是通过给索引上的索引项加锁来实现的。InnoDB这种行锁实现特点意味着：<em>只有通过索引条件检索数据，InnoDB才使用行级锁，否则，InnoDB将使用表锁！</em></p>
-<p><strong>行级锁与死锁</strong></p>
-<p>在MySQL中，<strong>行级锁并不是直接锁记录，而是锁索引</strong>。索引分为主键索引和非主键索引两种，如果一条sql语句操作了主键索引，MySQL就会锁定这条主键索引；如果一条语句操作了非主键索引，MySQL会先锁定该非主键索引，再锁定相关的主键索引。 在UPDATE、DELETE操作时，MySQL不仅锁定WHERE条件扫描过的所有索引记录，而且会锁定相邻的键值，即所谓的next-key locking。</p>
-<p>当两个事务同时执行，一个锁住了主键索引，在等待其他相关索引。另一个锁定了非主键索引，在等待主键索引。这样就会发生死锁。</p>
-<p>发生死锁后，InnoDB一般都可以检测到，并使一个事务释放锁回退，另一个获取锁完成事务。</p>
-<hr>
-<p><strong>常见的三种解决死锁的方法</strong></p>
-<ol>
-<li>如果不同程序会并发存取多个表，尽量约定以相同的顺序访问表，可以大大降低死锁机会</li>
-<li>在同一个事务中，尽可能做到一次锁定所需要的所有资源，减少死锁产生概率</li>
-<li>对于非常容易产生死锁的业务部分，可以尝试使用升级锁定颗粒度，通过表级锁定来减少死锁产生的概率</li>
-</ol>
-<hr>
-<p>按使用方式划分</p>
-<p><strong>悲观锁</strong></p>
-<blockquote>
-<p>在关系数据库管理系统里，悲观并发控制（又名“悲观锁”，Pessimistic Concurrency Control，缩写“PCC”）是一种并发控制的方法。它可以阻止一个事务以影响其他用户的方式来修改数据。如果一个事务执行的操作都某行数据应用了锁，那只有当这个事务把锁释放，其他事务才能够执行与该锁冲突的操作。</p>
-<p>悲观并发控制主要用于数据争用激烈的环境，以及发生并发冲突时使用锁保护数据的成本要低于回滚事务的成本的环境中。</p>
-</blockquote>
-<p><strong>在数据库中，悲观锁的流程如下：</strong></p>
-<blockquote>
-<p>在对任意记录进行修改前，先尝试为该记录加上排他锁（exclusive locking）。</p>
-<p>如果加锁失败，说明该记录正在被修改，那么当前查询可能要等待或者抛出异常。 具体响应方式由开发者根据实际需要决定。</p>
-<p>如果成功加锁，那么就可以对记录做修改，事务完成后就会解锁了。</p>
-<p>其间如果有其他对该记录做修改或加排他锁的操作，都会等待我们解锁或直接抛出异常。</p>
-</blockquote>
-<p>使用select…for update会把数据给锁住，不过我们需要注意一些锁的级别，MySQL InnoDB默认行级锁。行级锁都是基于索引的，如果一条SQL语句用不到索引是不会使用行级锁的，会使用表级锁把整张表锁住，这点需要注意。</p>
-<p><strong>优点与不足</strong></p>
-<p>悲观并发控制实际上是“先取锁再访问”的保守策略，为数据处理的安全提供了保证。但是在效率方面，处理加锁的机制会让数据库产生额外的开销，还有增加产生死锁的机会；另外，在只读型事务处理中由于不会产生冲突，也没必要使用锁，这样做只能增加系统负载；还有会降低了并行性，一个事务如果锁定了某行数据，其他事务就必须等待该事务处理完才可以处理那行数</p>
-<hr>
-<p><strong>乐观锁</strong></p>
-<blockquote>
-<p>在关系数据库管理系统里，乐观并发控制（又名“乐观锁”，Optimistic Concurrency Control，缩写“OCC”）是一种并发控制的方法。它假设多用户并发的事务在处理时不会彼此互相影响，各事务能够在不产生锁的情况下处理各自影响的那部分数据。在提交数据更新之前，每个事务会先检查在该事务读取数据后，有没有其他事务又修改了该数据。如果其他事务有更新的话，正在提交的事务会进行回滚。乐观事务控制最早是由孔祥重（H.T.Kung）教授提出。</p>
-</blockquote>
-<p>乐观锁（ Optimistic Locking ） 相对悲观锁而言，乐观锁假设认为数据一般情况下不会造成冲突，所以在数据进行提交更新的时候，才会正式对数据的冲突与否进行检测，如果发现冲突了，则让返回用户错误的信息，让用户决定如何去做。</p>
-<p>相对于悲观锁，在对数据库进行处理的时候，乐观锁并不会使用数据库提供的锁机制。一般的实现乐观锁的方式就是记录数据版本。</p>
-<blockquote>
-<p>数据版本,为数据增加的一个版本标识。当读取数据时，将版本标识的值一同读出，数据每更新一次，同时对版本标识进行更新。当我们提交更新的时候，判断数据库表对应记录的当前版本信息与第一次取出来的版本标识进行比对，如果数据库表当前版本号与第一次取出来的版本标识值相等，则予以更新，否则认为是过期数据。</p>
-</blockquote>
-<p><strong>优点与不足</strong></p>
-<p>乐观并发控制相信事务之间的数据竞争(data race)的概率是比较小的，因此尽可能直接做下去，直到提交的时候才去锁定，所以不会产生任何锁和死锁。但如果直接简单这么做，还是有可能会遇到不可预期的结果，例如两个事务都读取了数据库的某一行，经过修改以后写回数据库，这时就遇到了问题。</p>
-<hr>
-
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="https://hsb786.github.io/2018/04/08/sqlTransaction/" data-id="cjftiupgl001hc8myf2v894js" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-
-        </footer>
-    </div>
-    
-</article>
-
-
-
-    <article id="post-SpringMVC" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2018/04/08/SpringMVC/">SpringMVC</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2018/04/08/SpringMVC/">
-            <time datetime="2018-04-08T09:58:41.000Z" itemprop="datePublished">2018-04-08</time>
-        </a>
-    </div>
-
-
-                        
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/Spring/">Spring</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            
-            <hr>
-<h2 id="SpringMVC工作流程"><a href="#SpringMVC工作流程" class="headerlink" title="SpringMVC工作流程"></a>SpringMVC工作流程</h2><p>SpringMVC是一种基于Servelt的技术，它提供了控制器DispatchServlet和相关组件，这些SpringMVC的组件一起协调工作，完成对web请求的相应。</p>
-<ol>
-<li>客户端发出一个HTTP请求，Web服务器接收到这个请求。服务器检查HTTP请求的路径，如果匹配DispatchServelt的请求映射路径(web.xml中指定)，则Web容器将该请求转交给对应的DispatchServlet处理</li>
-<li>DispatchServlet接收到这个请求后，将根据请求的信息以及HandlerMapping配置找到处理请求的处理器（Handler）。HandlerMapping可以简单理解为统一资源标识符URL域与处理器Handler之间的关系。</li>
-<li>找到对应的处理器之后，通过HandlerAdapter对Handler进行封装，再以同一的适配器接口调用Handler。因为为了更加灵活的编码和AOP增强功能，SpringMVC会给处理器加入拦截器，这样就可以在处理器执行前后加入执行前后加入自己的代码，于是就构成了一个处理器的执行链，所以SpringMVC提供了处理器适配器HandlerAdapter，帮助我们运行相应的处理器以及我们添加进去的拦截器。</li>
-<li>处理器完成了请求的业务逻辑之后将返回一个ModelAndView对象给DIspatcherServlet，这里ModelAndView包含了视图的逻辑名和模型数据信息。</li>
-<li>得到了ModelAndView之后，DispatchServlet借助ViewResolver视图解析器将逻辑试图转换为真实视图。</li>
-<li>通过ViewResolver视图解析器得到了真实视图后，DispatServlet使用这个真实视图对象对ModelAndView中的模型数据进行渲染。</li>
-<li>最终DispatchServlet将渲染过后的视图对象返回给请求的客户端，客户端得到的响应可能是一个普通的HTML页面，也可能是一个JSON串，甚至是一张图片等等不同的视图模型。</li>
-</ol>
-
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="https://hsb786.github.io/2018/04/08/SpringMVC/" data-id="cjftiupfq0002c8myhfl49dwv" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/08/hash/" data-id="cjftmqy72001814myifzmfy95" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1146,7 +1371,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/08/spring/" data-id="cjftiupgl001dc8myka096ene" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/08/spring/" data-id="cjftmqy7h001m14my6dgm86u5" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1222,7 +1447,7 @@
 
 
 
-    <article id="post-skills" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-preventDupAjax" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -1230,7 +1455,7 @@
                 
     
         <h1 itemprop="name">
-            <a class="article-title" href="/2018/04/08/skills/">一些小技巧</a>
+            <a class="article-title" href="/2018/04/08/preventDupAjax/">防止重复发送 Ajax 请求的解决方案</a>
         </h1>
     
 
@@ -1239,7 +1464,7 @@
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/2018/04/08/skills/">
+        <a href="/2018/04/08/preventDupAjax/">
             <time datetime="2018-04-08T09:58:41.000Z" itemprop="datePublished">2018-04-08</time>
         </a>
     </div>
@@ -1249,7 +1474,7 @@
                         
     <div class="article-tag">
         <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/爪哇/">爪哇</a>
+        <a class="tag-link" href="/tags/前端/">前端</a>
     </div>
 
                     </div>
@@ -1261,13 +1486,13 @@
         
             
             <hr>
-<p>位运算直接对内存数据进行操作，不需要转成十进制，因此处理速度非常快</p>
-<p> X % 2^n = X &amp; (2^n-1)</p>
+<p>连续点击多个按钮，可能导致先请求的数据后显示出来。</p>
 <hr>
-<p><strong>判段一个数组是否包含某个值</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Set&lt;String&gt; set=new HashSet&lt;String&gt;(Arrays.asList(arr));  </span><br><span class="line">return set.contains(targetValue);</span><br></pre></td></tr></table></figure></p>
-<p>效率慢，要将数组压入Collection类型中，首先要将数组元素便利一遍，然后再使用集合类做其它操作。</p>
-<p>可以使用Apache Commons类库中提供的<strong>ArrayUtils</strong>类的<strong>contains</strong>方法<br>contains内部调用indexOf方法</p>
-<p><img src="https://github.com/hsb786/hsb786.github.io/tree/master/images/indexOf.png" alt=""></p>
+<p><strong>解决方案</strong></p>
+<p><strong>1. 将ajsx请求的async设置为false</strong></p>
+<p><strong>2. 利用jquery ajaxPrefilter中断请求</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">var pendingRequests = &#123;&#125;;</span><br><span class="line">$.ajaxPrefilter(function( options, originalOptions, jqXHR ) &#123;</span><br><span class="line">    var key = options.url;</span><br><span class="line">    console.log(key);</span><br><span class="line">    if (!pendingRequests[key]) &#123;</span><br><span class="line">        pendingRequests[key] = jqXHR;</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        //jqXHR.abort();    //放弃后触发的提交</span><br><span class="line">        pendingRequests[key].abort();   // 放弃先触发的提交</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    var complete = options.complete;</span><br><span class="line">    options.complete = function(jqXHR, textStatus) &#123;</span><br><span class="line">        pendingRequests[key] = null;</span><br><span class="line">        if ($.isFunction(complete)) &#123;</span><br><span class="line">        complete.apply(this, arguments);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>核心思想是维护一个队列，发送请求时，将请求加入队列，请求响应后，从队列中清楚，这就保证了在任一时刻只能有一个同样的请求发送</p>
+<p>局限性：仅对jquery的ajax有作用</p>
 
         
         </div>
@@ -1278,7 +1503,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/08/skills/" data-id="cjftiupgl001ac8myn1j8tw5d" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/08/preventDupAjax/" data-id="cjftmqy72001k14myq8yduy9b" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1432,288 +1657,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/08/passByValue/" data-id="cjftiupgl0014c8my60eb36ls" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-
-        </footer>
-    </div>
-    
-</article>
-
-
-
-    <article id="post-preventDupAjax" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2018/04/08/preventDupAjax/">防止重复发送 Ajax 请求的解决方案</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2018/04/08/preventDupAjax/">
-            <time datetime="2018-04-08T09:58:41.000Z" itemprop="datePublished">2018-04-08</time>
-        </a>
-    </div>
-
-
-                        
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/前端/">前端</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            
-            <hr>
-<p>连续点击多个按钮，可能导致先请求的数据后显示出来。</p>
-<hr>
-<p><strong>解决方案</strong></p>
-<p><strong>1. 将ajsx请求的async设置为false</strong></p>
-<p><strong>2. 利用jquery ajaxPrefilter中断请求</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">var pendingRequests = &#123;&#125;;</span><br><span class="line">$.ajaxPrefilter(function( options, originalOptions, jqXHR ) &#123;</span><br><span class="line">    var key = options.url;</span><br><span class="line">    console.log(key);</span><br><span class="line">    if (!pendingRequests[key]) &#123;</span><br><span class="line">        pendingRequests[key] = jqXHR;</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        //jqXHR.abort();    //放弃后触发的提交</span><br><span class="line">        pendingRequests[key].abort();   // 放弃先触发的提交</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    var complete = options.complete;</span><br><span class="line">    options.complete = function(jqXHR, textStatus) &#123;</span><br><span class="line">        pendingRequests[key] = null;</span><br><span class="line">        if ($.isFunction(complete)) &#123;</span><br><span class="line">        complete.apply(this, arguments);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
-<p>核心思想是维护一个队列，发送请求时，将请求加入队列，请求响应后，从队列中清楚，这就保证了在任一时刻只能有一个同样的请求发送</p>
-<p>局限性：仅对jquery的ajax有作用</p>
-
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="https://hsb786.github.io/2018/04/08/preventDupAjax/" data-id="cjftiupgl0018c8myoxmbyl9o" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-
-        </footer>
-    </div>
-    
-</article>
-
-
-
-    <article id="post-performsSyn" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2018/04/08/performsSyn/">Java虚拟机是如何执行线程同步的</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2018/04/08/performsSyn/">
-            <time datetime="2018-04-08T09:48:41.000Z" itemprop="datePublished">2018-04-08</time>
-        </a>
-    </div>
-
-
-                        
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/爪哇/">爪哇</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            
-            <hr>
-<p><strong>线程和共享数据</strong></p>
-<p>在JVM中，每个线程独享一块栈内存，其中包括局部变量、线程调用的每个方法的参数和返回值。其它线程无法读取到该栈内存块中的数据。栈中的数据仅限于基本类型和对象引用。</p>
-<p>在JVM中，堆内存是所有线程共享的。对象在堆中。</p>
-<p>还有一部分数据保存JVM中的方法区中，比如类的静态变量。方法去和栈类似，其中只包含基本类型和对象引用。和栈不同的是，方法区中的静态变量可以被所有线程访问到。</p>
-<hr>
-<p><strong>对象和类的锁</strong></p>
-<p>JMM中有两块区域可以被所有线程共享</p>
-<blockquote>
-<p>堆，存放着所有对象<br>方法区，存放着静态变量</p>
-</blockquote>
-<p>那么，如果有多个线程想要同时访问同一个对象或者静态变量，就需要被管控，否则可能出现不可预期的结果</p>
-<p>为了协调多个线程之间的共享数据访问，虚拟机给每个对象和类都分配了一个锁。这个锁就像一个特权，在同一时刻，只有一个线程可以“拥有”这个类或者对象。如果一个线程想要获得某个类或者对象的锁，需要询问虚拟机。当一个线程向虚拟机申请某个类或者对象的锁之后，也许很快或者很慢虚拟机可以把锁分配给这个线程，同时这个线程也许永远也无法获得锁。但线程不再需要锁的时候，他再把锁还给虚拟机。这时虚拟机就可以再把锁分配给其它申请锁的线程。</p>
-<p>类锁其实通过对象锁实现的。因为当虚拟机加载一个类的时候，会为这个类实例化一个java.lang.Class对象，当你锁住一个类的时候，其实锁住的是其对应的Class对象</p>
-<hr>
-<p><strong>监视器（Monitors）</strong></p>
-<p>锁其实是通过监视器实现的，监视器主要功能是监控一段代码，确保在同一时间只有一个线程在执行。</p>
-<p>每个监视器都与一个对象相关联。当线程执行到监视器监视下的代码块中的第一条指令时，线程必须获取对被引用对象的锁定。在线程获取锁之前，它是无法执行这段代码的，一旦获得锁，线程便可以进入“被保护”的代码开始执行。</p>
-<p>当线程离开代码块时，无论如何离开，都会释放所关联对象的锁</p>
-<hr>
-<p><strong>多次加锁</strong></p>
-<p>同一个线程可以对同一个对象进行多次加锁。每个对象维护着一个记录着被锁次数的计数器。未被锁定的对象的该计数器为0，当一个线程获得锁喉，该计数器自增变为1，当同一个线程再次获得该对象的锁的时候，计数器再次自增。当同一个线程释放锁的时候，计数器再自减。当计数器为0的时候。锁将被释放，其它线程便可以获得锁。</p>
-<hr>
-<p><strong>同步</strong></p>
-<p>在Java中，当有多个线程都必须要对同一个共享数据进行访问时，有一种协调方式叫做同步。Java语言提供了两种内置方式来使线程同步的访问数据：同步代码块和同步方法。</p>
-
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="https://hsb786.github.io/2018/04/08/performsSyn/" data-id="cjftiupgl0016c8mylgx6ff9a" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/08/passByValue/" data-id="cjftmqy72001c14my2ze8lhxj" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1806,6 +1750,82 @@
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/2018/04/10/T16/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/04/10/T16/" class="title">反转链表</a></p>
+                            <p class="item-date"><time datetime="2018-04-10T12:14:31.000Z" itemprop="datePublished">2018-04-10</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/04/10/T15/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/04/10/T15/" class="title">链表中倒数第K个节点</a></p>
+                            <p class="item-date"><time datetime="2018-04-10T12:13:03.000Z" itemprop="datePublished">2018-04-10</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/04/10/T14/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/04/10/T14/" class="title">调整数组顺序使奇数位于偶数之前</a></p>
+                            <p class="item-date"><time datetime="2018-04-10T12:10:37.000Z" itemprop="datePublished">2018-04-10</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/04/10/T13/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/04/10/T13/" class="title">在O(1)时间内删除链表节点</a></p>
+                            <p class="item-date"><time datetime="2018-04-10T12:04:16.000Z" itemprop="datePublished">2018-04-10</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/2018/04/10/T10/" class="thumbnail">
     
     
@@ -1822,82 +1842,6 @@
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2018/04/10/T08/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"></p>
-                            <p class="item-title"><a href="/2018/04/10/T08/" class="title">旋转数组的最小数字</a></p>
-                            <p class="item-date"><time datetime="2018-04-10T08:11:33.000Z" itemprop="datePublished">2018-04-10</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2018/04/10/T0701/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"></p>
-                            <p class="item-title"><a href="/2018/04/10/T0701/" class="title">用两个队列实现一个栈</a></p>
-                            <p class="item-date"><time datetime="2018-04-10T08:11:19.000Z" itemprop="datePublished">2018-04-10</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2018/04/10/T07/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"></p>
-                            <p class="item-title"><a href="/2018/04/10/T07/" class="title">用两个栈实现队列</a></p>
-                            <p class="item-date"><time datetime="2018-04-10T08:10:52.000Z" itemprop="datePublished">2018-04-10</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2018/04/10/T04/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"></p>
-                            <p class="item-title"><a href="/2018/04/10/T04/" class="title">替换空格</a></p>
-                            <p class="item-date"><time datetime="2018-04-10T08:08:27.000Z" itemprop="datePublished">2018-04-10</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -1909,7 +1853,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">归档</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a><span class="archive-list-count">25</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a><span class="archive-list-count">29</span></li></ul>
         </div>
     </div>
 
@@ -1918,7 +1862,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">标签</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql/">sql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/剑指Offer/">剑指Offer</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爪哇/">爪哇</a><span class="tag-list-count">10</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql/">sql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/剑指Offer/">剑指Offer</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爪哇/">爪哇</a><span class="tag-list-count">10</span></li></ul>
         </div>
     </div>
 
@@ -1927,7 +1871,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">标签云</h3>
         <div class="widget tagcloud">
-            <a href="/tags/Spring/" style="font-size: 12.5px;">Spring</a> <a href="/tags/sql/" style="font-size: 10px;">sql</a> <a href="/tags/前端/" style="font-size: 10px;">前端</a> <a href="/tags/剑指Offer/" style="font-size: 17.5px;">剑指Offer</a> <a href="/tags/工具/" style="font-size: 15px;">工具</a> <a href="/tags/爪哇/" style="font-size: 20px;">爪哇</a>
+            <a href="/tags/Spring/" style="font-size: 13.33px;">Spring</a> <a href="/tags/sql/" style="font-size: 10px;">sql</a> <a href="/tags/前端/" style="font-size: 10px;">前端</a> <a href="/tags/剑指Offer/" style="font-size: 20px;">剑指Offer</a> <a href="/tags/工具/" style="font-size: 16.67px;">工具</a> <a href="/tags/爪哇/" style="font-size: 20px;">爪哇</a>
         </div>
     </div>
 
