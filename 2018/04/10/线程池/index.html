@@ -13,12 +13,12 @@
 <meta property="og:site_name" content="HuShengBin’s blog">
 <meta property="og:description" content="Executor框架Exexutor框架是一个根据一组执行策略调用，调度，执行和控制的异步任务的框架，可以用来控制线程的启动、执行和关闭，可以简化并发编程的操作。无限制的创建线程会引起应用程序内存溢出。所以创建一个线程池是个更好的解决方案，因为可以限制线程的数量并且可以回收再利用这些线程。Executor框架包括：线程池、Executor、Exexutors、ExecutorService、Com">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://github.com/hsb786/hsb786.github.io/tree/master/images/threadPool.png">
-<meta property="og:updated_time" content="2018-04-11T04:19:37.715Z">
+<meta property="og:image" content="https://hsb786.github.io/images/threadPool.png">
+<meta property="og:updated_time" content="2018-04-11T04:42:22.103Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="threadPool">
 <meta name="twitter:description" content="Executor框架Exexutor框架是一个根据一组执行策略调用，调度，执行和控制的异步任务的框架，可以用来控制线程的启动、执行和关闭，可以简化并发编程的操作。无限制的创建线程会引起应用程序内存溢出。所以创建一个线程池是个更好的解决方案，因为可以限制线程的数量并且可以回收再利用这些线程。Executor框架包括：线程池、Executor、Exexutors、ExecutorService、Com">
-<meta name="twitter:image" content="https://github.com/hsb786/hsb786.github.io/tree/master/images/threadPool.png">
+<meta name="twitter:image" content="https://hsb786.github.io/images/threadPool.png">
     
 
     
@@ -302,7 +302,7 @@
 <li>如果当前线程池中的线程数目达到maximumPoolSize，则会采取任务拒绝策略进行处理；</li>
 <li>如果线程池中的线程数量大于corePoolSize时，如果某线程空闲时间超过keepAliveTime，线程将被终止，直至线程池中的线程数目不大于corePoolSize；如果允许为核心池中的线程设置存活时间，那么核心池中的线程空闲时间超过KeepAliveTime，线程也会被终止</li>
 </ol>
-<p><img src="https://github.com/hsb786/hsb786.github.io/tree/master/images/threadPool.png" alt=""></p>
+<p><img src="/images/threadPool.png" alt=""></p>
 <p>默认情况下，创建线程池之后，线程池中是没有线程的，需要提交任务之后才会创建线程。在实际中如果需要线程池创建之后立即创建线程，可以通过以下两个方法办到：</p>
 <ol>
 <li>prestartCoreThread()：初始化一个核心线程；</li>
@@ -326,7 +326,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/10/线程池/" data-id="cjfulti42001hawmyp6rdf7r8" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/10/线程池/" data-id="cjfum2kyw001mnkmyzprt3jcl" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
