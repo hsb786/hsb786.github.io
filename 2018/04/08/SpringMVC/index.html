@@ -5,18 +5,18 @@
     
     <title>SpringMVC | HuShengBin’s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="SpringMVC工作流程SpringMVC是一种基于Servelt的技术，它提供了控制器DispatchServlet和相关组件，这些SpringMVC的组件一起协调工作，完成对web请求的相应。  客户端发出一个HTTP请求，Web服务器接收到这个请求。服务器检查HTTP请求的路径，如果匹配DispatchServelt的请求映射路径(web.xml中指定)，则Web容器将该请求转交给对应的">
+    <meta name="description" content="SpringMVC工作流程SpringMVC是一种基于Servelt的技术，它提供了控制器DispatchServlet和相关组件，这些SpringMVC的组件一起协调工作，完成对web请求的相应。">
 <meta name="keywords" content="Spring">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SpringMVC">
 <meta property="og:url" content="https://hsb786.github.io/2018/04/08/SpringMVC/index.html">
 <meta property="og:site_name" content="HuShengBin’s blog">
-<meta property="og:description" content="SpringMVC工作流程SpringMVC是一种基于Servelt的技术，它提供了控制器DispatchServlet和相关组件，这些SpringMVC的组件一起协调工作，完成对web请求的相应。  客户端发出一个HTTP请求，Web服务器接收到这个请求。服务器检查HTTP请求的路径，如果匹配DispatchServelt的请求映射路径(web.xml中指定)，则Web容器将该请求转交给对应的">
+<meta property="og:description" content="SpringMVC工作流程SpringMVC是一种基于Servelt的技术，它提供了控制器DispatchServlet和相关组件，这些SpringMVC的组件一起协调工作，完成对web请求的相应。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-04-10T10:13:47.395Z">
+<meta property="og:updated_time" content="2018-04-11T04:13:00.200Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SpringMVC">
-<meta name="twitter:description" content="SpringMVC工作流程SpringMVC是一种基于Servelt的技术，它提供了控制器DispatchServlet和相关组件，这些SpringMVC的组件一起协调工作，完成对web请求的相应。  客户端发出一个HTTP请求，Web服务器接收到这个请求。服务器检查HTTP请求的路径，如果匹配DispatchServelt的请求映射路径(web.xml中指定)，则Web容器将该请求转交给对应的">
+<meta name="twitter:description" content="SpringMVC工作流程SpringMVC是一种基于Servelt的技术，它提供了控制器DispatchServlet和相关组件，这些SpringMVC的组件一起协调工作，完成对web请求的相应。">
     
 
     
@@ -216,7 +216,7 @@
         
             
             <hr>
-<h2 id="SpringMVC工作流程"><a href="#SpringMVC工作流程" class="headerlink" title="SpringMVC工作流程"></a>SpringMVC工作流程</h2><p>SpringMVC是一种基于Servelt的技术，它提供了控制器DispatchServlet和相关组件，这些SpringMVC的组件一起协调工作，完成对web请求的相应。</p>
+<h2 id="SpringMVC工作流程"><a href="#SpringMVC工作流程" class="headerlink" title="SpringMVC工作流程"></a>SpringMVC工作流程</h2><p>SpringMVC是一种基于Servelt的技术，它提供了控制器DispatchServlet和相关组件，这些SpringMVC的组件一起协调工作，完成对web请求的相应。<br><a id="more"></a></p>
 <ol>
 <li>客户端发出一个HTTP请求，Web服务器接收到这个请求。服务器检查HTTP请求的路径，如果匹配DispatchServelt的请求映射路径(web.xml中指定)，则Web容器将该请求转交给对应的DispatchServlet处理</li>
 <li>DispatchServlet接收到这个请求后，将根据请求的信息以及HandlerMapping配置找到处理请求的处理器（Handler）。HandlerMapping可以简单理解为统一资源标识符URL域与处理器Handler之间的关系。</li>
@@ -226,6 +226,23 @@
 <li>通过ViewResolver视图解析器得到了真实视图后，DispatServlet使用这个真实视图对象对ModelAndView中的模型数据进行渲染。</li>
 <li>最终DispatchServlet将渲染过后的视图对象返回给请求的客户端，客户端得到的响应可能是一个普通的HTML页面，也可能是一个JSON串，甚至是一张图片等等不同的视图模型。</li>
 </ol>
+<hr>
+<p>另一个说法</p>
+<h2 id="DispatcherServlet是什么"><a href="#DispatcherServlet是什么" class="headerlink" title="DispatcherServlet是什么"></a>DispatcherServlet是什么</h2><p>它是Spring MVC的核心。每个由Spring MVC处理的请求都要经过DispatcherServlet。一般而言，它是前端控制器模式的实现，为应用提供一个统一入口。DispatcherServlet是连接Java与Spring的桥梁，处理所有传入的请求。并且与其他声明在web.xml中的Servlet一样，也是通过一个URL pattern将每个请求映射到DispatcherServlet。<br><!--more--><br>DispatcherServlet负责将请求委派给Spring MVC中其他的组建处理，比如注有@Controller或@RestController的Controller类，HandlerMappers（处理映射），View Resolvers(视图解析器)等等。</p>
+<p>尽管，请求映射是由 @ResquestMapping 注解完成的，但实际上是由 DispatcherServlet 将请求委派给相应的 Controller 来处理的。</p>
+<h2 id="DispatcherServlet如何处理请求"><a href="#DispatcherServlet如何处理请求" class="headerlink" title="DispatcherServlet如何处理请求"></a>DispatcherServlet如何处理请求</h2><p>正如上面所说，DispatcherServlet 被用来处理所有传入的请求，并将它们路由到不同的 Controller 来进行进一步处理。它决定了由哪个 Controller 处理请求。</p>
+<p>DispatcherServlet 使用处理器映射来将传入的请求路由到处理器。默认情况下，使用 BeanNameUrlHandlerMapping 和 由 @RequestMapping 注解驱动的DefaultAnnotationHandlerMapping。</p>
+<p>为了找到正确的方法来处理请求，它会扫描所有声明了 @Controller 注解的类，并且通过 @RequestMapping 注解找到负责处理该请求的方法。@RequestMapping 注解可以通过路径来映射请求(比如: @RequestMapping(“path”)), 也可以通过 HTTP 方法(比如: @RequestMapping(“path”, method=RequestMethod.GET)), 也可以通过请求参数(比如: @RequestMapping(“path””, method=RequestMethod.POST, params=”param1”)),还可以通过 HTTP 请求头(比如: @RequestMapping(“path”, header=”content-type=text/*”))。我们也可以在类级别声明 @RequestMapping 注解来过滤传入的请求。</p>
+<p>在请求处理之后，Controller 会将逻辑视图的名字和 model 返回给 DispatcherServlet。之后利用视图解析器定位到真正的 View 以便渲染结果。我们可以指定使用的视图解析器，默认情况下，DispatcherServlet 使用 InternalResourceViewResolver来将逻辑视图的名字转换成真正的视图，比如 JSP。</p>
+<p>选定视图之后，DispatcherServlet 会将数据模型与视图相结合，并将结果返回给客户端。并不是任何时候都需要视图，比如一个 RESTful 的 web 服务就不需要，它们的处理方法会利用 @ResponseBody 注解直接将请求结果返回给客户端。可以看REST with Spring course了解更多关于如何使用 Spring MVC 开发和测试 RESTful 服务的知识。 </p>
+<hr>
+<p><em>参考</em></p>
+<blockquote>
+<p><a href="https://lujunqiu.github.io/2018/01/17/Spring-MVC框架入门/" target="_blank" rel="noopener">https://lujunqiu.github.io/2018/01/17/Spring-MVC框架入门/</a></p>
+</blockquote>
+<blockquote>
+<p><a href="https://yemengying.com/2017/10/07/spring-dispatcherServlet/" target="_blank" rel="noopener">https://yemengying.com/2017/10/07/spring-dispatcherServlet/</a></p>
+</blockquote>
 
         
         </div>
@@ -236,7 +253,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/08/SpringMVC/" data-id="cjfuic6qp000208myu6fxp3fg" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/08/SpringMVC/" data-id="cjfulj9hu0005pcmyf2c7zuww" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -311,7 +328,7 @@
         
 <nav id="article-nav">
     
-        <a href="/2018/04/08/passByValue/" id="article-nav-newer" class="article-nav-link-wrap">
+        <a href="/2018/04/08/值传递和引用传递/" id="article-nav-newer" class="article-nav-link-wrap">
             <strong class="article-nav-caption">上一篇</strong>
             <div class="article-nav-title">
                 
@@ -321,9 +338,9 @@
         </a>
     
     
-        <a href="/2018/04/08/sqlTransaction/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/2018/04/08/Spring整理/" id="article-nav-older" class="article-nav-link-wrap">
             <strong class="article-nav-caption">下一篇</strong>
-            <div class="article-nav-title">事务</div>
+            <div class="article-nav-title">Spring整理</div>
         </a>
     
 </nav>
@@ -350,7 +367,7 @@
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2018/04/10/httpStatus/" class="thumbnail">
+                            <a href="/2018/04/11/工具网站/" class="thumbnail">
     
     
         <span class="thumbnail-image thumbnail-none"></span>
@@ -361,7 +378,26 @@
                         
                         <div class="item-inner">
                             <p class="item-category"></p>
-                            <p class="item-title"><a href="/2018/04/10/httpStatus/" class="title">HTTP状态码</a></p>
+                            <p class="item-title"><a href="/2018/04/11/工具网站/" class="title">工具网站</a></p>
+                            <p class="item-date"><time datetime="2018-04-11T04:22:11.000Z" itemprop="datePublished">2018-04-11</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/04/10/HTTP状态码/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/04/10/HTTP状态码/" class="title">HTTP状态码</a></p>
                             <p class="item-date"><time datetime="2018-04-10T12:27:44.000Z" itemprop="datePublished">2018-04-10</time></p>
                         </div>
                     </li>
@@ -369,7 +405,7 @@
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2018/04/10/T16/" class="thumbnail">
+                            <a href="/2018/04/10/反转链表/" class="thumbnail">
     
     
         <span class="thumbnail-image thumbnail-none"></span>
@@ -380,7 +416,7 @@
                         
                         <div class="item-inner">
                             <p class="item-category"></p>
-                            <p class="item-title"><a href="/2018/04/10/T16/" class="title">反转链表</a></p>
+                            <p class="item-title"><a href="/2018/04/10/反转链表/" class="title">反转链表</a></p>
                             <p class="item-date"><time datetime="2018-04-10T12:14:31.000Z" itemprop="datePublished">2018-04-10</time></p>
                         </div>
                     </li>
@@ -388,7 +424,7 @@
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2018/04/10/T15/" class="thumbnail">
+                            <a href="/2018/04/10/链表中倒数第K个节点/" class="thumbnail">
     
     
         <span class="thumbnail-image thumbnail-none"></span>
@@ -399,7 +435,7 @@
                         
                         <div class="item-inner">
                             <p class="item-category"></p>
-                            <p class="item-title"><a href="/2018/04/10/T15/" class="title">链表中倒数第K个节点</a></p>
+                            <p class="item-title"><a href="/2018/04/10/链表中倒数第K个节点/" class="title">链表中倒数第K个节点</a></p>
                             <p class="item-date"><time datetime="2018-04-10T12:13:03.000Z" itemprop="datePublished">2018-04-10</time></p>
                         </div>
                     </li>
@@ -407,7 +443,7 @@
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2018/04/10/T14/" class="thumbnail">
+                            <a href="/2018/04/10/调整数组顺序使奇数位于偶数之前/" class="thumbnail">
     
     
         <span class="thumbnail-image thumbnail-none"></span>
@@ -418,27 +454,8 @@
                         
                         <div class="item-inner">
                             <p class="item-category"></p>
-                            <p class="item-title"><a href="/2018/04/10/T14/" class="title">调整数组顺序使奇数位于偶数之前</a></p>
+                            <p class="item-title"><a href="/2018/04/10/调整数组顺序使奇数位于偶数之前/" class="title">调整数组顺序使奇数位于偶数之前</a></p>
                             <p class="item-date"><time datetime="2018-04-10T12:10:37.000Z" itemprop="datePublished">2018-04-10</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2018/04/10/T13/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"></p>
-                            <p class="item-title"><a href="/2018/04/10/T13/" class="title">在O(1)时间内删除链表节点</a></p>
-                            <p class="item-date"><time datetime="2018-04-10T12:04:16.000Z" itemprop="datePublished">2018-04-10</time></p>
                         </div>
                     </li>
                 
@@ -462,7 +479,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">标签</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/">HTTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql/">sql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/剑指Offer/">剑指Offer</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爪哇/">爪哇</a><span class="tag-list-count">10</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/">HTTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql/">sql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/剑指Offer/">剑指Offer</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爪哇/">爪哇</a><span class="tag-list-count">10</span></li></ul>
         </div>
     </div>
 
