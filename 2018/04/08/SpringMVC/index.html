@@ -253,7 +253,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/08/SpringMVC/" data-id="cjfun2jik000cdgmys0p3mzw0" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/08/SpringMVC/" data-id="cjfun8jf00002b4myuw5cb5ms" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -321,8 +321,6 @@
 
             
     
-        <a href="https://hsb786.github.io/2018/04/08/SpringMVC/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="https://hsb786.github.io/2018/04/08/SpringMVC/">评论</a>
-    
 
         </footer>
     </div>
@@ -330,19 +328,19 @@
         
 <nav id="article-nav">
     
-        <a href="/2018/04/08/值传递和引用传递/" id="article-nav-newer" class="article-nav-link-wrap">
+        <a href="/2018/04/08/Spring整理/" id="article-nav-newer" class="article-nav-link-wrap">
             <strong class="article-nav-caption">上一篇</strong>
             <div class="article-nav-title">
                 
-                    值传递和引用传递
+                    Spring整理
                 
             </div>
         </a>
     
     
-        <a href="/2018/04/08/防止重复发送 Ajax 请求的解决方案/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/2018/04/08/值传递和引用传递/" id="article-nav-older" class="article-nav-link-wrap">
             <strong class="article-nav-caption">下一篇</strong>
-            <div class="article-nav-title">防止重复发送 Ajax 请求的解决方案</div>
+            <div class="article-nav-title">值传递和引用传递</div>
         </a>
     
 </nav>
@@ -355,9 +353,7 @@
     
     
         <section id="comments">
-    <div id="disqus_thread">
-        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-    </div>
+    <div id="valine-thread"></div>
 </section>
     
 
@@ -516,20 +512,18 @@
 </footer>
         
     
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//cdn.jsdelivr.net/gh/xcss/valine@v1.1.6/dist/Valine.min.js"></script>
     <script>
-    var disqus_config = function () {
-        
-            this.page.url = 'https://hsb786.github.io/2018/04/08/SpringMVC/';
-        
-        this.page.identifier = 'SpringMVC';
-    };
-    (function() { 
-        var d = document, s = d.createElement('script');  
-        s.src = '//' + 'dis' + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
+        new Valine({
+            el: '#valine-thread' ,
+            notify:,
+            verify:,
+            app_id: 'eqjWlM0tCYgxhh8nvvV6DleG-gzGzoHsz',
+            app_key: 'CRXn0n9IAsJdOeMDUIxyh1Hb',
+            placeholder: '(。・∀・)ノ'
+        });
+    </script>
 
 
 
