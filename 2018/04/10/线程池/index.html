@@ -3,20 +3,20 @@
 <head>
     <meta charset="utf-8">
     
-    <title>threadPool | HuShengBin’s blog</title>
+    <title>线程池 | HuShengBin’s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <meta name="description" content="Executor框架Exexutor框架是一个根据一组执行策略调用，调度，执行和控制的异步任务的框架，可以用来控制线程的启动、执行和关闭，可以简化并发编程的操作。无限制的创建线程会引起应用程序内存溢出。所以创建一个线程池是个更好的解决方案，因为可以限制线程的数量并且可以回收再利用这些线程。Executor框架包括：线程池、Executor、Exexutors、ExecutorService、Com">
 <meta name="keywords" content="爪哇">
 <meta property="og:type" content="article">
-<meta property="og:title" content="threadPool">
+<meta property="og:title" content="线程池">
 <meta property="og:url" content="https://hsb786.github.io/2018/04/10/线程池/index.html">
 <meta property="og:site_name" content="HuShengBin’s blog">
 <meta property="og:description" content="Executor框架Exexutor框架是一个根据一组执行策略调用，调度，执行和控制的异步任务的框架，可以用来控制线程的启动、执行和关闭，可以简化并发编程的操作。无限制的创建线程会引起应用程序内存溢出。所以创建一个线程池是个更好的解决方案，因为可以限制线程的数量并且可以回收再利用这些线程。Executor框架包括：线程池、Executor、Exexutors、ExecutorService、Com">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://hsb786.github.io/images/threadPool.png">
-<meta property="og:updated_time" content="2018-04-11T04:42:22.103Z">
+<meta property="og:updated_time" content="2018-04-11T08:07:27.842Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="threadPool">
+<meta name="twitter:title" content="线程池">
 <meta name="twitter:description" content="Executor框架Exexutor框架是一个根据一组执行策略调用，调度，执行和控制的异步任务的框架，可以用来控制线程的启动、执行和关闭，可以简化并发编程的操作。无限制的创建线程会引起应用程序内存溢出。所以创建一个线程池是个更好的解决方案，因为可以限制线程的数量并且可以回收再利用这些线程。Executor框架包括：线程池、Executor、Exexutors、ExecutorService、Com">
 <meta name="twitter:image" content="https://hsb786.github.io/images/threadPool.png">
     
@@ -187,7 +187,7 @@
                 
     
         <h1 class="article-title" itemprop="name">
-            threadPool
+            线程池
         </h1>
     
 
@@ -251,10 +251,23 @@
 </tbody>
 </table>
 <hr>
+<p><strong>关于Callable和Future</strong></p>
+<p>Callable接口使用泛型去定义它的返回类型。Executors类提供了一些有用的方法去在线程池中执行Callable内的任务。由于Callable任务是并行的，我们必须等待它返回的结果。java.util.concurrent.Future对象为我们解决了这个问题。在线程池提交Callable任务后返回了一个Future对象，使用它我们可以知道Callable任务的状态和得到Callable返回的执行结果。Future提供了get()方法让我们可以等待Callable结束并获取它的执行结果。</p>
+<p>Future提供了三种功能：</p>
+<ol>
+<li>判断任务是否完成</li>
+<li>能够中断任务</li>
+<li>能够获取执行结果</li>
+</ol>
+<hr>
 <p><strong>关于Future中的cancel()</strong></p>
 <p>Future对象提供了异步执行，这意味着无需等待任务执行的完成，只要提交需要执行的任务，然后再需要时检查Future是否已经有了结果，如果任务已经执行完成，就可以通过Future.get()方法获得执行结果。需要注意的是，Future.get()方法是一个阻塞式的方法，如果调用时任务还没有完成，会等待直到任务执行结束。</p>
 <p>cancel()传入true时会中断线程停止任务，传入false则会让线程正常执行完成。</p>
 <p>传入false只能取消还没有开始的任务，若任务已经开始了，就任由其运行下去。</p>
+<hr>
+<p><strong>FutureTask</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public class FutureTask&lt;V&gt; implements RunnableFuture&lt;V&gt; </span><br><span class="line"></span><br><span class="line">public interface RunnableFuture&lt;V&gt; extends Runnable, Future&lt;V&gt; &#123;</span><br><span class="line">    /**</span><br><span class="line">    * Sets this Future to the result of its computation</span><br><span class="line">    * unless it has been cancelled.</span><br><span class="line">    */</span><br><span class="line">    void run();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>FutureTask既可以做为Runnable被线程执行，又可以作为Future得到Callable的返回值</p>
 <hr>
 <p><strong>ThreadPoolExecutor</strong></p>
 <table>
@@ -316,6 +329,12 @@
 <li>LinkedBlockingQueue：基于链表的先进先出队列，如果创建时没有指定此队列大小，则默认为Integer.MAX_VALUE</li>
 <li>synchronousQueue：这个队列比较特殊，它不会保存提交的任务，而是将直接新建一个线程来执行新来的任务</li>
 </ol>
+<hr>
+<p>参考</p>
+<blockquote>
+<p><a href="http://www.cnblogs.com/xiaoxi/p/7692250.html" target="_blank" rel="noopener">Java并发编程：线程池的使用</a></p>
+<p><a href="http://codepub.cn/2016/02/01/Java-multi-thread-Callable-interface-and-thread-pool/" target="_blank" rel="noopener">Java多线程之Callable接口及线程池</a></p>
+</blockquote>
 
         
         </div>
@@ -326,7 +345,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/10/线程池/" data-id="cjfuqlkv2001newmyyvdggwd2" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/10/线程池/" data-id="cjfutbh6x001ctgmyynsyriyn" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
