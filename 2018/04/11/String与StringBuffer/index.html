@@ -3,20 +3,20 @@
 <head>
     <meta charset="utf-8">
     
-    <title>工具网站 | HuShengBin’s blog</title>
+    <title>String与StringBuffer | HuShengBin’s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="图标 在线编码转换 HTTP状态码 Sql转Class">
-<meta name="keywords" content="工具">
+    <meta name="description" content="String不可变，StringBuffer可变，why ?">
+<meta name="keywords" content="爪哇">
 <meta property="og:type" content="article">
-<meta property="og:title" content="工具网站">
-<meta property="og:url" content="https://hsb786.github.io/2018/04/11/工具网站/index.html">
+<meta property="og:title" content="String与StringBuffer">
+<meta property="og:url" content="https://hsb786.github.io/2018/04/11/String与StringBuffer/index.html">
 <meta property="og:site_name" content="HuShengBin’s blog">
-<meta property="og:description" content="图标 在线编码转换 HTTP状态码 Sql转Class">
+<meta property="og:description" content="String不可变，StringBuffer可变，why ?">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-04-11T04:50:18.850Z">
+<meta property="og:updated_time" content="2018-04-11T06:50:46.678Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="工具网站">
-<meta name="twitter:description" content="图标 在线编码转换 HTTP状态码 Sql转Class">
+<meta name="twitter:title" content="String与StringBuffer">
+<meta name="twitter:description" content="String不可变，StringBuffer可变，why ?">
     
 
     
@@ -177,7 +177,7 @@
 </aside>
 
             
-            <section id="main"><article id="post-工具网站" class="article article-type-post" itemscope itemprop="blogPost">
+            <section id="main"><article id="post-String与StringBuffer" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -185,7 +185,7 @@
                 
     
         <h1 class="article-title" itemprop="name">
-            工具网站
+            String与StringBuffer
         </h1>
     
 
@@ -194,8 +194,8 @@
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/2018/04/11/工具网站/">
-            <time datetime="2018-04-11T04:22:11.000Z" itemprop="datePublished">2018-04-11</time>
+        <a href="/2018/04/11/String与StringBuffer/">
+            <time datetime="2018-04-11T06:17:41.000Z" itemprop="datePublished">2018-04-11</time>
         </a>
     </div>
 
@@ -204,7 +204,7 @@
                         
     <div class="article-tag">
         <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/工具/">工具</a>
+        <a class="tag-link" href="/tags/爪哇/">爪哇</a>
     </div>
 
                     </div>
@@ -215,10 +215,37 @@
         <div class="article-entry" itemprop="articleBody">
         
             
-            <p><a href="https://fontawesome.com/icons?d=gallery" target="_blank" rel="noopener">图标</a></p>
-<p><a href="http://tool.oschina.net/encode?type=4" target="_blank" rel="noopener">在线编码转换</a></p>
-<p><a href="http://tool.oschina.net/commons?type=5" target="_blank" rel="noopener">HTTP状态码</a></p>
-<p><a href="http://www.autojcode.com/code/sql2class.jsp" target="_blank" rel="noopener">Sql转Class</a></p>
+            <p>String不可变，StringBuffer可变，why ?<br><a id="more"></a></p>
+<hr>
+<p>看源码</p>
+<p><strong>String</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public final class String</span><br><span class="line">    implements java.io.Serializable, Comparable&lt;String&gt;, CharSequence &#123;</span><br><span class="line">    /** The value is used for character storage. */</span><br><span class="line">    private final char value[];</span><br></pre></td></tr></table></figure></p>
+<p>可以看出String底层是用char数组实现的，由于被final修饰所以引用不能改变。</p>
+<p><strong>为什么要这样设计</strong></p>
+<ol>
+<li>只有当字符串是不可变的，字符串池才有可能实现。字符串池的实现可以在运行时节约很多heap空间，因为不同的字符串变量都指向池中的同一个字符串。但如果字符串是可变的，那么String interning将不能实现(String interning是指对不同的字符串仅仅只保存一个，即不会保存多个相同的字符串)，因为这样的话，如果变量改变了它的值，那么其它指向这个值的变量的值也会一起改变。</li>
+<li>如果字符串是可变的，那么会引起很严重的安全问题。譬如，数据库的用户名、密码都是以字符串的形式传入来获得数据库的连接，或者在socket编程中，主机名和端口都是以字符串的形式传入。</li>
+<li>因为字符串是不可变的，所以它的值是不可改变的，否则黑客们可以钻到空子，改变字符串指向的对象的值，造成安全漏洞。因为字符串是不可变的，所以是多线程安全的，同一个字符串实例可以被多个线程共享。这样便不用因为线程安全问题而使用同步。字符串自己便是线程安全的。</li>
+<li>类加载器要用到字符串，不可变性提供了安全性，以便正确的类被加载。譬如你想加载java.sql.Connection类，而这个值被改成了myhacked.Connection，那么会对你的数据库造成不可知的破坏。</li>
+<li>因为字符串是不可变的，所以在它创建的时候hashcode就被缓存了，不需要重新计算。这就使得字符串很适合作为Map中的键，字符串的处理速度要快过其它的键对象。这就是HashMap中的键往往都使用字符串。</li>
+</ol>
+<hr>
+<p><strong>StringBuffer</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"> public final class StringBuffer</span><br><span class="line">    extends AbstractStringBuilder</span><br><span class="line">    implements java.io.Serializable, CharSequence</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * A cache of the last value returned by toString. Cleared</span><br><span class="line">     * whenever the StringBuffer is modified.</span><br><span class="line">     */</span><br><span class="line">    private transient char[] toStringCache;</span><br><span class="line"></span><br><span class="line">     @Override</span><br><span class="line">    public synchronized StringBuffer append(String str) &#123;</span><br><span class="line">        toStringCache = null;</span><br><span class="line">        super.append(str);</span><br><span class="line">        return this;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    //AbstractStringBuilder中的方法</span><br><span class="line">     public AbstractStringBuilder append(String str) &#123;</span><br><span class="line">        if (str == null)</span><br><span class="line">            return appendNull();</span><br><span class="line">        int len = str.length();</span><br><span class="line">        ensureCapacityInternal(count + len);</span><br><span class="line">        str.getChars(0, len, value, count);</span><br><span class="line">        count += len;</span><br><span class="line">        return this;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //String中的方法</span><br><span class="line">     public void getChars(int srcBegin, int srcEnd, char dst[], int dstBegin) &#123;</span><br><span class="line">        if (srcBegin &lt; 0) &#123;</span><br><span class="line">            throw new StringIndexOutOfBoundsException(srcBegin);</span><br><span class="line">        &#125;</span><br><span class="line">        if (srcEnd &gt; value.length) &#123;</span><br><span class="line">            throw new StringIndexOutOfBoundsException(srcEnd);</span><br><span class="line">        &#125;</span><br><span class="line">        if (srcBegin &gt; srcEnd) &#123;</span><br><span class="line">            throw new StringIndexOutOfBoundsException(srcEnd - srcBegin);</span><br><span class="line">        &#125;</span><br><span class="line">        System.arraycopy(value, srcBegin, dst, dstBegin, srcEnd - srcBegin);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>StringBuffer中append中的实现</p>
+<ol>
+<li>调用super.append(str)， super类为AbstractStringBuilder</li>
+<li>AbstractStringBuilder.append(str)中通过调用String类的getChars()方法</li>
+<li>String.getChars()，调用System.arraycopy()完成数组的复制</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">* @param      src      the source array.</span><br><span class="line">   * @param      srcPos   starting position in the source array.</span><br><span class="line">   * @param      dest     the destination array.</span><br><span class="line">   * @param      destPos  starting position in the destination data.</span><br><span class="line">   * @param      length   the number of array elements to be copied.</span><br><span class="line"> public static native void arraycopy(Object src,  int  srcPos,</span><br><span class="line">                                      Object dest, int destPos,</span><br><span class="line">                                      int length);</span><br></pre></td></tr></table></figure>
+<p>本地方法的实现。</p>
+<p>src原数组，srcPoc原数组起始位；dest目标数组，destPos目标数组起始位,length复制个数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">      int[] int1= &#123;1,2,3,4&#125;;</span><br><span class="line">int[] int2= &#123;10,11,12,13,14,15,16,17&#125;;</span><br><span class="line">System.arraycopy(int1, 0, int2, 0, 3);</span><br><span class="line">      System.out.println(Arrays.toString(int2));  //out  [1, 2, 3, 13, 14, 15, 16, 17]</span><br></pre></td></tr></table></figure>
+<hr>
+<p><em>参考</em></p>
+<blockquote>
+<p>[如何理解 String 类型值的不可变？][<a href="https://www.zhihu.com/question/20618891/answer/147575525]" target="_blank" rel="noopener">https://www.zhihu.com/question/20618891/answer/147575525]</a></p>
+</blockquote>
 
         
         </div>
@@ -229,7 +256,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/11/工具网站/" data-id="cjfuqlkv2001aewmyf1ywxrav" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/11/String与StringBuffer/" data-id="cjfuqlku7000bewmy11j4oju2" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -304,19 +331,10 @@
         
 <nav id="article-nav">
     
-        <a href="/2018/04/11/String与StringBuffer/" id="article-nav-newer" class="article-nav-link-wrap">
-            <strong class="article-nav-caption">上一篇</strong>
-            <div class="article-nav-title">
-                
-                    String与StringBuffer
-                
-            </div>
-        </a>
     
-    
-        <a href="/2018/04/10/HTTP状态码/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/2018/04/11/工具网站/" id="article-nav-older" class="article-nav-link-wrap">
             <strong class="article-nav-caption">下一篇</strong>
-            <div class="article-nav-title">HTTP状态码</div>
+            <div class="article-nav-title">工具网站</div>
         </a>
     
 </nav>
