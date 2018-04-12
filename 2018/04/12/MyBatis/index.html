@@ -5,21 +5,22 @@
     
     <title>MyBatis | HuShengBin’s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="MyBatis简介MyBatis 是一款优秀的持久层框架，它支持定制化 SQL、存储过程以及高级映射。MyBatis 避免了几乎所有的 JDBC 代码和手动设置参数以及获取结果集。MyBatis 可以使用简单的 XML 或注解来配置和映射原生信息，将接口和 Java 的 POJOs(Plain Old Java Objects,普通的 Java对象)映射成数据库中的记录。 Mybatis与Hibe">
+    <meta name="description" content="MyBatis简介 MyBatis 是一款优秀的持久层框架，它支持定制化 SQL、存储过程以及高级映射。MyBatis 避免了几乎所有的 JDBC 代码和手动设置参数以及获取结果集。MyBatis 可以使用简单的 XML 或注解来配置和映射原生信息，将接口和 Java 的 POJOs(Plain Old Java Objects,普通的 Java对象)映射成数据库中的记录。 Mybatis与Hib">
 <meta name="keywords" content="MyBatis">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MyBatis">
 <meta property="og:url" content="https://hsb786.github.io/2018/04/12/MyBatis/index.html">
 <meta property="og:site_name" content="HuShengBin’s blog">
-<meta property="og:description" content="MyBatis简介MyBatis 是一款优秀的持久层框架，它支持定制化 SQL、存储过程以及高级映射。MyBatis 避免了几乎所有的 JDBC 代码和手动设置参数以及获取结果集。MyBatis 可以使用简单的 XML 或注解来配置和映射原生信息，将接口和 Java 的 POJOs(Plain Old Java Objects,普通的 Java对象)映射成数据库中的记录。 Mybatis与Hibe">
+<meta property="og:description" content="MyBatis简介 MyBatis 是一款优秀的持久层框架，它支持定制化 SQL、存储过程以及高级映射。MyBatis 避免了几乎所有的 JDBC 代码和手动设置参数以及获取结果集。MyBatis 可以使用简单的 XML 或注解来配置和映射原生信息，将接口和 Java 的 POJOs(Plain Old Java Objects,普通的 Java对象)映射成数据库中的记录。 Mybatis与Hib">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://hsb786.github.io/images/mybatis-logo.png">
 <meta property="og:image" content="https://hsb786.github.io/images/MyBatis.png">
 <meta property="og:image" content="https://hsb786.github.io/images/MyBatis2.png">
-<meta property="og:updated_time" content="2018-04-12T06:25:11.526Z">
+<meta property="og:updated_time" content="2018-04-12T06:29:26.910Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MyBatis">
-<meta name="twitter:description" content="MyBatis简介MyBatis 是一款优秀的持久层框架，它支持定制化 SQL、存储过程以及高级映射。MyBatis 避免了几乎所有的 JDBC 代码和手动设置参数以及获取结果集。MyBatis 可以使用简单的 XML 或注解来配置和映射原生信息，将接口和 Java 的 POJOs(Plain Old Java Objects,普通的 Java对象)映射成数据库中的记录。 Mybatis与Hibe">
-<meta name="twitter:image" content="https://hsb786.github.io/images/MyBatis.png">
+<meta name="twitter:description" content="MyBatis简介 MyBatis 是一款优秀的持久层框架，它支持定制化 SQL、存储过程以及高级映射。MyBatis 避免了几乎所有的 JDBC 代码和手动设置参数以及获取结果集。MyBatis 可以使用简单的 XML 或注解来配置和映射原生信息，将接口和 Java 的 POJOs(Plain Old Java Objects,普通的 Java对象)映射成数据库中的记录。 Mybatis与Hib">
+<meta name="twitter:image" content="https://hsb786.github.io/images/mybatis-logo.png">
     
 
     
@@ -218,7 +219,8 @@
         <div class="article-entry" itemprop="articleBody">
         
             
-            <h2 id="MyBatis简介"><a href="#MyBatis简介" class="headerlink" title="MyBatis简介"></a>MyBatis简介</h2><p>MyBatis 是一款优秀的持久层框架，它支持定制化 SQL、存储过程以及高级映射。MyBatis 避免了几乎所有的 JDBC 代码和手动设置参数以及获取结果集。MyBatis 可以使用简单的 XML 或注解来配置和映射原生信息，将接口和 Java 的 POJOs(Plain Old Java Objects,普通的 Java对象)映射成数据库中的记录。</p>
+            <h2 id="MyBatis简介"><a href="#MyBatis简介" class="headerlink" title="MyBatis简介"></a>MyBatis简介</h2><p><img src="/images/mybatis-logo.png" alt=""></p>
+<p>MyBatis 是一款优秀的持久层框架，它支持定制化 SQL、存储过程以及高级映射。MyBatis 避免了几乎所有的 JDBC 代码和手动设置参数以及获取结果集。MyBatis 可以使用简单的 XML 或注解来配置和映射原生信息，将接口和 Java 的 POJOs(Plain Old Java Objects,普通的 Java对象)映射成数据库中的记录。</p>
 <p>Mybatis与Hibernate都是持久层框架，这类框架的作用就是将数据库中的表和POJO映射起来，它们的本质就是Java对数据库的操作的抽象，所以我们也将这种框架称为对象关系映射框架(ORM,Object Relational Mapping)。它们的区别也很明显，Hibernate基本不需要编写SQL，它可以根据映射规则自动生成SQL语句，是一种全表映射。而MyBatis不屏蔽SQL，我们可以自己定制SQL，这样就提供给了我们足够的灵活性与优化的可能。总而言之，MyBatis相对于Hibernate来说具有性能高，响应快，开发灵活的特点。<br><a id="more"></a></p>
 <h2 id="MyBatis组件"><a href="#MyBatis组件" class="headerlink" title="MyBatis组件"></a>MyBatis组件</h2><p>MyBatis的核心组件分为4个部分：</p>
 <ul>
@@ -331,7 +333,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/12/MyBatis/" data-id="cjfw55jld000cqkmyd5z57djd" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/12/MyBatis/" data-id="cjfw58xiv000b7wmyumgot75s" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
