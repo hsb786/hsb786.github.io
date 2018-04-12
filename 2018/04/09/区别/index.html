@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="HuShengBin’s blog">
 <meta property="og:description" content="sleep和wait区别  sleep是Thread类的static方法； wait是Object类的方法 sleep()睡眠时保持对象锁； wait释放锁 sleep可以放在任何地方； wait()必须放在synchronized block中，否则会在runtime是扔出IllegalMonitorStateExcetion异常">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-04-11T06:11:17.363Z">
+<meta property="og:updated_time" content="2018-04-12T11:30:39.930Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="区别">
 <meta name="twitter:description" content="sleep和wait区别  sleep是Thread类的static方法； wait是Object类的方法 sleep()睡眠时保持对象锁； wait释放锁 sleep可以放在任何地方； wait()必须放在synchronized block中，否则会在runtime是扔出IllegalMonitorStateExcetion异常">
@@ -149,7 +149,7 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                36
+                37
                 <span>文章</span>
             </div>
             <div class="article-info-block">
@@ -242,8 +242,9 @@
 </li>
 <li>静态内部类<br>只能访问其外部类的静态成员</li>
 <li>局部内部类<br>没有修饰符，局部内部类只能范围该方法中的局部变量，并且这些局部变量一定要是final修饰的产量或者隐含是final的(java8)</li>
-<li>匿名内部类<br>不能抽象；仅能被使用一次；不能存在静态成员变量和方法<br><em>只有静态内部类可以访问静态成员变量</em></li>
+<li>匿名内部类<br>不能抽象；仅能被使用一次；不能存在静态成员变量和方法  </li>
 </ol>
+<p><em>只有静态内部类可以访问静态成员变量</em></p>
 <hr>
 <p> <strong>Session和Cookie的区别</strong></p>
 <p> <strong>Session</strong>是在服务端保存的一个数据结构，用来跟踪用户的状态，这个数据可以保存在集群、数据库、文件中。<br> <strong>Cookie</strong>是客户端保存用户信息的一种机制，用来记录用户的一些信息，也是实现Session的一种方式。<br> 客户端传JSESSIONID，服务端就可以通过这个ID，来将存储到服务端的数据取出</p>
@@ -258,7 +259,7 @@
 <p><em>先吐槽一下Hashtable的命名，为啥t要小写</em>  </p>
 <ol>
 <li>Hashtable是线程安全的； HashMap不是</li>
-<li>Hashtable不允许有null的KV； HashMap运行</li>
+<li>Hashtable不允许有null的KV； HashMap允许</li>
 <li>Hashtable继承Dictionary类； HashMap继承AbstractMap</li>
 <li>HashMap有一个子类LinkedHashMap，对这个类对象进行迭代时，它的顺序是有序的。可以轻易的将LinkedHashMap转换成HashMap； Hashtable不好实现</li>
 </ol>
@@ -306,12 +307,10 @@
 </table>
 <hr>
 <p><strong>组合与继承的区别和联系</strong></p>
-<blockquote>
 <p>在继承结构中，父类的内部细节对于子类是可见的。所以我们通常也可以说通过继承的代码复用是一种白盒式代码复用。（如果基类的实现发生改变，那么派生类的实现也将随之改变。这样就导致了子类行为的不可预知性；)  </p>
 <p>组合是通过对现有的对象进行拼装（组合）产生新的、更复杂的功能。因为在对象之间，各自的内部细节是不可见的，所以我们也说这种方式的代码复用是黑盒式代码复用。（因为组合中一般都定义一个类型，所以在编译期根本不知道具体会调用哪个实现类的方法）  </p>
 <p>继承，在写代码的时候就要指名具体继承哪个类，所以，在编译期就确定了关系。（从基类继承来的实现是无法在运行期动态改变的，因此降低了应用的灵活性。）</p>
 <p>组合，在写代码的时候可以采用面向接口编程。所以，类的组合关系一般在运行期确定。  </p>
-</blockquote>
 <p><strong>优缺点对比</strong></p>
 <table>
 <thead>
@@ -350,7 +349,7 @@
 <p><strong>如何选择</strong></p>
 <blockquote>
 <p>继承要慎用，其使用场合仅限于你确信使用该技术有效的情况。一个判断方法是，问一问自己是否需要从新类向基类进行向上转型。如果是必须的，则继承是必要的。反之则应该好好考虑是否需要继承。&lt;&lt;java编程思想&gt;&gt;  </p>
-<p>只有当子类真正是超类的子类型时，才适合用继承。换句话说，对于两个类A和B，只有当两者之间确实存在is-a关系的时候，类B才应该继承类A。&lt;<effective java="">&gt;</effective></p>
+<p>只有当子类真正是超类的子类型时，才适合用继承。换句话说，对于两个类A和B，只有当两者之间确实存在is-a关系的时候，类B才应该继承类A。&lt;<effective java\="">></effective></p>
 </blockquote>
 <hr>
 <p><strong>Compareable和Comparator</strong></p>
@@ -367,7 +366,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/09/区别/" data-id="cjfwfauxp0017mwmyrlas5xzh" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/09/区别/" data-id="cjfwgszfe001ef0myz0y9p2h6" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -452,7 +451,7 @@
         </a>
     
     
-        <a href="/2018/04/08/hash/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/2018/04/08/hash（转载）/" id="article-nav-older" class="article-nav-link-wrap">
             <strong class="article-nav-caption">下一篇</strong>
             <div class="article-nav-title">hash</div>
         </a>
@@ -588,7 +587,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">归档</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a><span class="archive-list-count">36</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a><span class="archive-list-count">37</span></li></ul>
         </div>
     </div>
 
@@ -597,7 +596,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">标签</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/">HTTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MyBatis/">MyBatis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql/">sql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/剑指Offer/">剑指Offer</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多线程/">多线程</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爪哇/">爪哇</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">11</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/">HTTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MyBatis/">MyBatis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql/">sql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/剑指Offer/">剑指Offer</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多线程/">多线程</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爪哇/">爪哇</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">11</span></li></ul>
         </div>
     </div>
 
