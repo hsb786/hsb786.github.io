@@ -15,7 +15,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://hsb786.github.io/images/HashMap.png">
 <meta property="og:image" content="https://hsb786.github.io/images/HashMap2.png">
-<meta property="og:updated_time" content="2018-04-12T04:19:18.658Z">
+<meta property="og:updated_time" content="2018-04-12T04:32:17.022Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HashMap">
 <meta name="twitter:description" content="HashMap内部存储结构 HashMap内部存储使用了一个Node数组（默认大小是16），而Node类包含一个类型为Node的next变量，也就是相当于一个链表，所有根据hash值计算的bucket一样的key会存储到同一个链表里（即产生了冲突）。">
@@ -222,7 +222,7 @@
 <p>HashMap内部存储使用了一个Node数组（默认大小是16），而Node类包含一个类型为Node的next变量，也就是相当于一个链表，所有根据hash值计算的bucket一样的key会存储到同一个链表里（即产生了冲突）。<br><a id="more"></a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">public class HashMap&lt;K,V&gt; extends AbstractMap&lt;K,V&gt;</span><br><span class="line">    implements Map&lt;K,V&gt;, Cloneable, Serializable &#123;</span><br><span class="line"></span><br><span class="line">    transient Node&lt;K,V&gt;[] table;</span><br><span class="line"></span><br><span class="line">    transient int size;</span><br><span class="line"></span><br><span class="line">    transient int modCount;</span><br><span class="line"></span><br><span class="line">    static final int DEFAULT_INITIAL_CAPACITY = 1 &lt;&lt; 4; // aka 16</span><br><span class="line"></span><br><span class="line">    static final int MAXIMUM_CAPACITY = 1 &lt;&lt; 30;</span><br><span class="line"></span><br><span class="line">    static final float DEFAULT_LOAD_FACTOR = 0.75f;</span><br><span class="line"></span><br><span class="line">    static final int TREEIFY_THRESHOLD = 8;</span><br><span class="line"></span><br><span class="line">    static class Node&lt;K,V&gt; implements Map.Entry&lt;K,V&gt; &#123;</span><br><span class="line">        final int hash;</span><br><span class="line">        final K key;</span><br><span class="line">        V value;</span><br><span class="line">        Node&lt;K,V&gt; next;</span><br><span class="line"></span><br><span class="line">        .....</span><br><span class="line">    &#125;</span><br><span class="line">    .....</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>table，一个存放节点(Node[])的数组，是Hashmap的基础设施，所有的节点都存放于此。</p>
 <p>size，Hashmap存放的键值对的数目，并不等于table数组的长度，因为可能存在链表和红黑树结构。</p>
-<p>modCount，Hashmap的修改次数，是实现fail-fast机制的关键</p>
+<p>modCount，Hashmap的修改次数，是实现fail-fast机制的关键（不清楚fail-fast机制的请看<a href="https://hsb786.github.io/2018/04/09/需要注意的一些东西/">需要注意的一些东西</a>）</p>
 <p>DEFAULT_INITIAL_CAPACITY，表示默认HashMap数组初始大小为16，并且为了后续的rehash操作的方便，Hashmap的数组大小始终为2的整数次幂，即使你输入一个不是2的整数次幂的值，也会变成最小的大于该值的2的整数次幂。</p>
 <p>MAXIMUM_CAPACITY，表示Hashmap数组的最大容量，初始值为2^30。</p>
 <p>DEFAULT_LOAD_FACTOR，表示负载因子，当Hashmap的实际容量超过了(设定容量x负载因子)，就触发rehash操作，默认值为0.75。</p>
@@ -307,7 +307,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/12/HashMap/" data-id="cjfw0lpsu00000kmyyhdscl8u" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/12/HashMap/" data-id="cjfw13w43000718myosu24n3l" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
