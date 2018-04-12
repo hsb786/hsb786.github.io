@@ -13,10 +13,12 @@
 <meta property="og:site_name" content="HuShengBin’s blog">
 <meta property="og:description" content="SpringMVC工作流程SpringMVC是一种基于Servelt的技术，它提供了控制器DispatchServlet和相关组件，这些SpringMVC的组件一起协调工作，完成对web请求的相应。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-04-11T04:13:00.200Z">
+<meta property="og:image" content="https://hsb786.github.io/images/DispatcherServlet.png">
+<meta property="og:updated_time" content="2018-04-12T10:40:40.410Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SpringMVC">
 <meta name="twitter:description" content="SpringMVC工作流程SpringMVC是一种基于Servelt的技术，它提供了控制器DispatchServlet和相关组件，这些SpringMVC的组件一起协调工作，完成对web请求的相应。">
+<meta name="twitter:image" content="https://hsb786.github.io/images/DispatcherServlet.png">
     
 
     
@@ -228,20 +230,36 @@
 </ol>
 <hr>
 <p>另一个说法</p>
-<h2 id="DispatcherServlet是什么"><a href="#DispatcherServlet是什么" class="headerlink" title="DispatcherServlet是什么"></a>DispatcherServlet是什么</h2><p>它是Spring MVC的核心。每个由Spring MVC处理的请求都要经过DispatcherServlet。一般而言，它是前端控制器模式的实现，为应用提供一个统一入口。DispatcherServlet是连接Java与Spring的桥梁，处理所有传入的请求。并且与其他声明在web.xml中的Servlet一样，也是通过一个URL pattern将每个请求映射到DispatcherServlet。<br><!--more--><br>DispatcherServlet负责将请求委派给Spring MVC中其他的组建处理，比如注有@Controller或@RestController的Controller类，HandlerMappers（处理映射），View Resolvers(视图解析器)等等。</p>
+<h2 id="DispatcherServlet是什么"><a href="#DispatcherServlet是什么" class="headerlink" title="DispatcherServlet是什么"></a>DispatcherServlet是什么</h2><p>它是Spring MVC的核心。每个由Spring MVC处理的请求都要经过DispatcherServlet。一般而言，它是前端控制器模式的实现，为应用提供一个统一入口。DispatcherServlet是连接Java与Spring的桥梁，处理所有传入的请求。并且与其他声明在web.xml中的Servlet一样，也是通过一个URL pattern将每个请求映射到DispatcherServlet。<br><!--more--><br>DispatcherServlet负责将请求委派给Spring MVC中其他的组处件理，比如注有@Controller或@RestController的Controller类，HandlerMappers（处理映射），View Resolvers(视图解析器)等等。</p>
 <p>尽管，请求映射是由 @ResquestMapping 注解完成的，但实际上是由 DispatcherServlet 将请求委派给相应的 Controller 来处理的。</p>
 <h2 id="DispatcherServlet如何处理请求"><a href="#DispatcherServlet如何处理请求" class="headerlink" title="DispatcherServlet如何处理请求"></a>DispatcherServlet如何处理请求</h2><p>正如上面所说，DispatcherServlet 被用来处理所有传入的请求，并将它们路由到不同的 Controller 来进行进一步处理。它决定了由哪个 Controller 处理请求。</p>
 <p>DispatcherServlet 使用处理器映射来将传入的请求路由到处理器。默认情况下，使用 BeanNameUrlHandlerMapping 和 由 @RequestMapping 注解驱动的DefaultAnnotationHandlerMapping。</p>
 <p>为了找到正确的方法来处理请求，它会扫描所有声明了 @Controller 注解的类，并且通过 @RequestMapping 注解找到负责处理该请求的方法。@RequestMapping 注解可以通过路径来映射请求(比如: @RequestMapping(“path”)), 也可以通过 HTTP 方法(比如: @RequestMapping(“path”, method=RequestMethod.GET)), 也可以通过请求参数(比如: @RequestMapping(“path””, method=RequestMethod.POST, params=”param1”)),还可以通过 HTTP 请求头(比如: @RequestMapping(“path”, header=”content-type=text/*”))。我们也可以在类级别声明 @RequestMapping 注解来过滤传入的请求。</p>
 <p>在请求处理之后，Controller 会将逻辑视图的名字和 model 返回给 DispatcherServlet。之后利用视图解析器定位到真正的 View 以便渲染结果。我们可以指定使用的视图解析器，默认情况下，DispatcherServlet 使用 InternalResourceViewResolver来将逻辑视图的名字转换成真正的视图，比如 JSP。</p>
 <p>选定视图之后，DispatcherServlet 会将数据模型与视图相结合，并将结果返回给客户端。并不是任何时候都需要视图，比如一个 RESTful 的 web 服务就不需要，它们的处理方法会利用 @ResponseBody 注解直接将请求结果返回给客户端。可以看REST with Spring course了解更多关于如何使用 Spring MVC 开发和测试 RESTful 服务的知识。 </p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ol>
+<li>DispatcherServlet 是 Spring MVC 应用中主要的控制器。所有的请求都会先经由 DispatcherServlet 处理，再由 Controller (声明有 @Controller 注解的类) 处理。</li>
+<li>DispatcherServlet 是前端控制器模式的实现。前端控制器就是个用来处理网站所有请求的控制器。</li>
+<li><p>就像其他的 Servlet， DispatcherServlet 也是声明和配置在 web.xml 文件中的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;web-app&gt; </span><br><span class="line">&lt;servlet&gt; </span><br><span class="line">&lt;servlet-name&gt;SpringMVC&lt;/servlet-name&gt; </span><br><span class="line">&lt;servlet-class&gt;org.springframework.web.servlet.DispatcherServlet&lt;/servlet-class&gt; </span><br><span class="line">&lt;load-on-startup&gt;1&lt;/load-on-startup&gt; </span><br><span class="line">&lt;/servlet&gt; </span><br><span class="line">&lt;servlet-mapping&gt; </span><br><span class="line">&lt;servlet-name&gt;SpringMVC&lt;/servlet-name&gt; </span><br><span class="line">&lt;url-pattern&gt;*&lt;/url-pattern&gt; </span><br><span class="line">&lt;/servlet-mapping&gt; </span><br><span class="line">&lt;/web-app&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>DispatcherServlet 继承自 HttpServlet 基类。Servlet 引擎(比如 Tomcat) 创建该类的实例，并且调用它不同的方法，比如：init(), service(), destroy()。</p>
+</li>
+<li>DispatcherServlet 为 Spring MVC 应用提供统一入口，处理所有的请求。</li>
+<li>DispatcherServlet 也完全与 Spring IoC 容器集成，可以使用 Spring 框架的每一个特性，比如依赖注入。</li>
+<li>当 DispatcherServlet 被配置为 load-on-startup = 1,意味着该 servlet 会在启动时由容器创建，而不是在请求到达时。这样做会降低第一次请求的响应时间，因为DispatcherServlet 会在启动时做大量工作，包括扫描和查找所有的 Controller 和 RequestMapping。</li>
+<li>在 DispatcherServlet 初始化期间，Spring 框架会在 WEB-INF 文件夹中查找名为 [servlet-name]-servlet.xml 的文件，并创建相应的 bean。比如，如果 servlet 像上面 web.xml 文件中配置的一样，名为 “SpringMVC”，那么会查找 “SpringMVC-Servlet.xml”的文件。如果全局作用域中有相同名字的bean，会被覆盖。可以用 servlet 初始化参数 contextConfigLocation更改配置文件的位置。<br><img src="/images/DispatcherServlet.png" alt=""></li>
+<li>在 Spring MVC 框架中，每个 DispatcherServlet 都有它自己的 WebApplicationContext ，并且继承了根 WebApplicationContext 中定义的所有 bean。这些继承的 bean 在 servlet 指定的作用域中可以被重载，也可以在其指定作用域中定义新的 bean。</li>
+<li>Spring MVC 中的 DispatcherServlet也允许返回 Servlet API 定义的 last-modification-date。为了决定请求最后修改时间，DispatcherServlet会先查找合适的 handler mapping，然后检测处理器是否实现了 LastModified 接口。如果实现了，就调用接口的 getLastModified(request) 方法，并将该值返回给客户端。</li>
+</ol>
+<p>以上就是关于 DispatcherSerlvet 的内容。正如上面所讲，DispacherServlet 是 Spring MVC 的骨干，是主要的控制器，用来将不同的 HTTP 请求路由当相应的 Controller。它是前端控制器设计模式的实现，并且为应用提供单一入口。可以在 web.xml 中配置 DispatcherServlet，但建议将 load-on-startup 设置为 1。这样容器会在启动时加载该 Serlvet 而不是请求到达时。这样能减少第一个请求的响应时间。</p>
 <hr>
 <p><em>参考</em></p>
 <blockquote>
-<p><a href="https://lujunqiu.github.io/2018/01/17/Spring-MVC框架入门/" target="_blank" rel="noopener">https://lujunqiu.github.io/2018/01/17/Spring-MVC框架入门/</a></p>
+<p><a href="https://lujunqiu.github.io/2018/01/17/Spring-MVC框架入门/" target="_blank" rel="noopener">Spring-MVC框架入门</a></p>
 </blockquote>
 <blockquote>
-<p><a href="https://yemengying.com/2017/10/07/spring-dispatcherServlet/" target="_blank" rel="noopener">https://yemengying.com/2017/10/07/spring-dispatcherServlet/</a></p>
+<p><a href="https://yemengying.com/2017/10/07/spring-dispatcherServlet/" target="_blank" rel="noopener">【译】Spring MVC 中的 DispatcherServlet </a></p>
 </blockquote>
 
         
@@ -253,7 +271,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/08/SpringMVC/" data-id="cjfwdq632000azgmyqlc0l5ks" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/08/SpringMVC/" data-id="cjfwee4u6000cucmyvfl9spgs" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -338,9 +356,9 @@
         </a>
     
     
-        <a href="/2018/04/08/Java虚拟机是如何执行线程同步的/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/2018/04/08/Spring/" id="article-nav-older" class="article-nav-link-wrap">
             <strong class="article-nav-caption">下一篇</strong>
-            <div class="article-nav-title">Java虚拟机是如何执行线程同步的</div>
+            <div class="article-nav-title">Spring</div>
         </a>
     
 </nav>
