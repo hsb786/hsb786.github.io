@@ -15,7 +15,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://hsb786.github.io/images/HashMap3.png">
 <meta property="og:image" content="https://hsb786.github.io/images/HashMap2.png">
-<meta property="og:updated_time" content="2018-04-12T05:02:27.568Z">
+<meta property="og:updated_time" content="2018-04-12T05:10:29.846Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HashMap">
 <meta name="twitter:description" content="HashMap内部存储结构 HashMap内部存储使用了一个Node数组（默认大小是16），而Node类包含一个类型为Node的next变量，也就是相当于一个链表，所有根据hash值计算的bucket一样的key会存储到同一个链表里（即产生了冲突）。">
@@ -152,7 +152,7 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                32
+                33
                 <span>文章</span>
             </div>
             <div class="article-info-block">
@@ -283,7 +283,7 @@
 <ol>
 <li>如果多个线程同时使用put方法添加元素，而且假设正好存在两个put的key发生了碰撞(根据hash值计算的bucket一样)，那么根据HashMap的实现，这两个key会添加到数组的同一个位置，这样最终就会发生其中一个线程的put的数据被覆盖。</li>
 <li>如果多个线程同时检测到元素个数超过数组大小*loadFactor，这样就会发生多个线程同时对Node数组进行扩容，都在重新计算元素位置以及复制数据，但是最终只有一个线程扩容后的数组会赋给table，也就是说其他线程的都会丢失，并且各自线程put的数据也丢失。</li>
-<li>扩容时需要rehash，可能会造成死循环(jdk8已修复)</li>
+<li>扩容时需要rehash，可能会造成死循环(java8已修复)</li>
 </ol>
 <hr>
 <p><strong>如何线程安全的使用HashMap</strong></p>
@@ -328,7 +328,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/12/HashMap/" data-id="cjfw25rxl000468myfx1fred8" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/12/HashMap/" data-id="cjfw2rwrm000810myunxed970" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -403,6 +403,15 @@
         
 <nav id="article-nav">
     
+        <a href="/2018/04/12/动态代理（转载）/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">上一篇</strong>
+            <div class="article-nav-title">
+                
+                    动态代理（转载）
+                
+            </div>
+        </a>
+    
     
         <a href="/2018/04/11/String与StringBuffer/" id="article-nav-older" class="article-nav-link-wrap">
             <strong class="article-nav-caption">下一篇</strong>
@@ -433,6 +442,25 @@
         <h3 class="widget-title">最新文章</h3>
         <div class="widget">
             <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/04/12/动态代理（转载）/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/04/12/动态代理（转载）/" class="title">动态代理（转载）</a></p>
+                            <p class="item-date"><time datetime="2018-04-12T05:13:18.000Z" itemprop="datePublished">2018-04-12</time></p>
+                        </div>
+                    </li>
                 
                     <li>
                         
@@ -510,25 +538,6 @@
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2018/04/10/反转链表/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"></p>
-                            <p class="item-title"><a href="/2018/04/10/反转链表/" class="title">反转链表</a></p>
-                            <p class="item-date"><time datetime="2018-04-10T12:14:31.000Z" itemprop="datePublished">2018-04-10</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -540,7 +549,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">归档</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a><span class="archive-list-count">32</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a><span class="archive-list-count">33</span></li></ul>
         </div>
     </div>
 
@@ -549,7 +558,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">标签</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/">HTTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql/">sql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/剑指Offer/">剑指Offer</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爪哇/">爪哇</a><span class="tag-list-count">12</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/">HTTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql/">sql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/剑指Offer/">剑指Offer</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爪哇/">爪哇</a><span class="tag-list-count">13</span></li></ul>
         </div>
     </div>
 
