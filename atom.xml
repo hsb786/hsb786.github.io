@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://hsb786.github.io/"/>
-  <updated>2018-04-12T11:46:36.921Z</updated>
+  <updated>2018-04-12T12:15:43.803Z</updated>
   <id>https://hsb786.github.io/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Java虚拟机</title>
+    <link href="https://hsb786.github.io/2018/04/12/Java%E8%99%9A%E6%8B%9F%E6%9C%BA/"/>
+    <id>https://hsb786.github.io/2018/04/12/Java虚拟机/</id>
+    <published>2018-04-12T12:01:50.000Z</published>
+    <updated>2018-04-12T12:15:43.803Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="内存区域"><a href="#内存区域" class="headerlink" title="内存区域"></a>内存区域</h2><p>Java虚拟机在执行Java程序的过程中会把他所管理的内存划分为若干个不同的数据区域。Java虚拟机规范将JVM所管理的内存分为以下几个运行时数据区：程序计数器、Java虚拟机栈、本地方法栈、Java堆、方法区。下面详细阐述各数据区所存储的数据类型。</p><p><img src="/images/java虚拟机.png" alt=""></p><h3 id="程序计数器（Program-Counter-Register）"><a href="#程序计数器（Program-Counter-Register）" class="headerlink" title="程序计数器（Program Counter Register）"></a>程序计数器（Program Counter Register）</h3><p>一块较小的内存空间，它是当前线程所执行的字节码的行号指示器，字节码解释器工作时通过改变该计数器的值来选择下一条需要执行的字节码指令，分支、跳转、循环等基础功能都要依赖它来实现。每条线程都有一个独立的的程序计数器，各线程间的计数器互不影响，因此该区域是线程私有的。</p><p>当线程在执行一个Java方法时，该计数器记录的是正在执行的虚拟机字节码指令的地址，当线程在执行的是Native方法（调用本地操作系统方法）时，该计数器的值为空。另外，该内存区域是唯一一个在Java虚拟机规范中没有规定任何OOM（内存溢出：OutOfMemoryError）情况的区域。</p><h3 id="Java虚拟机栈（Java-Virtual-Machine-Stacks）"><a href="#Java虚拟机栈（Java-Virtual-Machine-Stacks）" class="headerlink" title="Java虚拟机栈（Java Virtual Machine Stacks）"></a>Java虚拟机栈（Java Virtual Machine Stacks）</h3><p>该区域也是线程私有的，它的生命周期也与线程相同。虚拟机栈描述的是Java方法执行的内存模型：每个方法被执行的时候都会同时创建一个栈帧，栈它是用于支持续虚拟机进行方法调用和方法执行的数据结构。对于执行引擎来讲，活动线程中，只有栈顶的栈帧是有效的，称为当前栈帧，这个栈帧所关联的方法称为当前方法，执行引擎所运行的所有字节码指令都只针对当前栈帧进行操作。栈帧用于存储局部变量表、操作数栈、动态链接、方法返回地址和一些额外的附加信息。在编译程序代码时，栈帧中需要多大的局部变量表、多深的操作数栈都已经完全确定了，并且写入了方法表的Code属性之中。因此，一个栈帧需要分配多少内存，不会受到程序运行期变量数据的影响，而仅仅取决于具体的虚拟机实现。</p><p>在Java虚拟机规范中，对这个区域规定了两种异常情况：</p><ol><li>如果线程请求的栈深度大于虚拟机所允许的深度，将抛出StackOverflowError异常。</li><li>如果虚拟机在动态扩展栈时无法申请到足够的内存空间，则抛出OutOfMemoryError异常。</li></ol><h3 id="本地方法栈（Native-Method-Stacks）"><a href="#本地方法栈（Native-Method-Stacks）" class="headerlink" title="本地方法栈（Native Method Stacks）"></a>本地方法栈（Native Method Stacks）</h3><p>该区域与虚拟机栈所发挥的作用非常相似，只是虚拟机栈为虚拟机执行Java方法服务，而本地方法栈则为使用到的本地操作系统（Native）方法服务。</p><h3 id="Java堆（Java-Heap）"><a href="#Java堆（Java-Heap）" class="headerlink" title="Java堆（Java Heap）"></a>Java堆（Java Heap）</h3><p>Java Heap是Java虚拟机所管理的内存中最大的一块，它是所有线程共享的一块内存区域。几乎所有的对象实例和数组都在这类分配内存。Java Heap是垃圾收集器管理的主要区域，因此很多时候也被称为“GC堆”。</p><p>根据Java虚拟机规范的规定，Java堆可以处在物理上不连续的内存空间中，只要逻辑上是连续的即可。如果在堆中没有内存可分配时，并且堆也无法扩展时，将会抛出OutOfMemoryError异常。   </p><h3 id="方法区（Method-Area）"><a href="#方法区（Method-Area）" class="headerlink" title="方法区（Method Area）"></a>方法区（Method Area）</h3><p>方法区也是各个线程共享的内存区域，它用于存储已经被虚拟机加载的类信息、常量、静态变量、即时编译器编译后的代码等数据。方法区域又被称为“永久代”。</p><p>根据Java虚拟机规范的规定，当方法区无法满足内存分配需求时，将抛出OutOfMemoryError异常。</p><hr><p><em>参考</em></p><blockquote><p><a href="https://blog.csdn.net/ns_code/article/details/17565503" target="_blank" rel="noopener">【深入Java虚拟机】之一：Java内存区域与内存溢出</a></p><p><a href="https://yemengying.com/2015/11/12/读书笔记-深入理解Java虚拟机1/" target="_blank" rel="noopener">读书笔记-深入理解Java虚拟机1</a></p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;内存区域&quot;&gt;&lt;a href=&quot;#内存区域&quot; class=&quot;headerlink&quot; title=&quot;内存区域&quot;&gt;&lt;/a&gt;内存区域&lt;/h2&gt;&lt;p&gt;Java虚拟机在执行Java程序的过程中会把他所管理的内存划分为若干个不同的数据区域。Java虚拟机规范将JVM所管理的内存
+      
+    
+    </summary>
+    
+    
+      <category term="爪哇" scheme="https://hsb786.github.io/tags/%E7%88%AA%E5%93%87/"/>
+    
+  </entry>
   
   <entry>
     <title>java8新特性（转载）</title>
@@ -425,33 +448,6 @@
       <category term="爪哇" scheme="https://hsb786.github.io/tags/%E7%88%AA%E5%93%87/"/>
     
       <category term="多线程" scheme="https://hsb786.github.io/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>java基础总结</title>
-    <link href="https://hsb786.github.io/2018/04/09/java%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93/"/>
-    <id>https://hsb786.github.io/2018/04/09/java基础总结/</id>
-    <published>2018-04-09T13:28:54.000Z</published>
-    <updated>2018-04-11T04:17:39.893Z</updated>
-    
-    <content type="html"><![CDATA[<p><strong>初始化顺序</strong></p><ol><li>父类（静态变量，静态语句块）</li><li>子类（静态变量，静态语句块）</li><li>父类（实例变量，普通语句块）</li><li>父类（构造函数）</li><li>子类（实例变量，普通语句块）</li><li>子类（构造函数）<a id="more"></a></li></ol><hr><p><strong>Object</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">public final native Class&lt;?&gt; getClass()</span><br><span class="line"></span><br><span class="line">public native int hashCode()</span><br><span class="line"></span><br><span class="line">public boolean equals(Object obj)</span><br><span class="line"></span><br><span class="line">protected native Object clone() throws CloneNotSupportedException</span><br><span class="line"></span><br><span class="line">public String toString()</span><br><span class="line"></span><br><span class="line">public final native void notify()</span><br><span class="line"></span><br><span class="line">public final native void notifyAll()</span><br><span class="line"></span><br><span class="line">public final native void wait(long timeout) throws InterruptedException</span><br><span class="line"></span><br><span class="line">public final void wait(long timeout, int nanos) throws InterruptedException</span><br><span class="line"></span><br><span class="line">public final void wait() throws InterruptedException</span><br><span class="line"></span><br><span class="line">protected void finalize() throws Throwable &#123;&#125;</span><br></pre></td></tr></table></figure><hr><p><strong>异常</strong></p><p>Throwable可以用来表示任何可以作为异常抛出的类，分为两种：Error和Exception。其中Error用来表示JVM无法处理的错误，Exception分为两种：</p><ol><li><strong>受检异常（checked exception）</strong>：需要try…catch…语句捕获并进行处理，并且可以从一场恢复</li><li><strong>非受检异常（unchecked exception）</strong>：是程序运行时错误，例如除0会引发Arithmetic Exceptino，此时程序崩溃并且无法恢复 </li></ol>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;strong&gt;初始化顺序&lt;/strong&gt;&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;父类（静态变量，静态语句块）&lt;/li&gt;
-&lt;li&gt;子类（静态变量，静态语句块）&lt;/li&gt;
-&lt;li&gt;父类（实例变量，普通语句块）&lt;/li&gt;
-&lt;li&gt;父类（构造函数）&lt;/li&gt;
-&lt;li&gt;子类（实例变量，普通语句块）&lt;/li&gt;
-&lt;li&gt;子类（构造函数）
-    
-    </summary>
-    
-    
-      <category term="爪哇" scheme="https://hsb786.github.io/tags/%E7%88%AA%E5%93%87/"/>
     
   </entry>
   
