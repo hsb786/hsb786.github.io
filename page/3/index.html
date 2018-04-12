@@ -147,7 +147,7 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                38
+                40
                 <span>文章</span>
             </div>
             <div class="article-info-block">
@@ -176,6 +176,132 @@
 
             
             <section id="main">
+    <article id="post-线程池" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2018/04/10/线程池/">线程池</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2018/04/10/线程池/">
+            <time datetime="2018-04-10T02:13:01.000Z" itemprop="datePublished">2018-04-10</time>
+        </a>
+    </div>
+
+
+                        
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/多线程/">多线程</a>, <a class="tag-link" href="/tags/爪哇/">爪哇</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            <p><h2 id="Executor框架"><a href="#Executor框架" class="headerlink" title="Executor框架"></a>Executor框架</h2><p>Exexutor框架是一个根据一组执行策略调用，调度，执行和控制的异步任务的框架，可以用来控制线程的启动、执行和关闭，可以简化并发编程的操作。无限制的创建线程会引起应用程序内存溢出。所以创建一个线程池是个更好的解决方案，因为可以限制线程的数量并且可以回收再利用这些线程。Executor框架包括：线程池、Executor、Exexutors、ExecutorService、CompletionService、Future、Callable等。<br></p>
+            <p class="article-more-link">
+                <a href="/2018/04/10/线程池/#more">查看更多</a>
+            </p>
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="https://hsb786.github.io/2018/04/10/线程池/" data-id="cjfwk3c2d0025rwmyxamuvrka" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
     <article id="post-java基础总结" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
@@ -213,8 +339,7 @@
         
         <div class="article-entry" itemprop="articleBody">
         
-            <p><p><strong>初始化顺序</strong></p>
-<ol>
+            <p><h2 id="初始化顺序"><a href="#初始化顺序" class="headerlink" title="初始化顺序"></a>初始化顺序</h2><ol>
 <li>父类（静态变量，静态语句块）</li>
 <li>子类（静态变量，静态语句块）</li>
 <li>父类（实例变量，普通语句块）</li>
@@ -233,7 +358,164 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/09/java基础总结/" data-id="cjfwhm70o000qd4myrz8ycsr8" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/09/java基础总结/" data-id="cjfwk3c1i000vrwmydpm8vpqe" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
+    <article id="post-多线程基础" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2018/04/09/多线程基础/">多线程基础</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2018/04/09/多线程基础/">
+            <time datetime="2018-04-09T13:03:41.000Z" itemprop="datePublished">2018-04-09</time>
+        </a>
+    </div>
+
+
+                        
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/多线程/">多线程</a>, <a class="tag-link" href="/tags/爪哇/">爪哇</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h2 id="线程间通信"><a href="#线程间通信" class="headerlink" title="线程间通信"></a>线程间通信</h2><p>线程是操作系统中独立的个体，但这些个体如果不经过特殊处理就不能成为一个整体。在线程间进行通信后，系统之间的交互性会更加强大，在大大提高CPU利用率的同时还会使程序员对各线程任务在处理的过程中进行有效的把控与监督。</p>
+<h2 id="锁队列"><a href="#锁队列" class="headerlink" title="锁队列"></a>锁队列</h2><p>每个锁对象都有两个队列，一个是就绪队列，一个是阻塞队列。就绪队列存储了将要获得锁的线程，阻塞队列存储了被阻塞的线程。一个线程被唤醒后，才会进入就绪队列，等待CPU的调度；反之，一个线程被wait后，就会进入阻塞队列，等待下一次被唤醒。</p>
+<h2 id="多线程对象的常用函数"><a href="#多线程对象的常用函数" class="headerlink" title="多线程对象的常用函数"></a>多线程对象的常用函数</h2><ul>
+<li>Thread.currentThread()方法返回代码段正在被哪个线程调用的信息</li>
+<li>Thread对象实例.isAlive()方法的功能是判断当前线程是否处于活跃状态(正在运行状态或者准备开始运行状态)</li>
+<li>Thread.sleep()方法的作用是在指定的毫秒数内让”当前执行的线程”休眠(暂停执行)</li>
+<li>getId()方法可以获取线程的唯一标识</li>
+<li>yield()方法的作用是放弃当前的CPU资源，将它让给其他的任务去占用CPU执行时间。当放弃的时间不确定，有可能刚刚放弃，马上又获取CPU时间片。</li>
+</ul>
+<h2 id="对象锁何时会被释放"><a href="#对象锁何时会被释放" class="headerlink" title="对象锁何时会被释放"></a>对象锁何时会被释放</h2><ul>
+<li>执行完同步代码块</li>
+<li>在执行同步代码块的过程中，遇到异常而导致线程终止</li>
+<li>在执行同步代码块的过程中，执行了锁所属对象的wait()方法，这个线程会释放锁，进行对象的等待池</li>
+</ul>
+<h2 id="如何判断线程是否处于停止状态"><a href="#如何判断线程是否处于停止状态" class="headerlink" title="如何判断线程是否处于停止状态"></a>如何判断线程是否处于停止状态</h2><ul>
+<li>Thread.interrupted():测试当前线程是否已经中断，static方法，调用这个方法后线程的中断状态被清除。换句话说，如果连续２次调用该方法，则第二次调用将返回false。</li>
+<li>this.isInterrupted():测试线程Thread对象实例是否已经中断，非static方法，不清除状态标识</li>
+</ul>
+<p>调用interrupt()方法不会真的停止线程，而是在当前线程中打了一个停止的标记，还需要配合其他的代码来停止线程。</p>
+<h2 id="守护线程"><a href="#守护线程" class="headerlink" title="守护线程"></a>守护线程</h2><p>守护线程是一种特殊的线程，当进程中不存在非守护线程了，守护线程就自动销毁。典型的守护线程就是垃圾回收线程，当进程中没有非守护线程了，则垃圾回收线程也就没有存在的必要了，自动销毁。Deamon的作用是为其他线程的运行提供便利服务，守护线程最典型的应用就是GC(垃圾回收器)。</p>
+<h2 id="对象及变量的并发访问"><a href="#对象及变量的并发访问" class="headerlink" title="对象及变量的并发访问"></a>对象及变量的并发访问</h2><p>“非线程安全”其实会在多个线程对同一个对象中的实例变量进行并发访问时发生，产生的后果就是”脏读”，也就是取到的数据其实是被更改过的。而”线程安全”获得的实例变量的值是经过同步处理的，不会出现”脏读”的现象。</p>
+<h2 id="方法内的私有变量"><a href="#方法内的私有变量" class="headerlink" title="方法内的私有变量"></a>方法内的私有变量</h2><p>“非线程安全”问题存在于”实例变量”，如果是方法内部的私有变量，则不存在”非线程安全”问题，永远都是线程安全的，这是方法内部的变量是私有(作用域)的特性造成的。</p>
+<h2 id="锁"><a href="#锁" class="headerlink" title="锁"></a>锁</h2><p>关键字synchronized取得的锁都是对象锁，而不是把一段代码或者方法(函数)当作锁，哪个线程先执行带synchronized关键字的方法，哪个线程就持有该方法所属对象的锁Lock，那么其他线程只能呈现等待状态，前提是多个线程访问的是同一个对象。如果多个线程访问多个对象，则JVM会创建多个锁。</p>
+<p>“可重入锁”:当有一个线程获得了某个对象的锁，此时这个对象锁还没有释放，当这个线程再次想要获得这个对象的锁的时候还是可以获取的。特别的说明，当存在父子类继承关系时，子类是完全可以通过”可重入锁”调用父类的同步方法的。</p>
+<h2 id="静态同步synchronized方法与synchronized-class-代码块"><a href="#静态同步synchronized方法与synchronized-class-代码块" class="headerlink" title="静态同步synchronized方法与synchronized(class)代码块"></a>静态同步synchronized方法与synchronized(class)代码块</h2><p>关键字synchronized还可以应用在static静态方法上，如果这样写，那是对当前的.java文件对应的Class类进行持锁。synchronized关键字加到static静态方法上是给Class类上锁，可以对类的所有对象实例起作用，而synchronized关键字加到非static静态方法上是给对象上锁，这2个锁不是同一个锁。synchronized(class)代码块的作用其实和synchronized static方法的作用一样。我们需要注意的是，synchronized(ClassName)与synchronized(ClassName的实例)，线程各自获取各自的锁，不会有等待。</p>
+<p>注意:我们在将任何数据类型作为同步锁时，需要观察，是否有多个线程同时持有锁对象，如果同时持有相同的锁对象，则这些线程之间就是同步的；如果分别获得锁对象，就是异步的。</p>
+<h2 id="volatile"><a href="#volatile" class="headerlink" title="volatile"></a>volatile</h2><p>关键字volatile的主要作用是使变量在多个线程间可见。简单地说就是当线程A对变量X进行了修改后，在线程A后面执行的其他线程能看到变量X的变动。同时关键字synchronized也可以同样的完成volatile关键字可见性的功能。(happens-before)</p>
+<h2 id="ThreadLocal"><a href="#ThreadLocal" class="headerlink" title="ThreadLocal"></a>ThreadLocal</h2><p>类ThreadLocal主要解决的就是每个线程绑定自己的值，可以将ThreadLocal类比喻成全局存放数据的盒子，盒子中可以存储每个线程的私有数据。</p>
+<p>类Threadlocal解决的是变量在不同线程间的隔离性，也就是不同线程拥有自己的值，不同线程中的值是可以放入Threadlocal类中进行保存的。</p>
+<hr>
+<blockquote>
+<p><a href="https://lujunqiu.github.io/2017/06/24/Java多线程学习笔记/" target="_blank" rel="noopener">Java多线程学习笔记</a></p>
+</blockquote>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="https://hsb786.github.io/2018/04/09/多线程基础/" data-id="cjfwk3c2d001trwmy9gbshwlq" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -361,7 +643,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/09/需要注意的一些东西/" data-id="cjfwhm71y0029d4my69k8ljj2" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/09/需要注意的一些东西/" data-id="cjfwk3c2t002hrwmyvgdptn7u" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -491,7 +773,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/09/记录一些容易忘记的东西/" data-id="cjfwhm71y0026d4myr5rnwd28" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/09/记录一些容易忘记的东西/" data-id="cjfwk3c2d002crwmyl3thlaxs" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -605,8 +887,7 @@
         <div class="article-entry" itemprop="articleBody">
         
             <p><hr>
-<p><strong>sleep和wait区别</strong></p>
-<ol>
+<h2 id="sleep和wait区别"><a href="#sleep和wait区别" class="headerlink" title="sleep和wait区别"></a>sleep和wait区别</h2><ol>
 <li>sleep是Thread类的static方法； wait是Object类的方法</li>
 <li>sleep()睡眠时保持对象锁； wait释放锁</li>
 <li>sleep可以放在任何地方； wait()必须放在synchronized block中，否则会在runtime是扔出IllegalMonitorStateExcetion异常</p>
@@ -622,7 +903,137 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/09/区别/" data-id="cjfwhm713001hd4my2961f02z" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/09/区别/" data-id="cjfwk3c1x001lrwmy3urvnlvy" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
+    <article id="post-hash（转载）" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2018/04/08/hash（转载）/">hash</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2018/04/08/hash（转载）/">
+            <time datetime="2018-04-08T13:23:41.000Z" itemprop="datePublished">2018-04-08</time>
+        </a>
+    </div>
+
+
+                        
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/爪哇/">爪哇</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <hr>
+<p><strong>哈希</strong>  </p>
+<p>Hash，一般翻译成“散列”，也有直接音译为“哈希”的，就是把任意长度的输入，通过散列算法，变换成固定长度的输出，该输出就是散列值  </p>
+<p>特性：根据同一散列函数计算出的散列值如果不同，那么输入值肯定也不同。但是，根据同一散列函数计算出的散列值如果相同，输入值不一定相同</p>
+<p>两个不同的输入值，根据同一散列函数计算出的散列值相同的现象叫做碰撞</p>
+<hr>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="https://hsb786.github.io/2018/04/08/hash（转载）/" data-id="cjfwk3c1i000orwmyeerkgf40" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -783,395 +1194,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/08/hash/" data-id="cjfwhm70o000od4mygwbgkih1" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-
-        </footer>
-    </div>
-    
-</article>
-
-
-
-    <article id="post-hash（转载）" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2018/04/08/hash（转载）/">hash</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2018/04/08/hash（转载）/">
-            <time datetime="2018-04-08T13:23:41.000Z" itemprop="datePublished">2018-04-08</time>
-        </a>
-    </div>
-
-
-                        
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/爪哇/">爪哇</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            
-            <hr>
-<p><strong>哈希</strong>  </p>
-<p>Hash，一般翻译成“散列”，也有直接音译为“哈希”的，就是把任意长度的输入，通过散列算法，变换成固定长度的输出，该输出就是散列值  </p>
-<p>特性：根据同一散列函数计算出的散列值如果不同，那么输入值肯定也不同。但是，根据同一散列函数计算出的散列值如果相同，输入值不一定相同</p>
-<p>两个不同的输入值，根据同一散列函数计算出的散列值相同的现象叫做碰撞</p>
-<hr>
-
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="https://hsb786.github.io/2018/04/08/hash（转载）/" data-id="cjfwhm70o000xd4my3tvgfycw" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-
-        </footer>
-    </div>
-    
-</article>
-
-
-
-    <article id="post-一些小技巧" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2018/04/08/一些小技巧/">一些小技巧</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2018/04/08/一些小技巧/">
-            <time datetime="2018-04-08T09:58:41.000Z" itemprop="datePublished">2018-04-08</time>
-        </a>
-    </div>
-
-
-                        
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/爪哇/">爪哇</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            <p><hr>
-<p>位运算直接对内存数据进行操作，不需要转成十进制，因此处理速度非常快</p>
-<p> X % 2^n = X &amp; (2^n-1)<br></p>
-            <p class="article-more-link">
-                <a href="/2018/04/08/一些小技巧/#more">查看更多</a>
-            </p>
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="https://hsb786.github.io/2018/04/08/一些小技巧/" data-id="cjfwhm70o0012d4myokyb1wtt" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-
-        </footer>
-    </div>
-    
-</article>
-
-
-
-    <article id="post-Spring" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2018/04/08/Spring/">Spring</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2018/04/08/Spring/">
-            <time datetime="2018-04-08T09:58:41.000Z" itemprop="datePublished">2018-04-08</time>
-        </a>
-    </div>
-
-
-                        
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/Spring/">Spring</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            <p><hr>
-<h2 id="Spring结构"><a href="#Spring结构" class="headerlink" title="Spring结构"></a>Spring结构</h2><p>Spring框架的核心组件只有三个：<strong>Bean，Context，Core</strong></p>
-<p>Spring是面向Bean编程，自然Bean组件就是Spring对Java对象Object的封装，在Spring容器中管理的就是被Bean封装了的Java对象。Bean组件解决了Bean的定义，Bean的创建以及Bean的解析。</p>
-<p>Context组件就是我们常说的IOC容器，也就是Spring容器。Context组件可以发现每个Bean之间的关系，为它们建立好Bean之间的依赖关系，为Bean提供生存环境。</p>
-<p>Core组件，它是Context组件与Bean组件的工具包，可以把Core组件理解为Util工具包<br></p>
-            <p class="article-more-link">
-                <a href="/2018/04/08/Spring/#more">查看更多</a>
-            </p>
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="https://hsb786.github.io/2018/04/08/Spring/" data-id="cjfwhm708000dd4mymyn57gh7" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/08/hash/" data-id="cjfwk3c1i000qrwmyxgu86cya" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1303,7 +1326,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/08/防止重复发送 Ajax 请求的解决方案/" data-id="cjfwhm71y002bd4myjouffv8i" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/08/防止重复发送 Ajax 请求的解决方案/" data-id="cjfwk3c2t002krwmyvf16c1nr" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1379,7 +1402,7 @@
 
 
 
-    <article id="post-值传递和引用传递" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Spring" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -1387,7 +1410,7 @@
                 
     
         <h1 itemprop="name">
-            <a class="article-title" href="/2018/04/08/值传递和引用传递/">值传递和引用传递</a>
+            <a class="article-title" href="/2018/04/08/Spring/">Spring</a>
         </h1>
     
 
@@ -1396,7 +1419,7 @@
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/2018/04/08/值传递和引用传递/">
+        <a href="/2018/04/08/Spring/">
             <time datetime="2018-04-08T09:58:41.000Z" itemprop="datePublished">2018-04-08</time>
         </a>
     </div>
@@ -1406,7 +1429,7 @@
                         
     <div class="article-tag">
         <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/爪哇/">爪哇</a>
+        <a class="tag-link" href="/tags/Spring/">Spring</a>
     </div>
 
                     </div>
@@ -1417,10 +1440,12 @@
         <div class="article-entry" itemprop="articleBody">
         
             <p><hr>
-<p><strong>值传递</strong>  指在调用函数时将实际参数<em>复制</em>一份传递到函数中，那么在函数中对参数所进行的修改，将不会影响到实际参数。  </p>
-<p><strong>引用传递</strong> 指在调用函数时将实际参数的地址<em>直接</em>传递到函数中，那么在函数中对参数所进行的修改，将影响到实际参数。<br></p>
+<h2 id="Spring结构"><a href="#Spring结构" class="headerlink" title="Spring结构"></a>Spring结构</h2><p>Spring框架的核心组件只有三个：<strong>Bean，Context，Core</strong></p>
+<p>Spring是面向Bean编程，自然Bean组件就是Spring对Java对象Object的封装，在Spring容器中管理的就是被Bean封装了的Java对象。Bean组件解决了Bean的定义，Bean的创建以及Bean的解析。</p>
+<p>Context组件就是我们常说的IOC容器，也就是Spring容器。Context组件可以发现每个Bean之间的关系，为它们建立好Bean之间的依赖关系，为Bean提供生存环境。</p>
+<p>Core组件，它是Context组件与Bean组件的工具包，可以把Core组件理解为Util工具包<br></p>
             <p class="article-more-link">
-                <a href="/2018/04/08/值传递和引用传递/#more">查看更多</a>
+                <a href="/2018/04/08/Spring/#more">查看更多</a>
             </p>
         
         </div>
@@ -1431,7 +1456,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/08/值传递和引用传递/" data-id="cjfwhm713001ad4myn2f9d6z7" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/08/Spring/" data-id="cjfwk3c12000drwmy662jqqf5" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1524,10 +1549,29 @@
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2018/04/12/Java虚拟机/" class="thumbnail">
+                            <a href="/2018/04/12/sql/" class="thumbnail">
     
     
         <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/04/12/sql/" class="title">sql</a></p>
+                            <p class="item-date"><time datetime="2018-04-12T12:56:19.000Z" itemprop="datePublished">2018-04-12</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/04/12/Java虚拟机/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/java虚拟机.png)" alt="Java虚拟机" class="thumbnail-image"></span>
     
 </a>
 
@@ -1597,25 +1641,6 @@
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2018/04/12/动态代理（转载）/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"></p>
-                            <p class="item-title"><a href="/2018/04/12/动态代理（转载）/" class="title">动态代理（转载）</a></p>
-                            <p class="item-date"><time datetime="2018-04-12T05:13:18.000Z" itemprop="datePublished">2018-04-12</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -1627,7 +1652,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">归档</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a><span class="archive-list-count">38</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a><span class="archive-list-count">40</span></li></ul>
         </div>
     </div>
 
@@ -1636,7 +1661,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">标签</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/">HTTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MyBatis/">MyBatis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql/">sql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/剑指Offer/">剑指Offer</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多线程/">多线程</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爪哇/">爪哇</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">11</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/">HTTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MyBatis/">MyBatis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql/">sql</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/剑指Offer/">剑指Offer</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多线程/">多线程</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爪哇/">爪哇</a><span class="tag-list-count">17</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">11</span></li></ul>
         </div>
     </div>
 
@@ -1645,7 +1670,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">标签云</h3>
         <div class="widget tagcloud">
-            <a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/MyBatis/" style="font-size: 10px;">MyBatis</a> <a href="/tags/Spring/" style="font-size: 12.5px;">Spring</a> <a href="/tags/sql/" style="font-size: 10px;">sql</a> <a href="/tags/前端/" style="font-size: 10px;">前端</a> <a href="/tags/剑指Offer/" style="font-size: 17.5px;">剑指Offer</a> <a href="/tags/多线程/" style="font-size: 12.5px;">多线程</a> <a href="/tags/工具/" style="font-size: 15px;">工具</a> <a href="/tags/爪哇/" style="font-size: 20px;">爪哇</a> <a href="/tags/算法/" style="font-size: 17.5px;">算法</a>
+            <a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/MyBatis/" style="font-size: 10px;">MyBatis</a> <a href="/tags/Spring/" style="font-size: 12px;">Spring</a> <a href="/tags/sql/" style="font-size: 12px;">sql</a> <a href="/tags/前端/" style="font-size: 10px;">前端</a> <a href="/tags/剑指Offer/" style="font-size: 18px;">剑指Offer</a> <a href="/tags/多线程/" style="font-size: 14px;">多线程</a> <a href="/tags/工具/" style="font-size: 16px;">工具</a> <a href="/tags/爪哇/" style="font-size: 20px;">爪哇</a> <a href="/tags/算法/" style="font-size: 18px;">算法</a>
         </div>
     </div>
 

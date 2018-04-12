@@ -3,20 +3,20 @@
 <head>
     <meta charset="utf-8">
     
-    <title>需要注意的一些东西 | HuShengBin’s blog</title>
+    <title>多线程基础 | HuShengBin’s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="happens-before 在JMM中，如果一个操作执行的结果需要对另一个操作可见，那么这两个操作之间必须要存在happens-before关系     需要注意的是，上面提到的两个操作可以是在不同线程之间的，而且并不意味着前一个操作必须要在后一个操作之前执行，仅仅要求前一个操作的执行结果对后一个操作可见">
-<meta name="keywords" content="爪哇">
+    <meta name="description" content="线程间通信线程是操作系统中独立的个体，但这些个体如果不经过特殊处理就不能成为一个整体。在线程间进行通信后，系统之间的交互性会更加强大，在大大提高CPU利用率的同时还会使程序员对各线程任务在处理的过程中进行有效的把控与监督。 锁队列每个锁对象都有两个队列，一个是就绪队列，一个是阻塞队列。就绪队列存储了将要获得锁的线程，阻塞队列存储了被阻塞的线程。一个线程被唤醒后，才会进入就绪队列，等待CPU的调度；">
+<meta name="keywords" content="爪哇,多线程">
 <meta property="og:type" content="article">
-<meta property="og:title" content="需要注意的一些东西">
-<meta property="og:url" content="https://hsb786.github.io/2018/04/09/需要注意的一些东西/index.html">
+<meta property="og:title" content="多线程基础">
+<meta property="og:url" content="https://hsb786.github.io/2018/04/09/多线程基础/index.html">
 <meta property="og:site_name" content="HuShengBin’s blog">
-<meta property="og:description" content="happens-before 在JMM中，如果一个操作执行的结果需要对另一个操作可见，那么这两个操作之间必须要存在happens-before关系     需要注意的是，上面提到的两个操作可以是在不同线程之间的，而且并不意味着前一个操作必须要在后一个操作之前执行，仅仅要求前一个操作的执行结果对后一个操作可见">
+<meta property="og:description" content="线程间通信线程是操作系统中独立的个体，但这些个体如果不经过特殊处理就不能成为一个整体。在线程间进行通信后，系统之间的交互性会更加强大，在大大提高CPU利用率的同时还会使程序员对各线程任务在处理的过程中进行有效的把控与监督。 锁队列每个锁对象都有两个队列，一个是就绪队列，一个是阻塞队列。就绪队列存储了将要获得锁的线程，阻塞队列存储了被阻塞的线程。一个线程被唤醒后，才会进入就绪队列，等待CPU的调度；">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-04-12T11:31:32.065Z">
+<meta property="og:updated_time" content="2018-04-12T13:25:05.849Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="需要注意的一些东西">
-<meta name="twitter:description" content="happens-before 在JMM中，如果一个操作执行的结果需要对另一个操作可见，那么这两个操作之间必须要存在happens-before关系     需要注意的是，上面提到的两个操作可以是在不同线程之间的，而且并不意味着前一个操作必须要在后一个操作之前执行，仅仅要求前一个操作的执行结果对后一个操作可见">
+<meta name="twitter:title" content="多线程基础">
+<meta name="twitter:description" content="线程间通信线程是操作系统中独立的个体，但这些个体如果不经过特殊处理就不能成为一个整体。在线程间进行通信后，系统之间的交互性会更加强大，在大大提高CPU利用率的同时还会使程序员对各线程任务在处理的过程中进行有效的把控与监督。 锁队列每个锁对象都有两个队列，一个是就绪队列，一个是阻塞队列。就绪队列存储了将要获得锁的线程，阻塞队列存储了被阻塞的线程。一个线程被唤醒后，才会进入就绪队列，等待CPU的调度；">
     
 
     
@@ -177,7 +177,7 @@
 </aside>
 
             
-            <section id="main"><article id="post-需要注意的一些东西" class="article article-type-post" itemscope itemprop="blogPost">
+            <section id="main"><article id="post-多线程基础" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -185,7 +185,7 @@
                 
     
         <h1 class="article-title" itemprop="name">
-            需要注意的一些东西
+            多线程基础
         </h1>
     
 
@@ -194,8 +194,8 @@
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/2018/04/09/需要注意的一些东西/">
-            <time datetime="2018-04-09T05:53:41.000Z" itemprop="datePublished">2018-04-09</time>
+        <a href="/2018/04/09/多线程基础/">
+            <time datetime="2018-04-09T13:03:41.000Z" itemprop="datePublished">2018-04-09</time>
         </a>
     </div>
 
@@ -204,7 +204,7 @@
                         
     <div class="article-tag">
         <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/爪哇/">爪哇</a>
+        <a class="tag-link" href="/tags/多线程/">多线程</a>, <a class="tag-link" href="/tags/爪哇/">爪哇</a>
     </div>
 
                     </div>
@@ -215,42 +215,39 @@
         <div class="article-entry" itemprop="articleBody">
         
             
-            <p><strong>happens-before</strong></p>
-<p>在JMM中，如果一个操作执行的结果需要对另一个操作可见，那么这两个操作之间必须要存在happens-before关系    </p>
-<p>需要注意的是，上面提到的两个操作可以是在不同线程之间的，而且并不意味着前一个操作必须要在后一个操作之前执行，仅仅要求前一个操作的执行结果对后一个操作可见<br><a id="more"></a></p>
-<ul>
-<li>happends-before规则<ul>
-<li>程序顺序规则： 单个线程中的每个操作，happens-before于该线程中的任意后续操作</li>
-<li>监视器锁规则： 对一个锁的解锁，happens-before于随后对这个锁的加锁</li>
-<li>volatile变量规则： 对一个volatile变量的写，happends-before于任意后续对这个volatile变量的读  </li>
-<li>传递性： 如果A happeens-before B，且 B happeend-before C，那么A happeens-before C  </li>
-<li>join规则： 如果线程A执行操作ThreadB.join()成功返回，那么线程B中的任意操作happeens-before与线程A从ThreadB.join()操作成功返回  </li>
+            <h2 id="线程间通信"><a href="#线程间通信" class="headerlink" title="线程间通信"></a>线程间通信</h2><p>线程是操作系统中独立的个体，但这些个体如果不经过特殊处理就不能成为一个整体。在线程间进行通信后，系统之间的交互性会更加强大，在大大提高CPU利用率的同时还会使程序员对各线程任务在处理的过程中进行有效的把控与监督。</p>
+<h2 id="锁队列"><a href="#锁队列" class="headerlink" title="锁队列"></a>锁队列</h2><p>每个锁对象都有两个队列，一个是就绪队列，一个是阻塞队列。就绪队列存储了将要获得锁的线程，阻塞队列存储了被阻塞的线程。一个线程被唤醒后，才会进入就绪队列，等待CPU的调度；反之，一个线程被wait后，就会进入阻塞队列，等待下一次被唤醒。</p>
+<h2 id="多线程对象的常用函数"><a href="#多线程对象的常用函数" class="headerlink" title="多线程对象的常用函数"></a>多线程对象的常用函数</h2><ul>
+<li>Thread.currentThread()方法返回代码段正在被哪个线程调用的信息</li>
+<li>Thread对象实例.isAlive()方法的功能是判断当前线程是否处于活跃状态(正在运行状态或者准备开始运行状态)</li>
+<li>Thread.sleep()方法的作用是在指定的毫秒数内让”当前执行的线程”休眠(暂停执行)</li>
+<li>getId()方法可以获取线程的唯一标识</li>
+<li>yield()方法的作用是放弃当前的CPU资源，将它让给其他的任务去占用CPU执行时间。当放弃的时间不确定，有可能刚刚放弃，马上又获取CPU时间片。</li>
 </ul>
-</li>
+<h2 id="对象锁何时会被释放"><a href="#对象锁何时会被释放" class="headerlink" title="对象锁何时会被释放"></a>对象锁何时会被释放</h2><ul>
+<li>执行完同步代码块</li>
+<li>在执行同步代码块的过程中，遇到异常而导致线程终止</li>
+<li>在执行同步代码块的过程中，执行了锁所属对象的wait()方法，这个线程会释放锁，进行对象的等待池</li>
 </ul>
+<h2 id="如何判断线程是否处于停止状态"><a href="#如何判断线程是否处于停止状态" class="headerlink" title="如何判断线程是否处于停止状态"></a>如何判断线程是否处于停止状态</h2><ul>
+<li>Thread.interrupted():测试当前线程是否已经中断，static方法，调用这个方法后线程的中断状态被清除。换句话说，如果连续２次调用该方法，则第二次调用将返回false。</li>
+<li>this.isInterrupted():测试线程Thread对象实例是否已经中断，非static方法，不清除状态标识</li>
+</ul>
+<p>调用interrupt()方法不会真的停止线程，而是在当前线程中打了一个停止的标记，还需要配合其他的代码来停止线程。</p>
+<h2 id="守护线程"><a href="#守护线程" class="headerlink" title="守护线程"></a>守护线程</h2><p>守护线程是一种特殊的线程，当进程中不存在非守护线程了，守护线程就自动销毁。典型的守护线程就是垃圾回收线程，当进程中没有非守护线程了，则垃圾回收线程也就没有存在的必要了，自动销毁。Deamon的作用是为其他线程的运行提供便利服务，守护线程最典型的应用就是GC(垃圾回收器)。</p>
+<h2 id="对象及变量的并发访问"><a href="#对象及变量的并发访问" class="headerlink" title="对象及变量的并发访问"></a>对象及变量的并发访问</h2><p>“非线程安全”其实会在多个线程对同一个对象中的实例变量进行并发访问时发生，产生的后果就是”脏读”，也就是取到的数据其实是被更改过的。而”线程安全”获得的实例变量的值是经过同步处理的，不会出现”脏读”的现象。</p>
+<h2 id="方法内的私有变量"><a href="#方法内的私有变量" class="headerlink" title="方法内的私有变量"></a>方法内的私有变量</h2><p>“非线程安全”问题存在于”实例变量”，如果是方法内部的私有变量，则不存在”非线程安全”问题，永远都是线程安全的，这是方法内部的变量是私有(作用域)的特性造成的。</p>
+<h2 id="锁"><a href="#锁" class="headerlink" title="锁"></a>锁</h2><p>关键字synchronized取得的锁都是对象锁，而不是把一段代码或者方法(函数)当作锁，哪个线程先执行带synchronized关键字的方法，哪个线程就持有该方法所属对象的锁Lock，那么其他线程只能呈现等待状态，前提是多个线程访问的是同一个对象。如果多个线程访问多个对象，则JVM会创建多个锁。</p>
+<p>“可重入锁”:当有一个线程获得了某个对象的锁，此时这个对象锁还没有释放，当这个线程再次想要获得这个对象的锁的时候还是可以获取的。特别的说明，当存在父子类继承关系时，子类是完全可以通过”可重入锁”调用父类的同步方法的。</p>
+<h2 id="静态同步synchronized方法与synchronized-class-代码块"><a href="#静态同步synchronized方法与synchronized-class-代码块" class="headerlink" title="静态同步synchronized方法与synchronized(class)代码块"></a>静态同步synchronized方法与synchronized(class)代码块</h2><p>关键字synchronized还可以应用在static静态方法上，如果这样写，那是对当前的.java文件对应的Class类进行持锁。synchronized关键字加到static静态方法上是给Class类上锁，可以对类的所有对象实例起作用，而synchronized关键字加到非static静态方法上是给对象上锁，这2个锁不是同一个锁。synchronized(class)代码块的作用其实和synchronized static方法的作用一样。我们需要注意的是，synchronized(ClassName)与synchronized(ClassName的实例)，线程各自获取各自的锁，不会有等待。</p>
+<p>注意:我们在将任何数据类型作为同步锁时，需要观察，是否有多个线程同时持有锁对象，如果同时持有相同的锁对象，则这些线程之间就是同步的；如果分别获得锁对象，就是异步的。</p>
+<h2 id="volatile"><a href="#volatile" class="headerlink" title="volatile"></a>volatile</h2><p>关键字volatile的主要作用是使变量在多个线程间可见。简单地说就是当线程A对变量X进行了修改后，在线程A后面执行的其他线程能看到变量X的变动。同时关键字synchronized也可以同样的完成volatile关键字可见性的功能。(happens-before)</p>
+<h2 id="ThreadLocal"><a href="#ThreadLocal" class="headerlink" title="ThreadLocal"></a>ThreadLocal</h2><p>类ThreadLocal主要解决的就是每个线程绑定自己的值，可以将ThreadLocal类比喻成全局存放数据的盒子，盒子中可以存储每个线程的私有数据。</p>
+<p>类Threadlocal解决的是变量在不同线程间的隔离性，也就是不同线程拥有自己的值，不同线程中的值是可以放入Threadlocal类中进行保存的。</p>
 <hr>
-<p><strong>fail-fast</strong></p>
-<p>fail-fast机制是java集合(Collection)中的一种错误机制。当多个线程对同一集合的内容进行操作时，就可能会产生fail-fast事件。  </p>
-<p>例如：当某一个线程A通过iterator去遍历某集合的过程中，若该集合的内容被其他线程所改变了；那么线程A访问集合时，就会抛出ConcurrentModificationException异常，产生fail-fast事件  </p>
-<p>要了解fail-fast机制，我们首先要对ConcurrentModificationException 异常有所了解。当方法检测到对象的并发修改，但不允许这种修改时就抛出该异常。同时需要注意的是，该异常不会始终指出对象已经由不同线程并发修改，如果单线程违反了规则，同样也有可能会抛出改异常。<br>诚然，迭代器的快速失败行为无法得到保证，它不能保证一定会出现该错误，但是快速失败操作会尽最大努力抛出ConcurrentModificationException异常</p>
-<p>当使用fail-fast iterator对Collection或对Map进行操作过程中尝试直接修改Collection/Map的内容时，即使是在单线程下运行，java.util.ConcurrentModificationException异常也将抛出  </p>
-<p>Iterator是工作在一个独立的线程，并且拥有一个mutex锁。<em>Iterator被创建之后会建立一个指向原来对象的单链索引表，当原来对象发生变化时，这个索引表的内容不会同步该表，所以当索引指针往后移动的时候就找不到要迭代的对象，所以按照fail-fast原则Iterator会马上抛出ConsurrentModificationException异常</em>。</p>
-<p>所以Iterator在工作的时候是不允许被迭代的对象被改变的。但你可以使用Iterator本身的方法remove()来删除对象，Iteraror.remove()方法会在删除当前迭代对象的同时维护索引的一致性。</p>
-<hr>
-<p><strong>数据库三大范式</strong></p>
-<ol>
-<li>1NF：字段不可再分</li>
-<li>2NF：主键依赖，一张表里的数据，必须是跟主键相关的</li>
-<li>3NF：任意两个表不能出现重复的非主键字段</li>
-</ol>
-<hr>
-<p><strong>设计模式六大原则</strong></p>
-<p><strong>单一职责(Single Responsibility Principle)</strong>：一个类只负责一个功能领域中的相应职责</p>
-<p><strong>开闭(Open-Closed Principle)</strong>：对扩展开放，对修改关闭</p>
-<p><strong>里氏替换(Liskov Subsitution Principle)</strong>：子类能出现在基类出现的地方</p>
-<p><strong>依赖倒置(Dependency Inversion Principle)</strong>：针对接口编程，而不是针对实现类编程</p>
-<p><strong>接口隔离(Interface Segregation Principle)</strong>：使用多个专门的接口，而不使用单一的总接口</p>
-<p><strong>迪米特(Law of Demeter)</strong>：一个类尽可能少的与其它类发生相互作用</p>
+<blockquote>
+<p><a href="https://lujunqiu.github.io/2017/06/24/Java多线程学习笔记/" target="_blank" rel="noopener">Java多线程学习笔记</a></p>
+</blockquote>
 
         
         </div>
@@ -261,7 +258,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/09/需要注意的一些东西/" data-id="cjfwk3c2t002hrwmyvgdptn7u" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/09/多线程基础/" data-id="cjfwk3c2d001trwmy9gbshwlq" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -336,19 +333,19 @@
         
 <nav id="article-nav">
     
-        <a href="/2018/04/09/多线程基础/" id="article-nav-newer" class="article-nav-link-wrap">
+        <a href="/2018/04/09/java基础总结/" id="article-nav-newer" class="article-nav-link-wrap">
             <strong class="article-nav-caption">上一篇</strong>
             <div class="article-nav-title">
                 
-                    多线程基础
+                    java基础总结
                 
             </div>
         </a>
     
     
-        <a href="/2018/04/09/记录一些容易忘记的东西/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/2018/04/09/需要注意的一些东西/" id="article-nav-older" class="article-nav-link-wrap">
             <strong class="article-nav-caption">下一篇</strong>
-            <div class="article-nav-title">记录一些容易忘记的东西</div>
+            <div class="article-nav-title">需要注意的一些东西</div>
         </a>
     
 </nav>

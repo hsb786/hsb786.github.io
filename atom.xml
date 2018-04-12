@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://hsb786.github.io/"/>
-  <updated>2018-04-12T12:15:43.803Z</updated>
+  <updated>2018-04-12T12:59:07.604Z</updated>
   <id>https://hsb786.github.io/</id>
   
   <author>
@@ -17,20 +17,42 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Java虚拟机</title>
-    <link href="https://hsb786.github.io/2018/04/12/Java%E8%99%9A%E6%8B%9F%E6%9C%BA/"/>
-    <id>https://hsb786.github.io/2018/04/12/Java虚拟机/</id>
-    <published>2018-04-12T12:01:50.000Z</published>
-    <updated>2018-04-12T12:15:43.803Z</updated>
+    <title>sql</title>
+    <link href="https://hsb786.github.io/2018/04/12/sql/"/>
+    <id>https://hsb786.github.io/2018/04/12/sql/</id>
+    <published>2018-04-12T12:56:19.000Z</published>
+    <updated>2018-04-12T12:59:07.604Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="内存区域"><a href="#内存区域" class="headerlink" title="内存区域"></a>内存区域</h2><p>Java虚拟机在执行Java程序的过程中会把他所管理的内存划分为若干个不同的数据区域。Java虚拟机规范将JVM所管理的内存分为以下几个运行时数据区：程序计数器、Java虚拟机栈、本地方法栈、Java堆、方法区。下面详细阐述各数据区所存储的数据类型。</p><p><img src="/images/java虚拟机.png" alt=""></p><h3 id="程序计数器（Program-Counter-Register）"><a href="#程序计数器（Program-Counter-Register）" class="headerlink" title="程序计数器（Program Counter Register）"></a>程序计数器（Program Counter Register）</h3><p>一块较小的内存空间，它是当前线程所执行的字节码的行号指示器，字节码解释器工作时通过改变该计数器的值来选择下一条需要执行的字节码指令，分支、跳转、循环等基础功能都要依赖它来实现。每条线程都有一个独立的的程序计数器，各线程间的计数器互不影响，因此该区域是线程私有的。</p><p>当线程在执行一个Java方法时，该计数器记录的是正在执行的虚拟机字节码指令的地址，当线程在执行的是Native方法（调用本地操作系统方法）时，该计数器的值为空。另外，该内存区域是唯一一个在Java虚拟机规范中没有规定任何OOM（内存溢出：OutOfMemoryError）情况的区域。</p><h3 id="Java虚拟机栈（Java-Virtual-Machine-Stacks）"><a href="#Java虚拟机栈（Java-Virtual-Machine-Stacks）" class="headerlink" title="Java虚拟机栈（Java Virtual Machine Stacks）"></a>Java虚拟机栈（Java Virtual Machine Stacks）</h3><p>该区域也是线程私有的，它的生命周期也与线程相同。虚拟机栈描述的是Java方法执行的内存模型：每个方法被执行的时候都会同时创建一个栈帧，栈它是用于支持续虚拟机进行方法调用和方法执行的数据结构。对于执行引擎来讲，活动线程中，只有栈顶的栈帧是有效的，称为当前栈帧，这个栈帧所关联的方法称为当前方法，执行引擎所运行的所有字节码指令都只针对当前栈帧进行操作。栈帧用于存储局部变量表、操作数栈、动态链接、方法返回地址和一些额外的附加信息。在编译程序代码时，栈帧中需要多大的局部变量表、多深的操作数栈都已经完全确定了，并且写入了方法表的Code属性之中。因此，一个栈帧需要分配多少内存，不会受到程序运行期变量数据的影响，而仅仅取决于具体的虚拟机实现。</p><p>在Java虚拟机规范中，对这个区域规定了两种异常情况：</p><ol><li>如果线程请求的栈深度大于虚拟机所允许的深度，将抛出StackOverflowError异常。</li><li>如果虚拟机在动态扩展栈时无法申请到足够的内存空间，则抛出OutOfMemoryError异常。</li></ol><h3 id="本地方法栈（Native-Method-Stacks）"><a href="#本地方法栈（Native-Method-Stacks）" class="headerlink" title="本地方法栈（Native Method Stacks）"></a>本地方法栈（Native Method Stacks）</h3><p>该区域与虚拟机栈所发挥的作用非常相似，只是虚拟机栈为虚拟机执行Java方法服务，而本地方法栈则为使用到的本地操作系统（Native）方法服务。</p><h3 id="Java堆（Java-Heap）"><a href="#Java堆（Java-Heap）" class="headerlink" title="Java堆（Java Heap）"></a>Java堆（Java Heap）</h3><p>Java Heap是Java虚拟机所管理的内存中最大的一块，它是所有线程共享的一块内存区域。几乎所有的对象实例和数组都在这类分配内存。Java Heap是垃圾收集器管理的主要区域，因此很多时候也被称为“GC堆”。</p><p>根据Java虚拟机规范的规定，Java堆可以处在物理上不连续的内存空间中，只要逻辑上是连续的即可。如果在堆中没有内存可分配时，并且堆也无法扩展时，将会抛出OutOfMemoryError异常。   </p><h3 id="方法区（Method-Area）"><a href="#方法区（Method-Area）" class="headerlink" title="方法区（Method Area）"></a>方法区（Method Area）</h3><p>方法区也是各个线程共享的内存区域，它用于存储已经被虚拟机加载的类信息、常量、静态变量、即时编译器编译后的代码等数据。方法区域又被称为“永久代”。</p><p>根据Java虚拟机规范的规定，当方法区无法满足内存分配需求时，将抛出OutOfMemoryError异常。</p><hr><p><em>参考</em></p><blockquote><p><a href="https://blog.csdn.net/ns_code/article/details/17565503" target="_blank" rel="noopener">【深入Java虚拟机】之一：Java内存区域与内存溢出</a></p><p><a href="https://yemengying.com/2015/11/12/读书笔记-深入理解Java虚拟机1/" target="_blank" rel="noopener">读书笔记-深入理解Java虚拟机1</a></p></blockquote>]]></content>
+    <content type="html"><![CDATA[<h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><p>索引（Index）是帮助MySQL高效获取数据的数据结构</p><p>排好序的快速查找数据结构</p><p>在数据之外，数据库系统还维护着满足特定查找算法的数据结构，这些数据结构以某种方式引用（指向）数据，这样就可以在这些数据结构上快速实现高级查找算法，这种数据结构就是索引。</p><h3 id="优势"><a href="#优势" class="headerlink" title="优势"></a>优势</h3><ul><li>提高数据检索效率，降低数据库的IO成本</li><li>通过索引对数据进行排序，降低数据排序的成本，降低了消耗</li></ul><h3 id="劣势"><a href="#劣势" class="headerlink" title="劣势"></a>劣势</h3><ul><li>实际上索引也是一张表，该表保存了主键与索引字段，并指向实体表的记录，索引列也是要占空间的</li><li>虽然索引列大大提高了查询速度，同时会降低更新表的速度。因为更新表时，还要保存一下索引文件每次更新添加了索引列的字段</li></ul><h3 id="哪些情况需要创建索引"><a href="#哪些情况需要创建索引" class="headerlink" title="哪些情况需要创建索引"></a>哪些情况需要创建索引</h3><ul><li>主键自动建立唯一索引            （不需要自己建）</li><li>频繁作为查询条件的字段应该创建索引</li><li>查询中与其他表关联的字段，外键关系建立索引    （自动建立）</li><li>查询中排序的字段，排序的字段若通过索引去访问将大大提高排序速度</li><li>查询中统计或者分组的字段</li></ul><h3 id="哪些情况不需要创建索引"><a href="#哪些情况不需要创建索引" class="headerlink" title="哪些情况不需要创建索引"></a>哪些情况不需要创建索引</h3><ul><li>表记录太小</li><li>经常增删改的表</li><li>某个数据列包含许多重复的内容，为它建立索引就没有太大的实际效果</li></ul>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;h2 id=&quot;内存区域&quot;&gt;&lt;a href=&quot;#内存区域&quot; class=&quot;headerlink&quot; title=&quot;内存区域&quot;&gt;&lt;/a&gt;内存区域&lt;/h2&gt;&lt;p&gt;Java虚拟机在执行Java程序的过程中会把他所管理的内存划分为若干个不同的数据区域。Java虚拟机规范将JVM所管理的内存
+        &lt;h2 id=&quot;索引&quot;&gt;&lt;a href=&quot;#索引&quot; class=&quot;headerlink&quot; title=&quot;索引&quot;&gt;&lt;/a&gt;索引&lt;/h2&gt;&lt;p&gt;索引（Index）是帮助MySQL高效获取数据的数据结构&lt;/p&gt;
+&lt;p&gt;排好序的快速查找数据结构&lt;/p&gt;
+&lt;p&gt;在数据之外，数据库系统还维护
       
+    
+    </summary>
+    
+    
+      <category term="sql" scheme="https://hsb786.github.io/tags/sql/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java虚拟机</title>
+    <link href="https://hsb786.github.io/2018/04/12/Java%E8%99%9A%E6%8B%9F%E6%9C%BA/"/>
+    <id>https://hsb786.github.io/2018/04/12/Java虚拟机/</id>
+    <published>2018-04-12T12:01:50.000Z</published>
+    <updated>2018-04-12T12:18:28.268Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="内存区域"><a href="#内存区域" class="headerlink" title="内存区域"></a>内存区域</h2><p>Java虚拟机在执行Java程序的过程中会把他所管理的内存划分为若干个不同的数据区域。Java虚拟机规范将JVM所管理的内存分为以下几个运行时数据区：程序计数器、Java虚拟机栈、本地方法栈、Java堆、方法区。下面详细阐述各数据区所存储的数据类型。<br><a id="more"></a><br><img src="/images/java虚拟机.png" alt=""></p><h3 id="程序计数器（Program-Counter-Register）"><a href="#程序计数器（Program-Counter-Register）" class="headerlink" title="程序计数器（Program Counter Register）"></a>程序计数器（Program Counter Register）</h3><p>一块较小的内存空间，它是当前线程所执行的字节码的行号指示器，字节码解释器工作时通过改变该计数器的值来选择下一条需要执行的字节码指令，分支、跳转、循环等基础功能都要依赖它来实现。每条线程都有一个独立的的程序计数器，各线程间的计数器互不影响，因此该区域是线程私有的。</p><p>当线程在执行一个Java方法时，该计数器记录的是正在执行的虚拟机字节码指令的地址，当线程在执行的是Native方法（调用本地操作系统方法）时，该计数器的值为空。另外，该内存区域是唯一一个在Java虚拟机规范中没有规定任何OOM（内存溢出：OutOfMemoryError）情况的区域。</p><h3 id="Java虚拟机栈（Java-Virtual-Machine-Stacks）"><a href="#Java虚拟机栈（Java-Virtual-Machine-Stacks）" class="headerlink" title="Java虚拟机栈（Java Virtual Machine Stacks）"></a>Java虚拟机栈（Java Virtual Machine Stacks）</h3><p>该区域也是线程私有的，它的生命周期也与线程相同。虚拟机栈描述的是Java方法执行的内存模型：每个方法被执行的时候都会同时创建一个栈帧，栈它是用于支持续虚拟机进行方法调用和方法执行的数据结构。对于执行引擎来讲，活动线程中，只有栈顶的栈帧是有效的，称为当前栈帧，这个栈帧所关联的方法称为当前方法，执行引擎所运行的所有字节码指令都只针对当前栈帧进行操作。栈帧用于存储局部变量表、操作数栈、动态链接、方法返回地址和一些额外的附加信息。在编译程序代码时，栈帧中需要多大的局部变量表、多深的操作数栈都已经完全确定了，并且写入了方法表的Code属性之中。因此，一个栈帧需要分配多少内存，不会受到程序运行期变量数据的影响，而仅仅取决于具体的虚拟机实现。</p><p>在Java虚拟机规范中，对这个区域规定了两种异常情况：</p><ol><li>如果线程请求的栈深度大于虚拟机所允许的深度，将抛出StackOverflowError异常。</li><li>如果虚拟机在动态扩展栈时无法申请到足够的内存空间，则抛出OutOfMemoryError异常。</li></ol><h3 id="本地方法栈（Native-Method-Stacks）"><a href="#本地方法栈（Native-Method-Stacks）" class="headerlink" title="本地方法栈（Native Method Stacks）"></a>本地方法栈（Native Method Stacks）</h3><p>该区域与虚拟机栈所发挥的作用非常相似，只是虚拟机栈为虚拟机执行Java方法服务，而本地方法栈则为使用到的本地操作系统（Native）方法服务。</p><h3 id="Java堆（Java-Heap）"><a href="#Java堆（Java-Heap）" class="headerlink" title="Java堆（Java Heap）"></a>Java堆（Java Heap）</h3><p>Java Heap是Java虚拟机所管理的内存中最大的一块，它是所有线程共享的一块内存区域。几乎所有的对象实例和数组都在这类分配内存。Java Heap是垃圾收集器管理的主要区域，因此很多时候也被称为“GC堆”。</p><p>根据Java虚拟机规范的规定，Java堆可以处在物理上不连续的内存空间中，只要逻辑上是连续的即可。如果在堆中没有内存可分配时，并且堆也无法扩展时，将会抛出OutOfMemoryError异常。   </p><h3 id="方法区（Method-Area）"><a href="#方法区（Method-Area）" class="headerlink" title="方法区（Method Area）"></a>方法区（Method Area）</h3><p>方法区也是各个线程共享的内存区域，它用于存储已经被虚拟机加载的类信息、常量、静态变量、即时编译器编译后的代码等数据。方法区域又被称为“永久代”。</p><p>根据Java虚拟机规范的规定，当方法区无法满足内存分配需求时，将抛出OutOfMemoryError异常。</p><hr><p><em>参考</em></p><blockquote><p><a href="https://blog.csdn.net/ns_code/article/details/17565503" target="_blank" rel="noopener">【深入Java虚拟机】之一：Java内存区域与内存溢出</a></p><p><a href="https://yemengying.com/2015/11/12/读书笔记-深入理解Java虚拟机1/" target="_blank" rel="noopener">读书笔记-深入理解Java虚拟机1</a></p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;内存区域&quot;&gt;&lt;a href=&quot;#内存区域&quot; class=&quot;headerlink&quot; title=&quot;内存区域&quot;&gt;&lt;/a&gt;内存区域&lt;/h2&gt;&lt;p&gt;Java虚拟机在执行Java程序的过程中会把他所管理的内存划分为若干个不同的数据区域。Java虚拟机规范将JVM所管理的内存分为以下几个运行时数据区：程序计数器、Java虚拟机栈、本地方法栈、Java堆、方法区。下面详细阐述各数据区所存储的数据类型。&lt;br&gt;
     
     </summary>
     
@@ -426,28 +448,6 @@
       <category term="剑指Offer" scheme="https://hsb786.github.io/tags/%E5%89%91%E6%8C%87Offer/"/>
     
       <category term="算法" scheme="https://hsb786.github.io/tags/%E7%AE%97%E6%B3%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>线程池</title>
-    <link href="https://hsb786.github.io/2018/04/10/%E7%BA%BF%E7%A8%8B%E6%B1%A0/"/>
-    <id>https://hsb786.github.io/2018/04/10/线程池/</id>
-    <published>2018-04-10T02:13:01.000Z</published>
-    <updated>2018-04-12T05:27:05.129Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="Executor框架"><a href="#Executor框架" class="headerlink" title="Executor框架"></a>Executor框架</h2><p>Exexutor框架是一个根据一组执行策略调用，调度，执行和控制的异步任务的框架，可以用来控制线程的启动、执行和关闭，可以简化并发编程的操作。无限制的创建线程会引起应用程序内存溢出。所以创建一个线程池是个更好的解决方案，因为可以限制线程的数量并且可以回收再利用这些线程。Executor框架包括：线程池、Executor、Exexutors、ExecutorService、CompletionService、Future、Callable等。<br><a id="more"></a><br>ExecutorService接口对Executor接口进行了扩展，提供了返回Future对象，终止，关闭线程池等方法。</p><p>通过ExecutorService.submit()方法返回的Future对象，还可以取消任务的执行。Future提供了Cancel()方法用来取消pending中的任务。</p><p>Executor是一个顶层接口，在它里面只声明了一个方法execute(Runnable)，返回值为void，参数为Runnable类型，从字面意思可以理解，就是用来执行传进去的任务的。然后ExecutorService接口继承了Executor接口，并声明了一些方法：submit、invokeAll、invokeAny以及shutDown等。抽象类AbstractExecutorService实现了ExecutorService接口，基本实现了ExecutorService中声明的所有方法。然后ThreadPoolExecutor继承了类AbstractExecutorService。</p><table><thead><tr><th>Executor</th><th>ExecutorService</th></tr></thead><tbody><tr><td>Executor是java线程池的核心接口，用来并发执行提交的任务</td><td>ExecutorService是Executor接口的扩展，提供了异步执行和关闭线程的方法</td></tr><tr><td>提供execute()方法用来提交任务</td><td>提供submit方法用来提交任务</td></tr><tr><td>execute方法无返回值</td><td>submit方法返回Future对象</td></tr><tr><td>不能取消任务</td><td>Future.cancel()中断线程停止任务</td></tr><tr><td>没有提供和关闭线程池有关的方法</td><td>提供了关闭线程池的方法</td></tr></tbody></table><hr><p><strong>关于Callable和Future</strong></p><p>Callable接口使用泛型去定义它的返回类型。Executors类提供了一些有用的方法去在线程池中执行Callable内的任务。由于Callable任务是并行的，我们必须等待它返回的结果。java.util.concurrent.Future对象为我们解决了这个问题。在线程池提交Callable任务后返回了一个Future对象，使用它我们可以知道Callable任务的状态和得到Callable返回的执行结果。Future提供了get()方法让我们可以等待Callable结束并获取它的执行结果。</p><p>Future提供了三种功能：</p><ol><li>判断任务是否完成</li><li>能够中断任务</li><li>能够获取执行结果</li></ol><hr><p><strong>关于Future中的cancel()</strong></p><p>Future对象提供了异步执行，这意味着无需等待任务执行的完成，只要提交需要执行的任务，然后再需要时检查Future是否已经有了结果，如果任务已经执行完成，就可以通过Future.get()方法获得执行结果。需要注意的是，Future.get()方法是一个阻塞式的方法，如果调用时任务还没有完成，会等待直到任务执行结束。</p><p>cancel()传入true时会中断线程停止任务，传入false则会让线程正常执行完成。</p><p>传入false只能取消还没有开始的任务，若任务已经开始了，就任由其运行下去。</p><hr><p><strong>FutureTask</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public class FutureTask&lt;V&gt; implements RunnableFuture&lt;V&gt; </span><br><span class="line"></span><br><span class="line">public interface RunnableFuture&lt;V&gt; extends Runnable, Future&lt;V&gt; &#123;</span><br><span class="line">    /**</span><br><span class="line">    * Sets this Future to the result of its computation</span><br><span class="line">    * unless it has been cancelled.</span><br><span class="line">    */</span><br><span class="line">    void run();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>FutureTask既可以做为Runnable被线程执行，又可以作为Future得到Callable的返回值</p><hr><p><strong>ThreadPoolExecutor</strong></p><table><thead><tr><th>参数</th><th>说明</th></tr></thead><tbody><tr><td>corePoolSize</td><td>线程池中核心线程数量</td></tr><tr><td>maximumPoolSize</td><td>线程池中最大线程数量</td></tr><tr><td>keepAliveTime</td><td>非核心线程存活时间</td></tr><tr><td>unit</td><td>keepAliveTime的时间单位</td></tr><tr><td>workQueue</td><td>存放任务的队列</td></tr><tr><td>threadFactory</td><td>用来生产线程的工厂</td></tr><tr><td>handler</td><td>当线程池中不能再放入任务时执行的handler</td></tr></tbody></table><p>任务提交给线程池之后的处理策略：</p><ol><li>如果当前线程池中的线程数目小于corePoolSize，则每来一个任务，就会创建一个线程去执行这个任务；</li><li>如果当前线程池中的线程数目&gt;=corePoolSize，则每来一个认为，会尝试将其添加到任务缓存队列当中，若添加成功，则该任务会等待空闲线程将其取出来执行；若添加失败（一般来说是任务缓存队列已满），则会尝试创建新的线程去执行这个任务</li><li>如果当前线程池中的线程数目达到maximumPoolSize，则会采取任务拒绝策略进行处理；</li><li>如果线程池中的线程数量大于corePoolSize时，如果某线程空闲时间超过keepAliveTime，线程将被终止，直至线程池中的线程数目不大于corePoolSize；如果允许为核心池中的线程设置存活时间，那么核心池中的线程空闲时间超过KeepAliveTime，线程也会被终止</li></ol><p><img src="/images/threadPool.png" alt=""></p><p>默认情况下，创建线程池之后，线程池中是没有线程的，需要提交任务之后才会创建线程。在实际中如果需要线程池创建之后立即创建线程，可以通过以下两个方法办到：</p><ol><li>prestartCoreThread()：初始化一个核心线程；</li><li>prestartAllCoreThreads()：初始化所有核心线程</li></ol><hr><p><strong>任务缓存队列及排队策略</strong></p><p>workQueue，它用来存放等待执行的任务。workQueue的类型为BlockingQueue<runnable>，通常可以取下面三种类型：</runnable></p><ol><li>ArrayBlockingQueue：基于数组的先进先出队列，此队列创建时必须指定大小</li><li>LinkedBlockingQueue：基于链表的先进先出队列，如果创建时没有指定此队列大小，则默认为Integer.MAX_VALUE</li><li>synchronousQueue：这个队列比较特殊，它不会保存提交的任务，而是将直接新建一个线程来执行新来的任务</li></ol><hr><p>参考</p><blockquote><p><a href="http://www.cnblogs.com/xiaoxi/p/7692250.html" target="_blank" rel="noopener">Java并发编程：线程池的使用</a></p><p><a href="http://codepub.cn/2016/02/01/Java-multi-thread-Callable-interface-and-thread-pool/" target="_blank" rel="noopener">Java多线程之Callable接口及线程池</a></p></blockquote>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;Executor框架&quot;&gt;&lt;a href=&quot;#Executor框架&quot; class=&quot;headerlink&quot; title=&quot;Executor框架&quot;&gt;&lt;/a&gt;Executor框架&lt;/h2&gt;&lt;p&gt;Exexutor框架是一个根据一组执行策略调用，调度，执行和控制的异步任务的框架，可以用来控制线程的启动、执行和关闭，可以简化并发编程的操作。无限制的创建线程会引起应用程序内存溢出。所以创建一个线程池是个更好的解决方案，因为可以限制线程的数量并且可以回收再利用这些线程。Executor框架包括：线程池、Executor、Exexutors、ExecutorService、CompletionService、Future、Callable等。&lt;br&gt;
-    
-    </summary>
-    
-    
-      <category term="爪哇" scheme="https://hsb786.github.io/tags/%E7%88%AA%E5%93%87/"/>
-    
-      <category term="多线程" scheme="https://hsb786.github.io/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
     
   </entry>
   

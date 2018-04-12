@@ -5,18 +5,18 @@
     
     <title>区别 | HuShengBin’s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="sleep和wait区别  sleep是Thread类的static方法； wait是Object类的方法 sleep()睡眠时保持对象锁； wait释放锁 sleep可以放在任何地方； wait()必须放在synchronized block中，否则会在runtime是扔出IllegalMonitorStateExcetion异常">
+    <meta name="description" content="sleep和wait区别 sleep是Thread类的static方法； wait是Object类的方法 sleep()睡眠时保持对象锁； wait释放锁 sleep可以放在任何地方； wait()必须放在synchronized block中，否则会在runtime是扔出IllegalMonitorStateExcetion异常">
 <meta name="keywords" content="爪哇">
 <meta property="og:type" content="article">
 <meta property="og:title" content="区别">
 <meta property="og:url" content="https://hsb786.github.io/2018/04/09/区别/index.html">
 <meta property="og:site_name" content="HuShengBin’s blog">
-<meta property="og:description" content="sleep和wait区别  sleep是Thread类的static方法； wait是Object类的方法 sleep()睡眠时保持对象锁； wait释放锁 sleep可以放在任何地方； wait()必须放在synchronized block中，否则会在runtime是扔出IllegalMonitorStateExcetion异常">
+<meta property="og:description" content="sleep和wait区别 sleep是Thread类的static方法； wait是Object类的方法 sleep()睡眠时保持对象锁； wait释放锁 sleep可以放在任何地方； wait()必须放在synchronized block中，否则会在runtime是扔出IllegalMonitorStateExcetion异常">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-04-12T11:30:39.930Z">
+<meta property="og:updated_time" content="2018-04-12T12:44:53.880Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="区别">
-<meta name="twitter:description" content="sleep和wait区别  sleep是Thread类的static方法； wait是Object类的方法 sleep()睡眠时保持对象锁； wait释放锁 sleep可以放在任何地方； wait()必须放在synchronized block中，否则会在runtime是扔出IllegalMonitorStateExcetion异常">
+<meta name="twitter:description" content="sleep和wait区别 sleep是Thread类的static方法； wait是Object类的方法 sleep()睡眠时保持对象锁； wait释放锁 sleep可以放在任何地方； wait()必须放在synchronized block中，否则会在runtime是扔出IllegalMonitorStateExcetion异常">
     
 
     
@@ -149,7 +149,7 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                38
+                40
                 <span>文章</span>
             </div>
             <div class="article-info-block">
@@ -216,24 +216,21 @@
         
             
             <hr>
-<p><strong>sleep和wait区别</strong></p>
-<ol>
+<h2 id="sleep和wait区别"><a href="#sleep和wait区别" class="headerlink" title="sleep和wait区别"></a>sleep和wait区别</h2><ol>
 <li>sleep是Thread类的static方法； wait是Object类的方法</li>
 <li>sleep()睡眠时保持对象锁； wait释放锁</li>
 <li>sleep可以放在任何地方； wait()必须放在synchronized block中，否则会在runtime是扔出IllegalMonitorStateExcetion异常<a id="more"></a>
 </li>
 </ol>
 <hr>
-<p><strong>synchronized和volatile区别</strong></p>
-<ol>
+<h2 id="synchronized和volatile区别"><a href="#synchronized和volatile区别" class="headerlink" title="synchronized和volatile区别"></a>synchronized和volatile区别</h2><ol>
 <li>volatile是线程同步的轻量级实现，性能比synchronized好</li>
 <li>volatile只能修饰变量； synchronized可修饰方法和代码块</li>
 <li>volatile能保证数据可见性，不保证原子性； synchronized可以保证原子性，也可以间接保证可见性。<br><em>synchronized会将私有内存和公共内存中的数据进行同步</em></li>
 <li>volatile解决的是变量在多个线程间的可见性； synchronized解决的是多个线程访问资源的同步性</li>
 </ol>
 <hr>
-<p><strong>内部类</strong></p>
-<p>在类中定义一个类(私有内部类，静态内部类)<br>在方法中定义一个类(局部内部类，匿名内部类)  </p>
+<h2 id="内部类"><a href="#内部类" class="headerlink" title="内部类"></a>内部类</h2><p>在类中定义一个类(私有内部类，静态内部类)<br>在方法中定义一个类(局部内部类，匿名内部类)  </p>
 <ol>
 <li>私有内部类<br>编译器做的手脚<ul>
 <li>在内部类中创建了包可见构造器，从而使外部类获得了创建权限</li>
@@ -246,17 +243,13 @@
 </ol>
 <p><em>只有静态内部类可以访问静态成员变量</em></p>
 <hr>
-<p> <strong>Session和Cookie的区别</strong></p>
-<p> <strong>Session</strong>是在服务端保存的一个数据结构，用来跟踪用户的状态，这个数据可以保存在集群、数据库、文件中。<br> <strong>Cookie</strong>是客户端保存用户信息的一种机制，用来记录用户的一些信息，也是实现Session的一种方式。<br> 客户端传JSESSIONID，服务端就可以通过这个ID，来将存储到服务端的数据取出</p>
+<h2 id="Session和Cookie的区别"><a href="#Session和Cookie的区别" class="headerlink" title="Session和Cookie的区别"></a>Session和Cookie的区别</h2><p> <strong>Session</strong>是在服务端保存的一个数据结构，用来跟踪用户的状态，这个数据可以保存在集群、数据库、文件中。<br> <strong>Cookie</strong>是客户端保存用户信息的一种机制，用来记录用户的一些信息，也是实现Session的一种方式。<br> 客户端传JSESSIONID，服务端就可以通过这个ID，来将存储到服务端的数据取出</p>
 <hr>
-<p> <strong>Servlet和Filter的区别</strong></p>
-<p> Filter对用户请求进行预处理，接着将请求交给Servlet进行处理并生成响应，最后Filter再对响应的数据进行后处理。</p>
+<h2 id="Servlet和Filter的区别"><a href="#Servlet和Filter的区别" class="headerlink" title="Servlet和Filter的区别"></a>Servlet和Filter的区别</h2><p> Filter对用户请求进行预处理，接着将请求交给Servlet进行处理并生成响应，最后Filter再对响应的数据进行后处理。</p>
 <hr>
-<p> <strong>强、软、弱、虚引用</strong>  </p>
-<p><strong>强引用</strong> Object obj=new Object()，只要引用还在，就不会被回收<br><strong>软引用</strong>内存不够才会被回收<br><strong>弱引用</strong>下一次垃圾收集器工作时会被回收。<br><strong>虚引用</strong>随时可能被回收，目的是能在这个对象被回收时收到一个系统通知。<br>垃圾回收期是一个优先级较低的线程，并不一定能迅速发现弱引用对象  </p>
+<h2 id="强、软、弱、虚引用"><a href="#强、软、弱、虚引用" class="headerlink" title="强、软、弱、虚引用**"></a>强、软、弱、虚引用**</h2><p><strong>强引用</strong> Object obj=new Object()，只要引用还在，就不会被回收<br><strong>软引用</strong>内存不够才会被回收<br><strong>弱引用</strong>下一次垃圾收集器工作时会被回收。<br><strong>虚引用</strong>随时可能被回收，目的是能在这个对象被回收时收到一个系统通知。<br>垃圾回收期是一个优先级较低的线程，并不一定能迅速发现弱引用对象  </p>
 <hr>
-<p><strong>HashMap和Hashtable的区别</strong></p>
-<p><em>先吐槽一下Hashtable的命名，为啥t要小写</em>  </p>
+<h2 id="HashMap和Hashtable的区别"><a href="#HashMap和Hashtable的区别" class="headerlink" title="HashMap和Hashtable的区别"></a>HashMap和Hashtable的区别</h2><p><em>先吐槽一下Hashtable的命名，为啥t要小写</em>  </p>
 <ol>
 <li>Hashtable是线程安全的； HashMap不是</li>
 <li>Hashtable不允许有null的KV； HashMap允许</li>
@@ -265,18 +258,18 @@
 </ol>
 <p>相同点：都实现了Map接口</p>
 <hr>
-<p><strong>join和sleep的区别</strong>  </p>
-<p>join底层调用wait方法，执行到wait释放锁<br>sleep在睡眠时不释放锁</p>
+<p><strong>join和synchronized的区别</strong></p>
+<p>join在内部使用wait()方法进行等待；<br>synchronized使用的是对象监视器原理作为同步</p>
 <hr>
-<p><strong>JDK动态代理和CGLIB代理的区别</strong></p>
-<ol>
+<h2 id="join和sleep的区别"><a href="#join和sleep的区别" class="headerlink" title="join和sleep的区别"></a>join和sleep的区别</h2><p>join底层调用wait方法，执行到wait释放锁<br>sleep在睡眠时不释放锁</p>
+<hr>
+<h2 id="JDK动态代理和CGLIB代理的区别"><a href="#JDK动态代理和CGLIB代理的区别" class="headerlink" title="JDK动态代理和CGLIB代理的区别"></a>JDK动态代理和CGLIB代理的区别</h2><ol>
 <li>JDK动态动态代理是利用反射机制生存一个实现代理接口的匿名类，在调用具体方法前调用InvokeHandler来处理。JDK动态代理只能对<em>实现了接口的类生成代理，而不能针对类</em></li>
 <li>CGLIB动态代理是利用ASM开源包，将目标对象类的class文件加载进来，通过修改其字节码生成子类来处理。CGLIB是<em>针对类实现代理</em>，主要是对指定的类生成一个子类，覆盖其中的方法。</li>
 <li>JDK动态代理是面向接口的，在创建代理实现类时比CGLIB要快，创建代理速度快。CGLIB动态代理是通过字节码底层继承要代理类的目标类来实现，<em>创建速度没有JDK动态代理快，但是运行速度比JDK动态代理快</em>。</li>
 </ol>
 <hr>
-<p><strong>重载和重写的区别</strong></p>
-<p><strong>重载</strong>： 方法有同样的名称，但是参数列表不同</p>
+<h2 id="重载和重写的区别"><a href="#重载和重写的区别" class="headerlink" title="重载和重写的区别"></a>重载和重写的区别</h2><p><strong>重载</strong>： 方法有同样的名称，但是参数列表不同</p>
 <p><strong>重写</strong>：在java的子类与父类中有两个名称、参数列表都相同的方法的情况。由于它们具有相同的方法签名，所以子类中的新方法将覆盖父类中原有的方法</p>
 <p><strong>区别</strong></p>
 <table>
@@ -306,8 +299,7 @@
 </tbody>
 </table>
 <hr>
-<p><strong>组合与继承的区别和联系</strong></p>
-<p>在继承结构中，父类的内部细节对于子类是可见的。所以我们通常也可以说通过继承的代码复用是一种白盒式代码复用。（如果基类的实现发生改变，那么派生类的实现也将随之改变。这样就导致了子类行为的不可预知性；)  </p>
+<h2 id="组合与继承的区别和联系"><a href="#组合与继承的区别和联系" class="headerlink" title="组合与继承的区别和联系"></a>组合与继承的区别和联系</h2><p>在继承结构中，父类的内部细节对于子类是可见的。所以我们通常也可以说通过继承的代码复用是一种白盒式代码复用。（如果基类的实现发生改变，那么派生类的实现也将随之改变。这样就导致了子类行为的不可预知性；)  </p>
 <p>组合是通过对现有的对象进行拼装（组合）产生新的、更复杂的功能。因为在对象之间，各自的内部细节是不可见的，所以我们也说这种方式的代码复用是黑盒式代码复用。（因为组合中一般都定义一个类型，所以在编译期根本不知道具体会调用哪个实现类的方法）  </p>
 <p>继承，在写代码的时候就要指名具体继承哪个类，所以，在编译期就确定了关系。（从基类继承来的实现是无法在运行期动态改变的，因此降低了应用的灵活性。）</p>
 <p>组合，在写代码的时候可以采用面向接口编程。所以，类的组合关系一般在运行期确定。  </p>
@@ -352,8 +344,7 @@
 <p>只有当子类真正是超类的子类型时，才适合用继承。换句话说，对于两个类A和B，只有当两者之间确实存在is-a关系的时候，类B才应该继承类A。&lt;<effective java\="">></effective></p>
 </blockquote>
 <hr>
-<p><strong>Compareable和Comparator</strong></p>
-<p><strong>Comparable</strong>：一个实现了Comparable接口的类，可以让其自身的对象和其它对象进行比较。也就是说，同一个类的对象之间要想比较，对应的类就要实现Compareable接口，并实现<em>compareTo()</em>方法。  </p>
+<h2 id="Compareable和Comparator"><a href="#Compareable和Comparator" class="headerlink" title="Compareable和Comparator"></a>Compareable和Comparator</h2><p><strong>Comparable</strong>：一个实现了Comparable接口的类，可以让其自身的对象和其它对象进行比较。也就是说，同一个类的对象之间要想比较，对应的类就要实现Compareable接口，并实现<em>compareTo()</em>方法。  </p>
 <p><strong>Comparator</strong>：不改变原有的类。通过定义一个类实现Comparator接口，重写<em>compare()</em>方法。  </p>
 <p>Comparator通常用于排序。Java中的Collectinos和Arrays都包括排序的sort方法，该方法可以接受一个Comparator的实例(比较器)来进行排序；new TreeSet&lt;&gt;(new Comparator())</p>
 
@@ -366,7 +357,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/09/区别/" data-id="cjfwhm713001hd4my2961f02z" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/09/区别/" data-id="cjfwk3c1x001lrwmy3urvnlvy" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -451,9 +442,9 @@
         </a>
     
     
-        <a href="/2018/04/08/hash/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/2018/04/08/hash（转载）/" id="article-nav-older" class="article-nav-link-wrap">
             <strong class="article-nav-caption">下一篇</strong>
-            <div class="article-nav-title">hash（转载）</div>
+            <div class="article-nav-title">hash</div>
         </a>
     
 </nav>
@@ -484,10 +475,29 @@
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2018/04/12/Java虚拟机/" class="thumbnail">
+                            <a href="/2018/04/12/sql/" class="thumbnail">
     
     
         <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/04/12/sql/" class="title">sql</a></p>
+                            <p class="item-date"><time datetime="2018-04-12T12:56:19.000Z" itemprop="datePublished">2018-04-12</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/04/12/Java虚拟机/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/java虚拟机.png)" alt="Java虚拟机" class="thumbnail-image"></span>
     
 </a>
 
@@ -557,25 +567,6 @@
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2018/04/12/动态代理（转载）/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"></p>
-                            <p class="item-title"><a href="/2018/04/12/动态代理（转载）/" class="title">动态代理（转载）</a></p>
-                            <p class="item-date"><time datetime="2018-04-12T05:13:18.000Z" itemprop="datePublished">2018-04-12</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -587,7 +578,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">归档</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a><span class="archive-list-count">38</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a><span class="archive-list-count">40</span></li></ul>
         </div>
     </div>
 
@@ -596,7 +587,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">标签</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/">HTTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MyBatis/">MyBatis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql/">sql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/剑指Offer/">剑指Offer</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多线程/">多线程</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爪哇/">爪哇</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">11</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/">HTTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MyBatis/">MyBatis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql/">sql</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/剑指Offer/">剑指Offer</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多线程/">多线程</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爪哇/">爪哇</a><span class="tag-list-count">17</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">11</span></li></ul>
         </div>
     </div>
 
@@ -605,7 +596,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">标签云</h3>
         <div class="widget tagcloud">
-            <a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/MyBatis/" style="font-size: 10px;">MyBatis</a> <a href="/tags/Spring/" style="font-size: 12.5px;">Spring</a> <a href="/tags/sql/" style="font-size: 10px;">sql</a> <a href="/tags/前端/" style="font-size: 10px;">前端</a> <a href="/tags/剑指Offer/" style="font-size: 17.5px;">剑指Offer</a> <a href="/tags/多线程/" style="font-size: 12.5px;">多线程</a> <a href="/tags/工具/" style="font-size: 15px;">工具</a> <a href="/tags/爪哇/" style="font-size: 20px;">爪哇</a> <a href="/tags/算法/" style="font-size: 17.5px;">算法</a>
+            <a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/MyBatis/" style="font-size: 10px;">MyBatis</a> <a href="/tags/Spring/" style="font-size: 12px;">Spring</a> <a href="/tags/sql/" style="font-size: 12px;">sql</a> <a href="/tags/前端/" style="font-size: 10px;">前端</a> <a href="/tags/剑指Offer/" style="font-size: 18px;">剑指Offer</a> <a href="/tags/多线程/" style="font-size: 14px;">多线程</a> <a href="/tags/工具/" style="font-size: 16px;">工具</a> <a href="/tags/爪哇/" style="font-size: 20px;">爪哇</a> <a href="/tags/算法/" style="font-size: 18px;">算法</a>
         </div>
     </div>
 

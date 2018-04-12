@@ -5,19 +5,19 @@
     
     <title>Java虚拟机 | HuShengBin’s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="内存区域Java虚拟机在执行Java程序的过程中会把他所管理的内存划分为若干个不同的数据区域。Java虚拟机规范将JVM所管理的内存分为以下几个运行时数据区：程序计数器、Java虚拟机栈、本地方法栈、Java堆、方法区。下面详细阐述各数据区所存储的数据类型。  程序计数器（Program Counter Register）一块较小的内存空间，它是当前线程所执行的字节码的行号指示器，字节码解释器工作">
+    <meta name="description" content="内存区域Java虚拟机在执行Java程序的过程中会把他所管理的内存划分为若干个不同的数据区域。Java虚拟机规范将JVM所管理的内存分为以下几个运行时数据区：程序计数器、Java虚拟机栈、本地方法栈、Java堆、方法区。下面详细阐述各数据区所存储的数据类型。">
 <meta name="keywords" content="爪哇">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java虚拟机">
 <meta property="og:url" content="https://hsb786.github.io/2018/04/12/Java虚拟机/index.html">
 <meta property="og:site_name" content="HuShengBin’s blog">
-<meta property="og:description" content="内存区域Java虚拟机在执行Java程序的过程中会把他所管理的内存划分为若干个不同的数据区域。Java虚拟机规范将JVM所管理的内存分为以下几个运行时数据区：程序计数器、Java虚拟机栈、本地方法栈、Java堆、方法区。下面详细阐述各数据区所存储的数据类型。  程序计数器（Program Counter Register）一块较小的内存空间，它是当前线程所执行的字节码的行号指示器，字节码解释器工作">
+<meta property="og:description" content="内存区域Java虚拟机在执行Java程序的过程中会把他所管理的内存划分为若干个不同的数据区域。Java虚拟机规范将JVM所管理的内存分为以下几个运行时数据区：程序计数器、Java虚拟机栈、本地方法栈、Java堆、方法区。下面详细阐述各数据区所存储的数据类型。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://hsb786.github.io/images/java虚拟机.png">
-<meta property="og:updated_time" content="2018-04-12T12:15:43.803Z">
+<meta property="og:updated_time" content="2018-04-12T12:18:28.268Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java虚拟机">
-<meta name="twitter:description" content="内存区域Java虚拟机在执行Java程序的过程中会把他所管理的内存划分为若干个不同的数据区域。Java虚拟机规范将JVM所管理的内存分为以下几个运行时数据区：程序计数器、Java虚拟机栈、本地方法栈、Java堆、方法区。下面详细阐述各数据区所存储的数据类型。  程序计数器（Program Counter Register）一块较小的内存空间，它是当前线程所执行的字节码的行号指示器，字节码解释器工作">
+<meta name="twitter:description" content="内存区域Java虚拟机在执行Java程序的过程中会把他所管理的内存划分为若干个不同的数据区域。Java虚拟机规范将JVM所管理的内存分为以下几个运行时数据区：程序计数器、Java虚拟机栈、本地方法栈、Java堆、方法区。下面详细阐述各数据区所存储的数据类型。">
 <meta name="twitter:image" content="https://hsb786.github.io/images/java虚拟机.png">
     
 
@@ -151,7 +151,7 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                38
+                40
                 <span>文章</span>
             </div>
             <div class="article-info-block">
@@ -217,8 +217,7 @@
         <div class="article-entry" itemprop="articleBody">
         
             
-            <h2 id="内存区域"><a href="#内存区域" class="headerlink" title="内存区域"></a>内存区域</h2><p>Java虚拟机在执行Java程序的过程中会把他所管理的内存划分为若干个不同的数据区域。Java虚拟机规范将JVM所管理的内存分为以下几个运行时数据区：程序计数器、Java虚拟机栈、本地方法栈、Java堆、方法区。下面详细阐述各数据区所存储的数据类型。</p>
-<p><img src="/images/java虚拟机.png" alt=""></p>
+            <h2 id="内存区域"><a href="#内存区域" class="headerlink" title="内存区域"></a>内存区域</h2><p>Java虚拟机在执行Java程序的过程中会把他所管理的内存划分为若干个不同的数据区域。Java虚拟机规范将JVM所管理的内存分为以下几个运行时数据区：程序计数器、Java虚拟机栈、本地方法栈、Java堆、方法区。下面详细阐述各数据区所存储的数据类型。<br><a id="more"></a><br><img src="/images/java虚拟机.png" alt=""></p>
 <h3 id="程序计数器（Program-Counter-Register）"><a href="#程序计数器（Program-Counter-Register）" class="headerlink" title="程序计数器（Program Counter Register）"></a>程序计数器（Program Counter Register）</h3><p>一块较小的内存空间，它是当前线程所执行的字节码的行号指示器，字节码解释器工作时通过改变该计数器的值来选择下一条需要执行的字节码指令，分支、跳转、循环等基础功能都要依赖它来实现。每条线程都有一个独立的的程序计数器，各线程间的计数器互不影响，因此该区域是线程私有的。</p>
 <p>当线程在执行一个Java方法时，该计数器记录的是正在执行的虚拟机字节码指令的地址，当线程在执行的是Native方法（调用本地操作系统方法）时，该计数器的值为空。另外，该内存区域是唯一一个在Java虚拟机规范中没有规定任何OOM（内存溢出：OutOfMemoryError）情况的区域。</p>
 <h3 id="Java虚拟机栈（Java-Virtual-Machine-Stacks）"><a href="#Java虚拟机栈（Java-Virtual-Machine-Stacks）" class="headerlink" title="Java虚拟机栈（Java Virtual Machine Stacks）"></a>Java虚拟机栈（Java Virtual Machine Stacks）</h3><p>该区域也是线程私有的，它的生命周期也与线程相同。虚拟机栈描述的是Java方法执行的内存模型：每个方法被执行的时候都会同时创建一个栈帧，栈它是用于支持续虚拟机进行方法调用和方法执行的数据结构。对于执行引擎来讲，活动线程中，只有栈顶的栈帧是有效的，称为当前栈帧，这个栈帧所关联的方法称为当前方法，执行引擎所运行的所有字节码指令都只针对当前栈帧进行操作。栈帧用于存储局部变量表、操作数栈、动态链接、方法返回地址和一些额外的附加信息。在编译程序代码时，栈帧中需要多大的局部变量表、多深的操作数栈都已经完全确定了，并且写入了方法表的Code属性之中。因此，一个栈帧需要分配多少内存，不会受到程序运行期变量数据的影响，而仅仅取决于具体的虚拟机实现。</p>
@@ -248,7 +247,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/12/Java虚拟机/" data-id="cjfwhm6zd0000d4myqusm1gr0" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/12/Java虚拟机/" data-id="cjfwk3c0n0002rwmym1c1ego1" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -323,6 +322,15 @@
         
 <nav id="article-nav">
     
+        <a href="/2018/04/12/sql/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">上一篇</strong>
+            <div class="article-nav-title">
+                
+                    sql
+                
+            </div>
+        </a>
+    
     
         <a href="/2018/04/12/java8新特性（转载）/" id="article-nav-older" class="article-nav-link-wrap">
             <strong class="article-nav-caption">下一篇</strong>
@@ -357,10 +365,29 @@
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2018/04/12/Java虚拟机/" class="thumbnail">
+                            <a href="/2018/04/12/sql/" class="thumbnail">
     
     
         <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/04/12/sql/" class="title">sql</a></p>
+                            <p class="item-date"><time datetime="2018-04-12T12:56:19.000Z" itemprop="datePublished">2018-04-12</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/04/12/Java虚拟机/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/java虚拟机.png)" alt="Java虚拟机" class="thumbnail-image"></span>
     
 </a>
 
@@ -430,25 +457,6 @@
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2018/04/12/动态代理（转载）/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"></p>
-                            <p class="item-title"><a href="/2018/04/12/动态代理（转载）/" class="title">动态代理（转载）</a></p>
-                            <p class="item-date"><time datetime="2018-04-12T05:13:18.000Z" itemprop="datePublished">2018-04-12</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -460,7 +468,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">归档</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a><span class="archive-list-count">38</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a><span class="archive-list-count">40</span></li></ul>
         </div>
     </div>
 
@@ -469,7 +477,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">标签</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/">HTTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MyBatis/">MyBatis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql/">sql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/剑指Offer/">剑指Offer</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多线程/">多线程</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爪哇/">爪哇</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">11</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/">HTTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MyBatis/">MyBatis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql/">sql</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/剑指Offer/">剑指Offer</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多线程/">多线程</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爪哇/">爪哇</a><span class="tag-list-count">17</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">11</span></li></ul>
         </div>
     </div>
 
@@ -478,7 +486,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">标签云</h3>
         <div class="widget tagcloud">
-            <a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/MyBatis/" style="font-size: 10px;">MyBatis</a> <a href="/tags/Spring/" style="font-size: 12.5px;">Spring</a> <a href="/tags/sql/" style="font-size: 10px;">sql</a> <a href="/tags/前端/" style="font-size: 10px;">前端</a> <a href="/tags/剑指Offer/" style="font-size: 17.5px;">剑指Offer</a> <a href="/tags/多线程/" style="font-size: 12.5px;">多线程</a> <a href="/tags/工具/" style="font-size: 15px;">工具</a> <a href="/tags/爪哇/" style="font-size: 20px;">爪哇</a> <a href="/tags/算法/" style="font-size: 17.5px;">算法</a>
+            <a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/MyBatis/" style="font-size: 10px;">MyBatis</a> <a href="/tags/Spring/" style="font-size: 12px;">Spring</a> <a href="/tags/sql/" style="font-size: 12px;">sql</a> <a href="/tags/前端/" style="font-size: 10px;">前端</a> <a href="/tags/剑指Offer/" style="font-size: 18px;">剑指Offer</a> <a href="/tags/多线程/" style="font-size: 14px;">多线程</a> <a href="/tags/工具/" style="font-size: 16px;">工具</a> <a href="/tags/爪哇/" style="font-size: 20px;">爪哇</a> <a href="/tags/算法/" style="font-size: 18px;">算法</a>
         </div>
     </div>
 

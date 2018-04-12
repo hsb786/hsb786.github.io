@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="HuShengBin’s blog">
 <meta property="og:description" content="事务（Transaction），一般是指要做的或所做的事情。在计算机术语中是指访问并可能更新数据库中各种数据项的一个程序执行单元（unit）。在计算机术语中，事务通常就是指数据库事务。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-04-12T11:17:31.883Z">
+<meta property="og:updated_time" content="2018-04-12T12:48:33.078Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="事务">
 <meta name="twitter:description" content="事务（Transaction），一般是指要做的或所做的事情。在计算机术语中是指访问并可能更新数据库中各种数据项的一个程序执行单元（unit）。在计算机术语中，事务通常就是指数据库事务。">
@@ -149,7 +149,7 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                38
+                40
                 <span>文章</span>
             </div>
             <div class="article-info-block">
@@ -341,10 +341,13 @@
 </blockquote>
 <p><strong>优点与不足</strong></p>
 <p>乐观并发控制相信事务之间的数据竞争(data race)的概率是比较小的，因此尽可能直接做下去，直到提交的时候才去锁定，所以不会产生任何锁和死锁。但如果直接简单这么做，还是有可能会遇到不可预期的结果，例如两个事务都读取了数据库的某一行，经过修改以后写回数据库，这时就遇到了问题。</p>
+<p>悲观锁，就是总觉得有刁民想害朕，每次访问数据的时候都觉得会有别人修改它，所以每次拿数据时都会上锁，确保在自己使用的过程中不会被他人访问。乐观锁就是很单纯，心态好，所以每次拿数据的时候都不会上锁，只是在更新数据的时候去判断该数据是否被别人修改过。(<em>阿姨真有意思</em>)</p>
+<p>大多数的关系数据库写入操作都是基于悲观锁，缺点在于如果持有锁的客户端运行的很慢，那么等待解锁的客户端被阻塞的时间就越长。Redis的事务是基于乐观锁的机制，不会在执行WATCH命令时对数据进行加锁，只是会在数据已经被其他客户端抢先修改了的情况下，通知执行WATCH命令的客户端。乐观锁适用于读多写少的情况，因为在写操作比较频繁的时候，会不断地retry，从而降低性能。</p>
 <hr>
 <p><em>参考</em></p>
 <blockquote>
 <p><a href="http://www.hollischuang.com/archives/category/数据库" target="_blank" rel="noopener">数据库</a></p>
+<p><a href="https://yemengying.com/2016/06/05/interview/" target="_blank" rel="noopener">面试总结</a></p>
 </blockquote>
 
         
@@ -356,7 +359,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/08/事务/" data-id="cjfwhm70o0015d4my3pj1qi4f" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/08/事务/" data-id="cjfwk3c1i0017rwmyhqh3rlc7" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -474,10 +477,29 @@
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2018/04/12/Java虚拟机/" class="thumbnail">
+                            <a href="/2018/04/12/sql/" class="thumbnail">
     
     
         <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/04/12/sql/" class="title">sql</a></p>
+                            <p class="item-date"><time datetime="2018-04-12T12:56:19.000Z" itemprop="datePublished">2018-04-12</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/04/12/Java虚拟机/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/java虚拟机.png)" alt="Java虚拟机" class="thumbnail-image"></span>
     
 </a>
 
@@ -547,25 +569,6 @@
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2018/04/12/动态代理（转载）/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"></p>
-                            <p class="item-title"><a href="/2018/04/12/动态代理（转载）/" class="title">动态代理（转载）</a></p>
-                            <p class="item-date"><time datetime="2018-04-12T05:13:18.000Z" itemprop="datePublished">2018-04-12</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -577,7 +580,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">归档</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a><span class="archive-list-count">38</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a><span class="archive-list-count">40</span></li></ul>
         </div>
     </div>
 
@@ -586,7 +589,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">标签</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/">HTTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MyBatis/">MyBatis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql/">sql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/剑指Offer/">剑指Offer</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多线程/">多线程</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爪哇/">爪哇</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">11</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/">HTTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MyBatis/">MyBatis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql/">sql</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/剑指Offer/">剑指Offer</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多线程/">多线程</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爪哇/">爪哇</a><span class="tag-list-count">17</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">11</span></li></ul>
         </div>
     </div>
 
@@ -595,7 +598,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">标签云</h3>
         <div class="widget tagcloud">
-            <a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/MyBatis/" style="font-size: 10px;">MyBatis</a> <a href="/tags/Spring/" style="font-size: 12.5px;">Spring</a> <a href="/tags/sql/" style="font-size: 10px;">sql</a> <a href="/tags/前端/" style="font-size: 10px;">前端</a> <a href="/tags/剑指Offer/" style="font-size: 17.5px;">剑指Offer</a> <a href="/tags/多线程/" style="font-size: 12.5px;">多线程</a> <a href="/tags/工具/" style="font-size: 15px;">工具</a> <a href="/tags/爪哇/" style="font-size: 20px;">爪哇</a> <a href="/tags/算法/" style="font-size: 17.5px;">算法</a>
+            <a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/MyBatis/" style="font-size: 10px;">MyBatis</a> <a href="/tags/Spring/" style="font-size: 12px;">Spring</a> <a href="/tags/sql/" style="font-size: 12px;">sql</a> <a href="/tags/前端/" style="font-size: 10px;">前端</a> <a href="/tags/剑指Offer/" style="font-size: 18px;">剑指Offer</a> <a href="/tags/多线程/" style="font-size: 14px;">多线程</a> <a href="/tags/工具/" style="font-size: 16px;">工具</a> <a href="/tags/爪哇/" style="font-size: 20px;">爪哇</a> <a href="/tags/算法/" style="font-size: 18px;">算法</a>
         </div>
     </div>
 
