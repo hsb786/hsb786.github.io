@@ -228,134 +228,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/08/一些小技巧/" data-id="cjfw13w4j000r18mye4bjokj8" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-
-        </footer>
-    </div>
-    
-</article>
-
-
-
-    <article id="post-SpringMVC" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2018/04/08/SpringMVC/">SpringMVC</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2018/04/08/SpringMVC/">
-            <time datetime="2018-04-08T09:58:41.000Z" itemprop="datePublished">2018-04-08</time>
-        </a>
-    </div>
-
-
-                        
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/Spring/">Spring</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            <p><hr>
-<h2 id="SpringMVC工作流程"><a href="#SpringMVC工作流程" class="headerlink" title="SpringMVC工作流程"></a>SpringMVC工作流程</h2><p>SpringMVC是一种基于Servelt的技术，它提供了控制器DispatchServlet和相关组件，这些SpringMVC的组件一起协调工作，完成对web请求的相应。<br></p>
-            <p class="article-more-link">
-                <a href="/2018/04/08/SpringMVC/#more">查看更多</a>
-            </p>
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="https://hsb786.github.io/2018/04/08/SpringMVC/" data-id="cjfw13w4j000e18my4bfu9t85" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/08/一些小技巧/" data-id="cjfw25ry0000u68myme9lbgkr" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -486,7 +359,135 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/08/防止重复发送 Ajax 请求的解决方案/" data-id="cjfw13w5e001t18myl28ht9eu" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/08/防止重复发送 Ajax 请求的解决方案/" data-id="cjfw25ryg001t68myc6stzx4m" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
+    <article id="post-事务" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2018/04/08/事务/">事务</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2018/04/08/事务/">
+            <time datetime="2018-04-08T09:58:41.000Z" itemprop="datePublished">2018-04-08</time>
+        </a>
+    </div>
+
+
+                        
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/sql/">sql</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            <p><hr>
+<blockquote>
+<p>事务（Transaction），一般是指要做的或所做的事情。在计算机术语中是指访问并可能更新数据库中各种数据项的一个程序执行单元（unit）。在计算机术语中，事务通常就是指数据库事务。<br></p>
+            <p class="article-more-link">
+                <a href="/2018/04/08/事务/#more">查看更多</a>
+            </p>
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="https://hsb786.github.io/2018/04/08/事务/" data-id="cjfw25ry0000p68myobmu59j8" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -614,7 +615,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/08/值传递和引用传递/" data-id="cjfw13w4y001118my69lw2yhp" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/08/值传递和引用传递/" data-id="cjfw25ry0001168myt9gwp551" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -744,7 +745,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/08/Spring整理/" data-id="cjfw13w43000b18myueiukfii" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/08/Spring整理/" data-id="cjfw25rxl000268my9iue25b8" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -820,7 +821,7 @@
 
 
 
-    <article id="post-事务" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-SpringMVC" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -828,7 +829,7 @@
                 
     
         <h1 itemprop="name">
-            <a class="article-title" href="/2018/04/08/事务/">事务</a>
+            <a class="article-title" href="/2018/04/08/SpringMVC/">SpringMVC</a>
         </h1>
     
 
@@ -837,7 +838,7 @@
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/2018/04/08/事务/">
+        <a href="/2018/04/08/SpringMVC/">
             <time datetime="2018-04-08T09:58:41.000Z" itemprop="datePublished">2018-04-08</time>
         </a>
     </div>
@@ -847,7 +848,7 @@
                         
     <div class="article-tag">
         <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/sql/">sql</a>
+        <a class="tag-link" href="/tags/Spring/">Spring</a>
     </div>
 
                     </div>
@@ -858,10 +859,9 @@
         <div class="article-entry" itemprop="articleBody">
         
             <p><hr>
-<blockquote>
-<p>事务（Transaction），一般是指要做的或所做的事情。在计算机术语中是指访问并可能更新数据库中各种数据项的一个程序执行单元（unit）。在计算机术语中，事务通常就是指数据库事务。<br></p>
+<h2 id="SpringMVC工作流程"><a href="#SpringMVC工作流程" class="headerlink" title="SpringMVC工作流程"></a>SpringMVC工作流程</h2><p>SpringMVC是一种基于Servelt的技术，它提供了控制器DispatchServlet和相关组件，这些SpringMVC的组件一起协调工作，完成对web请求的相应。<br></p>
             <p class="article-more-link">
-                <a href="/2018/04/08/事务/#more">查看更多</a>
+                <a href="/2018/04/08/SpringMVC/#more">查看更多</a>
             </p>
         
         </div>
@@ -872,7 +872,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/08/事务/" data-id="cjfw13w4j000t18my9pqbbry4" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/08/SpringMVC/" data-id="cjfw25rxl000968my92mzwi32" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1002,7 +1002,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/08/Java虚拟机是如何执行线程同步的/" data-id="cjfw13w43000518my8sowmc8l" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/08/Java虚拟机是如何执行线程同步的/" data-id="cjfw25rx5000068myjcaa7pt7" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1130,7 +1130,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/08/lombok/" data-id="cjfw13w4j000k18mywo8s1nne" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/08/lombok/" data-id="cjfw25ry0000n68myivcvpv1z" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1262,7 +1262,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/08/NaN/" data-id="cjfw13w43000218myix7kh1ii" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/08/NaN/" data-id="cjfw25rxl000a68myqapetr4z" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1387,7 +1387,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/08/VSCode快捷键/" data-id="cjfw13w4j000c18my8hi2hivq" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/08/VSCode快捷键/" data-id="cjfw25rxl000568mys3a7xxuv" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
