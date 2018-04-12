@@ -5,18 +5,18 @@
     
     <title>防止重复发送 Ajax 请求的解决方案 | HuShengBin’s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="连续点击多个按钮，可能导致先请求的数据后显示出来。  解决方案 1. 将ajsx请求的async设置为false 2. 利用jquery ajaxPrefilter中断请求">
+    <meta name="description" content="连续点击多个按钮，可能导致先请求的数据后显示出来。  解决方案 1. 将ajsx请求的async设置为false 2. 利用jquery ajaxPrefilter中断请求 3. 加遮罩框">
 <meta name="keywords" content="前端">
 <meta property="og:type" content="article">
 <meta property="og:title" content="防止重复发送 Ajax 请求的解决方案">
 <meta property="og:url" content="https://hsb786.github.io/2018/04/08/防止重复发送 Ajax 请求的解决方案/index.html">
 <meta property="og:site_name" content="HuShengBin’s blog">
-<meta property="og:description" content="连续点击多个按钮，可能导致先请求的数据后显示出来。  解决方案 1. 将ajsx请求的async设置为false 2. 利用jquery ajaxPrefilter中断请求">
+<meta property="og:description" content="连续点击多个按钮，可能导致先请求的数据后显示出来。  解决方案 1. 将ajsx请求的async设置为false 2. 利用jquery ajaxPrefilter中断请求 3. 加遮罩框">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-04-11T04:20:05.795Z">
+<meta property="og:updated_time" content="2018-04-12T05:28:52.715Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="防止重复发送 Ajax 请求的解决方案">
-<meta name="twitter:description" content="连续点击多个按钮，可能导致先请求的数据后显示出来。  解决方案 1. 将ajsx请求的async设置为false 2. 利用jquery ajaxPrefilter中断请求">
+<meta name="twitter:description" content="连续点击多个按钮，可能导致先请求的数据后显示出来。  解决方案 1. 将ajsx请求的async设置为false 2. 利用jquery ajaxPrefilter中断请求 3. 加遮罩框">
     
 
     
@@ -153,7 +153,7 @@
                 <span>文章</span>
             </div>
             <div class="article-info-block">
-                7
+                9
                 <span>标签</span>
             </div>
         </div>
@@ -220,7 +220,8 @@
 <hr>
 <p><strong>解决方案</strong></p>
 <p><strong>1. 将ajsx请求的async设置为false</strong></p>
-<p><strong>2. 利用jquery ajaxPrefilter中断请求</strong><br><a id="more"></a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">var pendingRequests = &#123;&#125;;</span><br><span class="line">$.ajaxPrefilter(function( options, originalOptions, jqXHR ) &#123;</span><br><span class="line">    var key = options.url;</span><br><span class="line">    console.log(key);</span><br><span class="line">    if (!pendingRequests[key]) &#123;</span><br><span class="line">        pendingRequests[key] = jqXHR;</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        //jqXHR.abort();    //放弃后触发的提交</span><br><span class="line">        pendingRequests[key].abort();   // 放弃先触发的提交</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    var complete = options.complete;</span><br><span class="line">    options.complete = function(jqXHR, textStatus) &#123;</span><br><span class="line">        pendingRequests[key] = null;</span><br><span class="line">        if ($.isFunction(complete)) &#123;</span><br><span class="line">        complete.apply(this, arguments);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p><strong>2. 利用jquery ajaxPrefilter中断请求</strong></p>
+<p><strong>3. 加遮罩框</strong><br><a id="more"></a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">var pendingRequests = &#123;&#125;;</span><br><span class="line">$.ajaxPrefilter(function( options, originalOptions, jqXHR ) &#123;</span><br><span class="line">    var key = options.url;</span><br><span class="line">    console.log(key);</span><br><span class="line">    if (!pendingRequests[key]) &#123;</span><br><span class="line">        pendingRequests[key] = jqXHR;</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        //jqXHR.abort();    //放弃后触发的提交</span><br><span class="line">        pendingRequests[key].abort();   // 放弃先触发的提交</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    var complete = options.complete;</span><br><span class="line">    options.complete = function(jqXHR, textStatus) &#123;</span><br><span class="line">        pendingRequests[key] = null;</span><br><span class="line">        if ($.isFunction(complete)) &#123;</span><br><span class="line">        complete.apply(this, arguments);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
 <p>核心思想是维护一个队列，发送请求时，将请求加入队列，请求响应后，从队列中清楚，这就保证了在任一时刻只能有一个同样的请求发送</p>
 <p>局限性：仅对jquery的ajax有作用</p>
 <p><em>参考</em></p>
@@ -237,7 +238,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/08/防止重复发送 Ajax 请求的解决方案/" data-id="cjfw2rwsx001y10my5rgw9qvt" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/08/防止重复发送 Ajax 请求的解决方案/" data-id="cjfw2xcts0024y4myseay0xa8" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -312,19 +313,19 @@
         
 <nav id="article-nav">
     
-        <a href="/2018/04/08/Spring整理/" id="article-nav-newer" class="article-nav-link-wrap">
+        <a href="/2018/04/08/SpringMVC/" id="article-nav-newer" class="article-nav-link-wrap">
             <strong class="article-nav-caption">上一篇</strong>
             <div class="article-nav-title">
                 
-                    Spring整理
+                    SpringMVC
                 
             </div>
         </a>
     
     
-        <a href="/2018/04/08/一些小技巧/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/2018/04/08/事务/" id="article-nav-older" class="article-nav-link-wrap">
             <strong class="article-nav-caption">下一篇</strong>
-            <div class="article-nav-title">一些小技巧</div>
+            <div class="article-nav-title">事务</div>
         </a>
     
 </nav>
@@ -467,7 +468,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">标签</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/">HTTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql/">sql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/剑指Offer/">剑指Offer</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爪哇/">爪哇</a><span class="tag-list-count">13</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/">HTTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql/">sql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/剑指Offer/">剑指Offer</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多线程/">多线程</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爪哇/">爪哇</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">10</span></li></ul>
         </div>
     </div>
 
@@ -476,7 +477,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">标签云</h3>
         <div class="widget tagcloud">
-            <a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/Spring/" style="font-size: 12.5px;">Spring</a> <a href="/tags/sql/" style="font-size: 10px;">sql</a> <a href="/tags/前端/" style="font-size: 10px;">前端</a> <a href="/tags/剑指Offer/" style="font-size: 17.5px;">剑指Offer</a> <a href="/tags/工具/" style="font-size: 15px;">工具</a> <a href="/tags/爪哇/" style="font-size: 20px;">爪哇</a>
+            <a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/Spring/" style="font-size: 12.5px;">Spring</a> <a href="/tags/sql/" style="font-size: 10px;">sql</a> <a href="/tags/前端/" style="font-size: 10px;">前端</a> <a href="/tags/剑指Offer/" style="font-size: 17.5px;">剑指Offer</a> <a href="/tags/多线程/" style="font-size: 12.5px;">多线程</a> <a href="/tags/工具/" style="font-size: 15px;">工具</a> <a href="/tags/爪哇/" style="font-size: 20px;">爪哇</a> <a href="/tags/算法/" style="font-size: 17.5px;">算法</a>
         </div>
     </div>
 
