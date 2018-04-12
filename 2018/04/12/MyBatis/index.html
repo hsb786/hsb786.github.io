@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <meta charset="utf-8">
+    
+    <title>MyBatis | HuShengBin’s blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="MyBatis简介Mybatis与Hibernate都是持久层框架，这类框架的作用就是将数据库中的表和POJO映射起来，它们的本质就是Java对数据库的操作的抽象，所以我们也将这种框架称为对象关系映射框架(ORM,Object Relational Mapping)。它们的区别也很明显，Hibernate基本不需要编写SQL，它可以根据映射规则自动生成SQL语句，是一种全表映射。而MyBatis不">
+<meta name="keywords" content="MyBatis">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MyBatis">
+<meta property="og:url" content="https://hsb786.github.io/2018/04/12/MyBatis/index.html">
+<meta property="og:site_name" content="HuShengBin’s blog">
+<meta property="og:description" content="MyBatis简介Mybatis与Hibernate都是持久层框架，这类框架的作用就是将数据库中的表和POJO映射起来，它们的本质就是Java对数据库的操作的抽象，所以我们也将这种框架称为对象关系映射框架(ORM,Object Relational Mapping)。它们的区别也很明显，Hibernate基本不需要编写SQL，它可以根据映射规则自动生成SQL语句，是一种全表映射。而MyBatis不">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://hsb786.github.io/images/MyBatis.png">
+<meta property="og:image" content="https://hsb786.github.io/images/MyBatis2.png">
+<meta property="og:updated_time" content="2018-04-12T05:58:20.024Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MyBatis">
+<meta name="twitter:description" content="MyBatis简介Mybatis与Hibernate都是持久层框架，这类框架的作用就是将数据库中的表和POJO映射起来，它们的本质就是Java对数据库的操作的抽象，所以我们也将这种框架称为对象关系映射框架(ORM,Object Relational Mapping)。它们的区别也很明显，Hibernate基本不需要编写SQL，它可以根据映射规则自动生成SQL语句，是一种全表映射。而MyBatis不">
+<meta name="twitter:image" content="https://hsb786.github.io/images/MyBatis.png">
+    
+
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                
+                <span class="site-title">HuShengBin’s blog</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">Home</a>
+                
+                    <a class="main-nav-link" href="/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/about">About</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/css/images/txx.jpg" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/css/images/txx.jpg" />
+            <h2 id="name">hushengbin</h2>
+            <h3 id="title">JavaWeb Developer</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>Nanchang, Jiangxi, China</span>
+            <a id="follow" target="_blank" href="https://github.com/hsb786">关注我</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                34
+                <span>文章</span>
+            </div>
+            <div class="article-info-block">
+                10
+                <span>标签</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="https://github.com/hsb786" target="_blank" title="github" class=tooltip>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-MyBatis" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            MyBatis
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2018/04/12/MyBatis/">
+            <time datetime="2018-04-12T05:39:35.000Z" itemprop="datePublished">2018-04-12</time>
+        </a>
+    </div>
+
+
+                        
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/MyBatis/">MyBatis</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h2 id="MyBatis简介"><a href="#MyBatis简介" class="headerlink" title="MyBatis简介"></a>MyBatis简介</h2><p>Mybatis与Hibernate都是持久层框架，这类框架的作用就是将数据库中的表和POJO映射起来，它们的本质就是Java对数据库的操作的抽象，所以我们也将这种框架称为对象关系映射框架(ORM,Object Relational Mapping)。它们的区别也很明显，Hibernate基本不需要编写SQL，它可以根据映射规则自动生成SQL语句，是一种全表映射。而MyBatis不屏蔽SQL，我们可以自己定制SQL，这样就提供给了我们足够的灵活性与优化的可能。总而言之，MyBatis相对于Hibernate来说具有性能高，响应快，开发灵活的特点。<br><a id="more"></a></p>
+<h2 id="MyBatis组件"><a href="#MyBatis组件" class="headerlink" title="MyBatis组件"></a>MyBatis组件</h2><p>MyBatis的核心组件分为4个部分：</p>
+<ul>
+<li><p>SqlSessionFactoryBuilder(构造器)：它会根据mybatis的配置文件(Configuration配置类)来生成SqlSessionFactory，这里采用的是分步构建的Builder模式</p>
+</li>
+<li><p>SqlSessionFactory(工厂)：用于生成SqlSession，可以被认为是数据库连接池</p>
+</li>
+<li><p>SqlSession(会话)：既可以直接发送SQL执行并返回结果，也可以获取映射器Mapper接口(动态代理的类)执行SQL得到返回结果，相当于数据库连接(Connection对象)</p>
+</li>
+<li><p>Mapper(映射器)：由一个Java接口和XML文件构成：接口用于给出方法的入参以及返回值，XML给出SQL语句和映射规则。映射器的主要作用就是将SQL查询到的结果映射为一个POJO，或者将POJO的数据插入到数据库中</p>
+</li>
+</ul>
+<p>注意，无论是映射器还是SqlSession都可以发送SQL到数据库执行，但是为了保证代码的可读性与可维护性，推荐使用Mapper接口编程来完成该操作。</p>
+<h2 id="如何使用MyBatis"><a href="#如何使用MyBatis" class="headerlink" title="如何使用MyBatis"></a>如何使用MyBatis</h2><p>首先，在MyBatis中有两种XML配置文件，一种是基础配置文件，它只有一个，用于配置一些MyBatis的上下文参数和运行环境；另一种是映射器的XML映射文件，它可以配置映射关系，SQL等等。简单来说，在使用MyBatis的时候，先给出MyBatis的配置文件用于生成SqlSession，然后再给出映射器Mapper的接口与相应的映射XML文件，最后就可以生成Mapper接口的动态代理类来发送SQL获取结果了。<br><img src="/images/MyBatis.png" alt=""></p>
+<hr>
+<h2 id="映射器"><a href="#映射器" class="headerlink" title="映射器"></a>映射器</h2><p>映射器是mybatis最核心的组件，它由一个接口加上xml文件组成。在映射器中可以配置参数，各类的SQL语句，缓存，级联等内容，并且可以通过映射规则映射到指定的POJO上。映射器的接口与映射xml文件配置使用，可以有效的消除jdbc底层代码。</p>
+<p>映射器的映射xml文件有以下几个元素：</p>
+<ul>
+<li>cache – 给定命名空间的缓存配置</li>
+<li>cache-ref – 其他命名空间缓存配置的引用</li>
+<li>resultMap – 描述如何从数据库结果集中来加载对象，它将提供映射规则</li>
+<li>sql – 可被其他语句引用的可重用语句块，可以定义一部分SQL，然后在其他地方引用</li>
+<li>insert – 映射插入语句，执行后返回一个整数，代表插入的条数</li>
+<li>update – 映射更新语句，执行后返回一个整数，代表更新的条数</li>
+<li>delete – 映射删除语句，执行后返回一个整数，代表删除的条数</li>
+<li>select – 映射查询语句，返回查询结果</li>
+</ul>
+<h2 id="select元素"><a href="#select元素" class="headerlink" title="select元素"></a>select元素</h2><p>映射器中的select元素代表SQL的select语句，用于查询。select元素中有以下常用的属性：</p>
+<ul>
+<li>id:在Mapper的命名空间中唯一的标识符。Mapper的命名空间与select元素的id将唯一定位对应的映射器接口的某个方法。</li>
+<li>parameterType：将会传入这条语句的参数类的完全限定名或别名，可以选择Java Bean，Map等参数类型传递给SQL。这个属性是可选的，mybatis可以通过TypeHandler推断出具体传入语句的参数。</li>
+<li>resultType：从这条语句中返回的期望类型的类的完全限定名或别名。注意如果是集合情形，那应该是集合可以包含的类型，而不能是集合本身。</li>
+<li>resultMap：映射集的引用，用于结果集的映射，完成结果的映射功能。注意resultType和resultMap不能同时使用。</li>
+<li>flushCache：将其设置为true，任何时候只要语句被调用，都会导致本地缓存和二级缓存都会被清空，默认值：false。</li>
+<li>useCache：将其设置为true，将会导致本条语句的结果被二级缓存，默认值：对select元素为true。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;select id=&quot;getPerson&quot; parameterType=&quot;int&quot; resultType=&quot;mybatis.spring.test.pojo.Person&quot;&gt;</span><br><span class="line">    SELECT name,age,tel,id from t_person WHERE id = #&#123;id&#125;</span><br><span class="line">&lt;/select&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public Person getPerson(@Param(&quot;id&quot;) int id);</span><br></pre></td></tr></table></figure>
+<p>mybatis提供的自动映射功能，只要SQL的列名与POJO的属性名保持一致，同时在mybatis的配置文件中settings元素的autoMappingBehavior是开启的(默认是开启)即可完成自动映射。如果列名与属性名不一致的话，还可以通过SQL的别名机制来处理。比如说，假如原来列名为person_name，属性名为personName，那么在SQL中就可以这么写：select person_name as personName … 这样同样可以完成自动映射。</p>
+<p>这里特别说明关于select元素返回一个对象或者对象集合的问题：</p>
+<ol>
+<li>返回数据类型由DAO中的接口和映射xml文件共同决定。另外，不论是返回单一对象还是对象列表，映射xml中的配置都是一样的，都是resultType=“ . .”类型或resultMap=”resultMap-ref”*。</li>
+<li>每一次mybatis从数据库中select数据之后，都会检查数据条数和DAO中定义的返回值是否匹配。</li>
+<li>若返回一条数据，DAO中定义的返回值是一个对象或对象的List列表，则可以正常匹配，将查询的数据按照DAO中定义的返回值存放。</li>
+<li>若返回多条数据，DAO中定义的返回值是一个对象，则无法将多条数据映射为一个对象，此时mybatis报错。</li>
+</ol>
+<h2 id="resultMap元素"><a href="#resultMap元素" class="headerlink" title="resultMap元素"></a>resultMap元素</h2><p>通过resultType加上mybatis的自动映射可以应对大多数的结果集的映射需求，但是这种方法无法定义更多的属性，比如typeHandler，级联等。为了支持更加复杂的映射，mybatis提供了resultMap属性来完成SQL到Java Bean的映射关系定义。接下来，用resulyMap改写之前使用自动映射的select元素。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;resultMap id = &quot;Map&quot; type = &quot;mybatis.spring.test.pojo.Person&quot;&gt;</span><br><span class="line">	&lt;id property=&quot;id&quot; column=&quot;id&quot;&gt;</span><br><span class="line">	&lt;result property=&quot;name&quot; column=&quot;name&quot;&gt;</span><br><span class="line">	&lt;result property=&quot;age&quot; column=&quot;age&quot;&gt;</span><br><span class="line">	&lt;result property=&quot;tel&quot; column=&quot;tel&quot;&gt;</span><br><span class="line">&lt;/resultMap&gt;</span><br><span class="line">   &lt;select id=&quot;getPerson&quot; parameterType=&quot;int&quot; resultMap=&quot;Map&quot;&gt;</span><br><span class="line">       SELECT name,age,tel,id from t_person WHERE id = #&#123;id&#125;</span><br><span class="line">   &lt;/select&gt;</span><br></pre></td></tr></table></figure>
+<p>子元素id代表主键，result代表属性，id和result元素的property属性代表POJO的属性名称，column代表SQL的列名，这样就将POJO的属性和SQL的列名进行一一对应了。</p>
+<p>一个完整的resultMap元素的构成有哪些？</p>
+<ul>
+<li>constructor：类在实例化时,用来注入结果到构造方法中</li>
+<li>id：表示哪个列是主键</li>
+<li>result：注入到JavaBean属性的普通结果，配置POJO到SQL列名的映射关系</li>
+<li>association：一个复杂的类型关联;许多结果将包成这种类型</li>
+<li>collection：复杂类型的集</li>
+<li>discriminator：使用结果值来决定使用哪个结果映射</li>
+</ul>
+<p>constructor元素用于配置构造方法，一个POJO可能不存在没有参数的构造方法，就要使用construtor元素来配置了。</p>
+<p>id元素，result元素主要来定义POJO与SQL列名的映射规则，它们有如下属性：</p>
+<ul>
+<li>property:映射规则中的POJO的属性名，可以用导航式字段，例如需要访问Person类的Address属性的id，就可以写成Address.id</li>
+<li>column：对应的SQL的列名</li>
+<li>javaType：Java类型</li>
+<li>jdbcType：数据库类型</li>
+<li>typeHandler：类型处理器，允许使用自定义的类型处理器</li>
+</ul>
+<p>其中association，collection和discriminator这些元素是与结果映射的级联相关的。Mybatis支持级联映射，简单来说，假如我们select一个person类，person类有一个属性为address，address也是一个POJO，也就是说需要再进行一次select才能查询到address类的信息。这里需要说明的是，级联不是必须的，级联可以便捷的获取关联数据，但是如果级联太多的话会影响执行效率，也就是著名的N+1问题(如果有N个关联关系完成了级联，那么只要再加入一个关联关系，就变成了N+1个，所有的级联SQL都会被执行，显然不是所有数据是我们感兴趣的，造成了资源的浪费与性能的浪费)。为了应对级联中的N+1问题，mybatis支持延迟加载，在select的时候并不是一次性取出所有的SQL结果来映射，对于那些不常用的级联数据等到需要的时候再取出。在mybatis的全局配置文件中可以设定延迟加载属性，同时在级联元素association和collection中的fetchType属性也可以定义延迟加载。</p>
+<h2 id="insert-update-delete"><a href="#insert-update-delete" class="headerlink" title="insert,update,delete"></a>insert,update,delete</h2><p>相比于select来说，insert,update,delete就很简单了，它们执行的结果返回的是整数，用以标识该SQL语句影响了数据库的记录行数，不需要进行结果集的映射。除此之外，insert元素是支持主键回填的，在inser语句中有一个属性useGeneratedKeys，用来控制是否使用数据库生成的主键来回填到POJO，默认值为false。当打开了主键回填之后，还要配置keyProperty或者keyColumn，告诉mybatis把生成的主键放入哪个属性中。至于在实际中用不用得到数据库生成的主键，我也不能完全肯定，这里只要知道mybatis是支持主键回填的即可，使用起来也很容易。</p>
+<h2 id="sql元素"><a href="#sql元素" class="headerlink" title="sql元素"></a>sql元素</h2><p>这个元素可以被用来定义可重用的SQL代码段，可以包含在其他语句中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;sql id=&quot;userColumns&quot;&gt; $&#123;alias&#125;.id,$&#123;alias&#125;.username,$&#123;alias&#125;.password &lt;/sql&gt;</span><br><span class="line">&lt;select id=&quot;selectUsers&quot; resultType=&quot;map&quot;&gt;</span><br><span class="line">  select</span><br><span class="line">    &lt;include refid=&quot;userColumns&quot;&gt;&lt;property name=&quot;alias&quot; value=&quot;t1&quot;/&gt;&lt;/include&gt;,</span><br><span class="line">    &lt;include refid=&quot;userColumns&quot;&gt;&lt;property name=&quot;alias&quot; value=&quot;t2&quot;/&gt;&lt;/include&gt;</span><br><span class="line">  from some_table t1</span><br><span class="line">    cross join some_table t2</span><br><span class="line">&lt;/select&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="动态SQL"><a href="#动态SQL" class="headerlink" title="动态SQL"></a>动态SQL</h2><p>mybatis提供了对SQL语句动态的组装能力，大量的判断都可以在mybatis的映射xml里面配置，大大减少了代码量，提供了灵活性。<br><img src="/images/MyBatis2.png" alt=""></p>
+<h2 id="if"><a href="#if" class="headerlink" title="if"></a>if</h2><p>if元素使用的场景适用于在SQL语句的where子句中动态地选择某几个判断条件作为SQL语句的一部分进行拼接。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;select id=&quot;findActiveBlogWithTitleLike&quot;</span><br><span class="line">     resultType=&quot;Blog&quot;&gt;</span><br><span class="line">  SELECT * FROM BLOG </span><br><span class="line">  WHERE state = ‘ACTIVE’ </span><br><span class="line">  &lt;if test=&quot;title != null&quot;&gt;</span><br><span class="line">    AND title like #&#123;title&#125;</span><br><span class="line">  &lt;/if&gt;</span><br><span class="line">&lt;/select&gt;</span><br></pre></td></tr></table></figure>
+<p>如果传入的参数title不是null，那么就将 AND title like #{title} 这子句拼接在where之后，这样就可以有条件地包含where子句的一部分。</p>
+<h2 id="choose-when-otherwise"><a href="#choose-when-otherwise" class="headerlink" title="choose(when,otherwise)"></a>choose(when,otherwise)</h2><p>if元素是单条件的，choose元素就是多条件的选择类似java里的switch语句，原理一样，还是接着上面的例子来举例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;select id=&quot;findActiveBlogLike&quot;</span><br><span class="line">     resultType=&quot;Blog&quot;&gt;</span><br><span class="line">  SELECT * FROM BLOG WHERE state = ‘ACTIVE’</span><br><span class="line">  &lt;choose&gt;</span><br><span class="line">    &lt;when test=&quot;title != null&quot;&gt;</span><br><span class="line">      AND title like #&#123;title&#125;</span><br><span class="line">    &lt;/when&gt;</span><br><span class="line">    &lt;when test=&quot;author != null and author.name != null&quot;&gt;</span><br><span class="line">      AND author_name like #&#123;author.name&#125;</span><br><span class="line">    &lt;/when&gt;</span><br><span class="line">    &lt;otherwise&gt;</span><br><span class="line">      AND featured = 1</span><br><span class="line">    &lt;/otherwise&gt;</span><br><span class="line">  &lt;/choose&gt;</span><br><span class="line">&lt;/select&gt;</span><br></pre></td></tr></table></figure>
+<p>上述参考文档中的例子otherwise元素写的是 AND featured = 1 是为了解决前面的所有case都不满足的情况，我建议写成 AND 1 = 1 更好理解。<br>该动态SQL语句的功能：如果参数提供了“title”就按“title”查找，提供了“author”就按“author”查找，若两者都没有提供，就返回所有符合默认条件的查询结果集。</p>
+<h2 id="trim-where-set"><a href="#trim-where-set" class="headerlink" title="trim(where,set)"></a>trim(where,set)</h2><p>前面的例子中的where子句总会有一个默认的查询条件也就是例子中的 state = ‘ACTIVE’ ，如果state也设置成动态的呢？可以通过where,set元素来达到这个需求。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;select id=&quot;findActiveBlogLike&quot;</span><br><span class="line">     resultType=&quot;Blog&quot;&gt;</span><br><span class="line">  SELECT * FROM BLOG </span><br><span class="line">  &lt;where&gt; </span><br><span class="line">    &lt;if test=&quot;state != null&quot;&gt;</span><br><span class="line">         state = #&#123;state&#125;</span><br><span class="line">    &lt;/if&gt; </span><br><span class="line">    &lt;if test=&quot;title != null&quot;&gt;</span><br><span class="line">        AND title like #&#123;title&#125;</span><br><span class="line">    &lt;/if&gt;</span><br><span class="line">    &lt;if test=&quot;author != null and author.name != null&quot;&gt;</span><br><span class="line">        AND author_name like #&#123;author.name&#125;</span><br><span class="line">    &lt;/if&gt;</span><br><span class="line">  &lt;/where&gt;</span><br><span class="line">&lt;/select&gt;</span><br></pre></td></tr></table></figure>
+<p>同样如果是update子句，那么也就相应的set元素，如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;update id=&quot;updateAuthorIfNecessary&quot;&gt;</span><br><span class="line">  update Author</span><br><span class="line">    &lt;set&gt;</span><br><span class="line">      &lt;if test=&quot;username != null&quot;&gt;username=#&#123;username&#125;,&lt;/if&gt;</span><br><span class="line">      &lt;if test=&quot;password != null&quot;&gt;password=#&#123;password&#125;,&lt;/if&gt;</span><br><span class="line">      &lt;if test=&quot;email != null&quot;&gt;email=#&#123;email&#125;,&lt;/if&gt;</span><br><span class="line">      &lt;if test=&quot;bio != null&quot;&gt;bio=#&#123;bio&#125;&lt;/if&gt;</span><br><span class="line">    &lt;/set&gt;</span><br><span class="line">  where id=#&#123;id&#125;</span><br><span class="line">&lt;/update&gt;</span><br></pre></td></tr></table></figure>
+<p>如果where,set都无法满足动态拼接SQL的需求，我们可以使用trim来自定义如何拼接SQL子句，where和set只是mybatis定义好的拼接SQL的方法而已，但这也已经可以满足大多数需求了。</p>
+<h2 id="foreach"><a href="#foreach" class="headerlink" title="foreach"></a>foreach</h2><p>动态 SQL 的另外一个常用的必要操作是需要对一个集合进行遍历，通常是在构建 IN 条件语句的时候。还是参考文档里买的例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;select id=&quot;selectPostIn&quot; resultType=&quot;domain.blog.Post&quot;&gt;</span><br><span class="line">  SELECT *</span><br><span class="line">  FROM POST P</span><br><span class="line">  WHERE ID in</span><br><span class="line">  &lt;foreach item=&quot;item&quot; index=&quot;index&quot; collection=&quot;list&quot;</span><br><span class="line">      open=&quot;(&quot; separator=&quot;,&quot; close=&quot;)&quot;&gt;</span><br><span class="line">        #&#123;item&#125;</span><br><span class="line">  &lt;/foreach&gt;</span><br><span class="line">&lt;/select&gt;</span><br></pre></td></tr></table></figure>
+<p>foreach元素允许指定一个集合，声明可以用在元素体内的集合项和索引变量，也允许你指定开闭匹配的字符串以及在迭代中间放置分隔符。我们可以将任何可迭代对象（如列表、集合等）和任何的字典或者数组对象传递给foreach作为集合参数。当使用可迭代对象或者数组时，index是当前迭代的次数，item的值是本次迭代获取的元素。当使用字典（或者Map.Entry对象的集合）时，index是键，item是值。</p>
+<hr>
+<p><em>参考</em></p>
+<blockquote>
+<p><a href="http://www.mybatis.org/mybatis-3/zh/index.html" target="_blank" rel="noopener">MyBatis官方文档</a></p>
+<p><a href="https://lujunqiu.github.io/2018/01/23/MyBatis入门/" target="_blank" rel="noopener">MyBatis入门</a></p>
+<p><a href="https://lujunqiu.github.io/2018/01/26/MyBatis进阶/" target="_blank" rel="noopener">MyBatis进阶</a></p>
+</blockquote>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="https://hsb786.github.io/2018/04/12/MyBatis/" data-id="cjfw450qz000880myow0zqelk" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2018/04/12/动态代理（转载）/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">动态代理（转载）</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    
+        <section id="comments">
+    <div id="valine-thread"></div>
+</section>
+    
+
+</section>
+            
+                
+<aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/04/12/MyBatis/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/04/12/MyBatis/" class="title">MyBatis</a></p>
+                            <p class="item-date"><time datetime="2018-04-12T05:39:35.000Z" itemprop="datePublished">2018-04-12</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/04/12/动态代理（转载）/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/04/12/动态代理（转载）/" class="title">动态代理（转载）</a></p>
+                            <p class="item-date"><time datetime="2018-04-12T05:13:18.000Z" itemprop="datePublished">2018-04-12</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/04/12/HashMap/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/04/12/HashMap/" class="title">HashMap</a></p>
+                            <p class="item-date"><time datetime="2018-04-12T03:29:30.000Z" itemprop="datePublished">2018-04-12</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/04/11/String与StringBuffer/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/04/11/String与StringBuffer/" class="title">String与StringBuffer</a></p>
+                            <p class="item-date"><time datetime="2018-04-11T06:17:41.000Z" itemprop="datePublished">2018-04-11</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/04/11/工具网站/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/04/11/工具网站/" class="title">工具网站</a></p>
+                            <p class="item-date"><time datetime="2018-04-11T04:22:11.000Z" itemprop="datePublished">2018-04-11</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a><span class="archive-list-count">34</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/">HTTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MyBatis/">MyBatis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql/">sql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/剑指Offer/">剑指Offer</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多线程/">多线程</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爪哇/">爪哇</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">10</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/MyBatis/" style="font-size: 10px;">MyBatis</a> <a href="/tags/Spring/" style="font-size: 12.5px;">Spring</a> <a href="/tags/sql/" style="font-size: 10px;">sql</a> <a href="/tags/前端/" style="font-size: 10px;">前端</a> <a href="/tags/剑指Offer/" style="font-size: 17.5px;">剑指Offer</a> <a href="/tags/多线程/" style="font-size: 12.5px;">多线程</a> <a href="/tags/工具/" style="font-size: 15px;">工具</a> <a href="/tags/爪哇/" style="font-size: 20px;">爪哇</a> <a href="/tags/算法/" style="font-size: 17.5px;">算法</a>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">链接</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="https://www.douban.com/people/122973953/">我的豆瓣</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2018 HuShengBin<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//cdn.jsdelivr.net/gh/xcss/valine@v1.1.6/dist/Valine.min.js"></script>
+    <script>
+        new Valine({
+            el: '#valine-thread' ,
+            notify:false,
+            verify:false,
+            app_id: 'eqjWlM0tCYgxhh8nvvV6DleG-gzGzoHsz',
+            app_key: 'CRXn0n9IAsJdOeMDUIxyh1Hb',
+            placeholder: '(。・∀・)ノ说一句吧'
+        });
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>
