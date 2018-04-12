@@ -15,7 +15,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://hsb786.github.io/images/HashMap.png">
 <meta property="og:image" content="https://hsb786.github.io/images/HashMap2.png">
-<meta property="og:updated_time" content="2018-04-12T04:10:28.650Z">
+<meta property="og:updated_time" content="2018-04-12T04:19:18.658Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HashMap">
 <meta name="twitter:description" content="HashMap内部存储结构 HashMap内部存储使用了一个Node数组（默认大小是16），而Node类包含一个类型为Node的next变量，也就是相当于一个链表，所有根据hash值计算的bucket一样的key会存储到同一个链表里（即产生了冲突）。">
@@ -247,6 +247,8 @@
 <li>如果节点已经存在就替换old value(保证key的唯一性)；</li>
 <li>如果bucket满了(超过load factor*current capacity)，就要resize。</li>
 </ol>
+<p>根据数组的长度n-1的值与入参key的hash值按位与运算，算出hash值对应于数组中的位置，从tab中将这个位置上面的内容取出，判断为null时，在这个位置新增一个Node。但是，如果取到了数据，也就是这个hash值对应数组的位置上面已经有了键值对存在。那么，就判断这个Node,也就是p的hash值是否与传入的hash相等，然后接着判断key是否相等。如果判断通过，表示要传入的key-val键值对就是tab[i]位置上面的键值对，直接替换即可，不用管后面是链表还是红黑树。如果不是的话，就将这个新的键值对插入链表或者红黑树种即可。最后，将修改次数加一，同时判断当前的键值对数量是否即将超过阀值，如果即将超过，需要进行resize操作。</p>
+<p>插入键值对分两种情况：如果数组元素是链表时，就将节点新增到列表头部。如果链表的长度大于等于红黑树化的阀值-1，就将链表转成红黑树。如果数组元素是红黑树的话，就直接插入键值对Node即可。</p>
 <p><strong>get函数的实现</strong></p>
 <ol>
 <li>bucket里的第一个节点，直接命中；</li>
@@ -254,9 +256,7 @@
 <li>若为树，则在数中通过key.equals(k)查找，O(logn);</li>
 <li>若为链表，则在链表中通过key.equals(k)查找，O(n)。</li>
 </ol>
-<p><strong>putVal函数的实现</strong></p>
-<p>根据数组的长度n-1的值与入参key的hash值按位与运算，算出hash值对应于数组中的位置，从tab中将这个位置上面的内容取出，判断为null时，在这个位置新增一个Node。但是，如果取到了数据，也就是这个hash值对应数组的位置上面已经有了键值对存在。那么，就判断这个Node,也就是p的hash值是否与传入的hash相等，然后接着判断key是否相等。如果判断通过，表示要传入的key-val键值对就是tab[i]位置上面的键值对，直接替换即可，不用管后面是链表还是红黑树。如果不是的发，就将这个新的键值对插入链表或者红黑树种即可。最后，将修改次数加一，同时判断当前的键值对数量是否即将超过阀值，如果即将超过，需要进行resize操作。</p>
-<p>插入键值对分两种情况：如果数组元素是链表时，就将节点新增到列表头部。如果链表的长度大于等于红黑树化的阀值-1，就将链表转成红黑树。如果数组元素是红黑树的话，就直接插入键值对Node即可。</p>
+<p>通过key的hash值与key对象，来查找key对应的键值对的值，如果查找失败则返回null。如何查找的呢？首先，通过key的hash值计算出对应数组的索引，如果索引到的第一个Node节点的key和hash值与入参相等，直接返回该Node。否则，循环遍历下一个节点(可能是链表也有可能是红黑树)。</p>
 <hr>
 <p><strong>为什么线程不安全</strong></p>
 <ol>
@@ -307,7 +307,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/12/HashMap/" data-id="cjfvzru1e0005w0mybx9s9pfh" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/12/HashMap/" data-id="cjfw0lpsu00000kmyyhdscl8u" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
