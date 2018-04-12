@@ -13,10 +13,12 @@
 <meta property="og:site_name" content="HuShengBin’s blog">
 <meta property="og:description" content="Spring结构Spring框架的核心组件只有三个：Bean，Context，Core Spring是面向Bean编程，自然Bean组件就是Spring对Java对象Object的封装，在Spring容器中管理的就是被Bean封装了的Java对象。Bean组件解决了Bean的定义，Bean的创建以及Bean的解析。 Context组件就是我们常说的IOC容器，也就是Spring容器。Contex">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-04-12T10:54:48.913Z">
+<meta property="og:image" content="https://hsb786.github.io/images/bean.png">
+<meta property="og:updated_time" content="2018-04-12T11:03:30.036Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spring">
 <meta name="twitter:description" content="Spring结构Spring框架的核心组件只有三个：Bean，Context，Core Spring是面向Bean编程，自然Bean组件就是Spring对Java对象Object的封装，在Spring容器中管理的就是被Bean封装了的Java对象。Bean组件解决了Bean的定义，Bean的创建以及Bean的解析。 Context组件就是我们常说的IOC容器，也就是Spring容器。Contex">
+<meta name="twitter:image" content="https://hsb786.github.io/images/bean.png">
     
 
     
@@ -224,6 +226,40 @@
 <p>为了更好理解IOC，大家经常使用依赖注入来代替控制反转这个概念，即让调用类对某一接口的实现类的依赖关系由第三方容器注入，以移除调用类对某一接口实现类的依赖。那么IOC容器的工作就是通过配置文件和注解来描述类和类之间的依赖关系。利用反射机制完成类的初始化和依赖注入。</p>
 <h2 id="BeanFactory和ApplicationContext"><a href="#BeanFactory和ApplicationContext" class="headerlink" title="BeanFactory和ApplicationContext"></a>BeanFactory和ApplicationContext</h2><p>BeanFactory是Spring框架核心接口，提供了IOC的配置机制，是Spring的基础设施，面向Spring本身</p>
 <p>ApplicationContext是建立在BeanFactory之上，提供了更多的面向应用的功能，是Spring给开发者提高了IOC容器接口</p>
+<h2 id="Bean的生命周期"><a href="#Bean的生命周期" class="headerlink" title="Bean的生命周期"></a>Bean的生命周期</h2><p><img src="/images/bean.png" alt=""></p>
+<ol>
+<li>如果在配置文件中声明了工厂后处理器接口BeanFactoryPostProcessor的实现类，那么在Spring容器装载配置文件之后，初始化Bean实例之前将调用这些BeanFactoryPostProcessor对配置信息进行加工处理。也就是说工厂后处理器是容器级别的，仅在容器初始化的时候调用一次，对配置文件进行加工</li>
+<li>当我们通过getBean(String beanName)方法向容器请求某个Bean实例的时候，如果容器注册了InstantiationAwareBeanPostProcessor接口的实现类，那么在实例化Bean之前，将调用该接口的postProcessBeforeInstantiation()方法</li>
+<li>实例化Bean</li>
+<li>如果容器注册了InstantiationAwareBeanPostProcessor接口的实现类，那么在实例化Bean之后，将调用该接口的postProcessAfterInstantiation()方法</li>
+<li>如果Bean配置了属性信息，那么容器在将属性值配置到Bean中之前，将调用InstantiationAwareBeanPostProcessor接口的postProcessPropertyValues()方法</li>
+<li>为Bean设置属性值</li>
+<li>如果Bean实现了BeanNameAware接口，那么就调用该接口的setBeanName()方法，将配置文件中该Bean对应的名称设置到Bean中</li>
+<li>如果Bean实现了BeanFactoryAware接口，那么就调用该接口的setBeanFactory()方法，将BeanFactory容器实例设置到Bean中</li>
+<li>如果Bean实现了ApplicationContextAware接口，那么就调用该接口的setApplicationContext()方法，将ApplicationContext容器实例设置到Bean中</li>
+<li>如果BeanFactory装配了BeanPostProcessor接口的实现类，那么就调用该后处理器的postProcessBeforeInitialization(Object bean , String beanName)方法对Bean进行加工。其中，入参bean是当前正在处理的Bean，而beanName是当前Bean的配置名。开发者可以通过改方法对Bean进行特殊的改造，例如Spring提供的AOP功能就利用BeanPostPrecessor来实现</li>
+<li>如果Bean实现了InitializingBean接口，那么就调用该接口的afterPropertiesSet()方法</li>
+<li>如果在中通过init-method属性定义了初始化方法，那么就执行这个方法</li>
+<li>这是工厂后处理器BeanPostProcessor接口定义的第二个方法，第一个方法在第10步执行了，该接口的postProcessAfterInitialization(Object bean , String beanName)方法给容器提供了再次对Bean进行加工的机会</li>
+<li>如果在中配置的Bean的作用范围是scope=“prototype”，那么就直接将该Bean实例返回给调用者，这些Bean实例不再由Spring容器管理。如果scope=“singleton”，那么就缓存该Bean实例，再返回给调用者，同时Spring容器将继续管理缓存池中的Bean实例</li>
+<li>对于scope=“singleton”(默认情况)的Bean，当容器关闭的时候，如果Bean实现了DisposableBean接口，那么就调用该接口的destroy()方法</li>
+<li>对于scope=“singleton”(默认情况)的Bean，如果通过destroy-method属性配置的销毁方法，那么就调用该方法</li>
+</ol>
+<p>上述16步描述了ApplicationContext管理的Bean的生命周期，其中的每一步都调用了相关的方法，主要有以下几类：</p>
+<ol>
+<li>Bean自身的方法：Bean的构造函数，Bean的Setter方法，以及init-method和destroy-method方法</li>
+<li>Bean级生命周期接口方法：这些方法是Spring容器规定的，由Bean实现的方法，例如BeanNameAware接口，BeanFactoryAware接口，ApplicationContextAware接口，InitializingBean接口，DisposableBean接口</li>
+<li>容器级生命周期接口方法：这些方法是容器来配置实现类的，无需Bean来实现，在流程图中用黑点标识的方法。由于是容器级别的后处理器，这些方法对容器中所有的Bean都起作用。</li>
+</ol>
+<p>在ApplicationContext中，只需要在配置文件中通过定义工厂后处理器和Bean后处理器，容器就会按照预定的机制运行。以上就是Spring容器中管理的Bean的生命周期，并不是每一步都在实际中用到，但是这些生命周期体现了Spring容器对Bean的管理理念，提供给开发者足够的空间来自己控制Bean。</p>
+<h2 id="FactoryBean"><a href="#FactoryBean" class="headerlink" title="FactoryBean"></a>FactoryBean</h2><p>如果某些Bean的实例化过程比较复杂，如果按照XML或者注解来配置的话需要大量的配置信息，并且灵活性也受限制。Spring为了解决这一情况，提供了FactoryBean，我们可以通过实现该工厂接口来定制实例化Bean的逻辑。FactoryBean接口定义了3个方法：</p>
+<ul>
+<li>T getObject():返回由FactoryBean创建的Bean的实例。</li>
+<li>boolean isSingleton():由FactoryBean创建的Bean是Singleton还是prototype</li>
+<li>Class&lt;?&gt; getObjectType():返回FactoryBean创建的Bean的类型</li>
+</ul>
+<p>当配置文件中的类型是FactoryBean时，容器通过getBean()方法返回的不是FactoryBean本身，而是FactoryBean.getObject()方法所返回的对象。Spring提供了FactoryBean接口给我们提供了自定义实例化Bean的方法，在某些复杂的情况下很有用处。</p>
+<hr>
 <p><em>参考</em></p>
 <blockquote>
 <p><a href="https://lujunqiu.github.io/2018/02/01/Spring容器——面向Bean编程/" target="_blank" rel="noopener">Spring容器——面向Bean编程</a></p>
@@ -238,7 +274,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/08/Spring/" data-id="cjfweq36p0008fcmy91xh2wqu" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/08/Spring/" data-id="cjfwf4c8z0002a8myszcmx47c" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -323,9 +359,9 @@
         </a>
     
     
-        <a href="/2018/04/08/Java虚拟机是如何执行线程同步的/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/2018/04/08/值传递和引用传递/" id="article-nav-older" class="article-nav-link-wrap">
             <strong class="article-nav-caption">下一篇</strong>
-            <div class="article-nav-title">Java虚拟机是如何执行线程同步的</div>
+            <div class="article-nav-title">值传递和引用传递</div>
         </a>
     
 </nav>
