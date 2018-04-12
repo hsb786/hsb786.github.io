@@ -425,27 +425,24 @@
   </entry>
   
   <entry>
-    <title>防止重复发送 Ajax 请求的解决方案</title>
-    <link href="https://hsb786.github.io/2018/04/08/%E9%98%B2%E6%AD%A2%E9%87%8D%E5%A4%8D%E5%8F%91%E9%80%81%20Ajax%20%E8%AF%B7%E6%B1%82%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/"/>
-    <id>https://hsb786.github.io/2018/04/08/防止重复发送 Ajax 请求的解决方案/</id>
+    <title>一些小技巧</title>
+    <link href="https://hsb786.github.io/2018/04/08/%E4%B8%80%E4%BA%9B%E5%B0%8F%E6%8A%80%E5%B7%A7/"/>
+    <id>https://hsb786.github.io/2018/04/08/一些小技巧/</id>
     <published>2018-04-08T09:58:41.000Z</published>
-    <updated>2018-04-11T04:20:05.795Z</updated>
+    <updated>2018-04-11T04:42:45.628Z</updated>
     
-    <content type="html"><![CDATA[<hr><p>连续点击多个按钮，可能导致先请求的数据后显示出来。</p><hr><p><strong>解决方案</strong></p><p><strong>1. 将ajsx请求的async设置为false</strong></p><p><strong>2. 利用jquery ajaxPrefilter中断请求</strong><br><a id="more"></a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">var pendingRequests = &#123;&#125;;</span><br><span class="line">$.ajaxPrefilter(function( options, originalOptions, jqXHR ) &#123;</span><br><span class="line">    var key = options.url;</span><br><span class="line">    console.log(key);</span><br><span class="line">    if (!pendingRequests[key]) &#123;</span><br><span class="line">        pendingRequests[key] = jqXHR;</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        //jqXHR.abort();    //放弃后触发的提交</span><br><span class="line">        pendingRequests[key].abort();   // 放弃先触发的提交</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    var complete = options.complete;</span><br><span class="line">    options.complete = function(jqXHR, textStatus) &#123;</span><br><span class="line">        pendingRequests[key] = null;</span><br><span class="line">        if ($.isFunction(complete)) &#123;</span><br><span class="line">        complete.apply(this, arguments);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p><p>核心思想是维护一个队列，发送请求时，将请求加入队列，请求响应后，从队列中清楚，这就保证了在任一时刻只能有一个同样的请求发送</p><p>局限性：仅对jquery的ajax有作用</p><p><em>参考</em></p><blockquote><p><a href="http://www.hollischuang.com/archives/931" target="_blank" rel="noopener">http://www.hollischuang.com/archives/931</a></p></blockquote>]]></content>
+    <content type="html"><![CDATA[<hr><p>位运算直接对内存数据进行操作，不需要转成十进制，因此处理速度非常快</p><p> X % 2^n = X &amp; (2^n-1)<br> <a id="more"></a></p><hr><p><strong>判段一个数组是否包含某个值</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Set&lt;String&gt; set=new HashSet&lt;String&gt;(Arrays.asList(arr));  </span><br><span class="line">return set.contains(targetValue);</span><br></pre></td></tr></table></figure></p><p>效率慢，要将数组压入Collection类型中，首先要将数组元素便利一遍，然后再使用集合类做其它操作。</p><p>可以使用Apache Commons类库中提供的<strong>ArrayUtils</strong>类的<strong>contains</strong>方法<br>contains内部调用indexOf方法</p><p><img src="/images/indexOf.png" alt=""></p>]]></content>
     
     <summary type="html">
     
       &lt;hr&gt;
-&lt;p&gt;连续点击多个按钮，可能导致先请求的数据后显示出来。&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;&lt;strong&gt;解决方案&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;1. 将ajsx请求的async设置为false&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;2. 利用jquery ajaxPrefilter中断请求&lt;/strong&gt;&lt;br&gt;
+&lt;p&gt;位运算直接对内存数据进行操作，不需要转成十进制，因此处理速度非常快&lt;/p&gt;
+&lt;p&gt; X % 2^n = X &amp;amp; (2^n-1)&lt;br&gt;
     
     </summary>
     
     
-      <category term="前端" scheme="https://hsb786.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
+      <category term="爪哇" scheme="https://hsb786.github.io/tags/%E7%88%AA%E5%93%87/"/>
     
   </entry>
   
