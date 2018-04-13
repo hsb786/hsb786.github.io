@@ -5,18 +5,18 @@
     
     <title>多线程基础 | HuShengBin’s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="线程间通信线程是操作系统中独立的个体，但这些个体如果不经过特殊处理就不能成为一个整体。在线程间进行通信后，系统之间的交互性会更加强大，在大大提高CPU利用率的同时还会使程序员对各线程任务在处理的过程中进行有效的把控与监督。 锁队列每个锁对象都有两个队列，一个是就绪队列，一个是阻塞队列。就绪队列存储了将要获得锁的线程，阻塞队列存储了被阻塞的线程。一个线程被唤醒后，才会进入就绪队列，等待CPU的调度；">
+    <meta name="description" content="线程间通信线程是操作系统中独立的个体，但这些个体如果不经过特殊处理就不能成为一个整体。在线程间进行通信后，系统之间的交互性会更加强大，在大大提高CPU利用率的同时还会使程序员对各线程任务在处理的过程中进行有效的把控与监督。">
 <meta name="keywords" content="爪哇,多线程">
 <meta property="og:type" content="article">
 <meta property="og:title" content="多线程基础">
 <meta property="og:url" content="https://hsb786.github.io/2018/04/09/多线程基础/index.html">
 <meta property="og:site_name" content="HuShengBin’s blog">
-<meta property="og:description" content="线程间通信线程是操作系统中独立的个体，但这些个体如果不经过特殊处理就不能成为一个整体。在线程间进行通信后，系统之间的交互性会更加强大，在大大提高CPU利用率的同时还会使程序员对各线程任务在处理的过程中进行有效的把控与监督。 锁队列每个锁对象都有两个队列，一个是就绪队列，一个是阻塞队列。就绪队列存储了将要获得锁的线程，阻塞队列存储了被阻塞的线程。一个线程被唤醒后，才会进入就绪队列，等待CPU的调度；">
+<meta property="og:description" content="线程间通信线程是操作系统中独立的个体，但这些个体如果不经过特殊处理就不能成为一个整体。在线程间进行通信后，系统之间的交互性会更加强大，在大大提高CPU利用率的同时还会使程序员对各线程任务在处理的过程中进行有效的把控与监督。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-04-12T13:25:05.849Z">
+<meta property="og:updated_time" content="2018-04-13T11:39:44.929Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="多线程基础">
-<meta name="twitter:description" content="线程间通信线程是操作系统中独立的个体，但这些个体如果不经过特殊处理就不能成为一个整体。在线程间进行通信后，系统之间的交互性会更加强大，在大大提高CPU利用率的同时还会使程序员对各线程任务在处理的过程中进行有效的把控与监督。 锁队列每个锁对象都有两个队列，一个是就绪队列，一个是阻塞队列。就绪队列存储了将要获得锁的线程，阻塞队列存储了被阻塞的线程。一个线程被唤醒后，才会进入就绪队列，等待CPU的调度；">
+<meta name="twitter:description" content="线程间通信线程是操作系统中独立的个体，但这些个体如果不经过特殊处理就不能成为一个整体。在线程间进行通信后，系统之间的交互性会更加强大，在大大提高CPU利用率的同时还会使程序员对各线程任务在处理的过程中进行有效的把控与监督。">
     
 
     
@@ -216,6 +216,7 @@
         
             
             <h2 id="线程间通信"><a href="#线程间通信" class="headerlink" title="线程间通信"></a>线程间通信</h2><p>线程是操作系统中独立的个体，但这些个体如果不经过特殊处理就不能成为一个整体。在线程间进行通信后，系统之间的交互性会更加强大，在大大提高CPU利用率的同时还会使程序员对各线程任务在处理的过程中进行有效的把控与监督。</p>
+<a id="more"></a>
 <h2 id="锁队列"><a href="#锁队列" class="headerlink" title="锁队列"></a>锁队列</h2><p>每个锁对象都有两个队列，一个是就绪队列，一个是阻塞队列。就绪队列存储了将要获得锁的线程，阻塞队列存储了被阻塞的线程。一个线程被唤醒后，才会进入就绪队列，等待CPU的调度；反之，一个线程被wait后，就会进入阻塞队列，等待下一次被唤醒。</p>
 <h2 id="多线程对象的常用函数"><a href="#多线程对象的常用函数" class="headerlink" title="多线程对象的常用函数"></a>多线程对象的常用函数</h2><ul>
 <li>Thread.currentThread()方法返回代码段正在被哪个线程调用的信息</li>
@@ -258,7 +259,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/09/多线程基础/" data-id="cjfxv8ik8002zpcmysut9d46k" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/09/多线程基础/" data-id="cjfxvsg8d002hokmyl8umltw7" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
