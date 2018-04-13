@@ -209,6 +209,53 @@
   </entry>
   
   <entry>
+    <title>EasyUI</title>
+    <link href="https://hsb786.github.io/2018/04/11/EasyUI/"/>
+    <id>https://hsb786.github.io/2018/04/11/EasyUI/</id>
+    <published>2018-04-11T03:28:06.000Z</published>
+    <updated>2018-04-13T03:36:44.401Z</updated>
+    
+    <content type="html"><![CDATA[<p><strong>当请求远程数据时，发送的额外参数。</strong></p><p>在datagrid构造中加入queryParams参数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">dataGrid = $(&apos;#dg&apos;).datagrid(&#123;</span><br><span class="line">url : &apos;$&#123;pageContext.request.contextPath&#125;/companys/datagrid&apos;,</span><br><span class="line">method : &apos;GET&apos;,</span><br><span class="line">.........................</span><br><span class="line">queryParams : &#123;</span><br><span class="line">//传入当前日期查询</span><br><span class="line">startTime : getNowFormatDate()</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure></p><p><strong>重新加载行，保持在当前页</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(&apos;#dg&apos;).datagrid(&apos;reload&apos;);</span><br></pre></td></tr></table></figure></p><p><strong>加载并显示第一页的行,通过传递一些从参数进行查询，该方法被调用来从服务器加载新数据。</strong> </p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$(&quot;#dg&quot;).datagrid(&apos;load&apos;, &#123;</span><br><span class="line">&quot;job.name&quot; : $(&quot;#jobname&quot;).val(),</span><br><span class="line">&quot;user.realname&quot; : $(&quot;#realname&quot;).val()</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;strong&gt;当请求远程数据时，发送的额外参数。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;在datagrid构造中加入queryParams参数&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;p
+      
+    
+    </summary>
+    
+    
+      <category term="前端" scheme="https://hsb786.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>KingEditor</title>
+    <link href="https://hsb786.github.io/2018/04/11/KingEditor/"/>
+    <id>https://hsb786.github.io/2018/04/11/KingEditor/</id>
+    <published>2018-04-11T03:22:23.000Z</published>
+    <updated>2018-04-13T03:27:29.695Z</updated>
+    
+    <content type="html"><![CDATA[<p>官方文档示例 初始化；属于异步加载<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">KindEditor.ready(function(K) &#123;</span><br><span class="line">               window.editor = K.create(&apos;#editor_id&apos;);</span><br><span class="line">       &#125;);</span><br></pre></td></tr></table></figure></p><p>同步加载；直接调用KindEditor创建，而不是等KindEditor.ready后再创建<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">about = KindEditor.create(&apos;textarea[id=&quot;about&quot;]&apos;, &#123;</span><br><span class="line">items : [ &apos;cut&apos;, &apos;copy&apos;, &apos;paste&apos;, &apos;justifyleft&apos;, &apos;justifycenter&apos;,</span><br><span class="line">&apos;justifyright&apos;, &apos;justifyfull&apos;, &apos;insertorderedlist&apos;,</span><br><span class="line">&apos;insertunorderedlist&apos;, &apos;indent&apos;, &apos;outdent&apos;, &apos;subscript&apos;,</span><br><span class="line">&apos;superscript&apos;, &apos;clearhtml&apos;, &apos;quickformat&apos;, &apos;selectall&apos;,</span><br><span class="line">&apos;|&apos;, &apos;fullscreen&apos;, &apos;/&apos;, &apos;formatblock&apos;, &apos;fontname&apos;,</span><br><span class="line">&apos;fontsize&apos;, &apos;|&apos;, &apos;forecolor&apos;, &apos;hilitecolor&apos;, &apos;bold&apos;,</span><br><span class="line">&apos;italic&apos;, &apos;underline&apos;, &apos;strikethrough&apos;, &apos;lineheight&apos;,</span><br><span class="line">&apos;removeformat&apos;, &apos;|&apos;, &apos;table&apos;, &apos;hr&apos;, &apos;emoticons&apos;,</span><br><span class="line">&apos;pagebreak&apos; ]</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;官方文档示例 初始化；属于异步加载&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;
+      
+    
+    </summary>
+    
+    
+      <category term="前端" scheme="https://hsb786.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+  </entry>
+  
+  <entry>
     <title>HTTP状态码</title>
     <link href="https://hsb786.github.io/2018/04/10/HTTP%E7%8A%B6%E6%80%81%E7%A0%81/"/>
     <id>https://hsb786.github.io/2018/04/10/HTTP状态码/</id>
@@ -394,50 +441,6 @@
     <summary type="html">
     
       &lt;p&gt;用两个栈实现一个队列。队列的声明如下：请实现他的两个函数appendTail和deleteHead,分别完成在队列尾部插入节点和在队列头部删除节点的功能。&lt;br&gt;
-    
-    </summary>
-    
-    
-      <category term="剑指Offer" scheme="https://hsb786.github.io/tags/%E5%89%91%E6%8C%87Offer/"/>
-    
-      <category term="算法" scheme="https://hsb786.github.io/tags/%E7%AE%97%E6%B3%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>替换空格</title>
-    <link href="https://hsb786.github.io/2018/04/10/%E6%9B%BF%E6%8D%A2%E7%A9%BA%E6%A0%BC/"/>
-    <id>https://hsb786.github.io/2018/04/10/替换空格/</id>
-    <published>2018-04-10T08:08:27.000Z</published>
-    <updated>2018-04-12T05:27:55.838Z</updated>
-    
-    <content type="html"><![CDATA[<p>请实现一个函数，将一个字符串中的空格替换成“%20”。<br><a id="more"></a><br>例如，当字符串为We Are Happy.则经过替换之后的字符串We%20Are%20Happy。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * beginIndex记录比较起始下标，spaceIndex记录空格下标。</span><br><span class="line"> * 添加beginIndex到spaceIndex的数据到StringBuilder中。</span><br><span class="line"> * beginIndex设为spaceIndex；spaceIndex重新计算</span><br><span class="line"> * @author: husb   </span><br><span class="line"> * @date: 2018年4月10日 下午12:26:55 </span><br><span class="line"> */</span><br><span class="line">public static String replaceSpace(String str) &#123;</span><br><span class="line">//一开始想到的办法，一个字符一个字符的比，</span><br><span class="line">//这样会创建多个string对象,String.valueOf()内部是通过new String()来实现的。</span><br><span class="line">/*</span><br><span class="line"> * char[] chars = str.toCharArray(); StringBuilder sb = new StringBuilder(); for</span><br><span class="line"> * (char c : chars) &#123; sb.append(c == &apos; &apos; ? &quot;%20&quot; : String.valueOf(c)); &#125;</span><br><span class="line"> */</span><br><span class="line">StringBuilder sb = new StringBuilder();</span><br><span class="line">int beginIndex = 0;</span><br><span class="line">int spaceIndex = str.indexOf(&quot; &quot;, beginIndex);</span><br><span class="line">while (spaceIndex &gt; 0) &#123;</span><br><span class="line">sb.append(str.substring(beginIndex, spaceIndex)).append(&quot;%20&quot;);</span><br><span class="line">beginIndex = spaceIndex + 1;</span><br><span class="line">spaceIndex = str.indexOf(&quot; &quot;, beginIndex);</span><br><span class="line">&#125;</span><br><span class="line">sb.append(str.substring(beginIndex, str.length()));</span><br><span class="line">return sb.toString();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;请实现一个函数，将一个字符串中的空格替换成“%20”。&lt;br&gt;
-    
-    </summary>
-    
-    
-      <category term="剑指Offer" scheme="https://hsb786.github.io/tags/%E5%89%91%E6%8C%87Offer/"/>
-    
-      <category term="算法" scheme="https://hsb786.github.io/tags/%E7%AE%97%E6%B3%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>二维数组的查找</title>
-    <link href="https://hsb786.github.io/2018/04/10/%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E7%9A%84%E6%9F%A5%E6%89%BE/"/>
-    <id>https://hsb786.github.io/2018/04/10/二维数组的查找/</id>
-    <published>2018-04-10T04:01:22.000Z</published>
-    <updated>2018-04-12T05:26:43.517Z</updated>
-    
-    <content type="html"><![CDATA[<p>在一个二维数组中，每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个函数，输入这样的一个二维数组和一个整数，判断数组中是否含有该整数。<br><a id="more"></a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 从左下角开始比，查找的数字大于遍历值右移；查找的数字小于遍历值上移</span><br><span class="line"> * @author: husb   </span><br><span class="line"> * @date: 2018年4月10日 上午11:55:27 </span><br><span class="line"> */</span><br><span class="line">public static boolean find(int targer, int[][] array) &#123;</span><br><span class="line">int rows = array.length;</span><br><span class="line">int columns = array[0].length;</span><br><span class="line">int i = rows - 1, j = 0;</span><br><span class="line">while (targer != array[i][j]) &#123;</span><br><span class="line">if (targer &gt; array[i][j]) &#123;</span><br><span class="line">j++;</span><br><span class="line">&#125; else &#123;</span><br><span class="line">i--;</span><br><span class="line">&#125;</span><br><span class="line">if (i &lt; 0 || j &lt; 0 || i &gt; rows || j &gt; columns) &#123;</span><br><span class="line">return false;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">return true;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;在一个二维数组中，每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个函数，输入这样的一个二维数组和一个整数，判断数组中是否含有该整数。&lt;br&gt;
     
     </summary>
     
