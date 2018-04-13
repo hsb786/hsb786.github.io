@@ -3,20 +3,20 @@
 <head>
     <meta charset="utf-8">
     
-    <title>防止重复发送 Ajax 请求的解决方案 | HuShengBin’s blog</title>
+    <title>触发器 | HuShengBin’s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="连续点击多个按钮，可能导致先请求的数据后显示出来。  解决方案 1. 将ajax请求的async设置为false 2. 利用jquery ajaxPrefilter中断请求 3. 加遮罩框">
-<meta name="keywords" content="前端">
+    <meta name="description" content="对某一个表的某种操作，触发某种条件，从而执行的一段程序 new: 新数据，数据库里原先没有，将要有的数据。例如将要更新的数据或者是新增的数据。 old：旧数据，数据库里原先有的数据 说明：在把userjob(用户岗位关联表)中的success(审批状态)更新为true时，自动在成绩表中出入数据；否则说明没有审批没有通过，把成绩表中对应的数据删除1234CREATE TRIGGER `insertS">
+<meta name="keywords" content="sql">
 <meta property="og:type" content="article">
-<meta property="og:title" content="防止重复发送 Ajax 请求的解决方案">
-<meta property="og:url" content="https://hsb786.github.io/2018/04/08/防止重复发送 Ajax 请求的解决方案/index.html">
+<meta property="og:title" content="触发器">
+<meta property="og:url" content="https://hsb786.github.io/2018/04/13/触发器/index.html">
 <meta property="og:site_name" content="HuShengBin’s blog">
-<meta property="og:description" content="连续点击多个按钮，可能导致先请求的数据后显示出来。  解决方案 1. 将ajax请求的async设置为false 2. 利用jquery ajaxPrefilter中断请求 3. 加遮罩框">
+<meta property="og:description" content="对某一个表的某种操作，触发某种条件，从而执行的一段程序 new: 新数据，数据库里原先没有，将要有的数据。例如将要更新的数据或者是新增的数据。 old：旧数据，数据库里原先有的数据 说明：在把userjob(用户岗位关联表)中的success(审批状态)更新为true时，自动在成绩表中出入数据；否则说明没有审批没有通过，把成绩表中对应的数据删除1234CREATE TRIGGER `insertS">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-04-12T10:48:59.497Z">
+<meta property="og:updated_time" content="2018-04-13T04:17:39.079Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="防止重复发送 Ajax 请求的解决方案">
-<meta name="twitter:description" content="连续点击多个按钮，可能导致先请求的数据后显示出来。  解决方案 1. 将ajax请求的async设置为false 2. 利用jquery ajaxPrefilter中断请求 3. 加遮罩框">
+<meta name="twitter:title" content="触发器">
+<meta name="twitter:description" content="对某一个表的某种操作，触发某种条件，从而执行的一段程序 new: 新数据，数据库里原先没有，将要有的数据。例如将要更新的数据或者是新增的数据。 old：旧数据，数据库里原先有的数据 说明：在把userjob(用户岗位关联表)中的success(审批状态)更新为true时，自动在成绩表中出入数据；否则说明没有审批没有通过，把成绩表中对应的数据删除1234CREATE TRIGGER `insertS">
     
 
     
@@ -177,7 +177,7 @@
 </aside>
 
             
-            <section id="main"><article id="post-防止重复发送 Ajax 请求的解决方案" class="article article-type-post" itemscope itemprop="blogPost">
+            <section id="main"><article id="post-触发器" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -185,7 +185,7 @@
                 
     
         <h1 class="article-title" itemprop="name">
-            防止重复发送 Ajax 请求的解决方案
+            触发器
         </h1>
     
 
@@ -194,8 +194,8 @@
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/2018/04/08/防止重复发送 Ajax 请求的解决方案/">
-            <time datetime="2018-04-08T09:58:41.000Z" itemprop="datePublished">2018-04-08</time>
+        <a href="/2018/04/13/触发器/">
+            <time datetime="2018-04-13T03:43:11.000Z" itemprop="datePublished">2018-04-13</time>
         </a>
     </div>
 
@@ -204,7 +204,7 @@
                         
     <div class="article-tag">
         <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/前端/">前端</a>
+        <a class="tag-link" href="/tags/sql/">sql</a>
     </div>
 
                     </div>
@@ -215,19 +215,11 @@
         <div class="article-entry" itemprop="articleBody">
         
             
-            <hr>
-<p>连续点击多个按钮，可能导致先请求的数据后显示出来。</p>
-<hr>
-<p><strong>解决方案</strong></p>
-<p><strong>1. 将ajax请求的async设置为false</strong></p>
-<p><strong>2. 利用jquery ajaxPrefilter中断请求</strong></p>
-<p><strong>3. 加遮罩框</strong><br><a id="more"></a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">var pendingRequests = &#123;&#125;;</span><br><span class="line">$.ajaxPrefilter(function( options, originalOptions, jqXHR ) &#123;</span><br><span class="line">    var key = options.url;</span><br><span class="line">    console.log(key);</span><br><span class="line">    if (!pendingRequests[key]) &#123;</span><br><span class="line">        pendingRequests[key] = jqXHR;</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        //jqXHR.abort();    //放弃后触发的提交</span><br><span class="line">        pendingRequests[key].abort();   // 放弃先触发的提交</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    var complete = options.complete;</span><br><span class="line">    options.complete = function(jqXHR, textStatus) &#123;</span><br><span class="line">        pendingRequests[key] = null;</span><br><span class="line">        if ($.isFunction(complete)) &#123;</span><br><span class="line">        complete.apply(this, arguments);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
-<p>核心思想是维护一个队列，发送请求时，将请求加入队列，请求响应后，从队列中清楚，这就保证了在任一时刻只能有一个同样的请求发送</p>
-<p>局限性：仅对jquery的ajax有作用</p>
-<p><em>参考</em></p>
-<blockquote>
-<p><a href="http://www.hollischuang.com/archives/931" target="_blank" rel="noopener">防止重复发送 Ajax 请求的解决方案</a></p>
-</blockquote>
+            <p>对某一个表的某种操作，触发某种条件，从而执行的一段程序</p>
+<p>new: 新数据，数据库里原先没有，将要有的数据。例如将要更新的数据或者是新增的数据。</p>
+<p>old：旧数据，数据库里原先有的数据</p>
+<p>说明：在把userjob(用户岗位关联表)中的success(审批状态)更新为true时，自动在成绩表中出入数据；否则说明没有审批没有通过，把成绩表中对应的数据删除<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">CREATE TRIGGER `insertScore` AFTER UPDATE ON `userjob` FOR EACH ROW if new.success=true then</span><br><span class="line">insert into score(id) values(new.id);</span><br><span class="line">else delete from score where id=new.id;</span><br><span class="line">end if</span><br></pre></td></tr></table></figure></p>
+<p>说明：在删除userjob(用户岗位关联表)的数据时，自动删除成绩表对应中的数据<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">CREATE TRIGGER `deleteScore` BEFORE DELETE ON `userjob` FOR EACH ROW if old.success=true then</span><br><span class="line">delete from score where id=old.id;</span><br><span class="line">end if</span><br></pre></td></tr></table></figure></p>
 
         
         </div>
@@ -238,7 +230,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/08/防止重复发送 Ajax 请求的解决方案/" data-id="cjfxg2syf002iy0myeh6ast3w" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/13/触发器/" data-id="cjfxg2sxz0028y0myo9aymuxy" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -313,19 +305,19 @@
         
 <nav id="article-nav">
     
-        <a href="/2018/04/08/hash/" id="article-nav-newer" class="article-nav-link-wrap">
+        <a href="/2018/04/13/vscode-database/" id="article-nav-newer" class="article-nav-link-wrap">
             <strong class="article-nav-caption">上一篇</strong>
             <div class="article-nav-title">
                 
-                    hash（转载）
+                    vscode-database
                 
             </div>
         </a>
     
     
-        <a href="/2018/04/08/一些小技巧/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/2018/04/12/sql/" id="article-nav-older" class="article-nav-link-wrap">
             <strong class="article-nav-caption">下一篇</strong>
-            <div class="article-nav-title">一些小技巧</div>
+            <div class="article-nav-title">sql</div>
         </a>
     
 </nav>
