@@ -3,19 +3,19 @@
 <head>
     <meta charset="utf-8">
     
-    <title>Java-8中的扩展-Default-Defender-Extension-方法 | HuShengBin’s blog</title>
+    <title>【译】Java8中的扩展(default/extension)方法 （转载） | HuShengBin’s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <meta name="description" content="Java 8允许开发者使用default和static两个关键字在接口中加入非抽象的方法。带有default关键字的方法在Java中也被称作defender方法或defaul方法。在Java 8之前，想要改变一个已经发布的接口几乎是不可能的，任何改动(例如增加一个新的方法)都会影响该接口现有的实现类。这也是为什么在Java 8想要改变内部iterator的实现，使用forEach()方法时面临了一">
 <meta name="keywords" content="爪哇">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java-8中的扩展-Default-Defender-Extension-方法">
+<meta property="og:title" content="【译】Java8中的扩展(default&#x2F;extension)方法 （转载）">
 <meta property="og:url" content="https://hsb786.github.io/2018/04/13/Java-8中的扩展-Default-Defender-Extension-方法/index.html">
 <meta property="og:site_name" content="HuShengBin’s blog">
 <meta property="og:description" content="Java 8允许开发者使用default和static两个关键字在接口中加入非抽象的方法。带有default关键字的方法在Java中也被称作defender方法或defaul方法。在Java 8之前，想要改变一个已经发布的接口几乎是不可能的，任何改动(例如增加一个新的方法)都会影响该接口现有的实现类。这也是为什么在Java 8想要改变内部iterator的实现，使用forEach()方法时面临了一">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-04-13T07:20:22.585Z">
+<meta property="og:updated_time" content="2018-04-13T07:24:37.104Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java-8中的扩展-Default-Defender-Extension-方法">
+<meta name="twitter:title" content="【译】Java8中的扩展(default&#x2F;extension)方法 （转载）">
 <meta name="twitter:description" content="Java 8允许开发者使用default和static两个关键字在接口中加入非抽象的方法。带有default关键字的方法在Java中也被称作defender方法或defaul方法。在Java 8之前，想要改变一个已经发布的接口几乎是不可能的，任何改动(例如增加一个新的方法)都会影响该接口现有的实现类。这也是为什么在Java 8想要改变内部iterator的实现，使用forEach()方法时面临了一">
     
 
@@ -185,7 +185,7 @@
                 
     
         <h1 class="article-title" itemprop="name">
-            Java-8中的扩展-Default-Defender-Extension-方法
+            【译】Java8中的扩展(default/extension)方法 （转载）
         </h1>
     
 
@@ -233,6 +233,11 @@
 <li>在JDK1.8中有许多关于default方法的例子，比如forEach方法。也可以查看java.util.Map中新添的putIfAbsent方法，在JDK1.8之前，我们只能ConcurrentMap来使用它。</li>
 </ul>
 <p>以上就是default方法。不得不说，这是一个巨大的突破，使我们可以更好更方便的使用接口。了解CurrentMap的putIfAbsent方法可以帮助我们更好的记住default方法。在JDK1.7中，putIfAbsent方法并不存在于Map接口中，所以为了使用putIfAbsent方法，必须将Map接口指向的ConcurrentMap对象强制转换成ConcurrentMap。但Java 8引入扩展方法之后，Map接口中也有了putIfAbsent方法。</p>
+<hr>
+<p><em>参考</em></p>
+<blockquote>
+<p><a href="https://yemengying.com/2015/11/01/Java-8中的扩展-Default-Defender-Extension-方法/" target="_blank" rel="noopener">【译】Java8中的扩展(default/extension)方法 </a></p>
+</blockquote>
 
         
         </div>
@@ -243,7 +248,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/13/Java-8中的扩展-Default-Defender-Extension-方法/" data-id="cjfxmk82a0007u4myvdwbaine" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/13/Java-8中的扩展-Default-Defender-Extension-方法/" data-id="cjfxmogn90007cgmy0gj2jvns" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -363,7 +368,7 @@
                         
                         <div class="item-inner">
                             <p class="item-category"></p>
-                            <p class="item-title"><a href="/2018/04/13/Java-8中的扩展-Default-Defender-Extension-方法/" class="title">Java-8中的扩展-Default-Defender-Extension-方法</a></p>
+                            <p class="item-title"><a href="/2018/04/13/Java-8中的扩展-Default-Defender-Extension-方法/" class="title">【译】Java8中的扩展(default/extension)方法 （转载）</a></p>
                             <p class="item-date"><time datetime="2018-04-13T07:14:18.000Z" itemprop="datePublished">2018-04-13</time></p>
                         </div>
                     </li>
