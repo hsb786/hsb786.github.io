@@ -3,18 +3,20 @@
 <head>
     <meta charset="utf-8">
     
-    <title>归档: 2018/4 | HuShengBin’s blog</title>
+    <title>Executor, ExecutorService 和 Executors 间的不同 （转载） | HuShengBin’s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="记录码渣的奋斗史">
-<meta property="og:type" content="website">
-<meta property="og:title" content="HuShengBin’s blog">
-<meta property="og:url" content="https://hsb786.github.io/archives/2018/04/page/3/index.html">
+    <meta name="description" content="java.util.concurrent.Executor, java.util.concurrent.ExecutorService, java.util.concurrent. Executors 这三者均是 Java Executor 框架的一部分，用来提供线程池的功能。因为创建和管理线程非常心累，并且操作系统通常对线程数有限制，所以建议使用线程池来并发执行任务，而不是每次请求进来时创建一个">
+<meta name="keywords" content="爪哇,多线程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Executor, ExecutorService 和 Executors 间的不同 （转载）">
+<meta property="og:url" content="https://hsb786.github.io/2018/04/13/difference-between-executor-executorService/index.html">
 <meta property="og:site_name" content="HuShengBin’s blog">
-<meta property="og:description" content="记录码渣的奋斗史">
+<meta property="og:description" content="java.util.concurrent.Executor, java.util.concurrent.ExecutorService, java.util.concurrent. Executors 这三者均是 Java Executor 框架的一部分，用来提供线程池的功能。因为创建和管理线程非常心累，并且操作系统通常对线程数有限制，所以建议使用线程池来并发执行任务，而不是每次请求进来时创建一个">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-04-13T05:59:24.142Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="HuShengBin’s blog">
-<meta name="twitter:description" content="记录码渣的奋斗史">
+<meta name="twitter:title" content="Executor, ExecutorService 和 Executors 间的不同 （转载）">
+<meta name="twitter:description" content="java.util.concurrent.Executor, java.util.concurrent.ExecutorService, java.util.concurrent. Executors 这三者均是 Java Executor 框架的一部分，用来提供线程池的功能。因为创建和管理线程非常心累，并且操作系统通常对线程数有限制，所以建议使用线程池来并发执行任务，而不是每次请求进来时创建一个">
     
 
     
@@ -175,328 +177,206 @@
 </aside>
 
             
-            <section id="main"><div class="timeline timeline-wrap">
-    
-            <div class="timeline-row timeline-row-major">
-                <span class="node"><i class="fa fa-calendar"></i></span>
-                <h1 class="title">2018</h1>
-            </div>
+            <section id="main"><article id="post-difference-between-executor-executorService" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
         
-        <div class="timeline-row">
-            <span class="node"></span>
-            <div class="content">
+        
+            <header class="article-header">
                 
     
-        <h1 itemprop="name">
-            <a class="timeline-article-title" href="/2018/04/10/旋转数组的最小数字/">旋转数组的最小数字</a>
+        <h1 class="article-title" itemprop="name">
+            Executor, ExecutorService 和 Executors 间的不同 （转载）
         </h1>
     
 
-                <div class="article-meta">
-                    
+                
+                    <div class="article-meta">
+                        
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/2018/04/10/旋转数组的最小数字/">
-            <time datetime="2018-04-10T08:11:33.000Z" itemprop="datePublished">2018-04-10</time>
+        <a href="/2018/04/13/difference-between-executor-executorService/">
+            <time datetime="2018-04-13T05:21:41.000Z" itemprop="datePublished">2018-04-13</time>
         </a>
     </div>
 
 
-                    
-                    
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/剑指Offer/">剑指Offer</a>, <a class="tag-link" href="/tags/算法/">算法</a>
-    </div>
-
-                </div>
-            </div>
-        </div>
-    
-        <div class="timeline-row">
-            <span class="node"></span>
-            <div class="content">
-                
-    
-        <h1 itemprop="name">
-            <a class="timeline-article-title" href="/2018/04/10/用两个队列实现一个栈/">用两个队列实现一个栈</a>
-        </h1>
-    
-
-                <div class="article-meta">
-                    
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2018/04/10/用两个队列实现一个栈/">
-            <time datetime="2018-04-10T08:11:19.000Z" itemprop="datePublished">2018-04-10</time>
-        </a>
-    </div>
-
-
-                    
-                    
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/剑指Offer/">剑指Offer</a>, <a class="tag-link" href="/tags/算法/">算法</a>
-    </div>
-
-                </div>
-            </div>
-        </div>
-    
-        <div class="timeline-row">
-            <span class="node"></span>
-            <div class="content">
-                
-    
-        <h1 itemprop="name">
-            <a class="timeline-article-title" href="/2018/04/10/用两个栈实现队列/">用两个栈实现队列</a>
-        </h1>
-    
-
-                <div class="article-meta">
-                    
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2018/04/10/用两个栈实现队列/">
-            <time datetime="2018-04-10T08:10:52.000Z" itemprop="datePublished">2018-04-10</time>
-        </a>
-    </div>
-
-
-                    
-                    
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/剑指Offer/">剑指Offer</a>, <a class="tag-link" href="/tags/算法/">算法</a>
-    </div>
-
-                </div>
-            </div>
-        </div>
-    
-        <div class="timeline-row">
-            <span class="node"></span>
-            <div class="content">
-                
-    
-        <h1 itemprop="name">
-            <a class="timeline-article-title" href="/2018/04/10/替换空格/">替换空格</a>
-        </h1>
-    
-
-                <div class="article-meta">
-                    
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2018/04/10/替换空格/">
-            <time datetime="2018-04-10T08:08:27.000Z" itemprop="datePublished">2018-04-10</time>
-        </a>
-    </div>
-
-
-                    
-                    
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/剑指Offer/">剑指Offer</a>, <a class="tag-link" href="/tags/算法/">算法</a>
-    </div>
-
-                </div>
-            </div>
-        </div>
-    
-        <div class="timeline-row">
-            <span class="node"></span>
-            <div class="content">
-                
-    
-        <h1 itemprop="name">
-            <a class="timeline-article-title" href="/2018/04/10/二维数组的查找/">二维数组的查找</a>
-        </h1>
-    
-
-                <div class="article-meta">
-                    
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2018/04/10/二维数组的查找/">
-            <time datetime="2018-04-10T04:01:22.000Z" itemprop="datePublished">2018-04-10</time>
-        </a>
-    </div>
-
-
-                    
-                    
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/剑指Offer/">剑指Offer</a>, <a class="tag-link" href="/tags/算法/">算法</a>
-    </div>
-
-                </div>
-            </div>
-        </div>
-    
-        <div class="timeline-row">
-            <span class="node"></span>
-            <div class="content">
-                
-    
-        <h1 itemprop="name">
-            <a class="timeline-article-title" href="/2018/04/10/线程池/">线程池</a>
-        </h1>
-    
-
-                <div class="article-meta">
-                    
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2018/04/10/线程池/">
-            <time datetime="2018-04-10T02:13:01.000Z" itemprop="datePublished">2018-04-10</time>
-        </a>
-    </div>
-
-
-                    
-                    
+                        
+                        
     <div class="article-tag">
         <i class="fa fa-tag"></i>
         <a class="tag-link" href="/tags/多线程/">多线程</a>, <a class="tag-link" href="/tags/爪哇/">爪哇</a>
     </div>
 
-                </div>
-            </div>
-        </div>
-    
-        <div class="timeline-row">
-            <span class="node"></span>
-            <div class="content">
+                    </div>
                 
-    
-        <h1 itemprop="name">
-            <a class="timeline-article-title" href="/2018/04/09/java基础总结/">java基础总结</a>
-        </h1>
-    
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p>java.util.concurrent.Executor, java.util.concurrent.ExecutorService, java.util.concurrent. Executors 这三者均是 Java Executor 框架的一部分，用来提供线程池的功能。因为创建和管理线程非常心累，并且操作系统通常对线程数有限制，所以建议使用线程池来并发执行任务，而不是每次请求进来时创建一个线程。使用线程池不仅可以提高应用的响应时间，还可以避免”java.lang.OutOfMemoryError: unable to create new native thread” 之类的错误。<br><a id="more"></a><br>在 Java 1.5 时，开发者需要关心线程池的创建和管理，但在 Java 1.5 之后 Executor 框架提供了多种内置的线程池,例如：FixedThreadPool(包含固定数目的线程)，CachedThreadPool(可根据需要创建新的线程)等等。</p>
+<h2 id="Executor"><a href="#Executor" class="headerlink" title="Executor"></a>Executor</h2><p>Executor, ExecutorService, 和 Executors 最主要的区别是 Executor 是一个抽象层面的核心接口(大致代码如下)。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public interface Executor &#123;</span><br><span class="line">    void execute(Runnable command);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>不同于 java.lang.Thread 类将任务和执行耦合在一起， Executor 将任务本身和执行任务分离，可以阅读 difference between Thread and Executor 来了解 Thread 和 Executor 间更多的不同。</p>
+<h2 id="ExecutorService"><a href="#ExecutorService" class="headerlink" title="ExecutorService"></a>ExecutorService</h2><p>ExecutorService 接口 对 Executor 接口进行了扩展，提供了返回 Future 对象，终止，关闭线程池等方法。当调用 shutDown 方法时，线程池会停止接受新的任务，但会完成正在 pending 中的任务。</p>
+<p>Future 对象提供了异步执行，这意味着无需等待任务执行的完成，只要提交需要执行的任务，然后在需要时检查 Future 是否已经有了结果，如果任务已经执行完成，就可以通过 Future.get() 方法获得执行结果。需要注意的是，Future.get() 方法是一个阻塞式的方法，如果调用时任务还没有完成，会等待直到任务执行结束。</p>
+<p>通过 ExecutorService.submit() 方法返回的 Future 对象，还可以取消任务的执行。Future 提供了 cancel() 方法用来取消执行 pending 中的任务。</p>
+<p>ExecutorService 部分代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public interface ExecutorService extends Executor &#123;</span><br><span class="line">	void shutdown();</span><br><span class="line">	&lt;T&gt; Future&lt;T&gt; submit(Callable&lt;T&gt; task);</span><br><span class="line">	&lt;T&gt; Future&lt;T&gt; submit(Runnable task, T result);</span><br><span class="line">	&lt;T&gt; List&lt;Future&lt;T&gt;&gt; invokeAll(Collection&lt;? extends Callable&lt;T&gt;&gt; tasks, long timeout, TimeUnit unit) throws InterruptedException;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Executors"><a href="#Executors" class="headerlink" title="Executors"></a>Executors</h2><p>Executors 是一个工具类，类似于 Collections。提供工厂方法来创建不同类型的线程池，比如 FixedThreadPool 或 CachedThreadPool。</p>
+<p>Executors 部分代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public class Executors &#123;</span><br><span class="line">    public static ExecutorService newFixedThreadPool(int nThreads) &#123;</span><br><span class="line">        return new ThreadPoolExecutor(nThreads, nThreads, 0L, TimeUnit.MILLISECONDS,new LinkedBlockingQueue&lt;Runnable&gt;());</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">     public static ExecutorService newCachedThreadPool() &#123;</span><br><span class="line">        return new ThreadPoolExecutor(0, Integer.MAX_VALUE, 60L, TimeUnit.SECONDS, new SynchronousQueue&lt;Runnable&gt;());</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>下面详细看一下三者的区别：</p>
+<h2 id="Executor-vs-ExecutorService-vs-Executors"><a href="#Executor-vs-ExecutorService-vs-Executors" class="headerlink" title="Executor vs ExecutorService vs Executors"></a>Executor vs ExecutorService vs Executors</h2><p>正如上面所说，这三者均是 Executor 框架中的一部分。Java 开发者很有必要学习和理解他们，以便更高效的使用 Java 提供的不同类型的线程池。总结一下这三者间的区别，以便大家更好的理解：</p>
+<ul>
+<li>Executor 和 ExecutorService 这两个接口主要的区别是：ExecutorService 接口继承了 Executor 接口，是 Executor 的子接口</li>
+<li>Executor 和 ExecutorService 第二个区别是：Executor 接口定义了 execute()方法用来接收一个Runnable接口的对象，而 ExecutorService 接口中的 submit()方法可以接受Runnable和Callable接口的对象。</li>
+<li>Executor 和 ExecutorService 接口第三个区别是 Executor 中的 execute() 方法不返回任何结果，而 ExecutorService 中的 submit()方法可以通过一个 Future 对象返回运算结果。</li>
+<li>Executor 和 ExecutorService 接口第四个区别是除了允许客户端提交一个任务，ExecutorService 还提供用来控制线程池的方法。比如：调用 shutDown() 方法终止线程池。可以通过 《Java Concurrency in Practice》 一书了解更多关于关闭线程池和如何处理 pending 的任务的知识。</li>
+<li>Executors 类提供工厂方法用来创建不同类型的线程池。比如: newSingleThreadExecutor() 创建一个只有一个线程的线程池，newFixedThreadPool(int numOfThreads)来创建固定线程数的线程池，newCachedThreadPool()可以根据需要创建新的线程，但如果已有线程是空闲的会重用已有线程。</li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>下表列出了 Executor 和 ExecutorService 的区别：</p>
+<table>
+<thead>
+<tr>
+<th>Executor</th>
+<th>ExecutorService</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Executor 是 Java 线程池的核心接口，用来并发执行提交的任务</td>
+<td>ExecutorService 是 Executor 接口的扩展，提供了异步执行和关闭线程池的方法</td>
+</tr>
+<tr>
+<td>提供execute()方法用来提交任务</td>
+<td>提供submit()方法用来提交任务</td>
+</tr>
+<tr>
+<td>execute()方法无返回值</td>
+<td>submit()方法返回Future对象，可用来获取任务执行结果</td>
+</tr>
+<tr>
+<td>不能取消任务</td>
+<td>可以通过Future.cancel()取消pending中的任务</td>
+</tr>
+<tr>
+<td>没有提供和关闭线程池有关的方法</td>
+<td>提供了关闭线程池的方法</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<p><em>参考</em></p>
+<blockquote>
+<p><a href="https://yemengying.com/2017/03/17/difference-between-executor-executorService/" target="_blank" rel="noopener">【译】Executor, ExecutorService 和 Executors 间的不同 </a></p>
+</blockquote>
 
-                <div class="article-meta">
-                    
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2018/04/09/java基础总结/">
-            <time datetime="2018-04-09T13:28:54.000Z" itemprop="datePublished">2018-04-09</time>
-        </a>
-    </div>
-
-
-                    
-                    
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/爪哇/">爪哇</a>
-    </div>
-
-                </div>
-            </div>
+        
         </div>
-    
-        <div class="timeline-row">
-            <span class="node"></span>
-            <div class="content">
-                
-    
-        <h1 itemprop="name">
-            <a class="timeline-article-title" href="/2018/04/09/多线程基础/">多线程基础</a>
-        </h1>
-    
-
-                <div class="article-meta">
-                    
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2018/04/09/多线程基础/">
-            <time datetime="2018-04-09T13:03:41.000Z" itemprop="datePublished">2018-04-09</time>
-        </a>
-    </div>
+        <footer class="article-footer">
+            <div class="share-container">
 
 
-                    
-                    
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/多线程/">多线程</a>, <a class="tag-link" href="/tags/爪哇/">爪哇</a>
-    </div>
 
-                </div>
-            </div>
-        </div>
-    
-        <div class="timeline-row">
-            <span class="node"></span>
-            <div class="content">
-                
-    
-        <h1 itemprop="name">
-            <a class="timeline-article-title" href="/2018/04/09/需要注意的一些东西/">需要注意的一些东西</a>
-        </h1>
-    
-
-                <div class="article-meta">
-                    
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2018/04/09/需要注意的一些东西/">
-            <time datetime="2018-04-09T05:53:41.000Z" itemprop="datePublished">2018-04-09</time>
-        </a>
-    </div>
-
-
-                    
-                    
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/爪哇/">爪哇</a>
-    </div>
-
-                </div>
-            </div>
-        </div>
-    
-        <div class="timeline-row">
-            <span class="node"></span>
-            <div class="content">
-                
-    
-        <h1 itemprop="name">
-            <a class="timeline-article-title" href="/2018/04/09/记录一些容易忘记的东西/">记录一些容易忘记的东西</a>
-        </h1>
-    
-
-                <div class="article-meta">
-                    
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2018/04/09/记录一些容易忘记的东西/">
-            <time datetime="2018-04-09T00:42:41.000Z" itemprop="datePublished">2018-04-09</time>
-        </a>
-    </div>
-
-
-                    
-                    
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/爪哇/">爪哇</a>
-    </div>
-
-                </div>
-            </div>
-        </div>
-    
 </div>
 
-    <nav id="page-nav">
-        <a class="extend prev" rel="prev" href="/archives/2018/04/page/2/">&laquo; 上一页</a><a class="page-number" href="/archives/2018/04/">1</a><a class="page-number" href="/archives/2018/04/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/archives/2018/04/page/4/">4</a><a class="page-number" href="/archives/2018/04/page/5/">5</a><a class="extend next" rel="next" href="/archives/2018/04/page/4/">下一页 &raquo;</a>
-    </nav>
+    <a data-url="https://hsb786.github.io/2018/04/13/difference-between-executor-executorService/" data-id="cjfxjkggj000hmsmygpf70kwx" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2018/04/13/vscode-database/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">vscode-database</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    
+        <section id="comments">
+    <div id="valine-thread"></div>
+</section>
+    
+
 </section>
             
                 
