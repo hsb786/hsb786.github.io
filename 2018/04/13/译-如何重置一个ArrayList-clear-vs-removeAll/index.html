@@ -3,20 +3,20 @@
 <head>
     <meta charset="utf-8">
     
-    <title>在O(1)时间内删除链表节点 | HuShengBin’s blog</title>
+    <title>【译】如何重置一个ArrayList--clear vs removeAll （转载） | HuShengBin’s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="给定单向链表的头指针和一个节点指针，定义一个函数在O(1)时间删除该节点。">
-<meta name="keywords" content="剑指Offer,算法">
+    <meta name="description" content="很多时候为了重用我们会想要重置一个ArrayList，这里的重置是指清空列表或移除列表所有的元素。在Java中，有两个方法可以帮助我们实现重置clear或removeAll。在列表长度很小的情况下(eg:10或100个元素)，可以放心的使用这两种方法。但如果列表很大(eg:10M个元素)，那么选择clear还是removeAll会对你java应用的性能造成巨大的影响。甚至有时，在列表过大的情况下，">
+<meta name="keywords" content="爪哇">
 <meta property="og:type" content="article">
-<meta property="og:title" content="在O(1)时间内删除链表节点">
-<meta property="og:url" content="https://hsb786.github.io/2018/04/10/在O(1)时间内删除链表节点/index.html">
+<meta property="og:title" content="【译】如何重置一个ArrayList--clear vs removeAll （转载）">
+<meta property="og:url" content="https://hsb786.github.io/2018/04/13/译-如何重置一个ArrayList-clear-vs-removeAll/index.html">
 <meta property="og:site_name" content="HuShengBin’s blog">
-<meta property="og:description" content="给定单向链表的头指针和一个节点指针，定义一个函数在O(1)时间删除该节点。">
+<meta property="og:description" content="很多时候为了重用我们会想要重置一个ArrayList，这里的重置是指清空列表或移除列表所有的元素。在Java中，有两个方法可以帮助我们实现重置clear或removeAll。在列表长度很小的情况下(eg:10或100个元素)，可以放心的使用这两种方法。但如果列表很大(eg:10M个元素)，那么选择clear还是removeAll会对你java应用的性能造成巨大的影响。甚至有时，在列表过大的情况下，">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-04-12T05:27:44.657Z">
+<meta property="og:updated_time" content="2018-04-13T08:01:13.361Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="在O(1)时间内删除链表节点">
-<meta name="twitter:description" content="给定单向链表的头指针和一个节点指针，定义一个函数在O(1)时间删除该节点。">
+<meta name="twitter:title" content="【译】如何重置一个ArrayList--clear vs removeAll （转载）">
+<meta name="twitter:description" content="很多时候为了重用我们会想要重置一个ArrayList，这里的重置是指清空列表或移除列表所有的元素。在Java中，有两个方法可以帮助我们实现重置clear或removeAll。在列表长度很小的情况下(eg:10或100个元素)，可以放心的使用这两种方法。但如果列表很大(eg:10M个元素)，那么选择clear还是removeAll会对你java应用的性能造成巨大的影响。甚至有时，在列表过大的情况下，">
     
 
     
@@ -177,7 +177,7 @@
 </aside>
 
             
-            <section id="main"><article id="post-在O(1)时间内删除链表节点" class="article article-type-post" itemscope itemprop="blogPost">
+            <section id="main"><article id="post-译-如何重置一个ArrayList-clear-vs-removeAll" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -185,7 +185,7 @@
                 
     
         <h1 class="article-title" itemprop="name">
-            在O(1)时间内删除链表节点
+            【译】如何重置一个ArrayList--clear vs removeAll （转载）
         </h1>
     
 
@@ -194,8 +194,8 @@
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/2018/04/10/在O(1)时间内删除链表节点/">
-            <time datetime="2018-04-10T12:04:16.000Z" itemprop="datePublished">2018-04-10</time>
+        <a href="/2018/04/13/译-如何重置一个ArrayList-clear-vs-removeAll/">
+            <time datetime="2018-04-13T07:55:17.000Z" itemprop="datePublished">2018-04-13</time>
         </a>
     </div>
 
@@ -204,7 +204,7 @@
                         
     <div class="article-tag">
         <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/剑指Offer/">剑指Offer</a>, <a class="tag-link" href="/tags/算法/">算法</a>
+        <a class="tag-link" href="/tags/爪哇/">爪哇</a>
     </div>
 
                     </div>
@@ -215,7 +215,20 @@
         <div class="article-entry" itemprop="articleBody">
         
             
-            <p>给定单向链表的头指针和一个节点指针，定义一个函数在O(1)时间删除该节点。<br><a id="more"></a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"> /**</span><br><span class="line"> * 由于时间复杂度要求为O(1)，</span><br><span class="line"> * 只能将加一个节点的值复制到要删除的节点，之后再将下一个节点删除</span><br><span class="line"> * @author: husb   </span><br><span class="line"> * @date: 2018年4月10日 下午3:43:23</span><br><span class="line"> */</span><br><span class="line">public static void deleteNode(ListNode head, ListNode node) &#123;</span><br><span class="line">	//若为头节点，则将头节点设为head.next</span><br><span class="line">	if (node == head) &#123;</span><br><span class="line">		head = head.next;</span><br><span class="line">	//若为未节点，只能遍历了</span><br><span class="line">	&#125; else if (node.next == null) &#123;</span><br><span class="line">		ListNode t=head;</span><br><span class="line">		while(t.next!=node) &#123;</span><br><span class="line">			t=t.next;</span><br><span class="line">		&#125;</span><br><span class="line">		t.next=null;</span><br><span class="line">	&#125; else &#123;</span><br><span class="line">		//若为中间节点，则将下个节点的值复制到要删除的阶段，并且移除一个节点</span><br><span class="line">		node.data = node.next.data;</span><br><span class="line">		node.next = node.next.next;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+            <p>很多时候为了重用我们会想要重置一个ArrayList，这里的重置是指清空列表或移除列表所有的元素。在Java中，有两个方法可以帮助我们实现重置<code>clear</code>或<code>removeAll</code>。在列表长度很小的情况下(eg:10或100个元素)，可以放心的使用这两种方法。但如果列表很大(eg:10M个元素)，那么选择clear还是removeAll会对你java应用的性能造成巨大的影响。甚至有时，在列表过大的情况下，重置会耗费许多时间，那么重新创建一个新的列表比将老的列表重置要好。但需要提醒的是，必须要确保老的列表可以被垃圾回收，否则，有很大的风险会出现<code>java.lang.OutOfMemoryError: Java Heap Space</code>。言归正传，让我们看看clear()和removeAll()两个方法。大家应该常常会选择用clear(),因为他的复杂度是O(n),而相比之下，removeAll(Collection C)的性能要差一些，它的复杂度是O(n^2)。这也是为什么在重置大的列表的时候两个方法会有巨大的差异。如果阅读他们的源码并运行下面的例子程序，差异会更明显。<br><a id="more"></a></p>
+<h2 id="Clear-vs-RemoveAll-Collection-c"><a href="#Clear-vs-RemoveAll-Collection-c" class="headerlink" title="Clear() vs RemoveAll(Collection c)"></a>Clear() vs RemoveAll(Collection c)</h2><p>为了更好的比较这两个方法，阅读他们源码是很重要的。可以在<code>java.utils.ArrayList</code>类中找到clear()方法，不过为了方便我将它引入到了这里。下面的代码来自JDK 1.7.0_40版本。如果你想要学习更多的有关性能监控和调优的知识，我强烈建议阅读Scott Oaks写的Java Performance the Definitive Guide,它包含了java 7和一点java 8。下面是clear()的代码片段:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">/** </span><br><span class="line"> * Removes all of the elements from this list.The list will </span><br><span class="line"> * be empty after this call returns. </span><br><span class="line"> */ </span><br><span class="line"> public void clear() &#123; </span><br><span class="line"> 	modCount++; // clear to let GC do its work </span><br><span class="line"> 	for (int i = 0; i &lt; size; i++) </span><br><span class="line"> 		elementData[i] = null; </span><br><span class="line"> 	size = 0; </span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p>大家可以看出，clear()在循环遍历ArrayList，并且将每一个元素都置为null，使它们在没有被外部引用的情况下可以被垃圾回收。相似的，我们可以在<code>java.util.AbstractCollection</code>类中查看removeAll(Collention c)的代码，下面是代码片段:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public boolean removeAll(Collection&lt;?&gt; c) &#123;</span><br><span class="line">	//判断对象是否为null</span><br><span class="line">      Objects.requireNonNull(c);</span><br><span class="line">      boolean modified = false;</span><br><span class="line">      Iterator&lt;?&gt; it = iterator();</span><br><span class="line">      while (it.hasNext()) &#123;</span><br><span class="line">          if (c.contains(it.next())) &#123;</span><br><span class="line">              it.remove();</span><br><span class="line">              modified = true;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      return modified;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>  这个方法会检查迭代器顺序返回的每个元素是否包含在特定的集合中。如果存在，调用迭代器的remove方法将它从集合中移除。因为会用到contains方法，removeAll的复杂度是O(n^2)。所以在想要重置一个大的ArrayList时，这种方法是绝对不可取的。下面我们比较一下两者在重置一个包含100K个元素时的性能差异。</p>
+<h2 id="删除一个包含100k个元素的列表中的所有元素"><a href="#删除一个包含100k个元素的列表中的所有元素" class="headerlink" title="删除一个包含100k个元素的列表中的所有元素"></a>删除一个包含100k个元素的列表中的所有元素</h2><p>  我本来想在例子中尝试重置一个包含10M个元素的列表，不过在超过半个小时等待removeAll()结束后，我决定将元素的数量降为100K。在这种情况下，两个方法的差距也是很明显的。removeAll()比clear()多花费了10000倍的时间。事实上，在API中clear()和removeAll(Collection c)这两个方法的目的是不同的。clear()方法是为了通过删除所有元素而重置列表，而removeAll(Collection c)是为了从集合中删除某些存在于另一个提供的集合中的元素，并不是为了从集合中移除所有元素。所以如果你的目的是删除所有元素，用clear(),如果你的目的是删除某些存在于另一集合的元素，那么选择removeAll(Collection c)方法。</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">import java.util.ArrayList; </span><br><span class="line">/**</span><br><span class="line"> * Java Program to remove all elements from list in Java and comparing </span><br><span class="line"> * performance of clearn() and removeAll() method. </span><br><span class="line"> * * @author Javin Paul </span><br><span class="line"> */ </span><br><span class="line"> public class ArrayListResetTest &#123; </span><br><span class="line"> </span><br><span class="line"> 	private static final int SIZE = 100_000; </span><br><span class="line"> 	public static void main(String args[]) &#123; </span><br><span class="line"> 	</span><br><span class="line"> 	// Two ArrayList for clear and removeAll </span><br><span class="line"> 	ArrayList numbers = new ArrayList(SIZE); </span><br><span class="line"> 	ArrayList integers = new ArrayList(SIZE); </span><br><span class="line"> 	// Initialize ArrayList with 10M integers </span><br><span class="line"> 	for (int i = 0; i &amp;lt; SIZE; i++) &#123; </span><br><span class="line"> 		numbers.add(new Integer(i)); </span><br><span class="line"> 		integers.add(new Integer(i)); </span><br><span class="line"> 	&#125; </span><br><span class="line"> 	// Empty ArrayList using clear method </span><br><span class="line"> 	long startTime = System.nanoTime(); </span><br><span class="line"> 	numbers.clear(); </span><br><span class="line"> 	long elapsed = System.nanoTime() - startTime; </span><br><span class="line"> 	System.out.println(&quot;Time taken by clear to empty ArrayList of 1M elements (ns): &quot; + elapsed); </span><br><span class="line"> 	// Reset ArrayList using removeAll method </span><br><span class="line"> 	startTime = System.nanoTime(); </span><br><span class="line"> 	integers.removeAll(integers); </span><br><span class="line"> 	long time = System.nanoTime() - startTime; </span><br><span class="line"> 	System.out.println(&quot;Time taken by removeAll to reset ArrayList of 1M elements (ns): &quot; + time); </span><br><span class="line"> 	&#125; </span><br><span class="line"> &#125; </span><br><span class="line"> 	</span><br><span class="line"> 	Output: </span><br><span class="line"> 	Time taken by clear to empty ArrayList of 100000 elements (ns): 889619 </span><br><span class="line"> 	Time taken by removeAll to reset ArrayList of 100000 elements (ns): 36633112126</span><br></pre></td></tr></table></figure>
+<p>  由于程序使用了两个arrayList存储Integers，所以在运行时要确保有足够的内存，尤其是你想比较在列表存有1M个元素时，两种方法的性能差异。另外，由于使用了在数字中加入下划线的特性，所以需要java7来运行。如果没有JDK7，也可以移除SIZE常量中的下划线。</p>
+<hr>
+<p><em>参考</em></p>
+<blockquote>
+<p><a href="https://yemengying.com/2015/10/26/译-如何重置一个ArrayList-clear-vs-removeAll/" target="_blank" rel="noopener"> 【译】如何重置一个ArrayList–clear vs removeAll </a></p>
+</blockquote>
 
         
         </div>
@@ -226,7 +239,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/10/在O(1)时间内删除链表节点/" data-id="cjfxnztec0026womy2t1uvzqe" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/13/译-如何重置一个ArrayList-clear-vs-removeAll/" data-id="cjfxnzter0032womyystyqxza" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -301,19 +314,10 @@
         
 <nav id="article-nav">
     
-        <a href="/2018/04/10/调整数组顺序使奇数位于偶数之前/" id="article-nav-newer" class="article-nav-link-wrap">
-            <strong class="article-nav-caption">上一篇</strong>
-            <div class="article-nav-title">
-                
-                    调整数组顺序使奇数位于偶数之前
-                
-            </div>
-        </a>
     
-    
-        <a href="/2018/04/10/二进制中1的个数/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/2018/04/13/译-以生产者消费者为例阐述如何使用wait，notify和notifyAll/" id="article-nav-older" class="article-nav-link-wrap">
             <strong class="article-nav-caption">下一篇</strong>
-            <div class="article-nav-title">二进制中1的个数</div>
+            <div class="article-nav-title">【译】以生产者消费者为例阐述如何使用wait，notify和notifyAll （转载）</div>
         </a>
     
 </nav>
