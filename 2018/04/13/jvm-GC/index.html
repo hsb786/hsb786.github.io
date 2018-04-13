@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <meta charset="utf-8">
+    
+    <title>jvm-GC（转载） | HuShengBin’s blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="关键字约定 Young generation –&amp;gt;新生代 Tenured / Old Generation –&amp;gt;老年代 Perm Area –&amp;gt;永久代  重要的东东 在Java中，对象实例都是在堆上创建。一些类信息，常量，静态变量等存储在方法区。堆和方法区都是线程共享的。 GC机制是由JVM提供，用来清理需要清除的对象，回收堆内存。 GC机制将Java程序员从内存管理中解放了出来">
+<meta name="keywords" content="爪哇,JVM">
+<meta property="og:type" content="article">
+<meta property="og:title" content="jvm-GC（转载）">
+<meta property="og:url" content="https://hsb786.github.io/2018/04/13/jvm-GC/index.html">
+<meta property="og:site_name" content="HuShengBin’s blog">
+<meta property="og:description" content="关键字约定 Young generation –&amp;gt;新生代 Tenured / Old Generation –&amp;gt;老年代 Perm Area –&amp;gt;永久代  重要的东东 在Java中，对象实例都是在堆上创建。一些类信息，常量，静态变量等存储在方法区。堆和方法区都是线程共享的。 GC机制是由JVM提供，用来清理需要清除的对象，回收堆内存。 GC机制将Java程序员从内存管理中解放了出来">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://hsb786.github.io/images/GC-Object.png">
+<meta property="og:image" content="https://hsb786.github.io/images/堆内存.png">
+<meta property="og:image" content="https://hsb786.github.io/images/sweep.jpg">
+<meta property="og:image" content="https://hsb786.github.io/images/copy.jpg">
+<meta property="og:image" content="https://hsb786.github.io/images/compact.jpg">
+<meta property="og:image" content="https://hsb786.github.io/images/jvm-parameter.png">
+<meta property="og:updated_time" content="2018-04-13T06:42:42.575Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="jvm-GC（转载）">
+<meta name="twitter:description" content="关键字约定 Young generation –&amp;gt;新生代 Tenured / Old Generation –&amp;gt;老年代 Perm Area –&amp;gt;永久代  重要的东东 在Java中，对象实例都是在堆上创建。一些类信息，常量，静态变量等存储在方法区。堆和方法区都是线程共享的。 GC机制是由JVM提供，用来清理需要清除的对象，回收堆内存。 GC机制将Java程序员从内存管理中解放了出来">
+<meta name="twitter:image" content="https://hsb786.github.io/images/GC-Object.png">
+    
+
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                
+                <span class="site-title">HuShengBin’s blog</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">Home</a>
+                
+                    <a class="main-nav-link" href="/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/about">About</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/css/images/txx.jpg" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/css/images/txx.jpg" />
+            <h2 id="name">hushengbin</h2>
+            <h3 id="title">JavaWeb Developer</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>Nanchang, Jiangxi, China</span>
+            <a id="follow" target="_blank" href="https://github.com/hsb786">关注我</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                47
+                <span>文章</span>
+            </div>
+            <div class="article-info-block">
+                12
+                <span>标签</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="https://github.com/hsb786" target="_blank" title="github" class=tooltip>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-jvm-GC" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            jvm-GC（转载）
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2018/04/13/jvm-GC/">
+            <time datetime="2018-04-13T06:10:31.000Z" itemprop="datePublished">2018-04-13</time>
+        </a>
+    </div>
+
+
+                        
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/JVM/">JVM</a>, <a class="tag-link" href="/tags/爪哇/">爪哇</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h2 id="关键字约定"><a href="#关键字约定" class="headerlink" title="关键字约定"></a>关键字约定</h2><ul>
+<li>Young generation –&gt;新生代</li>
+<li>Tenured / Old Generation –&gt;老年代</li>
+<li>Perm Area –&gt;永久代</li>
+</ul>
+<h2 id="重要的东东"><a href="#重要的东东" class="headerlink" title="重要的东东"></a>重要的东东</h2><ul>
+<li>在Java中，对象实例都是在堆上创建。一些类信息，常量，静态变量等存储在方法区。堆和方法区都是线程共享的。</li>
+<li>GC机制是由JVM提供，用来清理需要清除的对象，回收堆内存。</li>
+<li>GC机制将Java程序员从内存管理中解放了出来，可以更关注于业务逻辑。</li>
+<li>在Java中，GC是由一个被称为垃圾回收器的守护线程执行的。</li>
+<li>在从内存回收一个对象之前会调用对象的finalize()方法。</li>
+<li>作为一个Java开发者不能强制JVM执行GC；GC的触发由JVM依据堆内存的大小来决定。</li>
+<li>System.gc()和Runtime.gc()会向JVM发送执行GC的请求，但是JVM不保证一定会执行GC。</li>
+<li>如果堆没有内存创建新的对象了，会抛出<code>OutOfMemoryError</code>。<a id="more"></a>
+<h2 id="GC针对什么对象？"><a href="#GC针对什么对象？" class="headerlink" title="GC针对什么对象？"></a>GC针对什么对象？</h2></li>
+</ul>
+<p>了解GC机制的第一步就是理解什么样的对象会被回收。当一个对象通过一系列根对象(比如：静态属性引用的常量)都不可达时就会被回收。简而言之，当一个对象的所有引用都为null。循环依赖不算做引用，如果对象A有一个指向对象B的引用，对象B也有一个指向对象A的引用，除此之外，它们没有其他引用，那么对象A和对象B都、需要被回收(如下图,ObjA和ObjB需要被回收)。</p>
+<p><img src="/images/GC-Object.png" alt="GC回收对象"></p>
+<h2 id="堆内存是如何划分的？"><a href="#堆内存是如何划分的？" class="headerlink" title="堆内存是如何划分的？"></a>堆内存是如何划分的？</h2><p>Java中对象都在堆上创建。为了GC，堆内存分为三个部分，也可以说三代，分别称为新生代，老年代和永久代。其中新生代又进一步分为Eden区，Survivor 1区和Survivor 2区(如下图)。新创建的对象会分配在Eden区,在经历一次Minor GC后会被移到Survivor 1区，再经历一次Minor GC后会被移到Survivor 2区，直到升至老年代,需要注意的是，一些大对象(长字符串或数组)可能会直接存放到老年代。</p>
+<p><img src="/images/堆内存.png" alt="堆内存"></p>
+<p>永久代有一些特殊，它用来存储类的元信息。对于GC是否发生在永久代有许多不同的看法，在我看来这取决于采用的JVM。大家可以通过创建大量的字符串来观察是发生了GC还是抛出了OutOfMemoryError。</p>
+<h2 id="GC算法"><a href="#GC算法" class="headerlink" title="GC算法"></a>GC算法</h2><ol>
+<li>标记清除算法<br> 分为标记和清除两个阶段：首先标记出所有需要回收的对象，在标记完成后统一回收所有被标记的对象。该算法的缺点是效率不高并且会产生不连续的内存碎片。<br><img src="/images/sweep.jpg" alt=""></li>
+<li>复制算法<br> 把内存空间划为两个区域，每次只使用其中一个区域。垃圾回收时，遍历当前使用区域，把正在使用中的对象复制到另外一个区域中。此算法每次只处理正在使用中的对象，因此复制成本比较小，同时复制过去以后还能进行相应的内存整理，不会出现“碎片”问题。优点：实现简单，运行高效。缺点：会浪费一定的内存。一般新生代采用这种算法。<br><img src="/images/copy.jpg" alt=""></li>
+<li>标记整理算法<br> 标记阶段与标记清除算法一样。但后续并不是直接对可回收的对象进行清理，而是让所有存活对象都想一端移动，然后清理。优点是不会造成内存碎片。<br><img src="/images/compact.jpg" alt=""></li>
+</ol>
+<h2 id="Java中垃圾回收器的类型"><a href="#Java中垃圾回收器的类型" class="headerlink" title="Java中垃圾回收器的类型"></a>Java中垃圾回收器的类型</h2><p>Java提供多种类型的垃圾回收器。JVM中的垃圾收集一般都采用“分代收集”，不同的堆内存区域采用不同的收集算法，主要目的就是为了增加吞吐量或降低停顿时间。</p>
+<ul>
+<li>Serial收集器：新生代收集器，使用复制算法，使用一个线程进行GC，串行，其它工作线程暂停。</li>
+<li>ParNew收集器：新生代收集器，使用复制算法，Serial收集器的多线程版，用多个线程进行GC，并行，其它工作线程暂停。使用-XX:+UseParNewGC开关来控制使用ParNew+Serial Old收集器组合收集内存；使用-XX:ParallelGCThreads来设置执行内存回收的线程数。</li>
+<li>Parallel Scavenge 收集器：吞吐量优先的垃圾回收器，作用在新生代，使用复制算法，关注CPU吞吐量，即运行用户代码的时间/总时间。使用-XX:+UseParallelGC开关控制使用Parallel Scavenge+Serial Old收集器组合回收垃圾。</li>
+<li>Serial Old收集器：老年代收集器，单线程收集器，串行，使用标记整理算法，使用单线程进行GC，其它工作线程暂停。</li>
+<li>Parallel Old收集器：吞吐量优先的垃圾回收器，作用在老年代，多线程，并行，多线程机制与Parallel Scavenge差不错，使用标记整理算法，在Parallel Old执行时，仍然需要暂停其它线程。</li>
+<li>CMS（Concurrent Mark Sweep）收集器：老年代收集器，致力于获取最短回收停顿时间（即缩短垃圾回收的时间），使用标记清除算法，多线程，优点是并发收集（用户线程可以和GC线程同时工作），停顿小。使用-XX:+UseConcMarkSweepGC进行ParNew+CMS+Serial Old进行内存回收，优先使用ParNew+CMS（原因见Full GC和并发垃圾回收一节），当用户线程内存不足时，采用备用方案Serial Old收集。</li>
+</ul>
+<h2 id="与GC有关的JVM参数"><a href="#与GC有关的JVM参数" class="headerlink" title="与GC有关的JVM参数"></a>与GC有关的JVM参数</h2><p>在开发中我们需要通过分析造成Full GC的原因来提高系统性能，在这个过程中我发现做GC的调优很大程度上依赖于对系统的分析，系统拥有怎样的对象以及他们的平均生命周期。<br>举个例子，如果一个应用大多是短生命周期的对象，那么应该确保Eden区足够大，这样可以减少Minor GC的次数。可以通过-XX:NewRatio来控制新生代和老年代的比例，比如-XX:NewRatio=3代表新生代和老年代的比例为1：3。需要注意的是，扩大新生代的大小会减少老年代的大小，这会导致Major GC执行的更频繁，而Major GC可能会造成用户线程的停顿从而降低系统吞吐量。JVM中可以用NewSize和MaxNewSize参数来指定新生代内存最小和最大值，如果两个参数值一样，那么就相当于固定了新生代的大小<br><img src="/images/jvm-parameter.png" alt="jvm参数"></p>
+<h2 id="Full-GC和并发垃圾回收"><a href="#Full-GC和并发垃圾回收" class="headerlink" title="Full GC和并发垃圾回收"></a>Full GC和并发垃圾回收</h2><p>并发垃圾回收器的内存回收过程是与用户线程一起并发执行的。通常情况下，并发垃圾回收器可以在用户线程运行的情况下完成大部分的回收工作，所以应用停顿时间很短。</p>
+<p>但由于并发垃圾回收时用户线程还在运行，所以会有新的垃圾不断产生。作为担保，如果在老年代内存都被占用之前，如果并发垃圾回收器还没结束工作，那么应用会暂停，在所有用户线程停止的情况下完成回收。这种情况称作Full GC，这意味着需要调整有关并发回收的参数了。</p>
+<p>由于Full GC很影响应用的性能，要尽量避免或减少。特别是如果对于高容量低延迟的电商系统，要尽量避免在交易时间段发生Full GC。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li>为了分代垃圾回收，Java堆内存分为3代：新生代，老年代和永久代。</li>
+<li>新的对象实例会优先分配在新生代，在经历几次Minor GC后(默认15次)，还存活的会被移至老年代(某些大对象会直接在老年代分配)。</li>
+<li>永久代是否执行GC，取决于采用的JVM。</li>
+<li>Minor GC发生在新生代，当Eden区没有足够空间时，会发起一次Minor GC，将Eden区中的存活对象移至Survivor区。Major GC发生在老年代，当升到老年代的对象大于老年代剩余空间时会发生Major GC。</li>
+<li>发生Major GC时用户线程会暂停，会降低系统性能和吞吐量。</li>
+<li>JVM的参数-Xmx和-Xms用来设置Java堆内存的初始大小和最大值。依据个人经验这个值的比例最好是1:1或者1:1.5。比如，你可以将-Xmx和-Xms都设为1GB，或者-Xmx和-Xms设为1.2GB和1.8GB。</li>
+<li>Java中不能手动触发GC，但可以用不同的引用类来辅助垃圾回收器工作(比如：弱引用或软引用)。</li>
+</ul>
+<p>以上就是关于Java中GC的一些内容。通过这篇博客，我们可以知道堆内存是如何划分的；一个对象在没有任何强引用指向他或该对象通过根节点不可达时需要被垃圾回收器回收；当垃圾收集器意识到需要进行GC时会触发Minor GC或Major GC，是自动的，无法强制执行。</p>
+<hr>
+<p><em>参考</em></p>
+<blockquote>
+<p><a href="https://yemengying.com/2016/05/13/jvm-GC/" target="_blank" rel="noopener">【译】Java中的垃圾回收机制 </a></p>
+</blockquote>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="https://hsb786.github.io/2018/04/13/jvm-GC/" data-id="cjfxmk8350011u4my2oof9uaq" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2018/04/13/【译】如何在java中使用ConcurrentHashMap/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">上一篇</strong>
+            <div class="article-nav-title">
+                
+                    【译】如何在java中使用ConcurrentHashMap（转载）
+                
+            </div>
+        </a>
+    
+    
+        <a href="/2018/04/13/difference-between-executor-executorService/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">Executor, ExecutorService 和 Executors 间的不同 （转载）</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    
+        <section id="comments">
+    <div id="valine-thread"></div>
+</section>
+    
+
+</section>
+            
+                
+<aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/04/13/Java-8中的扩展-Default-Defender-Extension-方法/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/04/13/Java-8中的扩展-Default-Defender-Extension-方法/" class="title">Java-8中的扩展-Default-Defender-Extension-方法</a></p>
+                            <p class="item-date"><time datetime="2018-04-13T07:14:18.000Z" itemprop="datePublished">2018-04-13</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/04/13/【译】如何在java中使用ConcurrentHashMap/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/04/13/【译】如何在java中使用ConcurrentHashMap/" class="title">【译】如何在java中使用ConcurrentHashMap（转载）</a></p>
+                            <p class="item-date"><time datetime="2018-04-13T06:41:41.000Z" itemprop="datePublished">2018-04-13</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/04/13/jvm-GC/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/04/13/jvm-GC/" class="title">jvm-GC（转载）</a></p>
+                            <p class="item-date"><time datetime="2018-04-13T06:10:31.000Z" itemprop="datePublished">2018-04-13</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/04/13/difference-between-executor-executorService/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/04/13/difference-between-executor-executorService/" class="title">Executor, ExecutorService 和 Executors 间的不同 （转载）</a></p>
+                            <p class="item-date"><time datetime="2018-04-13T05:21:41.000Z" itemprop="datePublished">2018-04-13</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/04/13/vscode-database/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/vscode-database.png)" alt="vscode-database" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/04/13/vscode-database/" class="title">vscode-database</a></p>
+                            <p class="item-date"><time datetime="2018-04-13T03:55:59.000Z" itemprop="datePublished">2018-04-13</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a><span class="archive-list-count">47</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/">HTTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MyBatis/">MyBatis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql/">sql</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/剑指Offer/">剑指Offer</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多线程/">多线程</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/术语/">术语</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爪哇/">爪哇</a><span class="tag-list-count">19</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">11</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/MyBatis/" style="font-size: 10px;">MyBatis</a> <a href="/tags/Spring/" style="font-size: 11.67px;">Spring</a> <a href="/tags/sql/" style="font-size: 13.33px;">sql</a> <a href="/tags/前端/" style="font-size: 13.33px;">前端</a> <a href="/tags/剑指Offer/" style="font-size: 18.33px;">剑指Offer</a> <a href="/tags/多线程/" style="font-size: 15px;">多线程</a> <a href="/tags/工具/" style="font-size: 16.67px;">工具</a> <a href="/tags/术语/" style="font-size: 10px;">术语</a> <a href="/tags/爪哇/" style="font-size: 20px;">爪哇</a> <a href="/tags/算法/" style="font-size: 18.33px;">算法</a>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">链接</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="https://www.douban.com/people/122973953/">我的豆瓣</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2018 HuShengBin<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//cdn.jsdelivr.net/gh/xcss/valine@v1.1.6/dist/Valine.min.js"></script>
+    <script>
+        new Valine({
+            el: '#valine-thread' ,
+            notify:false,
+            verify:false,
+            app_id: 'eqjWlM0tCYgxhh8nvvV6DleG-gzGzoHsz',
+            app_key: 'CRXn0n9IAsJdOeMDUIxyh1Hb',
+            placeholder: '(。・∀・)ノ说一句吧'
+        });
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

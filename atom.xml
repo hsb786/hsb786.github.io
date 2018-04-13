@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://hsb786.github.io/"/>
-  <updated>2018-04-13T05:59:24.142Z</updated>
+  <updated>2018-04-13T07:20:22.585Z</updated>
   <id>https://hsb786.github.io/</id>
   
   <author>
@@ -15,6 +15,81 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Java-8中的扩展-Default-Defender-Extension-方法</title>
+    <link href="https://hsb786.github.io/2018/04/13/Java-8%E4%B8%AD%E7%9A%84%E6%89%A9%E5%B1%95-Default-Defender-Extension-%E6%96%B9%E6%B3%95/"/>
+    <id>https://hsb786.github.io/2018/04/13/Java-8中的扩展-Default-Defender-Extension-方法/</id>
+    <published>2018-04-13T07:14:18.000Z</published>
+    <updated>2018-04-13T07:20:22.585Z</updated>
+    
+    <content type="html"><![CDATA[<p>Java 8允许开发者使用<code>default</code>和<code>static</code>两个关键字在接口中加入非抽象的方法。带有default关键字的方法在Java中也被称作defender方法或defaul方法。在Java 8之前，想要改变一个已经发布的接口几乎是不可能的，任何改动(例如增加一个新的方法)都会影响该接口现有的实现类。这也是为什么在Java 8想要改变内部iterator的实现，使用forEach()方法时面临了一个巨大的挑战，因为这会破坏了现有的Iterable接口的实现类。毫无疑问，向后兼容是Java工程师最优先考虑的事，所以要破坏现有的实现类是不可行的。因此，他们提出了一个解决办法，引入default方法。这是一个绝妙的想法，因为现在你可以用扩展现有的接口。JDK本身也使用了许多default方法,java.util.Map接口扩展了许多default方法，例如replaceAll(),putIfAbsent(Key k,Value v)….。另外，由于default方法可以扩展现有的接口也被称作extension方法。一个接口中的default方法是数量不受限制的。我相信，在这次改变之后，将不再需要抽象类来提供骨架实现(skeletal implementation),例如List接口有AbstractList，Collection接口有AbstractCollection，Set接口有AbstractSet，Map接口有AbstractMap。我们可以通过在接口中定义default方法来替代创建一个新的抽象类。相似的，static方法的引入也使得接口的工具类变得冗余。例如，Collection接口的Collections类，Path接口的Paths类，因为你可以直接在接口中定义静态工具方法。如果你想了解更多关于Java 8的新特性，我建议阅读Cay S. Horstmann写的Java SE 8 Really Impatient。这是我最喜欢的关于Java 8的书之一，它详细的介绍了Java7与Java 8不同的特性。<br><a id="more"></a></p><h2 id="Default方法的例子"><a href="#Default方法的例子" class="headerlink" title="Default方法的例子"></a>Default方法的例子</h2><p>Java 8让我们可以通过default关键字为接口添加非抽象的方法。这一特性也被称作Extension(扩展)方法。下面是第一个例子：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">interface Multiplication&#123; </span><br><span class="line">    </span><br><span class="line">    int multiply(int a, int b); </span><br><span class="line">    </span><br><span class="line">    default int square(int a)&#123; </span><br><span class="line">        return multiply(a, a); </span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>除了抽象方法multiply()之外，接口Multiplication还包含一个default方法square()。任何实现Multiplication接口的类只需实现抽象方法multiply，default方法square()可以直接使用。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Multiplication product = new Multiplication()&#123;</span><br><span class="line">    @Override</span><br><span class="line">    public int multiply(int x, int y)&#123;</span><br><span class="line">        return x*y;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">    int square = product.square(2);</span><br><span class="line">    int multiplication = product.multiply(2, 3);</span><br></pre></td></tr></table></figure><p>product是个匿名类。这段代码有点啰嗦了，用了6行实现一个简单地乘法的功能。我们可以利用lambda表达式来简化一下代码，lambda表达式也是Java 8中新引入的。因为我们的接口只包含一个抽象方法，而且lambda表达式也是SAM(Single Abstract method单一抽象方法)类型的。我们可以用lambda表达式来替代匿名类将代码简化成下面的样子。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Multiplication lambda = (x, y) -&gt; x*y; </span><br><span class="line">int product = lambda.multiply(3, 4); </span><br><span class="line">int square = lambda.square(4);</span><br></pre></td></tr></table></figure></p><p>以上就是在接口中使用default方法的例子。现在，你可以毫无顾虑的在旧的接口中扩展新的方法，只要这些方法是default或static的就不用担心会破坏接口的实现类。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">/**Java Program to demonstrate use of default method in Java 8. </span><br><span class="line"> * You can define non-abstract method by using default keyword, and more </span><br><span class="line"> * than one default method is permitted, which allows you to ship default skeletal </span><br><span class="line"> * implementation on interface itself. </span><br><span class="line"> * @author Javin Paul</span><br><span class="line"> */ </span><br><span class="line"> public class Java8DefaultMethodDemo&#123;</span><br><span class="line"> </span><br><span class="line">    public static void main(String args[]) &#123; </span><br><span class="line">    // Implementing interface using Anonymous class </span><br><span class="line">    Multiplication product = new Multiplication()&#123; </span><br><span class="line">        @Override public int multiply(int x, int y)&#123; </span><br><span class="line">            return x*y; </span><br><span class="line">        &#125; </span><br><span class="line">    &#125;; </span><br><span class="line">        int squareOfTwo = product.square(2); </span><br><span class="line">        int cubeOfTwo = product.cube(2); </span><br><span class="line">        System.out.println(&quot;Square of Two : &quot; + squareOfTwo); </span><br><span class="line">        System.out.println(&quot;Cube of Two : &quot; + cubeOfTwo); </span><br><span class="line">        // Since Multiplication has only one abstract method, it can </span><br><span class="line">        // also be implemented using lambda expression in Java 8 </span><br><span class="line">        Multiplication lambda = (x, y) -&gt; x*y; </span><br><span class="line">        int squareOfThree = lambda.square(3); </span><br><span class="line">        int cubeOfThree = lambda.cube(3); </span><br><span class="line">        System.out.println(&quot;Square of Three : &quot; + squareOfThree); </span><br><span class="line">        System.out.println(&quot;Cube of Three : &quot; + cubeOfThree);</span><br><span class="line">        &#125; </span><br><span class="line">    &#125; </span><br><span class="line"> </span><br><span class="line">   interface Multiplication&#123; </span><br><span class="line">        int multiply(int a, int b);</span><br><span class="line">        default int square(int a)&#123; </span><br><span class="line">            return multiply(a, a); </span><br><span class="line">        &#125; </span><br><span class="line">        default int cube(int a)&#123; </span><br><span class="line">            return multiply(multiply(a, a), a); </span><br><span class="line">        &#125; </span><br><span class="line">       &#125; </span><br><span class="line">       Output :  Square of Two : 4 </span><br><span class="line">                 Cube of Two : 8 </span><br><span class="line">                 Square of Three : 9 </span><br><span class="line">                 Cube of Three : 27</span><br></pre></td></tr></table></figure><p>这是个很好的关于如何使用default方法在接口中方便的添加方法的例子。也展示了如何避免一个额外的帮助类，比如Collections类。它仅仅提供了一些用于Collection的工具方法，而现在我们可以直接在Collection中定义这些方法。在上面的例子中，我们有一个包含一个抽象方法multiply(a,b)的接口Multiplication，接口还包括两个依赖于multiply(a,b)方法的非抽象方法square(a)和cube(b)。接口的实现类只需要实现multiply(a,b)方法，就可以直接使用square(a)和cube(b)方法了。</p><h2 id="default方法的关键点"><a href="#default方法的关键点" class="headerlink" title="default方法的关键点"></a>default方法的关键点</h2><ul><li>在Java8中你可以在接口中添加default方法</li><li>default方法的出现使得接口和抽象类的不同变得模糊。所以，当在面试中被问到这个问题，别忘了提一下，以前只能通过抽象类实现的事情，现在也可以通过default方法实现了。</li><li>default并不是一个新的关键字，在JDK1.1中就是保留关键字</li><li>接口中default方法的数量没有限制</li><li>如果接口C继承了接口A和B，如果A和B中拥有一样的default方法，编译器在编译过程中会报错。为了避免歧义，这在Java 8中是不允许的。所以当default方法有冲突时，是不可以多继承的</li><li>在JDK1.8中有许多关于default方法的例子，比如forEach方法。也可以查看java.util.Map中新添的putIfAbsent方法，在JDK1.8之前，我们只能ConcurrentMap来使用它。</li></ul><p>以上就是default方法。不得不说，这是一个巨大的突破，使我们可以更好更方便的使用接口。了解CurrentMap的putIfAbsent方法可以帮助我们更好的记住default方法。在JDK1.7中，putIfAbsent方法并不存在于Map接口中，所以为了使用putIfAbsent方法，必须将Map接口指向的ConcurrentMap对象强制转换成ConcurrentMap。但Java 8引入扩展方法之后，Map接口中也有了putIfAbsent方法。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Java 8允许开发者使用&lt;code&gt;default&lt;/code&gt;和&lt;code&gt;static&lt;/code&gt;两个关键字在接口中加入非抽象的方法。带有default关键字的方法在Java中也被称作defender方法或defaul方法。在Java 8之前，想要改变一个已经发布的接口几乎是不可能的，任何改动(例如增加一个新的方法)都会影响该接口现有的实现类。这也是为什么在Java 8想要改变内部iterator的实现，使用forEach()方法时面临了一个巨大的挑战，因为这会破坏了现有的Iterable接口的实现类。毫无疑问，向后兼容是Java工程师最优先考虑的事，所以要破坏现有的实现类是不可行的。因此，他们提出了一个解决办法，引入default方法。这是一个绝妙的想法，因为现在你可以用扩展现有的接口。JDK本身也使用了许多default方法,java.util.Map接口扩展了许多default方法，例如replaceAll(),putIfAbsent(Key k,Value v)….。另外，由于default方法可以扩展现有的接口也被称作extension方法。一个接口中的default方法是数量不受限制的。我相信，在这次改变之后，将不再需要抽象类来提供骨架实现(skeletal implementation),例如List接口有AbstractList，Collection接口有AbstractCollection，Set接口有AbstractSet，Map接口有AbstractMap。我们可以通过在接口中定义default方法来替代创建一个新的抽象类。相似的，static方法的引入也使得接口的工具类变得冗余。例如，Collection接口的Collections类，Path接口的Paths类，因为你可以直接在接口中定义静态工具方法。如果你想了解更多关于Java 8的新特性，我建议阅读Cay S. Horstmann写的Java SE 8 Really Impatient。这是我最喜欢的关于Java 8的书之一，它详细的介绍了Java7与Java 8不同的特性。&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="爪哇" scheme="https://hsb786.github.io/tags/%E7%88%AA%E5%93%87/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>【译】如何在java中使用ConcurrentHashMap（转载）</title>
+    <link href="https://hsb786.github.io/2018/04/13/%E3%80%90%E8%AF%91%E3%80%91%E5%A6%82%E4%BD%95%E5%9C%A8java%E4%B8%AD%E4%BD%BF%E7%94%A8ConcurrentHashMap/"/>
+    <id>https://hsb786.github.io/2018/04/13/【译】如何在java中使用ConcurrentHashMap/</id>
+    <published>2018-04-13T06:41:41.000Z</published>
+    <updated>2018-04-13T07:11:17.778Z</updated>
+    
+    <content type="html"><![CDATA[<p>ConcurrentHashMap(简称<code>CHM</code>)是在Java 1.5作为<code>Hashtable</code>的替代选择新引入的，是concurrent包的重要成员。在Java 1.5之前，如果想要实现一个可以在多线程和并发的程序中安全使用的Map,只能在HashTable和synchronized Map中选择，因为HashMap并不是线程安全的。但再引入了CHM之后，我们有了更好的选择。CHM不但是线程安全的，而且比HashTable和synchronizedMap的性能要好。相对于HashTable和synchronizedMap锁住了整个Map，CHM只锁住部分Map。CHM允许并发的读操作，同时通过同步锁在写操作时保持数据完整性。<br><a id="more"></a></p><h2 id="Java中ConcurrentHashMap的实现"><a href="#Java中ConcurrentHashMap的实现" class="headerlink" title="Java中ConcurrentHashMap的实现"></a>Java中ConcurrentHashMap的实现</h2><p>CHM引入了分割，并提供了HashTable支持的所有的功能。在CHM中，支持多线程对Map做读操作，并且不需要任何的blocking。这得益于CHM将Map分割成了不同的部分，在执行更新操作时只锁住一部分。根据默认的并发级别(<code>concurrency level</code>)，Map被分割成16个部分，并且由不同的锁控制。这意味着，同时最多可以有16个写线程操作Map。试想一下，由只能一个线程进入变成同时可由16个写线程同时进入(读线程几乎不受限制)，性能的提升是显而易见的。但由于一些更新操作，如put(),remove(),putAll(),clear()只锁住操作的部分，所以在检索操作不能保证返回的是最新的结果。</p><p>另一个重要点是在迭代遍历CHM时，keySet返回的iterator是<a href="https://hsb786.github.io/2018/04/09/术语/">弱一致</a>和<a href="(https://hsb786.github.io/2018/04/09/术语/">fail-safe</a>)的，可能不会返回某些最近的改变，并且在遍历过程中，如果已经遍历的数组上的内容变化了，不会抛出ConcurrentModificationExceptoin的异常。</p><p>CHM默认的并发级别是16，但可以在创建CHM时通过构造函数改变。毫无疑问，并发级别代表着并发执行更新操作的数目，所以如果只有很少的线程会更新Map，那么建议设置一个低的并发级别。另外，CHM还使用了ReentrantLock来对segments加锁。</p><h2 id="Java中ConcurrentHashMap-putifAbsent方法的例子"><a href="#Java中ConcurrentHashMap-putifAbsent方法的例子" class="headerlink" title="Java中ConcurrentHashMap putifAbsent方法的例子"></a>Java中ConcurrentHashMap putifAbsent方法的例子</h2><p>很多时候我们希望在元素不存在时插入元素，我们一般会像下面那样写代码</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">synchronized(map)&#123;</span><br><span class="line">  if (map.get(key) == null)&#123;</span><br><span class="line">      return map.put(key, value);</span><br><span class="line">  &#125; else&#123;</span><br><span class="line">      return map.get(key);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>上面这段代码在HashMap和HashTable中是好用的，但在CHM中是有出错的风险的。这是因为CHM在put操作时并没有对整个Map加锁，所以一个线程正在put(k,v)的时候，另一个线程调用get(k)会得到null，这就会造成一个线程put的值会被另一个线程put的值所覆盖。当然，你可以将代码封装到synchronized代码块中，这样虽然线程安全了，但会使你的代码变成了单线程。CHM提供的putIfAbsent(key,value)方法原子性的实现了同样的功能，同时避免了上面的线程竞争的风险。</p><h2 id="什么时候使用ConcurrentHashMap"><a href="#什么时候使用ConcurrentHashMap" class="headerlink" title="什么时候使用ConcurrentHashMap"></a>什么时候使用ConcurrentHashMap</h2><p>CHM适用于读者数量超过写者时，当写者数量大于等于读者时，CHM的性能是低于Hashtable和synchronized Map的。这是因为当锁住了整个Map时，读操作要等待对同一部分执行写操作的线程结束。CHM适用于做cache,在程序启动时初始化，之后可以被多个请求线程访问。正如Javadoc说明的那样，CHM是HashTable一个很好的替代，但要记住，CHM的比HashTable的同步性稍弱。</p><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>现在我们知道了什么是ConcurrentHashMap和什么时候该用ConcurrentHashMap，下面我们来复习一下CHM的一些关键点。</p><ul><li>CHM允许并发的读和线程安全的更新操作</li><li>在执行写操作时，CHM只锁住部分的Map</li><li>并发的更新是通过内部根据并发级别将Map分割成小部分实现的</li><li>高的并发级别会造成时间和空间的浪费，低的并发级别在写线程多时会引起线程间的竞争</li><li>CHM的所有操作都是线程安全</li><li>CHM返回的迭代器是弱一致性，fail-safe并且不会抛出ConcurrentModificationException异常</li><li>CHM不允许null的键值</li><li>可以使用CHM代替HashTable，但要记住CHM不会锁住整个Map</li></ul><hr><p><em>参考</em></p><blockquote><p><a href="https://yemengying.com/2015/11/06/【译】如何在java中使用ConcurrentHashMap/" target="_blank" rel="noopener">【译】如何在java中使用ConcurrentHashMap</a></p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;ConcurrentHashMap(简称&lt;code&gt;CHM&lt;/code&gt;)是在Java 1.5作为&lt;code&gt;Hashtable&lt;/code&gt;的替代选择新引入的，是concurrent包的重要成员。在Java 1.5之前，如果想要实现一个可以在多线程和并发的程序中安全使用的Map,只能在HashTable和synchronized Map中选择，因为HashMap并不是线程安全的。但再引入了CHM之后，我们有了更好的选择。CHM不但是线程安全的，而且比HashTable和synchronizedMap的性能要好。相对于HashTable和synchronizedMap锁住了整个Map，CHM只锁住部分Map。CHM允许并发的读操作，同时通过同步锁在写操作时保持数据完整性。&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="爪哇" scheme="https://hsb786.github.io/tags/%E7%88%AA%E5%93%87/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>jvm-GC（转载）</title>
+    <link href="https://hsb786.github.io/2018/04/13/jvm-GC/"/>
+    <id>https://hsb786.github.io/2018/04/13/jvm-GC/</id>
+    <published>2018-04-13T06:10:31.000Z</published>
+    <updated>2018-04-13T06:42:42.575Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="关键字约定"><a href="#关键字约定" class="headerlink" title="关键字约定"></a>关键字约定</h2><ul><li>Young generation –&gt;新生代</li><li>Tenured / Old Generation –&gt;老年代</li><li>Perm Area –&gt;永久代</li></ul><h2 id="重要的东东"><a href="#重要的东东" class="headerlink" title="重要的东东"></a>重要的东东</h2><ul><li>在Java中，对象实例都是在堆上创建。一些类信息，常量，静态变量等存储在方法区。堆和方法区都是线程共享的。</li><li>GC机制是由JVM提供，用来清理需要清除的对象，回收堆内存。</li><li>GC机制将Java程序员从内存管理中解放了出来，可以更关注于业务逻辑。</li><li>在Java中，GC是由一个被称为垃圾回收器的守护线程执行的。</li><li>在从内存回收一个对象之前会调用对象的finalize()方法。</li><li>作为一个Java开发者不能强制JVM执行GC；GC的触发由JVM依据堆内存的大小来决定。</li><li>System.gc()和Runtime.gc()会向JVM发送执行GC的请求，但是JVM不保证一定会执行GC。</li><li>如果堆没有内存创建新的对象了，会抛出<code>OutOfMemoryError</code>。<a id="more"></a><h2 id="GC针对什么对象？"><a href="#GC针对什么对象？" class="headerlink" title="GC针对什么对象？"></a>GC针对什么对象？</h2></li></ul><p>了解GC机制的第一步就是理解什么样的对象会被回收。当一个对象通过一系列根对象(比如：静态属性引用的常量)都不可达时就会被回收。简而言之，当一个对象的所有引用都为null。循环依赖不算做引用，如果对象A有一个指向对象B的引用，对象B也有一个指向对象A的引用，除此之外，它们没有其他引用，那么对象A和对象B都、需要被回收(如下图,ObjA和ObjB需要被回收)。</p><p><img src="/images/GC-Object.png" alt="GC回收对象"></p><h2 id="堆内存是如何划分的？"><a href="#堆内存是如何划分的？" class="headerlink" title="堆内存是如何划分的？"></a>堆内存是如何划分的？</h2><p>Java中对象都在堆上创建。为了GC，堆内存分为三个部分，也可以说三代，分别称为新生代，老年代和永久代。其中新生代又进一步分为Eden区，Survivor 1区和Survivor 2区(如下图)。新创建的对象会分配在Eden区,在经历一次Minor GC后会被移到Survivor 1区，再经历一次Minor GC后会被移到Survivor 2区，直到升至老年代,需要注意的是，一些大对象(长字符串或数组)可能会直接存放到老年代。</p><p><img src="/images/堆内存.png" alt="堆内存"></p><p>永久代有一些特殊，它用来存储类的元信息。对于GC是否发生在永久代有许多不同的看法，在我看来这取决于采用的JVM。大家可以通过创建大量的字符串来观察是发生了GC还是抛出了OutOfMemoryError。</p><h2 id="GC算法"><a href="#GC算法" class="headerlink" title="GC算法"></a>GC算法</h2><ol><li>标记清除算法<br> 分为标记和清除两个阶段：首先标记出所有需要回收的对象，在标记完成后统一回收所有被标记的对象。该算法的缺点是效率不高并且会产生不连续的内存碎片。<br><img src="/images/sweep.jpg" alt=""></li><li>复制算法<br> 把内存空间划为两个区域，每次只使用其中一个区域。垃圾回收时，遍历当前使用区域，把正在使用中的对象复制到另外一个区域中。此算法每次只处理正在使用中的对象，因此复制成本比较小，同时复制过去以后还能进行相应的内存整理，不会出现“碎片”问题。优点：实现简单，运行高效。缺点：会浪费一定的内存。一般新生代采用这种算法。<br><img src="/images/copy.jpg" alt=""></li><li>标记整理算法<br> 标记阶段与标记清除算法一样。但后续并不是直接对可回收的对象进行清理，而是让所有存活对象都想一端移动，然后清理。优点是不会造成内存碎片。<br><img src="/images/compact.jpg" alt=""></li></ol><h2 id="Java中垃圾回收器的类型"><a href="#Java中垃圾回收器的类型" class="headerlink" title="Java中垃圾回收器的类型"></a>Java中垃圾回收器的类型</h2><p>Java提供多种类型的垃圾回收器。JVM中的垃圾收集一般都采用“分代收集”，不同的堆内存区域采用不同的收集算法，主要目的就是为了增加吞吐量或降低停顿时间。</p><ul><li>Serial收集器：新生代收集器，使用复制算法，使用一个线程进行GC，串行，其它工作线程暂停。</li><li>ParNew收集器：新生代收集器，使用复制算法，Serial收集器的多线程版，用多个线程进行GC，并行，其它工作线程暂停。使用-XX:+UseParNewGC开关来控制使用ParNew+Serial Old收集器组合收集内存；使用-XX:ParallelGCThreads来设置执行内存回收的线程数。</li><li>Parallel Scavenge 收集器：吞吐量优先的垃圾回收器，作用在新生代，使用复制算法，关注CPU吞吐量，即运行用户代码的时间/总时间。使用-XX:+UseParallelGC开关控制使用Parallel Scavenge+Serial Old收集器组合回收垃圾。</li><li>Serial Old收集器：老年代收集器，单线程收集器，串行，使用标记整理算法，使用单线程进行GC，其它工作线程暂停。</li><li>Parallel Old收集器：吞吐量优先的垃圾回收器，作用在老年代，多线程，并行，多线程机制与Parallel Scavenge差不错，使用标记整理算法，在Parallel Old执行时，仍然需要暂停其它线程。</li><li>CMS（Concurrent Mark Sweep）收集器：老年代收集器，致力于获取最短回收停顿时间（即缩短垃圾回收的时间），使用标记清除算法，多线程，优点是并发收集（用户线程可以和GC线程同时工作），停顿小。使用-XX:+UseConcMarkSweepGC进行ParNew+CMS+Serial Old进行内存回收，优先使用ParNew+CMS（原因见Full GC和并发垃圾回收一节），当用户线程内存不足时，采用备用方案Serial Old收集。</li></ul><h2 id="与GC有关的JVM参数"><a href="#与GC有关的JVM参数" class="headerlink" title="与GC有关的JVM参数"></a>与GC有关的JVM参数</h2><p>在开发中我们需要通过分析造成Full GC的原因来提高系统性能，在这个过程中我发现做GC的调优很大程度上依赖于对系统的分析，系统拥有怎样的对象以及他们的平均生命周期。<br>举个例子，如果一个应用大多是短生命周期的对象，那么应该确保Eden区足够大，这样可以减少Minor GC的次数。可以通过-XX:NewRatio来控制新生代和老年代的比例，比如-XX:NewRatio=3代表新生代和老年代的比例为1：3。需要注意的是，扩大新生代的大小会减少老年代的大小，这会导致Major GC执行的更频繁，而Major GC可能会造成用户线程的停顿从而降低系统吞吐量。JVM中可以用NewSize和MaxNewSize参数来指定新生代内存最小和最大值，如果两个参数值一样，那么就相当于固定了新生代的大小<br><img src="/images/jvm-parameter.png" alt="jvm参数"></p><h2 id="Full-GC和并发垃圾回收"><a href="#Full-GC和并发垃圾回收" class="headerlink" title="Full GC和并发垃圾回收"></a>Full GC和并发垃圾回收</h2><p>并发垃圾回收器的内存回收过程是与用户线程一起并发执行的。通常情况下，并发垃圾回收器可以在用户线程运行的情况下完成大部分的回收工作，所以应用停顿时间很短。</p><p>但由于并发垃圾回收时用户线程还在运行，所以会有新的垃圾不断产生。作为担保，如果在老年代内存都被占用之前，如果并发垃圾回收器还没结束工作，那么应用会暂停，在所有用户线程停止的情况下完成回收。这种情况称作Full GC，这意味着需要调整有关并发回收的参数了。</p><p>由于Full GC很影响应用的性能，要尽量避免或减少。特别是如果对于高容量低延迟的电商系统，要尽量避免在交易时间段发生Full GC。</p><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul><li>为了分代垃圾回收，Java堆内存分为3代：新生代，老年代和永久代。</li><li>新的对象实例会优先分配在新生代，在经历几次Minor GC后(默认15次)，还存活的会被移至老年代(某些大对象会直接在老年代分配)。</li><li>永久代是否执行GC，取决于采用的JVM。</li><li>Minor GC发生在新生代，当Eden区没有足够空间时，会发起一次Minor GC，将Eden区中的存活对象移至Survivor区。Major GC发生在老年代，当升到老年代的对象大于老年代剩余空间时会发生Major GC。</li><li>发生Major GC时用户线程会暂停，会降低系统性能和吞吐量。</li><li>JVM的参数-Xmx和-Xms用来设置Java堆内存的初始大小和最大值。依据个人经验这个值的比例最好是1:1或者1:1.5。比如，你可以将-Xmx和-Xms都设为1GB，或者-Xmx和-Xms设为1.2GB和1.8GB。</li><li>Java中不能手动触发GC，但可以用不同的引用类来辅助垃圾回收器工作(比如：弱引用或软引用)。</li></ul><p>以上就是关于Java中GC的一些内容。通过这篇博客，我们可以知道堆内存是如何划分的；一个对象在没有任何强引用指向他或该对象通过根节点不可达时需要被垃圾回收器回收；当垃圾收集器意识到需要进行GC时会触发Minor GC或Major GC，是自动的，无法强制执行。</p><hr><p><em>参考</em></p><blockquote><p><a href="https://yemengying.com/2016/05/13/jvm-GC/" target="_blank" rel="noopener">【译】Java中的垃圾回收机制 </a></p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;关键字约定&quot;&gt;&lt;a href=&quot;#关键字约定&quot; class=&quot;headerlink&quot; title=&quot;关键字约定&quot;&gt;&lt;/a&gt;关键字约定&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;Young generation –&amp;gt;新生代&lt;/li&gt;
+&lt;li&gt;Tenured / Old Generation –&amp;gt;老年代&lt;/li&gt;
+&lt;li&gt;Perm Area –&amp;gt;永久代&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;重要的东东&quot;&gt;&lt;a href=&quot;#重要的东东&quot; class=&quot;headerlink&quot; title=&quot;重要的东东&quot;&gt;&lt;/a&gt;重要的东东&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;在Java中，对象实例都是在堆上创建。一些类信息，常量，静态变量等存储在方法区。堆和方法区都是线程共享的。&lt;/li&gt;
+&lt;li&gt;GC机制是由JVM提供，用来清理需要清除的对象，回收堆内存。&lt;/li&gt;
+&lt;li&gt;GC机制将Java程序员从内存管理中解放了出来，可以更关注于业务逻辑。&lt;/li&gt;
+&lt;li&gt;在Java中，GC是由一个被称为垃圾回收器的守护线程执行的。&lt;/li&gt;
+&lt;li&gt;在从内存回收一个对象之前会调用对象的finalize()方法。&lt;/li&gt;
+&lt;li&gt;作为一个Java开发者不能强制JVM执行GC；GC的触发由JVM依据堆内存的大小来决定。&lt;/li&gt;
+&lt;li&gt;System.gc()和Runtime.gc()会向JVM发送执行GC的请求，但是JVM不保证一定会执行GC。&lt;/li&gt;
+&lt;li&gt;如果堆没有内存创建新的对象了，会抛出&lt;code&gt;OutOfMemoryError&lt;/code&gt;。
+    
+    </summary>
+    
+    
+      <category term="爪哇" scheme="https://hsb786.github.io/tags/%E7%88%AA%E5%93%87/"/>
+    
+      <category term="JVM" scheme="https://hsb786.github.io/tags/JVM/"/>
+    
+  </entry>
   
   <entry>
     <title>Executor, ExecutorService 和 Executors 间的不同 （转载）</title>
@@ -375,72 +450,6 @@
     <summary type="html">
     
       &lt;p&gt;输入一个链表，输出该链表的倒数第K个节点。为了符合大多数人的习惯，本题从1开始计数，即链表尾节点是倒数第一个节点。&lt;br&gt;
-    
-    </summary>
-    
-    
-      <category term="剑指Offer" scheme="https://hsb786.github.io/tags/%E5%89%91%E6%8C%87Offer/"/>
-    
-      <category term="算法" scheme="https://hsb786.github.io/tags/%E7%AE%97%E6%B3%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>调整数组顺序使奇数位于偶数之前</title>
-    <link href="https://hsb786.github.io/2018/04/10/%E8%B0%83%E6%95%B4%E6%95%B0%E7%BB%84%E9%A1%BA%E5%BA%8F%E4%BD%BF%E5%A5%87%E6%95%B0%E4%BD%8D%E4%BA%8E%E5%81%B6%E6%95%B0%E4%B9%8B%E5%89%8D/"/>
-    <id>https://hsb786.github.io/2018/04/10/调整数组顺序使奇数位于偶数之前/</id>
-    <published>2018-04-10T12:10:37.000Z</published>
-    <updated>2018-04-12T05:28:10.149Z</updated>
-    
-    <content type="html"><![CDATA[<p>输入一个整数数组，实现一个函数来调整该数组中数组的顺序，使得所有的奇数位于数组的前半部分，偶数位于数组的后半部分。<br><a id="more"></a></p><p><strong>快速排序的思想</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">  /**</span><br><span class="line">    * 快速排序的思想</span><br><span class="line">    * 左边一个指针向右移，遇到偶数停止；</span><br><span class="line">    * 右边一直指针向左移，遇到奇数停止。</span><br><span class="line">    * 两个值交换</span><br><span class="line">    * @author: husb   </span><br><span class="line">    * @date: 2018年4月10日 下午7:12:45 </span><br><span class="line">    */</span><br><span class="line">private static void reorderOddEven(int[] arr) &#123;</span><br><span class="line">    int left = -1;</span><br><span class="line">    int right = arr.length ;</span><br><span class="line">    while (left != right&amp;&amp;left&lt;=right) &#123;</span><br><span class="line">        while(arr[++left]%2!=0&amp;&amp;left&lt;arr.length-1);</span><br><span class="line">        while(arr[--right]%2==0&amp;&amp;right&gt;=0);</span><br><span class="line">        if(left&lt;right) &#123;</span><br><span class="line">            int t=arr[left];</span><br><span class="line">            arr[left]=arr[right];</span><br><span class="line">            arr[right]=t;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;输入一个整数数组，实现一个函数来调整该数组中数组的顺序，使得所有的奇数位于数组的前半部分，偶数位于数组的后半部分。&lt;br&gt;
-    
-    </summary>
-    
-    
-      <category term="剑指Offer" scheme="https://hsb786.github.io/tags/%E5%89%91%E6%8C%87Offer/"/>
-    
-      <category term="算法" scheme="https://hsb786.github.io/tags/%E7%AE%97%E6%B3%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>在O(1)时间内删除链表节点</title>
-    <link href="https://hsb786.github.io/2018/04/10/%E5%9C%A8O(1)%E6%97%B6%E9%97%B4%E5%86%85%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E8%8A%82%E7%82%B9/"/>
-    <id>https://hsb786.github.io/2018/04/10/在O(1)时间内删除链表节点/</id>
-    <published>2018-04-10T12:04:16.000Z</published>
-    <updated>2018-04-12T05:27:44.657Z</updated>
-    
-    <content type="html"><![CDATA[<p>给定单向链表的头指针和一个节点指针，定义一个函数在O(1)时间删除该节点。<br><a id="more"></a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"> /**</span><br><span class="line"> * 由于时间复杂度要求为O(1)，</span><br><span class="line"> * 只能将加一个节点的值复制到要删除的节点，之后再将下一个节点删除</span><br><span class="line"> * @author: husb   </span><br><span class="line"> * @date: 2018年4月10日 下午3:43:23</span><br><span class="line"> */</span><br><span class="line">public static void deleteNode(ListNode head, ListNode node) &#123;</span><br><span class="line">//若为头节点，则将头节点设为head.next</span><br><span class="line">if (node == head) &#123;</span><br><span class="line">head = head.next;</span><br><span class="line">//若为未节点，只能遍历了</span><br><span class="line">&#125; else if (node.next == null) &#123;</span><br><span class="line">ListNode t=head;</span><br><span class="line">while(t.next!=node) &#123;</span><br><span class="line">t=t.next;</span><br><span class="line">&#125;</span><br><span class="line">t.next=null;</span><br><span class="line">&#125; else &#123;</span><br><span class="line">//若为中间节点，则将下个节点的值复制到要删除的阶段，并且移除一个节点</span><br><span class="line">node.data = node.next.data;</span><br><span class="line">node.next = node.next.next;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;给定单向链表的头指针和一个节点指针，定义一个函数在O(1)时间删除该节点。&lt;br&gt;
-    
-    </summary>
-    
-    
-      <category term="剑指Offer" scheme="https://hsb786.github.io/tags/%E5%89%91%E6%8C%87Offer/"/>
-    
-      <category term="算法" scheme="https://hsb786.github.io/tags/%E7%AE%97%E6%B3%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>二进制中1的个数</title>
-    <link href="https://hsb786.github.io/2018/04/10/%E4%BA%8C%E8%BF%9B%E5%88%B6%E4%B8%AD1%E7%9A%84%E4%B8%AA%E6%95%B0/"/>
-    <id>https://hsb786.github.io/2018/04/10/二进制中1的个数/</id>
-    <published>2018-04-10T08:11:44.000Z</published>
-    <updated>2018-04-12T05:27:32.509Z</updated>
-    
-    <content type="html"><![CDATA[<p>请实现一个函数，输入一个整数，输出该整数二进制表示中1的个数。<br><a id="more"></a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * n&amp;(n-1)，将二进制表示中的最低位的1变为0</span><br><span class="line"> * @author: husb   </span><br><span class="line"> * @date: 2018年4月10日 下午3:23:02 </span><br><span class="line"> */</span><br><span class="line">private static int numberOfOne(int n) &#123;</span><br><span class="line">int count=0;</span><br><span class="line">while(n!=0) &#123;</span><br><span class="line">n=n&amp;(n-1);</span><br><span class="line">count++;</span><br><span class="line">&#125;</span><br><span class="line">return count;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;请实现一个函数，输入一个整数，输出该整数二进制表示中1的个数。&lt;br&gt;
     
     </summary>
     
