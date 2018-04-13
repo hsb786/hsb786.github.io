@@ -14,7 +14,7 @@
 <meta property="og:description" content="Executor框架Exexutor框架是一个根据一组执行策略调用，调度，执行和控制的异步任务的框架，可以用来控制线程的启动、执行和关闭，可以简化并发编程的操作。无限制的创建线程会引起应用程序内存溢出。所以创建一个线程池是个更好的解决方案，因为可以限制线程的数量并且可以回收再利用这些线程。Executor框架包括：线程池、Executor、Exexutors、ExecutorService、Com">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://hsb786.github.io/images/threadPool.png">
-<meta property="og:updated_time" content="2018-04-12T05:27:05.129Z">
+<meta property="og:updated_time" content="2018-04-13T12:04:20.171Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="线程池">
 <meta name="twitter:description" content="Executor框架Exexutor框架是一个根据一组执行策略调用，调度，执行和控制的异步任务的框架，可以用来控制线程的启动、执行和关闭，可以简化并发编程的操作。无限制的创建线程会引起应用程序内存溢出。所以创建一个线程池是个更好的解决方案，因为可以限制线程的数量并且可以回收再利用这些线程。Executor框架包括：线程池、Executor、Exexutors、ExecutorService、Com">
@@ -217,40 +217,7 @@
         <div class="article-entry" itemprop="articleBody">
         
             
-            <h2 id="Executor框架"><a href="#Executor框架" class="headerlink" title="Executor框架"></a>Executor框架</h2><p>Exexutor框架是一个根据一组执行策略调用，调度，执行和控制的异步任务的框架，可以用来控制线程的启动、执行和关闭，可以简化并发编程的操作。无限制的创建线程会引起应用程序内存溢出。所以创建一个线程池是个更好的解决方案，因为可以限制线程的数量并且可以回收再利用这些线程。Executor框架包括：线程池、Executor、Exexutors、ExecutorService、CompletionService、Future、Callable等。<br><a id="more"></a><br>ExecutorService接口对Executor接口进行了扩展，提供了返回Future对象，终止，关闭线程池等方法。</p>
-<p>通过ExecutorService.submit()方法返回的Future对象，还可以取消任务的执行。Future提供了Cancel()方法用来取消pending中的任务。</p>
-<p>Executor是一个顶层接口，在它里面只声明了一个方法execute(Runnable)，返回值为void，参数为Runnable类型，从字面意思可以理解，就是用来执行传进去的任务的。然后ExecutorService接口继承了Executor接口，并声明了一些方法：submit、invokeAll、invokeAny以及shutDown等。抽象类AbstractExecutorService实现了ExecutorService接口，基本实现了ExecutorService中声明的所有方法。然后ThreadPoolExecutor继承了类AbstractExecutorService。</p>
-<table>
-<thead>
-<tr>
-<th>Executor</th>
-<th>ExecutorService</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Executor是java线程池的核心接口，用来并发执行提交的任务</td>
-<td>ExecutorService是Executor接口的扩展，提供了异步执行和关闭线程的方法</td>
-</tr>
-<tr>
-<td>提供execute()方法用来提交任务</td>
-<td>提供submit方法用来提交任务</td>
-</tr>
-<tr>
-<td>execute方法无返回值</td>
-<td>submit方法返回Future对象</td>
-</tr>
-<tr>
-<td>不能取消任务</td>
-<td>Future.cancel()中断线程停止任务</td>
-</tr>
-<tr>
-<td>没有提供和关闭线程池有关的方法</td>
-<td>提供了关闭线程池的方法</td>
-</tr>
-</tbody>
-</table>
-<hr>
+            <h2 id="Executor框架"><a href="#Executor框架" class="headerlink" title="Executor框架"></a>Executor框架</h2><p>Exexutor框架是一个根据一组执行策略调用，调度，执行和控制的异步任务的框架，可以用来控制线程的启动、执行和关闭，可以简化并发编程的操作。无限制的创建线程会引起应用程序内存溢出。所以创建一个线程池是个更好的解决方案，因为可以限制线程的数量并且可以回收再利用这些线程。Executor框架包括：线程池、Executor、Exexutors、ExecutorService、CompletionService、Future、Callable等。<br><a id="more"></a></p>
 <p><strong>关于Callable和Future</strong></p>
 <p>Callable接口使用泛型去定义它的返回类型。Executors类提供了一些有用的方法去在线程池中执行Callable内的任务。由于Callable任务是并行的，我们必须等待它返回的结果。java.util.concurrent.Future对象为我们解决了这个问题。在线程池提交Callable任务后返回了一个Future对象，使用它我们可以知道Callable任务的状态和得到Callable返回的执行结果。Future提供了get()方法让我们可以等待Callable结束并获取它的执行结果。</p>
 <p>Future提供了三种功能：</p>
@@ -259,11 +226,7 @@
 <li>能够中断任务</li>
 <li>能够获取执行结果</li>
 </ol>
-<hr>
-<p><strong>关于Future中的cancel()</strong></p>
 <p>Future对象提供了异步执行，这意味着无需等待任务执行的完成，只要提交需要执行的任务，然后再需要时检查Future是否已经有了结果，如果任务已经执行完成，就可以通过Future.get()方法获得执行结果。需要注意的是，Future.get()方法是一个阻塞式的方法，如果调用时任务还没有完成，会等待直到任务执行结束。</p>
-<p>cancel()传入true时会中断线程停止任务，传入false则会让线程正常执行完成。</p>
-<p>传入false只能取消还没有开始的任务，若任务已经开始了，就任由其运行下去。</p>
 <hr>
 <p><strong>FutureTask</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public class FutureTask&lt;V&gt; implements RunnableFuture&lt;V&gt; </span><br><span class="line"></span><br><span class="line">public interface RunnableFuture&lt;V&gt; extends Runnable, Future&lt;V&gt; &#123;</span><br><span class="line">    /**</span><br><span class="line">    * Sets this Future to the result of its computation</span><br><span class="line">    * unless it has been cancelled.</span><br><span class="line">    */</span><br><span class="line">    void run();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -345,7 +308,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/10/线程池/" data-id="cjfxvsg8d002pokmywe1m9dmu" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/10/线程池/" data-id="cjfxwuabx002nz0mygrzwjedl" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
