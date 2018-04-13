@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="HuShengBin’s blog">
 <meta property="og:description" content="初始化顺序 父类（静态变量，静态语句块） 子类（静态变量，静态语句块） 父类（实例变量，普通语句块） 父类（构造函数） 子类（实例变量，普通语句块） 子类（构造函数）">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-04-12T12:40:38.973Z">
+<meta property="og:updated_time" content="2018-04-13T11:21:53.636Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java基础总结">
 <meta name="twitter:description" content="初始化顺序 父类（静态变量，静态语句块） 子类（静态变量，静态语句块） 父类（实例变量，普通语句块） 父类（构造函数） 子类（实例变量，普通语句块） 子类（构造函数）">
@@ -289,6 +289,40 @@
 <p>限定通配符的上边界<br>ArrayList&lt;? extends Number&gt; collection=new ArrayList<integer>();</integer></p>
 <p>限定通配符的下边界<br>ArrayList&lt;? super Integer&gt; collection=new ArrayList<number>();</number></p>
 <h3 id="“擦除”"><a href="#“擦除”" class="headerlink" title="“擦除”"></a>“擦除”</h3><p>泛型是提供给javac编译器使用的，限定集合的输入类型，编译器编译带类型说明的集合时会去掉“类型”信息。</p>
+<h3 id="多态存在的三个条件"><a href="#多态存在的三个条件" class="headerlink" title="多态存在的三个条件"></a>多态存在的三个条件</h3><ol>
+<li>有继承关系</li>
+<li>子类重写父类方法</li>
+<li>父类引用指向子类对象</li>
+</ol>
+<p>以下三种类型的方法不能被重写：</p>
+<ol>
+<li>static方法。被static修饰的方法是属于类的，而不是属于实例的</li>
+<li>final方法。被final修饰的方法是无法被子类重写</li>
+<li>private方法。被private修饰的方法对子类不可见，</li>
+</ol>
+<h3 id="多态的分类"><a href="#多态的分类" class="headerlink" title="多态的分类"></a>多态的分类</h3><ol>
+<li>编译时多态，即方法的重载</li>
+<li>运行时多态，即方法的重写</li>
+</ol>
+<h3 id="throw和throws"><a href="#throw和throws" class="headerlink" title="throw和throws"></a>throw和throws</h3><p>throw: 表示抛出一个类的实例。throw关键字可以写在任何地方，并不强制必须写在catch块中，运行到throw所在的行，打印异常并立即退出当前方法。</p>
+<p>throws: 用于方法声明，指明可能发生的异常。</p>
+<h3 id="ArrayList"><a href="#ArrayList" class="headerlink" title="ArrayList"></a>ArrayList</h3><pre><code>transient Object[] elementData; 
+</code></pre><p>扩容1.5倍</p>
+<pre><code>int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);
+</code></pre><ol>
+<li>底层基于数组实现</li>
+<li>插入和删除的时候，涉及到元素复制</li>
+</ol>
+<h3 id="泛型"><a href="#泛型" class="headerlink" title="泛型"></a>泛型</h3><p>java集合有一个缺点是当把一个对象放入集合里面之后，集合就会”忘记”这个对象的数据类型，当再次取出该对象的时候，该对象的编译类型就变成了Object类型(该对象的运行时类型没变)。</p>
+<p>造成的问题：</p>
+<ol>
+<li>集合对元素类型没有任何限制，这样会引发一些问题。例如，想创建一个保存Dog对象的集合，但是程序也可以轻易的把Cat对象保存进去，所以会引发异常。</li>
+<li>由于把对象保存到集合里面时，集合丢失了对象的状态信息，集合只知道它盛装的是Object，因此取出集合元素之后通常还需要进行强制类型转换。这种强制类型转换即增加了编程的复杂度，也可能引发类型转换ClassCastException异常。</li>
+</ol>
+<hr>
+<p>在Java7以前，如果使用带有泛型的接口，类定义常量，那么调用构造器创建对象时构造器的后面也必须带泛型，这显得有些多余了。</p>
+<p>从java7开始，java允许在构造器后不需要带完整的泛型信息，只要给出一对尖括号(&lt;&gt;)即可，Java可以推断括号里面应该是什么泛型信息。即上面两条语句可以改写成为如下的形式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; strList=new ArrayList&lt;String&gt;();</span><br><span class="line">Map&lt;String,Integer&gt; scores=new HashMap&lt;String,Integer&gt;();</span><br></pre></td></tr></table></figure>
 
         
         </div>
@@ -299,7 +333,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/09/java基础总结/" data-id="cjfxnztd1000xwomyykz3txjn" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/09/java基础总结/" data-id="cjfxv8ii2000hpcmybec74pon" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
