@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://hsb786.github.io/"/>
-  <updated>2018-04-13T04:18:29.967Z</updated>
+  <updated>2018-04-13T04:23:59.089Z</updated>
   <id>https://hsb786.github.io/</id>
   
   <author>
@@ -21,19 +21,15 @@
     <link href="https://hsb786.github.io/2018/04/13/vscode-database/"/>
     <id>https://hsb786.github.io/2018/04/13/vscode-database/</id>
     <published>2018-04-13T03:55:59.000Z</published>
-    <updated>2018-04-13T04:18:29.967Z</updated>
+    <updated>2018-04-13T04:23:59.089Z</updated>
     
-    <content type="html"><![CDATA[<p><strong>最近发现了一个很好用的vscode插件, vscode-database</strong></p><p>迷上了vscode</p><p><img src="/images/vscode-database.png" alt=""></p><p><img src="/images/vscode_mysql.png" alt=""></p><p><strong>快捷键</strong></p><table><thead><tr><th>命令</th><th>语义</th></tr></thead><tbody><tr><td>ctrl q</td><td>querySQL</td></tr><tr><td>ctrl shift e</td><td>Run selected text as SQL query    </td></tr></tbody></table>]]></content>
+    <content type="html"><![CDATA[<p><strong>最近发现了一个很好用的vscode插件, vscode-database</strong></p><p>迷上了vscode</p><p><img src="/images/vscode-database.png" alt=""><br><a id="more"></a><br><img src="/images/vscode_mysql.png" alt=""></p><p><strong>快捷键</strong></p><table><thead><tr><th>命令</th><th>语义</th></tr></thead><tbody><tr><td>ctrl q</td><td>querySQL</td></tr><tr><td>ctrl shift e</td><td>Run selected text as SQL query    </td></tr></tbody></table>]]></content>
     
     <summary type="html">
     
-      
-      
-        &lt;p&gt;&lt;strong&gt;最近发现了一个很好用的vscode插件, vscode-database&lt;/strong&gt;&lt;/p&gt;
+      &lt;p&gt;&lt;strong&gt;最近发现了一个很好用的vscode插件, vscode-database&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;迷上了vscode&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/images/vscode-database.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img 
-      
+&lt;p&gt;&lt;img src=&quot;/images/vscode-database.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;
     
     </summary>
     
@@ -47,19 +43,15 @@
     <link href="https://hsb786.github.io/2018/04/13/%E8%A7%A6%E5%8F%91%E5%99%A8/"/>
     <id>https://hsb786.github.io/2018/04/13/触发器/</id>
     <published>2018-04-13T03:43:11.000Z</published>
-    <updated>2018-04-13T04:17:39.079Z</updated>
+    <updated>2018-04-13T04:22:44.305Z</updated>
     
-    <content type="html"><![CDATA[<p>对某一个表的某种操作，触发某种条件，从而执行的一段程序</p><p>new: 新数据，数据库里原先没有，将要有的数据。例如将要更新的数据或者是新增的数据。</p><p>old：旧数据，数据库里原先有的数据</p><p>说明：在把userjob(用户岗位关联表)中的success(审批状态)更新为true时，自动在成绩表中出入数据；否则说明没有审批没有通过，把成绩表中对应的数据删除<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">CREATE TRIGGER `insertScore` AFTER UPDATE ON `userjob` FOR EACH ROW if new.success=true then</span><br><span class="line">insert into score(id) values(new.id);</span><br><span class="line">else delete from score where id=new.id;</span><br><span class="line">end if</span><br></pre></td></tr></table></figure></p><p>说明：在删除userjob(用户岗位关联表)的数据时，自动删除成绩表对应中的数据<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">CREATE TRIGGER `deleteScore` BEFORE DELETE ON `userjob` FOR EACH ROW if old.success=true then</span><br><span class="line">delete from score where id=old.id;</span><br><span class="line">end if</span><br></pre></td></tr></table></figure></p>]]></content>
+    <content type="html"><![CDATA[<p>对某一个表的某种操作，触发某种条件，从而执行的一段程序</p><p>new: 新数据，数据库里原先没有，将要有的数据。例如将要更新的数据或者是新增的数据。</p><p>old：旧数据，数据库里原先有的数据<br><a id="more"></a></p><p>说明：在把userjob(用户岗位关联表)中的success(审批状态)更新为true时，自动在成绩表中出入数据；否则说明没有审批没有通过，把成绩表中对应的数据删除<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">CREATE TRIGGER `insertScore` AFTER UPDATE ON `userjob` FOR EACH ROW if new.success=true then</span><br><span class="line">insert into score(id) values(new.id);</span><br><span class="line">else delete from score where id=new.id;</span><br><span class="line">end if</span><br></pre></td></tr></table></figure></p><p>说明：在删除userjob(用户岗位关联表)的数据时，自动删除成绩表对应中的数据<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">CREATE TRIGGER `deleteScore` BEFORE DELETE ON `userjob` FOR EACH ROW if old.success=true then</span><br><span class="line">delete from score where id=old.id;</span><br><span class="line">end if</span><br></pre></td></tr></table></figure></p>]]></content>
     
     <summary type="html">
     
-      
-      
-        &lt;p&gt;对某一个表的某种操作，触发某种条件，从而执行的一段程序&lt;/p&gt;
+      &lt;p&gt;对某一个表的某种操作，触发某种条件，从而执行的一段程序&lt;/p&gt;
 &lt;p&gt;new: 新数据，数据库里原先没有，将要有的数据。例如将要更新的数据或者是新增的数据。&lt;/p&gt;
-&lt;p&gt;old：旧数据，数据库里原先有的数据&lt;/p&gt;
-&lt;p&gt;说明：在把userjob(用户岗位关联表)中的su
-      
+&lt;p&gt;old：旧数据，数据库里原先有的数据&lt;br&gt;
     
     </summary>
     
