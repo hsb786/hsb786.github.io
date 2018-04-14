@@ -14,7 +14,7 @@
 <meta property="og:description" content="MyBatis简介 MyBatis 是一款优秀的持久层框架，它支持定制化 SQL、存储过程以及高级映射。MyBatis 避免了几乎所有的 JDBC 代码和手动设置参数以及获取结果集。MyBatis 可以使用简单的 XML 或注解来配置和映射原生信息，将接口和 Java 的 POJOs(Plain Old Java Objects,普通的 Java对象)映射成数据库中的记录。 Mybatis与Hib">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://hsb786.github.io/images/mybatis-logo.png">
-<meta property="og:updated_time" content="2018-04-12T08:45:29.292Z">
+<meta property="og:updated_time" content="2018-04-14T05:13:08.342Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MyBatis">
 <meta name="twitter:description" content="MyBatis简介 MyBatis 是一款优秀的持久层框架，它支持定制化 SQL、存储过程以及高级映射。MyBatis 避免了几乎所有的 JDBC 代码和手动设置参数以及获取结果集。MyBatis 可以使用简单的 XML 或注解来配置和映射原生信息，将接口和 Java 的 POJOs(Plain Old Java Objects,普通的 Java对象)映射成数据库中的记录。 Mybatis与Hib">
@@ -315,11 +315,22 @@
 <h3 id="和"><a href="#和" class="headerlink" title="#{}和${}"></a>#{}和${}</h3><p>#{}表示一个占位符号，用来传入参数，sql在解析的时候会加上” “,当成字符串来解析，可以防止sql注入</p>
 <p>${}表示一个拼接符号, 传入数据直接显示在生成的sql中，这样就会导致sql注入</p>
 <hr>
+<h2 id="MyBatis缓存"><a href="#MyBatis缓存" class="headerlink" title="MyBatis缓存"></a>MyBatis缓存</h2><p>MyBatis提供一级缓存和二级缓存</p>
+<p>如果缓存中有数据就不用从数据库中获取，减少了和数据之间的交互次数，大大提高系统的性能。</p>
+<p><img src="/images/MyBatis-Cache01.png" alt=""></p>
+<ul>
+<li>一级缓存是sqlSession级别的缓存。在操作数据库时需要构造sqlSession对象，在对象中有一个数据结构(HashMap)，用于存储缓存数据。不同的sqlSession之间的缓存区域(HashMap)是互不影响的。</li>
+<li>二级缓存是mapper级别的缓存，多个sqlSession去操作同一个Mapper的sql语句，多个SqlSession可以公用二级缓存，二级缓存是跨sqlSession的。</li>
+</ul>
+<h3 id="一级缓存的工作原理"><a href="#一级缓存的工作原理" class="headerlink" title="一级缓存的工作原理"></a>一级缓存的工作原理</h3><p><img src="/images/MyBatis-Cache02.png" alt=""></p>
+<h3 id="二级缓存的工作原理"><a href="#二级缓存的工作原理" class="headerlink" title="二级缓存的工作原理"></a>二级缓存的工作原理</h3><p><img src="/images/MyBatis-Cache03.png" alt=""></p>
+<hr>
 <p><em>参考</em></p>
 <blockquote>
 <p><a href="http://www.mybatis.org/mybatis-3/zh/index.html" target="_blank" rel="noopener">MyBatis官方文档</a></p>
 <p><a href="https://lujunqiu.github.io/2018/01/23/MyBatis入门/" target="_blank" rel="noopener">MyBatis入门</a></p>
 <p><a href="https://lujunqiu.github.io/2018/01/26/MyBatis进阶/" target="_blank" rel="noopener">MyBatis进阶</a></p>
+<p><a href="http://www.cnblogs.com/xiaoxi/p/6640590.html" target="_blank" rel="noopener">Mybatis学习总结（九）——查询缓存</a></p>
 </blockquote>
 
         
@@ -331,7 +342,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/12/MyBatis/" data-id="cjfywvdw2000pg4myrujkcc5d" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/12/MyBatis/" data-id="cjfyxefth000c6omywushkiew" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
