@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <meta charset="utf-8">
+    
+    <title>IOC-实现原理 | HuShengBin’s blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="本来想研究一下Spring源码的，奈何自己太渣，看了一下代码，发现层次太多，感觉无从下手，之后发现了这篇博客，寥寥几行代码就把IOC实现了。链接放在底部，也可以看下 黄亿华分析的，同样在底部   IOC 也就是“控制反转”了，不过更流行的叫法是“依赖注入”（DI - Dependency Injection）。听起来挺高深，其实实现起来并不复杂。下面就看看如何来实现这个轻量级 IOC 框架。">
+<meta name="keywords" content="Spring">
+<meta property="og:type" content="article">
+<meta property="og:title" content="IOC-实现原理">
+<meta property="og:url" content="https://hsb786.github.io/2018/04/14/IOC-实现原理/index.html">
+<meta property="og:site_name" content="HuShengBin’s blog">
+<meta property="og:description" content="本来想研究一下Spring源码的，奈何自己太渣，看了一下代码，发现层次太多，感觉无从下手，之后发现了这篇博客，寥寥几行代码就把IOC实现了。链接放在底部，也可以看下 黄亿华分析的，同样在底部   IOC 也就是“控制反转”了，不过更流行的叫法是“依赖注入”（DI - Dependency Injection）。听起来挺高深，其实实现起来并不复杂。下面就看看如何来实现这个轻量级 IOC 框架。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-04-14T05:37:47.236Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="IOC-实现原理">
+<meta name="twitter:description" content="本来想研究一下Spring源码的，奈何自己太渣，看了一下代码，发现层次太多，感觉无从下手，之后发现了这篇博客，寥寥几行代码就把IOC实现了。链接放在底部，也可以看下 黄亿华分析的，同样在底部   IOC 也就是“控制反转”了，不过更流行的叫法是“依赖注入”（DI - Dependency Injection）。听起来挺高深，其实实现起来并不复杂。下面就看看如何来实现这个轻量级 IOC 框架。">
+    
+
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                
+                <span class="site-title">HuShengBin’s blog</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">Home</a>
+                
+                    <a class="main-nav-link" href="/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/about">About</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/css/images/txx.jpg" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/css/images/txx.jpg" />
+            <h2 id="name">hushengbin</h2>
+            <h3 id="title">JavaWeb Developer</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>Nanchang, Jiangxi, China</span>
+            <a id="follow" target="_blank" href="https://github.com/hsb786">关注我</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                46
+                <span>文章</span>
+            </div>
+            <div class="article-info-block">
+                12
+                <span>标签</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="https://github.com/hsb786" target="_blank" title="github" class=tooltip>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-IOC-实现原理" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            IOC-实现原理
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2018/04/14/IOC-实现原理/">
+            <time datetime="2018-04-14T05:22:40.000Z" itemprop="datePublished">2018-04-14</time>
+        </a>
+    </div>
+
+
+                        
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Spring/">Spring</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <blockquote>
+<p>本来想研究一下Spring源码的，奈何自己太渣，看了一下代码，发现层次太多，感觉无从下手，之后发现了这篇博客，寥寥几行代码就把IOC实现了。链接放在底部，也可以看下 黄亿华分析的，同样在底部</p>
+</blockquote>
+<p> IOC 也就是“控制反转”了，不过更流行的叫法是“依赖注入”（DI - Dependency Injection）。听起来挺高深，其实实现起来并不复杂。下面就看看如何来实现这个轻量级 IOC 框架。 </p>
+<p>从实例出发，先看看以下 Action 代码。 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">@Bean</span><br><span class="line">public class ProductAction extends BaseAction &#123;</span><br><span class="line">    @Inject</span><br><span class="line">    private ProductService productService;</span><br><span class="line"></span><br><span class="line">    @Request(&quot;GET:/product/&#123;id&#125;&quot;)</span><br><span class="line">    public Result getProductById(long productId) &#123;</span><br><span class="line">        if (productId == 0) &#123;</span><br><span class="line">            return new Result(ERROR_PARAM);</span><br><span class="line">        &#125;</span><br><span class="line">        Product product = productService.getProduct(productId);</span><br><span class="line">        if (product != null) &#123;</span><br><span class="line">            return new Result(OK, product);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            return new Result(ERROR_DATA);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p> 以上使用了两个自定义注解：@Bean 与 @Inject。<br>在 ProductAction 类上标注了 @Bean 注解，表示该类会交给“容器”处理，以便加入依赖注入框架。</p>
+<p>在 produceService 字段上标注了 @Inject 注解，表示该字段将会被注入进来，而无需 new ProductServiceImpl()，实际上 new 这件事情不是我们做的，而是框架做的，也就是说控制权正好反过来了，所以“依赖注入（DI）”也称作“控制反转（IoC）”。</p>
+<p>那么，应该如何实现依赖注入框架呢？首先还是看看下面的 BeanHelper 类吧。 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">public class BeanHelper &#123;</span><br><span class="line">    private static final Map&lt;Class&lt;?&gt;, Object&gt; beanMap = new HashMap&lt;Class&lt;?&gt;, Object&gt;();</span><br><span class="line"></span><br><span class="line">    static &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            // 获取并遍历所有的 Bean（带有 @Bean 注解的类）</span><br><span class="line">            List&lt;Class&lt;?&gt;&gt; beanClassList = ClassHelper.getClassListByAnnotation(Bean.class);</span><br><span class="line">            for (Class&lt;?&gt; beanClass : beanClassList) &#123;</span><br><span class="line">                // 创建 Bean 实例</span><br><span class="line">                Object beanInstance = beanClass.newInstance();</span><br><span class="line">                // 将 Bean 实例放入 Bean Map 中（键为 Bean 类，值为 Bean 实例）</span><br><span class="line">                beanMap.put(beanClass, beanInstance);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            // 遍历 Bean Map</span><br><span class="line">            for (Map.Entry&lt;Class&lt;?&gt;, Object&gt; beanEntry : beanMap.entrySet()) &#123;</span><br><span class="line">                // 获取 Bean 类与 Bean 实例</span><br><span class="line">                Class&lt;?&gt; beanClass = beanEntry.getKey();</span><br><span class="line">                Object beanInstance = beanEntry.getValue();</span><br><span class="line">                // 获取 Bean 类中所有的字段（不包括父类中的方法）</span><br><span class="line">                Field[] beanFields = beanClass.getDeclaredFields();</span><br><span class="line">                if (ArrayUtil.isNotEmpty(beanFields)) &#123;</span><br><span class="line">                    // 遍历所有的 Bean 字段</span><br><span class="line">                    for (Field beanField : beanFields) &#123;</span><br><span class="line">                        // 判断当前 Bean 字段是否带有 @Inject 注解</span><br><span class="line">                        if (beanField.isAnnotationPresent(Inject.class)) &#123;</span><br><span class="line">                            // 获取 Bean 字段对应的接口</span><br><span class="line">                            Class&lt;?&gt; interfaceClass = beanField.getType();</span><br><span class="line">                            // 获取该接口所有的实现类</span><br><span class="line">                            List&lt;Class&lt;?&gt;&gt; implementClassList = ClassHelper.getClassListByInterface(interfaceClass);</span><br><span class="line">                            if (CollectionUtil.isNotEmpty(implementClassList)) &#123;</span><br><span class="line">                                // 获取第一个实现类</span><br><span class="line">                                Class&lt;?&gt; implementClass = implementClassList.get(0);</span><br><span class="line">                                // 从 Bean Map 中获取该实现类对应的实现类实例</span><br><span class="line">                                Object implementInstance = beanMap.get(implementClass);</span><br><span class="line">                                // 设置该 Bean 字段的值</span><br><span class="line">                                beanField.setAccessible(true); // 必须使该字段可访问</span><br><span class="line">                                beanField.set(beanInstance, implementInstance);</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; catch (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static Map&lt;Class&lt;?&gt;, Object&gt; getBeanMap() &#123;</span><br><span class="line">        return beanMap;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @SuppressWarnings(&quot;unchecked&quot;)</span><br><span class="line">    public static &lt;T&gt; T getBean(Class&lt;T&gt; cls) &#123;</span><br><span class="line">        return (T) beanMap.get(cls);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其实很简单，依赖注入其实分为两个步骤：1. 通过反射创建实例；2. 获取需要注入的接口实现类并将其赋值给该接口。以上代码中的两个 for 循环就是干这两件事情的。  </p>
+<p>依赖注入框架实现完毕！ </p>
+<p>大家上面看到的 BeanHelper 类，其实兼任了两种职责：1.初始化所有的 Bean 类；2.实现依赖注入。</p>
+<p>这违法了设计模式中的“单一责任原则”，所有有必要将其重构一下，现在的 BeanHelper 类更加苗条了，只是负责初始化 Bean 类而已。代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">public class BeanHelper &#123;</span><br><span class="line"></span><br><span class="line">    // Bean 类 =&gt; Bean 实例</span><br><span class="line">    private static final Map&lt;Class&lt;?&gt;, Object&gt; beanMap = new HashMap&lt;Class&lt;?&gt;, Object&gt;();</span><br><span class="line"></span><br><span class="line">    static &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            // 获取并遍历所有的 Bean（带有 @Bean 注解的类）</span><br><span class="line">            List&lt;Class&lt;?&gt;&gt; beanClassList = ClassHelper.getClassListByAnnotation(Bean.class);</span><br><span class="line">            for (Class&lt;?&gt; beanClass : beanClassList) &#123;</span><br><span class="line">                // 创建 Bean 实例</span><br><span class="line">                Object beanInstance = beanClass.newInstance();</span><br><span class="line">                // 将 Bean 实例放入 Bean Map 中（键为 Bean 类，值为 Bean 实例）</span><br><span class="line">                beanMap.put(beanClass, beanInstance);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; catch (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static Map&lt;Class&lt;?&gt;, Object&gt; getBeanMap() &#123;</span><br><span class="line">        return beanMap;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @SuppressWarnings(&quot;unchecked&quot;)</span><br><span class="line">    public static &lt;T&gt; T getBean(Class&lt;T&gt; cls) &#123;</span><br><span class="line">        return (T) beanMap.get(cls);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">~~~ </span><br><span class="line"></span><br><span class="line"> 那么，依赖注入功能放哪里呢？我搞了一个 IOCHelper，用这个类来实现 IOC 功能。代码如下：</span><br></pre></td></tr></table></figure>
+<p>public class IOCHelper {</p>
+<pre><code>static {
+    try {
+        // 获取并遍历所有的 Bean 类
+        Map&lt;Class&lt;?&gt;, Object&gt; beanMap = BeanHelper.getBeanMap();
+        for (Map.Entry&lt;Class&lt;?&gt;, Object&gt; beanEntry : beanMap.entrySet()) {
+            // 获取 Bean 类与 Bean 实例
+            Class&lt;?&gt; beanClass = beanEntry.getKey();
+            Object beanInstance = beanEntry.getValue();
+            // 获取 Bean 类中所有的字段（不包括父类中的方法）
+            Field[] beanFields = beanClass.getDeclaredFields();
+            if (ArrayUtil.isNotEmpty(beanFields)) {
+                // 遍历所有的 Bean 字段
+                for (Field beanField : beanFields) {
+                    // 判断当前 Bean 字段是否带有 @Inject 注解
+                    if (beanField.isAnnotationPresent(Inject.class)) {
+                        // 获取 Bean 字段对应的接口
+                        Class&lt;?&gt; interfaceClass = beanField.getType();
+                        // 判断接口上是否标注了 @Impl 注解
+                        Class&lt;?&gt; implementClass = null;
+                        if (interfaceClass.isAnnotationPresent(Impl.class)) {
+                            // 获取强制指定的实现类
+                            implementClass = interfaceClass.getAnnotation(Impl.class).value();
+                        } else {
+                            // 获取该接口所有的实现类
+                            List&lt;Class&lt;?&gt;&gt; implementClassList = ClassHelper.getClassListByInterface(interfaceClass);
+                            if (CollectionUtil.isNotEmpty(implementClassList)) {
+                                // 获取第一个实现类
+                                implementClass = implementClassList.get(0);
+                            }
+                        }
+                        // 若存在实现类，则执行以下代码
+                        if (implementClass != null) {
+                            // 从 Bean Map 中获取该实现类对应的实现类实例
+                            Object implementInstance = beanMap.get(implementClass);
+                            // 设置该 Bean 字段的值
+                            if (implementInstance != null) {
+                                beanField.setAccessible(true); // 取消类型安全检测（可提高反射性能）
+                                beanField.set(beanInstance, implementInstance); // beanInstance 是普通实例，或 CGLib 动态代理实例（不能使 JDK 动态代理实例）
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
+</code></pre><p>}<br>~~~</p>
+<p> 可见，IOCHelper 是依赖于 BeanHelper 的。这样分离，还有一个好处，就是方便实现 ServiceHelper 与 AOPHelper。也就是说，首先通过 BeanHelper 初始化所有的 Bean 类，然后依次初始化 ServiceHelper、IOCHelper、AOPHelper，这个顺序不能搞错。因为在 ServcieHelper 中，对 Servcie 实现类进行了动态代理，所有保证了 IOC 注入进来的是代理类，而并非目标类。 </p>
+<hr>
+<p><em>参考</em></p>
+<blockquote>
+<p><a href="https://my.oschina.net/huangyong/blog/158992" target="_blank" rel="noopener">IOC 实现原理 </a></p>
+<p><a href="https://my.oschina.net/flashsword/blog/192551" target="_blank" rel="noopener">1000行代码读懂Spring（一）- 实现一个基本的IoC容器 </a></p>
+</blockquote>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="https://hsb786.github.io/2018/04/14/IOC-实现原理/" data-id="cjfyyank10007igmyoglkrdeo" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2018/04/14/Servlet（转载）/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">Servlet（转载）</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    
+        <section id="comments">
+    <div id="valine-thread"></div>
+</section>
+    
+
+</section>
+            
+                
+<aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/04/14/IOC-实现原理/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/04/14/IOC-实现原理/" class="title">IOC-实现原理</a></p>
+                            <p class="item-date"><time datetime="2018-04-14T05:22:40.000Z" itemprop="datePublished">2018-04-14</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/04/14/Servlet（转载）/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/04/14/Servlet（转载）/" class="title">Servlet（转载）</a></p>
+                            <p class="item-date"><time datetime="2018-04-14T04:35:27.000Z" itemprop="datePublished">2018-04-14</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/04/13/译-如何重置一个ArrayList-clear-vs-removeAll/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/04/13/译-如何重置一个ArrayList-clear-vs-removeAll/" class="title">【译】如何重置一个ArrayList--clear vs removeAll （转载）</a></p>
+                            <p class="item-date"><time datetime="2018-04-13T07:55:17.000Z" itemprop="datePublished">2018-04-13</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/04/13/译-以生产者消费者为例阐述如何使用wait，notify和notifyAll/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/04/13/译-以生产者消费者为例阐述如何使用wait，notify和notifyAll/" class="title">【译】以生产者消费者为例阐述如何使用wait，notify和notifyAll （转载）</a></p>
+                            <p class="item-date"><time datetime="2018-04-13T07:34:36.000Z" itemprop="datePublished">2018-04-13</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/04/13/Java-8中的扩展-Default-Defender-Extension-方法/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/04/13/Java-8中的扩展-Default-Defender-Extension-方法/" class="title">【译】Java8中的扩展(default/extension)方法 （转载）</a></p>
+                            <p class="item-date"><time datetime="2018-04-13T07:14:18.000Z" itemprop="datePublished">2018-04-13</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a><span class="archive-list-count">46</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/">HTTP</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MyBatis/">MyBatis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql/">sql</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/剑指Offer/">剑指Offer</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多线程/">多线程</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/术语/">术语</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爪哇/">爪哇</a><span class="tag-list-count">21</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">6</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/HTTP/" style="font-size: 12px;">HTTP</a> <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/MyBatis/" style="font-size: 10px;">MyBatis</a> <a href="/tags/Spring/" style="font-size: 14px;">Spring</a> <a href="/tags/sql/" style="font-size: 14px;">sql</a> <a href="/tags/前端/" style="font-size: 14px;">前端</a> <a href="/tags/剑指Offer/" style="font-size: 18px;">剑指Offer</a> <a href="/tags/多线程/" style="font-size: 16px;">多线程</a> <a href="/tags/工具/" style="font-size: 18px;">工具</a> <a href="/tags/术语/" style="font-size: 10px;">术语</a> <a href="/tags/爪哇/" style="font-size: 20px;">爪哇</a> <a href="/tags/算法/" style="font-size: 18px;">算法</a>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">链接</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="https://www.douban.com/people/122973953/">我的豆瓣</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2018 HuShengBin<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//cdn.jsdelivr.net/gh/xcss/valine@v1.1.6/dist/Valine.min.js"></script>
+    <script>
+        new Valine({
+            el: '#valine-thread' ,
+            notify:false,
+            verify:false,
+            app_id: 'eqjWlM0tCYgxhh8nvvV6DleG-gzGzoHsz',
+            app_key: 'CRXn0n9IAsJdOeMDUIxyh1Hb',
+            placeholder: '(。・∀・)ノ说一句吧'
+        });
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>
