@@ -15,7 +15,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://hsb786.github.io/images/HashMap3.png">
 <meta property="og:image" content="https://hsb786.github.io/images/HashMap2.png">
-<meta property="og:updated_time" content="2018-04-12T11:39:25.961Z">
+<meta property="og:updated_time" content="2018-04-13T12:43:52.141Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HashMap">
 <meta name="twitter:description" content="HashMap内部存储结构 HashMap内部存储使用了一个Node数组（默认大小是16），而Node类包含一个类型为Node的next变量，也就是相当于一个链表，所有根据hash值计算的bucket一样的key会存储到同一个链表里（即产生了冲突）。">
@@ -152,7 +152,7 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                49
+                45
                 <span>文章</span>
             </div>
             <div class="article-info-block">
@@ -223,10 +223,10 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">public class HashMap&lt;K,V&gt; extends AbstractMap&lt;K,V&gt;</span><br><span class="line">    implements Map&lt;K,V&gt;, Cloneable, Serializable &#123;</span><br><span class="line"></span><br><span class="line">    transient Node&lt;K,V&gt;[] table;</span><br><span class="line"></span><br><span class="line">    transient int size;</span><br><span class="line"></span><br><span class="line">    transient int modCount;</span><br><span class="line"></span><br><span class="line">    static final int DEFAULT_INITIAL_CAPACITY = 1 &lt;&lt; 4; // aka 16</span><br><span class="line"></span><br><span class="line">    static final int MAXIMUM_CAPACITY = 1 &lt;&lt; 30;</span><br><span class="line"></span><br><span class="line">    static final float DEFAULT_LOAD_FACTOR = 0.75f;</span><br><span class="line"></span><br><span class="line">    static final int TREEIFY_THRESHOLD = 8;</span><br><span class="line"></span><br><span class="line">    static class Node&lt;K,V&gt; implements Map.Entry&lt;K,V&gt; &#123;</span><br><span class="line">        final int hash;</span><br><span class="line">        final K key;</span><br><span class="line">        V value;</span><br><span class="line">        Node&lt;K,V&gt; next;</span><br><span class="line"></span><br><span class="line">        .....</span><br><span class="line">    &#125;</span><br><span class="line">    .....</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>table，一个存放节点(Node[])的数组，是Hashmap的基础设施，所有的节点都存放于此。</p>
 <p>size，Hashmap存放的键值对的数目，并不等于table数组的长度，因为可能存在链表和红黑树结构。</p>
-<p>modCount，Hashmap的修改次数，是实现fail-fast机制的关键（不清楚fail-fast机制的请看<a href="https://hsb786.github.io/2018/04/09/需要注意的一些东西/">需要注意的一些东西</a>）</p>
+<p>modCount，Hashmap的修改次数，是实现<a href="https://hsb786.github.io/2018/04/09/术语/">fail-fast</a>机制的关键</p>
 <p>DEFAULT_INITIAL_CAPACITY，表示默认HashMap数组初始大小为16，并且为了后续的rehash操作的方便，Hashmap的数组大小始终为2的整数次幂，即使你输入一个不是2的整数次幂的值，也会变成最小的大于该值的2的整数次幂。</p>
 <p>MAXIMUM_CAPACITY，表示Hashmap数组的最大容量，初始值为2^30。</p>
-<p>DEFAULT_LOAD_FACTOR，表示负载因子，当Hashmap的实际容量超过了(设定容量x负载因子)，就触发rehash操作，默认值为0.75。</p>
+<p>DEFAULT_LOAD_FACTOR，表示负载因子，当Hashmap的实际容量超过了(设定容量乘负载因子)，就触发rehash操作，默认值为0.75。</p>
 <p>TREEIFY_THRESHOLD，jkd1.8新增的，如果Hashmap数组元素的链表长度超过这个值，就使用红黑树结构代替链表提高查询效率，默认值为8。</p>
 <p>数组内的元素的数据结构继承了Map.Entry，用于存放键值对，另外还包含了hash值和next节点，其中hash值可用于存取节点时来寻址的作用，next节点是实现Hashmap的数组+链表(红黑树)结构的关键。</p>
 <p>在继续看Hashmap的内部方法之前，做个大致的总结：</p>
@@ -263,7 +263,7 @@
 </ul>
 <p>首先判断当前HashMap的数组是否为空，如果为空，就调用resize()方法初始化一个长度为16的数组，并且获取到数组的长度n，代码如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">if ((tab = table) == null || (n = tab.length) == 0)</span><br><span class="line">    n = (tab = resize()).length;</span><br></pre></td></tr></table></figure>
-<p>然后，根据数组的长度n-1的值与入参key的hash值按位与运算，算出hash值对应于数组中的位置，从tab中将这个位置上面的内容取出，判断为null时，在这个位置新增一个Node。但是，如果取到了数据，也就是这个hash值对应数组的位置上面已经有了键值对存在。那么，就判断这个Node,也就是p的hash值是否与传入的hash相等，然后接着判断key是否相等。如果判断通过，表示要传入的key-val键值对就是tab[i]位置上面的键值对，直接替换即可，不用管后面是链表还是红黑树。如果不是的话，就将这个新的键值对插入链表或者红黑树种即可。插入键值对分两种情况：如果数组元素是链表时，就将节点新增到列表头部。如果链表的长度大于等于红黑树化的阀值-1，就将链表转成红黑树。如果数组元素是红黑树的话，就直接插入键值对Node即可。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">if ((p = tab[i = (n - 1) &amp; hash]) == null)</span><br><span class="line">    tab[i] = newNode(hash, key, value, null);</span><br><span class="line">else &#123;</span><br><span class="line">    Node&lt;K,V&gt; e; K k;</span><br><span class="line">    if (p.hash == hash &amp;&amp;</span><br><span class="line">        ((k = p.key) == key || (key != null &amp;&amp; key.equals(k))))</span><br><span class="line">        e = p;</span><br><span class="line">    else if (p instanceof TreeNode)</span><br><span class="line">        e = ((TreeNode&lt;K,V&gt;)p).putTreeVal(this, tab, hash, key, value);</span><br><span class="line">    else &#123;</span><br><span class="line">        for (int binCount = 0; ; ++binCount) &#123;</span><br><span class="line">            if ((e = p.next) == null) &#123;</span><br><span class="line">                p.next = newNode(hash, key, value, null);</span><br><span class="line">                if (binCount &gt;= TREEIFY_THRESHOLD - 1) // -1 for 1st</span><br><span class="line">                    treeifyBin(tab, hash);</span><br><span class="line">                break;</span><br><span class="line">            &#125;</span><br><span class="line">            if (e.hash == hash &amp;&amp;</span><br><span class="line">                ((k = e.key) == key || (key != null &amp;&amp; key.equals(k))))</span><br><span class="line">                break;</span><br><span class="line">            p = e;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    if (e != null) &#123; // existing mapping for key</span><br><span class="line">        V oldValue = e.value;</span><br><span class="line">        if (!onlyIfAbsent || oldValue == null)</span><br><span class="line">            e.value = value;</span><br><span class="line">        afterNodeAccess(e);</span><br><span class="line">        return oldValue;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>然后，根据数组的长度n-1的值与入参key的hash值按位与运算，算出hash值对应于数组中的位置，从tab中将这个位置上面的内容取出，判断为null时，在这个位置新增一个Node。但是，如果取到了数据，也就是这个hash值对应数组的位置上面已经有了键值对存在。那么，就判断这个Node,也就是p的hash值是否与传入的hash相等，然后接着判断key是否相等。如果判断通过，表示要传入的key-val键值对就是tab[i]位置上面的键值对，直接替换即可，不用管后面是链表还是红黑树。如果不是的话，就将这个新的键值对插入链表或者红黑树种即可。插入键值对分两种情况：如果数组元素是链表时，就将节点新增到列表尾部。如果链表的长度大于等于红黑树化的阀值-1，就将链表转成红黑树。如果数组元素是红黑树的话，就插入键值到对应的Node。  <em>注意，java8开始用的是尾插法</em><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">if ((p = tab[i = (n - 1) &amp; hash]) == null)</span><br><span class="line">    tab[i] = newNode(hash, key, value, null);</span><br><span class="line">else &#123;</span><br><span class="line">    Node&lt;K,V&gt; e; K k;</span><br><span class="line">    if (p.hash == hash &amp;&amp;</span><br><span class="line">        ((k = p.key) == key || (key != null &amp;&amp; key.equals(k))))</span><br><span class="line">        e = p;</span><br><span class="line">    else if (p instanceof TreeNode)</span><br><span class="line">        e = ((TreeNode&lt;K,V&gt;)p).putTreeVal(this, tab, hash, key, value);</span><br><span class="line">    else &#123;</span><br><span class="line">        for (int binCount = 0; ; ++binCount) &#123;</span><br><span class="line">            if ((e = p.next) == null) &#123;</span><br><span class="line">                p.next = newNode(hash, key, value, null);</span><br><span class="line">                if (binCount &gt;= TREEIFY_THRESHOLD - 1) // -1 for 1st</span><br><span class="line">                    treeifyBin(tab, hash);</span><br><span class="line">                break;</span><br><span class="line">            &#125;</span><br><span class="line">            if (e.hash == hash &amp;&amp;</span><br><span class="line">                ((k = e.key) == key || (key != null &amp;&amp; key.equals(k))))</span><br><span class="line">                break;</span><br><span class="line">            p = e;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    if (e != null) &#123; // existing mapping for key</span><br><span class="line">        V oldValue = e.value;</span><br><span class="line">        if (!onlyIfAbsent || oldValue == null)</span><br><span class="line">            e.value = value;</span><br><span class="line">        afterNodeAccess(e);</span><br><span class="line">        return oldValue;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>最后，将修改次数加一，同时判断当前的键值对数量是否即将超过阀值，如果即将超过，需要进行resize操作。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">++modCount;</span><br><span class="line">     if (++size &gt; threshold)</span><br><span class="line">         resize();</span><br><span class="line">     afterNodeInsertion(evict);</span><br><span class="line">     return null;</span><br></pre></td></tr></table></figure></p>
 <p><strong>get()</strong></p>
 <ol>
@@ -328,7 +328,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/12/HashMap/" data-id="cjfxwuaa60003z0my2dgomuuc" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/12/HashMap/" data-id="cjfywvdvm0000g4myp78l4s8h" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -446,6 +446,25 @@
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/2018/04/14/Servlet（转载）/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/04/14/Servlet（转载）/" class="title">Servlet（转载）</a></p>
+                            <p class="item-date"><time datetime="2018-04-14T04:35:27.000Z" itemprop="datePublished">2018-04-14</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/2018/04/13/译-如何重置一个ArrayList-clear-vs-removeAll/" class="thumbnail">
     
     
@@ -519,25 +538,6 @@
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2018/04/13/jvm-GC/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"></p>
-                            <p class="item-title"><a href="/2018/04/13/jvm-GC/" class="title">jvm-GC（转载）</a></p>
-                            <p class="item-date"><time datetime="2018-04-13T06:10:31.000Z" itemprop="datePublished">2018-04-13</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -549,7 +549,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">归档</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a><span class="archive-list-count">49</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a><span class="archive-list-count">45</span></li></ul>
         </div>
     </div>
 
@@ -558,7 +558,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">标签</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/">HTTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MyBatis/">MyBatis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql/">sql</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/剑指Offer/">剑指Offer</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多线程/">多线程</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/术语/">术语</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爪哇/">爪哇</a><span class="tag-list-count">21</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">11</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/">HTTP</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MyBatis/">MyBatis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql/">sql</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/剑指Offer/">剑指Offer</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多线程/">多线程</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/术语/">术语</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爪哇/">爪哇</a><span class="tag-list-count">21</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">6</span></li></ul>
         </div>
     </div>
 
@@ -567,7 +567,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">标签云</h3>
         <div class="widget tagcloud">
-            <a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/MyBatis/" style="font-size: 10px;">MyBatis</a> <a href="/tags/Spring/" style="font-size: 11.67px;">Spring</a> <a href="/tags/sql/" style="font-size: 13.33px;">sql</a> <a href="/tags/前端/" style="font-size: 13.33px;">前端</a> <a href="/tags/剑指Offer/" style="font-size: 18.33px;">剑指Offer</a> <a href="/tags/多线程/" style="font-size: 15px;">多线程</a> <a href="/tags/工具/" style="font-size: 16.67px;">工具</a> <a href="/tags/术语/" style="font-size: 10px;">术语</a> <a href="/tags/爪哇/" style="font-size: 20px;">爪哇</a> <a href="/tags/算法/" style="font-size: 18.33px;">算法</a>
+            <a href="/tags/HTTP/" style="font-size: 12px;">HTTP</a> <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/MyBatis/" style="font-size: 10px;">MyBatis</a> <a href="/tags/Spring/" style="font-size: 12px;">Spring</a> <a href="/tags/sql/" style="font-size: 14px;">sql</a> <a href="/tags/前端/" style="font-size: 14px;">前端</a> <a href="/tags/剑指Offer/" style="font-size: 18px;">剑指Offer</a> <a href="/tags/多线程/" style="font-size: 16px;">多线程</a> <a href="/tags/工具/" style="font-size: 18px;">工具</a> <a href="/tags/术语/" style="font-size: 10px;">术语</a> <a href="/tags/爪哇/" style="font-size: 20px;">爪哇</a> <a href="/tags/算法/" style="font-size: 18px;">算法</a>
         </div>
     </div>
 
