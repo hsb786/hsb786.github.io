@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="HuShengBin’s blog">
 <meta property="og:description" content="线程间通信线程是操作系统中独立的个体，但这些个体如果不经过特殊处理就不能成为一个整体。在线程间进行通信后，系统之间的交互性会更加强大，在大大提高CPU利用率的同时还会使程序员对各线程任务在处理的过程中进行有效的把控与监督。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-04-13T11:39:44.929Z">
+<meta property="og:updated_time" content="2018-04-14T06:31:11.726Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="多线程基础">
 <meta name="twitter:description" content="线程间通信线程是操作系统中独立的个体，但这些个体如果不经过特殊处理就不能成为一个整体。在线程间进行通信后，系统之间的交互性会更加强大，在大大提高CPU利用率的同时还会使程序员对各线程任务在处理的过程中进行有效的把控与监督。">
@@ -149,7 +149,7 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                46
+                47
                 <span>文章</span>
             </div>
             <div class="article-info-block">
@@ -245,9 +245,14 @@
 <h2 id="volatile"><a href="#volatile" class="headerlink" title="volatile"></a>volatile</h2><p>关键字volatile的主要作用是使变量在多个线程间可见。简单地说就是当线程A对变量X进行了修改后，在线程A后面执行的其他线程能看到变量X的变动。同时关键字synchronized也可以同样的完成volatile关键字可见性的功能。(happens-before)</p>
 <h2 id="ThreadLocal"><a href="#ThreadLocal" class="headerlink" title="ThreadLocal"></a>ThreadLocal</h2><p>类ThreadLocal主要解决的就是每个线程绑定自己的值，可以将ThreadLocal类比喻成全局存放数据的盒子，盒子中可以存储每个线程的私有数据。</p>
 <p>类Threadlocal解决的是变量在不同线程间的隔离性，也就是不同线程拥有自己的值，不同线程中的值是可以放入Threadlocal类中进行保存的。</p>
+<h2 id="公平锁与非公平锁"><a href="#公平锁与非公平锁" class="headerlink" title="公平锁与非公平锁"></a>公平锁与非公平锁</h2><p>公平与非公平锁：锁Lock分为”公平锁”和”非公平锁”，公平锁表示线程获取锁的顺序是按照线程加锁的顺序来分配的，即先来先得的FIFO先进先出顺序。而非公平锁就是一种获取锁的抢占机制，是随机获得锁的，和公平锁不一样的就是先来的不一定先得到锁，这个方式可能造成某些线程一直拿不到锁，结果就是不公平的了。默认情况下，ReentrantLock类使用的是非公平锁。</p>
+<h2 id="ReentrantReadWriteLock"><a href="#ReentrantReadWriteLock" class="headerlink" title="ReentrantReadWriteLock"></a>ReentrantReadWriteLock</h2><p>类ReentrantLock具有完全互斥排他的效果，即同一时间只有一个线程在执行ReentrantLock.lock()方法后面的任务。这样做虽然保证了实例变量的线程安全性，但效率却是非常低下的。所以在JDK中提供了一种读写锁ReentrantReadWriteLock类，使用它可以加快运行效率。</p>
+<p>读写锁表示也有两个锁，一个是读操作相关的锁，也称为共享锁；另一个是写操作相关的锁，也叫排他锁。也就是多个读锁之间不互斥，读锁与写锁互斥，写锁与写锁互斥。在没有线程Thread进行写入操作时，进行读取操作的多个Thread都可以获取读锁，而进行写入操作的线程Thread只有在获取写锁后才能进行写入操作。即多个Thread可以同时进行读取操作，但是同一时刻只允许一个Thread进行写入操作。</p>
+<p>简单实现<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">public class ReadWriteLock &#123;</span><br><span class="line"></span><br><span class="line">    private int readThreadCounter = 0;      // 正在读取的线程数（0个或多个）</span><br><span class="line">    private int waitingWriteCounter = 0;    // 等待写入的线程数（0个或多个）</span><br><span class="line">    private int writeThreadCounter = 0;     // 正在写入的线程数（0个或1个）</span><br><span class="line">    private boolean writeFlag = true;       // 是否对写入优先（默认为是）</span><br><span class="line"></span><br><span class="line">    // 读取加锁</span><br><span class="line">    public synchronized void readLock() throws InterruptedException &#123;</span><br><span class="line">        // 若存在正在写入的线程，或当写入优先时存在等待写入的线程，则将当前线程设置为等待状态</span><br><span class="line">        while (writeThreadCounter &gt; 0 || (writeFlag &amp;&amp; waitingWriteCounter &gt; 0)) &#123;</span><br><span class="line">            wait();</span><br><span class="line">        &#125;</span><br><span class="line">        // 使正在读取的线程数加一</span><br><span class="line">        readThreadCounter++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 读取解锁</span><br><span class="line">    public synchronized void readUnlock() &#123;</span><br><span class="line">        // 使正在读取的线程数减一</span><br><span class="line">        readThreadCounter--;</span><br><span class="line">        // 读取结束，对写入优先</span><br><span class="line">        writeFlag = true;</span><br><span class="line">        // 通知所有处于 wait 状态的线程</span><br><span class="line">        notifyAll();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 写入加锁</span><br><span class="line">    public synchronized void writeLock() throws InterruptedException &#123;</span><br><span class="line">        // 使等待写入的线程数加一</span><br><span class="line">        waitingWriteCounter++;</span><br><span class="line">        try &#123;</span><br><span class="line">            // 若存在正在读取的线程，或存在正在写入的线程，则将当前线程设置为等待状态</span><br><span class="line">            while (readThreadCounter &gt; 0 || writeThreadCounter &gt; 0) &#123;</span><br><span class="line">                wait();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; finally &#123;</span><br><span class="line">            // 使等待写入的线程数减一</span><br><span class="line">            waitingWriteCounter--;</span><br><span class="line">        &#125;</span><br><span class="line">        // 使正在写入的线程数加一</span><br><span class="line">        writeThreadCounter++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 写入解锁</span><br><span class="line">    public synchronized void writeUnlock() &#123;</span><br><span class="line">        // 使正在写入的线程数减一</span><br><span class="line">        writeThreadCounter--;</span><br><span class="line">        // 写入结束，对读取优先</span><br><span class="line">        writeFlag = false;</span><br><span class="line">        // 通知所有处于等待状态的线程</span><br><span class="line">        notifyAll();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <hr>
 <blockquote>
 <p><a href="https://lujunqiu.github.io/2017/06/24/Java多线程学习笔记/" target="_blank" rel="noopener">Java多线程学习笔记</a></p>
+<p><a href="https://my.oschina.net/huangyong/blog/172391" target="_blank" rel="noopener">Lock 那点事儿 </a></p>
 </blockquote>
 
         
@@ -259,7 +264,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/09/多线程基础/" data-id="cjfyyhra4002aygmyn482k2zo" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/09/多线程基础/" data-id="cjfz33kqv0027n8myl89kmyt4" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -377,6 +382,25 @@
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/2018/04/14/ThreadLocal/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/04/14/ThreadLocal/" class="title">ThreadLocal</a></p>
+                            <p class="item-date"><time datetime="2018-04-14T07:06:57.000Z" itemprop="datePublished">2018-04-14</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/2018/04/14/IOC-实现原理（转载）/" class="thumbnail">
     
     
@@ -450,25 +474,6 @@
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2018/04/13/Java-8中的扩展-Default-Defender-Extension-方法/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"></p>
-                            <p class="item-title"><a href="/2018/04/13/Java-8中的扩展-Default-Defender-Extension-方法/" class="title">【译】Java8中的扩展(default/extension)方法 （转载）</a></p>
-                            <p class="item-date"><time datetime="2018-04-13T07:14:18.000Z" itemprop="datePublished">2018-04-13</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -480,7 +485,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">归档</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a><span class="archive-list-count">46</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a><span class="archive-list-count">47</span></li></ul>
         </div>
     </div>
 
@@ -489,7 +494,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">标签</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/">HTTP</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MyBatis/">MyBatis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql/">sql</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/剑指Offer/">剑指Offer</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多线程/">多线程</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/术语/">术语</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爪哇/">爪哇</a><span class="tag-list-count">21</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">6</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/">HTTP</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MyBatis/">MyBatis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql/">sql</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/剑指Offer/">剑指Offer</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多线程/">多线程</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/术语/">术语</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爪哇/">爪哇</a><span class="tag-list-count">22</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">6</span></li></ul>
         </div>
     </div>
 
@@ -498,7 +503,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">标签云</h3>
         <div class="widget tagcloud">
-            <a href="/tags/HTTP/" style="font-size: 12px;">HTTP</a> <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/MyBatis/" style="font-size: 10px;">MyBatis</a> <a href="/tags/Spring/" style="font-size: 14px;">Spring</a> <a href="/tags/sql/" style="font-size: 14px;">sql</a> <a href="/tags/前端/" style="font-size: 14px;">前端</a> <a href="/tags/剑指Offer/" style="font-size: 18px;">剑指Offer</a> <a href="/tags/多线程/" style="font-size: 16px;">多线程</a> <a href="/tags/工具/" style="font-size: 18px;">工具</a> <a href="/tags/术语/" style="font-size: 10px;">术语</a> <a href="/tags/爪哇/" style="font-size: 20px;">爪哇</a> <a href="/tags/算法/" style="font-size: 18px;">算法</a>
+            <a href="/tags/HTTP/" style="font-size: 12px;">HTTP</a> <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/MyBatis/" style="font-size: 10px;">MyBatis</a> <a href="/tags/Spring/" style="font-size: 16px;">Spring</a> <a href="/tags/sql/" style="font-size: 14px;">sql</a> <a href="/tags/前端/" style="font-size: 14px;">前端</a> <a href="/tags/剑指Offer/" style="font-size: 18px;">剑指Offer</a> <a href="/tags/多线程/" style="font-size: 18px;">多线程</a> <a href="/tags/工具/" style="font-size: 18px;">工具</a> <a href="/tags/术语/" style="font-size: 10px;">术语</a> <a href="/tags/爪哇/" style="font-size: 20px;">爪哇</a> <a href="/tags/算法/" style="font-size: 18px;">算法</a>
         </div>
     </div>
 

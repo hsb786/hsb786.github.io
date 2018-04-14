@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="HuShengBin’s blog">
 <meta property="og:description" content="本来想研究一下Spring源码的，奈何自己太渣，看了一下代码，发现层次太多，感觉无从下手，之后发现了这篇博客，寥寥几行代码就把IOC实现了。链接放在底部，也可以看下 黄亿华分析的，同样在底部   IOC 也就是“控制反转”了，不过更流行的叫法是“依赖注入”（DI - Dependency Injection）。听起来挺高深，其实实现起来并不复杂。下面就看看如何来实现这个轻量级 IOC 框架。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-04-14T05:43:32.006Z">
+<meta property="og:updated_time" content="2018-04-14T07:54:10.280Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IOC-实现原理（转载）">
 <meta name="twitter:description" content="本来想研究一下Spring源码的，奈何自己太渣，看了一下代码，发现层次太多，感觉无从下手，之后发现了这篇博客，寥寥几行代码就把IOC实现了。链接放在底部，也可以看下 黄亿华分析的，同样在底部   IOC 也就是“控制反转”了，不过更流行的叫法是“依赖注入”（DI - Dependency Injection）。听起来挺高深，其实实现起来并不复杂。下面就看看如何来实现这个轻量级 IOC 框架。">
@@ -149,7 +149,7 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                46
+                47
                 <span>文章</span>
             </div>
             <div class="article-info-block">
@@ -228,57 +228,9 @@
 <p>依赖注入框架实现完毕！ </p>
 <p>大家上面看到的 BeanHelper 类，其实兼任了两种职责：1.初始化所有的 Bean 类；2.实现依赖注入。</p>
 <p>这违法了设计模式中的“单一责任原则”，所有有必要将其重构一下，现在的 BeanHelper 类更加苗条了，只是负责初始化 Bean 类而已。代码如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">public class BeanHelper &#123;</span><br><span class="line"></span><br><span class="line">    // Bean 类 =&gt; Bean 实例</span><br><span class="line">    private static final Map&lt;Class&lt;?&gt;, Object&gt; beanMap = new HashMap&lt;Class&lt;?&gt;, Object&gt;();</span><br><span class="line"></span><br><span class="line">    static &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            // 获取并遍历所有的 Bean（带有 @Bean 注解的类）</span><br><span class="line">            List&lt;Class&lt;?&gt;&gt; beanClassList = ClassHelper.getClassListByAnnotation(Bean.class);</span><br><span class="line">            for (Class&lt;?&gt; beanClass : beanClassList) &#123;</span><br><span class="line">                // 创建 Bean 实例</span><br><span class="line">                Object beanInstance = beanClass.newInstance();</span><br><span class="line">                // 将 Bean 实例放入 Bean Map 中（键为 Bean 类，值为 Bean 实例）</span><br><span class="line">                beanMap.put(beanClass, beanInstance);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; catch (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static Map&lt;Class&lt;?&gt;, Object&gt; getBeanMap() &#123;</span><br><span class="line">        return beanMap;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @SuppressWarnings(&quot;unchecked&quot;)</span><br><span class="line">    public static &lt;T&gt; T getBean(Class&lt;T&gt; cls) &#123;</span><br><span class="line">        return (T) beanMap.get(cls);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">~~~ </span><br><span class="line"></span><br><span class="line"> 那么，依赖注入功能放哪里呢？我搞了一个 IOCHelper，用这个类来实现 IOC 功能。代码如下：</span><br></pre></td></tr></table></figure>
-<p>public class IOCHelper {</p>
-<pre><code>static {
-    try {
-        // 获取并遍历所有的 Bean 类
-        Map&lt;Class&lt;?&gt;, Object&gt; beanMap = BeanHelper.getBeanMap();
-        for (Map.Entry&lt;Class&lt;?&gt;, Object&gt; beanEntry : beanMap.entrySet()) {
-            // 获取 Bean 类与 Bean 实例
-            Class&lt;?&gt; beanClass = beanEntry.getKey();
-            Object beanInstance = beanEntry.getValue();
-            // 获取 Bean 类中所有的字段（不包括父类中的方法）
-            Field[] beanFields = beanClass.getDeclaredFields();
-            if (ArrayUtil.isNotEmpty(beanFields)) {
-                // 遍历所有的 Bean 字段
-                for (Field beanField : beanFields) {
-                    // 判断当前 Bean 字段是否带有 @Inject 注解
-                    if (beanField.isAnnotationPresent(Inject.class)) {
-                        // 获取 Bean 字段对应的接口
-                        Class&lt;?&gt; interfaceClass = beanField.getType();
-                        // 判断接口上是否标注了 @Impl 注解
-                        Class&lt;?&gt; implementClass = null;
-                        if (interfaceClass.isAnnotationPresent(Impl.class)) {
-                            // 获取强制指定的实现类
-                            implementClass = interfaceClass.getAnnotation(Impl.class).value();
-                        } else {
-                            // 获取该接口所有的实现类
-                            List&lt;Class&lt;?&gt;&gt; implementClassList = ClassHelper.getClassListByInterface(interfaceClass);
-                            if (CollectionUtil.isNotEmpty(implementClassList)) {
-                                // 获取第一个实现类
-                                implementClass = implementClassList.get(0);
-                            }
-                        }
-                        // 若存在实现类，则执行以下代码
-                        if (implementClass != null) {
-                            // 从 Bean Map 中获取该实现类对应的实现类实例
-                            Object implementInstance = beanMap.get(implementClass);
-                            // 设置该 Bean 字段的值
-                            if (implementInstance != null) {
-                                beanField.setAccessible(true); // 取消类型安全检测（可提高反射性能）
-                                beanField.set(beanInstance, implementInstance); // beanInstance 是普通实例，或 CGLib 动态代理实例（不能使 JDK 动态代理实例）
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    } catch (Exception e) {
-        e.printStackTrace();
-    }
-}
-</code></pre><p>}<br>~~~</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">public class BeanHelper &#123;</span><br><span class="line"></span><br><span class="line">    // Bean 类 =&gt; Bean 实例</span><br><span class="line">    private static final Map&lt;Class&lt;?&gt;, Object&gt; beanMap = new HashMap&lt;Class&lt;?&gt;, Object&gt;();</span><br><span class="line"></span><br><span class="line">    static &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            // 获取并遍历所有的 Bean（带有 @Bean 注解的类）</span><br><span class="line">            List&lt;Class&lt;?&gt;&gt; beanClassList = ClassHelper.getClassListByAnnotation(Bean.class);</span><br><span class="line">            for (Class&lt;?&gt; beanClass : beanClassList) &#123;</span><br><span class="line">                // 创建 Bean 实例</span><br><span class="line">                Object beanInstance = beanClass.newInstance();</span><br><span class="line">                // 将 Bean 实例放入 Bean Map 中（键为 Bean 类，值为 Bean 实例）</span><br><span class="line">                beanMap.put(beanClass, beanInstance);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; catch (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static Map&lt;Class&lt;?&gt;, Object&gt; getBeanMap() &#123;</span><br><span class="line">        return beanMap;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @SuppressWarnings(&quot;unchecked&quot;)</span><br><span class="line">    public static &lt;T&gt; T getBean(Class&lt;T&gt; cls) &#123;</span><br><span class="line">        return (T) beanMap.get(cls);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>那么，依赖注入功能放哪里呢？我搞了一个 IOCHelper，用这个类来实现 IOC 功能。代码如下： </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">public class IOCHelper &#123;</span><br><span class="line"></span><br><span class="line">    static &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            // 获取并遍历所有的 Bean 类</span><br><span class="line">            Map&lt;Class&lt;?&gt;, Object&gt; beanMap = BeanHelper.getBeanMap();</span><br><span class="line">            for (Map.Entry&lt;Class&lt;?&gt;, Object&gt; beanEntry : beanMap.entrySet()) &#123;</span><br><span class="line">                // 获取 Bean 类与 Bean 实例</span><br><span class="line">                Class&lt;?&gt; beanClass = beanEntry.getKey();</span><br><span class="line">                Object beanInstance = beanEntry.getValue();</span><br><span class="line">                // 获取 Bean 类中所有的字段（不包括父类中的方法）</span><br><span class="line">                Field[] beanFields = beanClass.getDeclaredFields();</span><br><span class="line">                if (ArrayUtil.isNotEmpty(beanFields)) &#123;</span><br><span class="line">                    // 遍历所有的 Bean 字段</span><br><span class="line">                    for (Field beanField : beanFields) &#123;</span><br><span class="line">                        // 判断当前 Bean 字段是否带有 @Inject 注解</span><br><span class="line">                        if (beanField.isAnnotationPresent(Inject.class)) &#123;</span><br><span class="line">                            // 获取 Bean 字段对应的接口</span><br><span class="line">                            Class&lt;?&gt; interfaceClass = beanField.getType();</span><br><span class="line">                            // 判断接口上是否标注了 @Impl 注解</span><br><span class="line">                            Class&lt;?&gt; implementClass = null;</span><br><span class="line">                            if (interfaceClass.isAnnotationPresent(Impl.class)) &#123;</span><br><span class="line">                                // 获取强制指定的实现类</span><br><span class="line">                                implementClass = interfaceClass.getAnnotation(Impl.class).value();</span><br><span class="line">                            &#125; else &#123;</span><br><span class="line">                                // 获取该接口所有的实现类</span><br><span class="line">                                List&lt;Class&lt;?&gt;&gt; implementClassList = ClassHelper.getClassListByInterface(interfaceClass);</span><br><span class="line">                                if (CollectionUtil.isNotEmpty(implementClassList)) &#123;</span><br><span class="line">                                    // 获取第一个实现类</span><br><span class="line">                                    implementClass = implementClassList.get(0);</span><br><span class="line">                                &#125;</span><br><span class="line">                            &#125;</span><br><span class="line">                            // 若存在实现类，则执行以下代码</span><br><span class="line">                            if (implementClass != null) &#123;</span><br><span class="line">                                // 从 Bean Map 中获取该实现类对应的实现类实例</span><br><span class="line">                                Object implementInstance = beanMap.get(implementClass);</span><br><span class="line">                                // 设置该 Bean 字段的值</span><br><span class="line">                                if (implementInstance != null) &#123;</span><br><span class="line">                                    beanField.setAccessible(true); // 取消类型安全检测（可提高反射性能）</span><br><span class="line">                                    beanField.set(beanInstance, implementInstance); // beanInstance 是普通实例，或 CGLib 动态代理实例（不能使 JDK 动态代理实例）</span><br><span class="line">                                &#125;</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; catch (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p> 可见，IOCHelper 是依赖于 BeanHelper 的。这样分离，还有一个好处，就是方便实现 ServiceHelper 与 AOPHelper。也就是说，首先通过 BeanHelper 初始化所有的 Bean 类，然后依次初始化 ServiceHelper、IOCHelper、AOPHelper，这个顺序不能搞错。因为在 ServcieHelper 中，对 Servcie 实现类进行了动态代理，所有保证了 IOC 注入进来的是代理类，而并非目标类。 </p>
 <hr>
 <p><em>参考</em></p>
@@ -296,7 +248,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/14/IOC-实现原理（转载）/" data-id="cjfyyhr8t0008ygmycgqs924k" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/14/IOC-实现原理（转载）/" data-id="cjfz33kov0005n8myuv7pavhk" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -371,6 +323,15 @@
         
 <nav id="article-nav">
     
+        <a href="/2018/04/14/ThreadLocal/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">上一篇</strong>
+            <div class="article-nav-title">
+                
+                    ThreadLocal
+                
+            </div>
+        </a>
+    
     
         <a href="/2018/04/14/Servlet（转载）/" id="article-nav-older" class="article-nav-link-wrap">
             <strong class="article-nav-caption">下一篇</strong>
@@ -401,6 +362,25 @@
         <h3 class="widget-title">最新文章</h3>
         <div class="widget">
             <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/04/14/ThreadLocal/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/04/14/ThreadLocal/" class="title">ThreadLocal</a></p>
+                            <p class="item-date"><time datetime="2018-04-14T07:06:57.000Z" itemprop="datePublished">2018-04-14</time></p>
+                        </div>
+                    </li>
                 
                     <li>
                         
@@ -478,25 +458,6 @@
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2018/04/13/Java-8中的扩展-Default-Defender-Extension-方法/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"></p>
-                            <p class="item-title"><a href="/2018/04/13/Java-8中的扩展-Default-Defender-Extension-方法/" class="title">【译】Java8中的扩展(default/extension)方法 （转载）</a></p>
-                            <p class="item-date"><time datetime="2018-04-13T07:14:18.000Z" itemprop="datePublished">2018-04-13</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -508,7 +469,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">归档</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a><span class="archive-list-count">46</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a><span class="archive-list-count">47</span></li></ul>
         </div>
     </div>
 
@@ -517,7 +478,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">标签</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/">HTTP</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MyBatis/">MyBatis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql/">sql</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/剑指Offer/">剑指Offer</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多线程/">多线程</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/术语/">术语</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爪哇/">爪哇</a><span class="tag-list-count">21</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">6</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/">HTTP</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MyBatis/">MyBatis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql/">sql</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/剑指Offer/">剑指Offer</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多线程/">多线程</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/术语/">术语</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爪哇/">爪哇</a><span class="tag-list-count">22</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">6</span></li></ul>
         </div>
     </div>
 
@@ -526,7 +487,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">标签云</h3>
         <div class="widget tagcloud">
-            <a href="/tags/HTTP/" style="font-size: 12px;">HTTP</a> <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/MyBatis/" style="font-size: 10px;">MyBatis</a> <a href="/tags/Spring/" style="font-size: 14px;">Spring</a> <a href="/tags/sql/" style="font-size: 14px;">sql</a> <a href="/tags/前端/" style="font-size: 14px;">前端</a> <a href="/tags/剑指Offer/" style="font-size: 18px;">剑指Offer</a> <a href="/tags/多线程/" style="font-size: 16px;">多线程</a> <a href="/tags/工具/" style="font-size: 18px;">工具</a> <a href="/tags/术语/" style="font-size: 10px;">术语</a> <a href="/tags/爪哇/" style="font-size: 20px;">爪哇</a> <a href="/tags/算法/" style="font-size: 18px;">算法</a>
+            <a href="/tags/HTTP/" style="font-size: 12px;">HTTP</a> <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/MyBatis/" style="font-size: 10px;">MyBatis</a> <a href="/tags/Spring/" style="font-size: 16px;">Spring</a> <a href="/tags/sql/" style="font-size: 14px;">sql</a> <a href="/tags/前端/" style="font-size: 14px;">前端</a> <a href="/tags/剑指Offer/" style="font-size: 18px;">剑指Offer</a> <a href="/tags/多线程/" style="font-size: 18px;">多线程</a> <a href="/tags/工具/" style="font-size: 18px;">工具</a> <a href="/tags/术语/" style="font-size: 10px;">术语</a> <a href="/tags/爪哇/" style="font-size: 20px;">爪哇</a> <a href="/tags/算法/" style="font-size: 18px;">算法</a>
         </div>
     </div>
 

@@ -3,20 +3,20 @@
 <head>
     <meta charset="utf-8">
     
-    <title>VSCode快捷键 | HuShengBin’s blog</title>
+    <title>ThreadLocal | HuShengBin’s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="命令 语义     ctrl B 侧边栏显/隐   ctrl shift E 资源管理器   ctrl tab 文件切换   F1或ctrl shift p 命令窗口   ctrl , 用户设置">
-<meta name="keywords" content="工具">
+    <meta name="description" content="早在 JDK 1.2 的时代，java.lang.ThreadLocal 就诞生了，它是为了解决多线程并发问题而设计的。相当于一个容器，用于存放线程的局部变量，为每一个线程提供了一个独立的副本。">
+<meta name="keywords" content="爪哇,多线程">
 <meta property="og:type" content="article">
-<meta property="og:title" content="VSCode快捷键">
-<meta property="og:url" content="https://hsb786.github.io/2018/04/08/VSCode快捷键/index.html">
+<meta property="og:title" content="ThreadLocal">
+<meta property="og:url" content="https://hsb786.github.io/2018/04/14/ThreadLocal/index.html">
 <meta property="og:site_name" content="HuShengBin’s blog">
-<meta property="og:description" content="命令 语义     ctrl B 侧边栏显/隐   ctrl shift E 资源管理器   ctrl tab 文件切换   F1或ctrl shift p 命令窗口   ctrl , 用户设置">
+<meta property="og:description" content="早在 JDK 1.2 的时代，java.lang.ThreadLocal 就诞生了，它是为了解决多线程并发问题而设计的。相当于一个容器，用于存放线程的局部变量，为每一个线程提供了一个独立的副本。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-04-13T04:19:33.526Z">
+<meta property="og:updated_time" content="2018-04-14T07:55:17.544Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="VSCode快捷键">
-<meta name="twitter:description" content="命令 语义     ctrl B 侧边栏显/隐   ctrl shift E 资源管理器   ctrl tab 文件切换   F1或ctrl shift p 命令窗口   ctrl , 用户设置">
+<meta name="twitter:title" content="ThreadLocal">
+<meta name="twitter:description" content="早在 JDK 1.2 的时代，java.lang.ThreadLocal 就诞生了，它是为了解决多线程并发问题而设计的。相当于一个容器，用于存放线程的局部变量，为每一个线程提供了一个独立的副本。">
     
 
     
@@ -177,7 +177,7 @@
 </aside>
 
             
-            <section id="main"><article id="post-VSCode快捷键" class="article article-type-post" itemscope itemprop="blogPost">
+            <section id="main"><article id="post-ThreadLocal" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -185,7 +185,7 @@
                 
     
         <h1 class="article-title" itemprop="name">
-            VSCode快捷键
+            ThreadLocal
         </h1>
     
 
@@ -194,8 +194,8 @@
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/2018/04/08/VSCode快捷键/">
-            <time datetime="2018-04-08T07:58:41.000Z" itemprop="datePublished">2018-04-08</time>
+        <a href="/2018/04/14/ThreadLocal/">
+            <time datetime="2018-04-14T07:06:57.000Z" itemprop="datePublished">2018-04-14</time>
         </a>
     </div>
 
@@ -204,7 +204,7 @@
                         
     <div class="article-tag">
         <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/工具/">工具</a>
+        <a class="tag-link" href="/tags/多线程/">多线程</a>, <a class="tag-link" href="/tags/爪哇/">爪哇</a>
     </div>
 
                     </div>
@@ -215,36 +215,24 @@
         <div class="article-entry" itemprop="articleBody">
         
             
-            <table>
-<thead>
-<tr>
-<th>命令</th>
-<th>语义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>ctrl B</td>
-<td>侧边栏显/隐</td>
-</tr>
-<tr>
-<td>ctrl shift E</td>
-<td>资源管理器</td>
-</tr>
-<tr>
-<td>ctrl tab</td>
-<td>文件切换</td>
-</tr>
-<tr>
-<td>F1或ctrl shift p</td>
-<td>命令窗口</td>
-</tr>
-<tr>
-<td>ctrl ,</td>
-<td>用户设置</td>
-</tr>
-</tbody>
-</table>
+            <p>早在 JDK 1.2 的时代，java.lang.ThreadLocal 就诞生了，它是为了解决多线程并发问题而设计的。相当于一个容器，用于存放线程的局部变量，为每一个线程提供了一个独立的副本。</p>
+<a id="more"></a>
+<p>ThreadLocal常用方法：</p>
+<ol>
+<li>public void set(T value)：将值放入线程局部变量中</li>
+<li>public T get()：从线程局部变量中获取值</li>
+<li>public void remove()：从线程局部变量中移除值（有助于 JVM 垃圾回收）</li>
+<li>protected T initialValue()：返回线程局部变量中的初始值（默认为 null） </li>
+</ol>
+<p>为什么 initialValue() 方法是 protected 的呢？就是为了提醒程序员们，这个方法是要你们来实现的，请给这个线程局部变量一个初始值吧。 </p>
+<h2 id="ThreadLocal简单实现"><a href="#ThreadLocal简单实现" class="headerlink" title="ThreadLocal简单实现"></a>ThreadLocal简单实现</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">public class MyThreadLocal&lt;T&gt; &#123;</span><br><span class="line"></span><br><span class="line">    private Map&lt;Thread, T&gt; container = Collections.synchronizedMap(new HashMap&lt;Thread, T&gt;());</span><br><span class="line"></span><br><span class="line">    public void set(T value) &#123;</span><br><span class="line">        container.put(Thread.currentThread(), value);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public T get() &#123;</span><br><span class="line">        Thread thread = Thread.currentThread();</span><br><span class="line">        T value = container.get(thread);</span><br><span class="line">        if (value == null &amp;&amp; !container.containsKey(thread)) &#123;</span><br><span class="line">            value = initialValue();</span><br><span class="line">            container.put(thread, value);</span><br><span class="line">        &#125;</span><br><span class="line">        return value;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void remove() &#123;</span><br><span class="line">        container.remove(Thread.currentThread());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    protected T initialValue() &#123;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="ThreadLocal-具体有哪些使用案例呢？"><a href="#ThreadLocal-具体有哪些使用案例呢？" class="headerlink" title="ThreadLocal 具体有哪些使用案例呢？"></a>ThreadLocal 具体有哪些使用案例呢？</h2><p>通过 ThreadLocal 存放 JDBC Connection，以达到事务控制的能力。(每个线程应该拥有自己的连接，而不是共享同一个连接，否则线程1有可能会关闭线程2的连接)</p>
+<p> 注意：当您在一个类中使用了 static 成员变量的时候，一定要多问问自己，这个 static 成员变量需要考虑“线程安全”吗？（也就是说，多个线程需要独享自己的 static 成员变量吗？）如果需要考虑，那就请用 ThreadLocal 吧！ </p>
+<hr>
+<p> <em>参考</em></p>
+<blockquote>
+<p><a href="https://my.oschina.net/huangyong/blog/159489" target="_blank" rel="noopener">ThreadLocal 那点事儿</a></p>
+</blockquote>
 
         
         </div>
@@ -255,7 +243,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/08/VSCode快捷键/" data-id="cjfz33kpz000zn8myzave8jch" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/14/ThreadLocal/" data-id="cjfz33kpf000jn8my26aem5ut" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -330,19 +318,10 @@
         
 <nav id="article-nav">
     
-        <a href="/2018/04/08/NaN/" id="article-nav-newer" class="article-nav-link-wrap">
-            <strong class="article-nav-caption">上一篇</strong>
-            <div class="article-nav-title">
-                
-                    NaN
-                
-            </div>
-        </a>
     
-    
-        <a href="/2018/04/08/gitCommand/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/2018/04/14/IOC-实现原理（转载）/" id="article-nav-older" class="article-nav-link-wrap">
             <strong class="article-nav-caption">下一篇</strong>
-            <div class="article-nav-title">git命令</div>
+            <div class="article-nav-title">IOC-实现原理（转载）</div>
         </a>
     
 </nav>
