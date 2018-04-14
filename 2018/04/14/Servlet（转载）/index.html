@@ -14,7 +14,7 @@
 <meta property="og:description" content="Servlet概述Servlet是在Java中创建web应用程序的J2ee 服务端技术。javax.servlet 和 javax.servlet.http包中提供了编写servlet的接口和类。 所有的servlet都要实现javax.servlet.Servlet接口。该接口中定义了一个Servlet生命周期中的所有方法。如果要实现一个通用的Servlet，可以通过继承Java Servlet">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://hsb786.github.io/images/Servlet-Hierarchy.png">
-<meta property="og:updated_time" content="2018-04-14T04:53:42.983Z">
+<meta property="og:updated_time" content="2018-04-14T05:14:16.072Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Servlet（转载）">
 <meta name="twitter:description" content="Servlet概述Servlet是在Java中创建web应用程序的J2ee 服务端技术。javax.servlet 和 javax.servlet.http包中提供了编写servlet的接口和类。 所有的servlet都要实现javax.servlet.Servlet接口。该接口中定义了一个Servlet生命周期中的所有方法。如果要实现一个通用的Servlet，可以通过继承Java Servlet">
@@ -218,8 +218,7 @@
         
             
             <h2 id="Servlet概述"><a href="#Servlet概述" class="headerlink" title="Servlet概述"></a>Servlet概述</h2><p>Servlet是在Java中创建web应用程序的J2ee 服务端技术。<code>javax.servlet</code> 和 <code>javax.servlet.http</code>包中提供了编写servlet的接口和类。</p>
-<p>所有的servlet都要实现<code>javax.servlet.Servlet</code>接口。该接口中定义了一个Servlet生命周期中的所有方法。如果要实现一个通用的Servlet，可以通过继承Java Servlet API中提供的<code>GenericServlet</code>类。<code>HttpServlet</code>类中提供了用于处理http请求的<code>doGet()</code>和 <code>doPost()</code>等方法。</p>
-<p>多数情况下，web应用程序都使用http协议，所以，我们多数时候都通过继承<code>HttpServlet</code>类来实现自己的Servlet。</p>
+<p>所有的servlet都要实现<code>javax.servlet.Servlet</code>接口。该接口中定义了一个Servlet生命周期中的所有方法。如果要实现一个通用的Servlet，可以通过继承Java Servlet API中提供的<code>GenericServlet</code>类。<code>HttpServlet</code>类中提供了用于处理http请求的<code>doGet()</code>和 <code>doPost()</code>等方法。<br><a id="more"></a><br>多数情况下，web应用程序都使用http协议，所以，我们多数时候都通过继承<code>HttpServlet</code>类来实现自己的Servlet。</p>
 <h2 id="Servlet-API的层次结构"><a href="#Servlet-API的层次结构" class="headerlink" title="Servlet API的层次结构"></a>Servlet API的层次结构</h2><p><code>javax.servlet.Servlet</code>是Servlet Api的最上层接口。还有一些其他的接口和类是我们在使用servlet的时候需要关注的。在Servlet 3.0规范中，建议使用的注解我们也需要了解。</p>
 <p><img src="/images/Servlet-Hierarchy.png" alt="servlet API层次结构"></p>
 <h2 id="Servlet-接口"><a href="#Servlet-接口" class="headerlink" title="Servlet 接口"></a>Servlet 接口</h2><p>javax.servlet.Servlet<code></code> 是Servlet Api的最上层接口，Servlet接口定义了一系列servlet的生命周期方法（init、service、destory等）。所有的Servlet类都需要继承这个接口。该接口中定义了以下方法：</p>
@@ -313,7 +312,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/14/Servlet（转载）/" data-id="cjfyxeftx000j6omywohlgd8l" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/14/Servlet（转载）/" data-id="cjfyxfsgl000h68mygu6e826e" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
