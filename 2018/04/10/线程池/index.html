@@ -14,7 +14,7 @@
 <meta property="og:description" content="Executor框架Exexutor框架是一个根据一组执行策略调用，调度，执行和控制的异步任务的框架，可以用来控制线程的启动、执行和关闭，可以简化并发编程的操作。无限制的创建线程会引起应用程序内存溢出。所以创建一个线程池是个更好的解决方案，因为可以限制线程的数量并且可以回收再利用这些线程。Executor框架包括：线程池、Executor、Exexutors、ExecutorService、Com">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://hsb786.github.io/images/threadPool.png">
-<meta property="og:updated_time" content="2018-04-15T10:42:56.589Z">
+<meta property="og:updated_time" content="2018-04-15T12:12:25.244Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="线程池">
 <meta name="twitter:description" content="Executor框架Exexutor框架是一个根据一组执行策略调用，调度，执行和控制的异步任务的框架，可以用来控制线程的启动、执行和关闭，可以简化并发编程的操作。无限制的创建线程会引起应用程序内存溢出。所以创建一个线程池是个更好的解决方案，因为可以限制线程的数量并且可以回收再利用这些线程。Executor框架包括：线程池、Executor、Exexutors、ExecutorService、Com">
@@ -218,8 +218,7 @@
         
             
             <h2 id="Executor框架"><a href="#Executor框架" class="headerlink" title="Executor框架"></a>Executor框架</h2><p>Exexutor框架是一个根据一组执行策略调用，调度，执行和控制的异步任务的框架，可以用来控制线程的启动、执行和关闭，可以简化并发编程的操作。无限制的创建线程会引起应用程序内存溢出。所以创建一个线程池是个更好的解决方案，因为可以限制线程的数量并且可以回收再利用这些线程。Executor框架包括：线程池、Executor、Exexutors、ExecutorService、CompletionService、Future、Callable等。<br><a id="more"></a></p>
-<p><strong>关于Callable和Future</strong></p>
-<p>Callable接口使用泛型去定义它的返回类型。Executors类提供了一些有用的方法去在线程池中执行Callable内的任务。由于Callable任务是并行的，我们必须等待它返回的结果。java.util.concurrent.Future对象为我们解决了这个问题。在线程池提交Callable任务后返回了一个Future对象，使用它我们可以知道Callable任务的状态和得到Callable返回的执行结果。Future提供了get()方法让我们可以等待Callable结束并获取它的执行结果。</p>
+<h2 id="关于Callable和Future"><a href="#关于Callable和Future" class="headerlink" title="关于Callable和Future"></a>关于Callable和Future</h2><p>Callable接口使用泛型去定义它的返回类型。Executors类提供了一些有用的方法去在线程池中执行Callable内的任务。由于Callable任务是并行的，我们必须等待它返回的结果。java.util.concurrent.Future对象为我们解决了这个问题。在线程池提交Callable任务后返回了一个Future对象，使用它我们可以知道Callable任务的状态和得到Callable返回的执行结果。Future提供了get()方法让我们可以等待Callable结束并获取它的执行结果。</p>
 <p>Future提供了三种功能：</p>
 <ol>
 <li>判断任务是否完成</li>
@@ -228,12 +227,10 @@
 </ol>
 <p>Future对象提供了异步执行，这意味着无需等待任务执行的完成，只要提交需要执行的任务，然后再需要时检查Future是否已经有了结果，如果任务已经执行完成，就可以通过Future.get()方法获得执行结果。需要注意的是，Future.get()方法是一个阻塞式的方法，如果调用时任务还没有完成，会等待直到任务执行结束。</p>
 <hr>
-<p><strong>FutureTask</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public class FutureTask&lt;V&gt; implements RunnableFuture&lt;V&gt; </span><br><span class="line"></span><br><span class="line">public interface RunnableFuture&lt;V&gt; extends Runnable, Future&lt;V&gt; &#123;</span><br><span class="line">    /**</span><br><span class="line">    * Sets this Future to the result of its computation</span><br><span class="line">    * unless it has been cancelled.</span><br><span class="line">    */</span><br><span class="line">    void run();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="FutureTask"><a href="#FutureTask" class="headerlink" title="FutureTask"></a>FutureTask</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public class FutureTask&lt;V&gt; implements RunnableFuture&lt;V&gt; </span><br><span class="line"></span><br><span class="line">public interface RunnableFuture&lt;V&gt; extends Runnable, Future&lt;V&gt; &#123;</span><br><span class="line">    /**</span><br><span class="line">    * Sets this Future to the result of its computation</span><br><span class="line">    * unless it has been cancelled.</span><br><span class="line">    */</span><br><span class="line">    void run();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>FutureTask既可以做为Runnable被线程执行，又可以作为Future得到Callable的返回值</p>
 <hr>
-<p><strong>ThreadPoolExecutor</strong></p>
-<table>
+<h2 id="ThreadPoolExecutor"><a href="#ThreadPoolExecutor" class="headerlink" title="ThreadPoolExecutor"></a>ThreadPoolExecutor</h2><table>
 <thead>
 <tr>
 <th>参数</th>
@@ -285,18 +282,48 @@
 <li>prestartAllCoreThreads()：初始化所有核心线程</li>
 </ol>
 <hr>
-<p><strong>任务缓存队列及排队策略</strong></p>
-<p>workQueue，它用来存放等待执行的任务。workQueue的类型为BlockingQueue<runnable>，通常可以取下面三种类型：</runnable></p>
+<h2 id="任务缓存队列及排队策略"><a href="#任务缓存队列及排队策略" class="headerlink" title="任务缓存队列及排队策略"></a>任务缓存队列及排队策略</h2><p>workQueue，它用来存放等待执行的任务。workQueue的类型为BlockingQueue<runnable>，通常可以取下面三种类型：</runnable></p>
 <ol>
 <li>ArrayBlockingQueue：基于数组的先进先出队列，此队列创建时必须指定大小</li>
 <li>LinkedBlockingQueue：基于链表的先进先出队列，如果创建时没有指定此队列大小，则默认为Integer.MAX_VALUE</li>
 <li>synchronousQueue：这个队列比较特殊，它不会保存提交的任务，而是将直接新建一个线程来执行新来的任务</li>
 </ol>
 <hr>
+<h2 id="使用线程池的好处"><a href="#使用线程池的好处" class="headerlink" title="使用线程池的好处"></a>使用线程池的好处</h2><ol>
+<li>降低资源消耗。通过重复利用已创建的线程降低线程创建和销毁造成的消耗。</li>
+<li>提高响应速度。当任务到达时，任务可以不需要等到线程创建就能立即执行。</li>
+<li>提高线程的可管理性。线程是稀缺资源，如果无限制的创建，不仅会消耗系统资源，还会降低系统的稳定性，使用线程池可以进行统一的分配，调优和监控。</li>
+</ol>
+<hr>
+<h2 id="锁优化"><a href="#锁优化" class="headerlink" title="锁优化"></a>锁优化</h2><ul>
+<li>减少锁持有时间<ul>
+<li>可以使用同步代码块来代替同步方法。这样既可以减少锁持有的时间。</li>
+</ul>
+</li>
+<li>减少锁粒度<ul>
+<li>要在并发场景中使用Map的时候，记得使用ConcurrentHashMap来代替HashTable和HashMap。</li>
+</ul>
+</li>
+<li>锁分离<ul>
+<li>普通锁（如syncronized）会导致读阻塞写、写也会阻塞读，同时读读与写写之间也会进行阻塞，可以想办法将读操作和写操作分离开。</li>
+</ul>
+</li>
+<li>锁粗化<ul>
+<li>有些情况下我们希望把很多次锁的请求合并成一个请求，以降低短时间内大量锁请求、同步、释放带来的性能损耗。</li>
+</ul>
+</li>
+<li>锁消除<ul>
+<li>锁消除是Java虚拟机在JIT编译是，通过对运行上下文的扫描，去除不可能存在共享资源竞争的锁，通过锁消除，可以节省毫无意义的请求锁时间。</li>
+</ul>
+</li>
+</ul>
+<hr>
 <p>参考</p>
 <blockquote>
 <p><a href="http://www.cnblogs.com/xiaoxi/p/7692250.html" target="_blank" rel="noopener">Java并发编程：线程池的使用</a></p>
 <p><a href="http://codepub.cn/2016/02/01/Java-multi-thread-Callable-interface-and-thread-pool/" target="_blank" rel="noopener">Java多线程之Callable接口及线程池</a></p>
+<p><a href="http://www.hollischuang.com/archives/2181" target="_blank" rel="noopener">人人都能掌握的Java服务端性能优化方案</a></p>
+<p><a href="http://www.hao124.net/article/70" target="_blank" rel="noopener">java锁优化的方法与思路-减少锁持有时间、减小锁粒度、锁分离、锁粗化、锁消除</a></p>
 </blockquote>
 
         
@@ -308,7 +335,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/10/线程池/" data-id="cjg0pz4bx002oxgmyff5mfajg" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/10/线程池/" data-id="cjg0qz5k9002n8wmybn6foth8" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding

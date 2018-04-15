@@ -176,7 +176,7 @@
 
             
             <section id="main">
-    <article id="post-一些小技巧" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-防止重复发送 Ajax 请求的解决方案" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -184,7 +184,7 @@
                 
     
         <h1 itemprop="name">
-            <a class="article-title" href="/2018/04/08/一些小技巧/">一些小技巧</a>
+            <a class="article-title" href="/2018/04/08/防止重复发送 Ajax 请求的解决方案/">防止重复发送 Ajax 请求的解决方案</a>
         </h1>
     
 
@@ -193,7 +193,7 @@
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/2018/04/08/一些小技巧/">
+        <a href="/2018/04/08/防止重复发送 Ajax 请求的解决方案/">
             <time datetime="2018-04-08T09:58:41.000Z" itemprop="datePublished">2018-04-08</time>
         </a>
     </div>
@@ -203,7 +203,7 @@
                         
     <div class="article-tag">
         <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/爪哇/">爪哇</a>
+        <a class="tag-link" href="/tags/前端/">前端</a>
     </div>
 
                     </div>
@@ -214,9 +214,14 @@
         <div class="article-entry" itemprop="articleBody">
         
             <p><hr>
-<h3 id="位运算直接对内存数据进行操作，不需要转成十进制，因此处理速度非常快"><a href="#位运算直接对内存数据进行操作，不需要转成十进制，因此处理速度非常快" class="headerlink" title="位运算直接对内存数据进行操作，不需要转成十进制，因此处理速度非常快"></a>位运算直接对内存数据进行操作，不需要转成十进制，因此处理速度非常快</h3><p> X % 2^n = X &amp; (2^n-1)<br></p>
+<p>连续点击多个按钮，可能导致先请求的数据后显示出来。</p>
+<hr>
+<p><strong>解决方案</strong></p>
+<p><strong>1. 将ajax请求的async设置为false</strong></p>
+<p><strong>2. 利用jquery ajaxPrefilter中断请求</strong></p>
+<p><strong>3. 加遮罩框</strong><br></p>
             <p class="article-more-link">
-                <a href="/2018/04/08/一些小技巧/#more">查看更多</a>
+                <a href="/2018/04/08/防止重复发送 Ajax 请求的解决方案/#more">查看更多</a>
             </p>
         
         </div>
@@ -227,7 +232,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/08/一些小技巧/" data-id="cjg0pz4bi001rxgmy0tv6efio" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/08/防止重复发送 Ajax 请求的解决方案/" data-id="cjg0qz5k9002w8wmyodab6qvc" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -303,7 +308,7 @@
 
 
 
-    <article id="post-值传递和引用传递" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-SpringMVC" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -311,7 +316,7 @@
                 
     
         <h1 itemprop="name">
-            <a class="article-title" href="/2018/04/08/值传递和引用传递/">值传递和引用传递</a>
+            <a class="article-title" href="/2018/04/08/SpringMVC/">SpringMVC</a>
         </h1>
     
 
@@ -320,7 +325,7 @@
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/2018/04/08/值传递和引用传递/">
+        <a href="/2018/04/08/SpringMVC/">
             <time datetime="2018-04-08T09:58:41.000Z" itemprop="datePublished">2018-04-08</time>
         </a>
     </div>
@@ -330,7 +335,7 @@
                         
     <div class="article-tag">
         <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/爪哇/">爪哇</a>
+        <a class="tag-link" href="/tags/Spring/">Spring</a>
     </div>
 
                     </div>
@@ -341,10 +346,9 @@
         <div class="article-entry" itemprop="articleBody">
         
             <p><hr>
-<p><strong>值传递</strong>  指在调用函数时将实际参数<em>复制</em>一份传递到函数中，那么在函数中对参数所进行的修改，将不会影响到实际参数。  </p>
-<p><strong>引用传递</strong> 指在调用函数时将实际参数的地址<em>直接</em>传递到函数中，那么在函数中对参数所进行的修改，将影响到实际参数。<br></p>
+<h2 id="SpringMVC工作流程"><a href="#SpringMVC工作流程" class="headerlink" title="SpringMVC工作流程"></a>SpringMVC工作流程</h2><p>SpringMVC是一种基于Servelt的技术，它提供了控制器DispatchServlet和相关组件，这些SpringMVC的组件一起协调工作，完成对web请求的相应。<br></p>
             <p class="article-more-link">
-                <a href="/2018/04/08/值传递和引用传递/#more">查看更多</a>
+                <a href="/2018/04/08/SpringMVC/#more">查看更多</a>
             </p>
         
         </div>
@@ -355,7 +359,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/08/值传递和引用传递/" data-id="cjg0pz4bi0022xgmy0lv6kw68" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/08/SpringMVC/" data-id="cjg0qz5iy000q8wmyqdhahmrm" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -485,7 +489,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/08/Java虚拟机是如何执行线程同步的/" data-id="cjg0pz4a7000bxgmy2us9cojt" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/08/Java虚拟机是如何执行线程同步的/" data-id="cjg0qz5ij000c8wmynz3fggoz" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -613,7 +617,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/08/lombok/" data-id="cjg0pz4b2001gxgmyx2nla371" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/08/lombok/" data-id="cjg0qz5je001j8wmy3bodk0ws" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -745,7 +749,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/08/NaN/" data-id="cjg0pz4am000kxgmyg0dxtqgw" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/08/NaN/" data-id="cjg0qz5ij000f8wmyqdqse41p" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -899,7 +903,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/08/VSCode快捷键/" data-id="cjg0pz4am0010xgmy7rvumbji" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/08/VSCode快捷键/" data-id="cjg0qz5iy00158wmyztaoctel" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1024,7 +1028,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/08/gitCommand/" data-id="cjg0pz4am0012xgmy0cgvptie" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/08/gitCommand/" data-id="cjg0qz5iy00128wmyo900rvcy" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1151,7 +1155,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/08/markdown/" data-id="cjg0pz4b2001nxgmy82la32it" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/08/markdown/" data-id="cjg0qz5je001m8wmyzrkrrmz9" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
