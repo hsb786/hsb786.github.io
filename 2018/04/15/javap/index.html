@@ -3,20 +3,25 @@
 <head>
     <meta charset="utf-8">
     
-    <title>记录一些容易忘记的东西 | HuShengBin’s blog</title>
+    <title>javap | HuShengBin’s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="接口不可以实现接口，可以继承多个接口 抽象类可以继承具体类 static不能被重写，重写是运行时动态绑定的 static变量发生在静态解析阶段，此时已经将字段的符号引用转换成了内存引用，将它与对应的类关联在了一起">
+    <meta name="description" content="javap是jdk自带的一个工具，可以对代码反编译，也可以查看java编译器生成的字节码文件">
 <meta name="keywords" content="爪哇">
 <meta property="og:type" content="article">
-<meta property="og:title" content="记录一些容易忘记的东西">
-<meta property="og:url" content="https://hsb786.github.io/2018/04/09/记录一些容易忘记的东西/index.html">
+<meta property="og:title" content="javap">
+<meta property="og:url" content="https://hsb786.github.io/2018/04/15/javap/index.html">
 <meta property="og:site_name" content="HuShengBin’s blog">
-<meta property="og:description" content="接口不可以实现接口，可以继承多个接口 抽象类可以继承具体类 static不能被重写，重写是运行时动态绑定的 static变量发生在静态解析阶段，此时已经将字段的符号引用转换成了内存引用，将它与对应的类关联在了一起">
+<meta property="og:description" content="javap是jdk自带的一个工具，可以对代码反编译，也可以查看java编译器生成的字节码文件">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-04-15T10:37:44.365Z">
+<meta property="og:image" content="https://hsb786.github.io/images/javap01.png">
+<meta property="og:image" content="https://hsb786.github.io/images/javap02.png">
+<meta property="og:image" content="https://hsb786.github.io/images/javap03.png">
+<meta property="og:image" content="https://hsb786.github.io/images/javap04.png">
+<meta property="og:updated_time" content="2018-04-15T11:38:02.142Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="记录一些容易忘记的东西">
-<meta name="twitter:description" content="接口不可以实现接口，可以继承多个接口 抽象类可以继承具体类 static不能被重写，重写是运行时动态绑定的 static变量发生在静态解析阶段，此时已经将字段的符号引用转换成了内存引用，将它与对应的类关联在了一起">
+<meta name="twitter:title" content="javap">
+<meta name="twitter:description" content="javap是jdk自带的一个工具，可以对代码反编译，也可以查看java编译器生成的字节码文件">
+<meta name="twitter:image" content="https://hsb786.github.io/images/javap01.png">
     
 
     
@@ -177,7 +182,7 @@
 </aside>
 
             
-            <section id="main"><article id="post-记录一些容易忘记的东西" class="article article-type-post" itemscope itemprop="blogPost">
+            <section id="main"><article id="post-javap" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -185,7 +190,7 @@
                 
     
         <h1 class="article-title" itemprop="name">
-            记录一些容易忘记的东西
+            javap
         </h1>
     
 
@@ -194,8 +199,8 @@
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/2018/04/09/记录一些容易忘记的东西/">
-            <time datetime="2018-04-09T00:42:41.000Z" itemprop="datePublished">2018-04-09</time>
+        <a href="/2018/04/15/javap/">
+            <time datetime="2018-04-15T11:11:13.000Z" itemprop="datePublished">2018-04-15</time>
         </a>
     </div>
 
@@ -215,61 +220,21 @@
         <div class="article-entry" itemprop="articleBody">
         
             
-            <hr>
-<p>接口不可以实现接口，可以继承多个接口</p>
-<p>抽象类可以继承具体类</p>
-<p>static不能被重写，重写是运行时动态绑定的</p>
-<p>static变量发生在静态解析阶段，此时已经将字段的符号引用转换成了内存引用，将它与对应的类关联在了一起<br><a id="more"></a><br>子类构造方法默认会寻找父类无参构造方法，若没有，编译不通过</p>
-<p>关于抽象类<br>JDK 1.8以前，抽象类的方法默认访问权限为protected<br>JDK 1.8时，抽象类的方法默认访问权限变为default</p>
-<p>关于接口<br>JDK 1.8以前，接口中的方法必须是public的<br>JDK 1.8时，接口中的方法可以是default，还可以是static<br>JDK 1.9时，接口中的方法可以是private的</p>
-<p>volatile 禁止指令重排序： 添加内存屏障，保证前面已经完成，后面都没开始（happens-before）</p>
-<p>内部类访问外部类      外部类.this.成员XX</p>
-<p>重载静态绑定，根据参数的静态类型而不是实际类型作为判断依据的</p>
-<p>java的8中基本类型，除了float和double之外，其它6种都实现了常量池</p>
-<p>boolean类型不允许进行任何类型的转换处理</p>
-<p>java7以后，常量池被放入到堆空间中。导致intern()函数的功能不同。intern()检查常量池时候存在该字符串，存在的话就直接返回；否则返回首次在堆中声明的相同字符串的引用</p>
-<p>ArrayList 默认容量 10                HashMap   16</p>
-<p>newInstance 低效率，只能调用<em>无参</em>构造。<br>将new这个方式分解为两步： 首先调用class的加载方式加载某个类，然后实例化  </p>
-<p>HashSet底层借用HashMap，利用HashMap中key不重复的特性</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">private static final Object PRESENT=new Object();  </span><br><span class="line"></span><br><span class="line"> public boolean add(E e) &#123;</span><br><span class="line">    return map.put(e, PRESENT)==null;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>字符只有在内存中才会形成，其它都是以字节的方式进行的</p>
-<p>强引用： Object obj=new Object()，只要引用还在，就不会被回收<br>软引用： 内存不够才会被回收<br>弱引用： 下一次垃圾收集器工作时会被回收。<br>虚引用： 随时可能被回收，目的是能在这个对象被回收时收到一个系统通知</p>
-<p>内加载器： JVM动态加载所需的类。  委托、可见、单一。<br>双亲委派，交给父加载器；父加载器加载的类子加载器都能看到；一个类只能被一个加载一次</p>
-<p>每个对象有两个队列： 就绪队列、阻塞队列</p>
-<p>ReentrantLock结合Condition可以有选择性地进行通知，在调度上更加灵活</p>
-<p>指令重排序： 编译器和处理器为了优化程序性能而对指令序列进行重新排序的一种手段</p>
-<p>null可以强制转换为任何java类类型；其返回值还是null，可以调用static方法</p>
-<hr>
-<hr>
-<p>基本类型与包装类比较；包装类拆箱，进行值比较</p>
-<hr>
-<p>子类，也叫导出类、派生类</p>
-<hr>
-<p>Math.round()    +0.5<br>Math.ceil()     向上取整<br>Math.floor()    向下取整</p>
-<hr>
-<p>类变量有默认值，局部变量是没有默认值的</p>
-<hr>
-<p>wait，sleep都必须进行异常捕获</p>
-<hr>
-<p>IllegalMonitorStateException  </p>
-<blockquote>
-<p>抛出该异常表明某一线程已经试图等待对象的监视器，或者试图通知其他正在等待对象的监视器，然而本身没有指定的监视器的线程。  </p>
+            <blockquote>
+<p>javap是jdk自带的一个工具，可以对代码反编译，也可以查看java编译器生成的字节码文件</p>
 </blockquote>
-<p>也就是当前的线程不是此对象监视器的所有者。当前线程要锁定该对象之后，才能用锁定的对象执行这些方法，这里需要用到synchronized关键字，锁定哪个对象就用哪个对象来执行notify(), notifyAll(),wait(), wait(long), wait(long, int)操作，否则就会报IllegalMonitorStateException异常。 </p>
+<a id="more"></a>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public class T01 &#123;</span><br><span class="line">	private volatile int n;</span><br><span class="line"></span><br><span class="line">	public void add() &#123;</span><br><span class="line">		n++;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	private void sub() &#123;</span><br><span class="line">		n--;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>javap T01 输出T01的public域及方法</p>
+<p><img src="/images/javap01.png" alt=""></p>
+<p>javap -c T01 列出每个方法所执行的JVM指令，并显示每个方法的字节码的实际作用</p>
+<p><img src="/images/javap02.png" alt=""></p>
+<p>javap -p T01 输出所有类和成员</p>
+<p><img src="/images/javap03.png" alt=""></p>
+<p>javap -v T01 输出栈大小，方法参数的个数</p>
+<p><img src="/images/javap04.png" alt=""></p>
 <hr>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">enum AccountType</span><br><span class="line">&#123;</span><br><span class="line">    SAVING, FIXED, CURRENT;</span><br><span class="line">    private AccountType()</span><br><span class="line">    &#123;</span><br><span class="line">        System.out.println(“It is a account type”);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">class EnumOne</span><br><span class="line">&#123;</span><br><span class="line">    public static void main(String[]args)</span><br><span class="line">    &#123;</span><br><span class="line">        System.out.println(AccountType.FIXED);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//output   </span><br><span class="line">It is a account type</span><br><span class="line">It is a account type</span><br><span class="line">It is a account type</span><br></pre></td></tr></table></figure>
-<p> 枚举类在后台实现时，实际上是转化为一个继承了java.lang.Enum类的实体类，原先的枚举类型变成对应的实体类型，上例中AccountType变成了个class AccountType，并且会生成一个新的构造函数，若原来有构造函数，则在此基础上添加两个参数，生成新的构造函数，如上例子中： </p>
-<pre><code>private AccountType(){ System.out.println(“It is a account type”); }
-</code></pre><p>会变成： </p>
-<pre><code>private AccountType(String s, int i){
-    super(s,i); System.out.println(“It is a account type”); }
-</code></pre><p> 而在这个类中，会添加若干字段来代表具体的枚举类型：</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public static final AccountType SAVING;</span><br><span class="line">public static final AccountType FIXED;</span><br><span class="line">public static final AccountType CURRENT;</span><br><span class="line"> ~~~ </span><br><span class="line"></span><br><span class="line">  而且还会添加一段static代码段：</span><br></pre></td></tr></table></figure>
-<p>static{<br>    SAVING = new AccountType(“SAVING”, 0);<br>    …  CURRENT = new AccountType(“CURRENT”, 0);<br>   $VALUES = new AccountType[]{<br>         SAVING, FIXED, CURRENT<br>    } }<br>  ~~~</p>
-<p>  以此来初始化枚举中的每个具体类型。（并将所有具体类型放到一个$VALUE数组中，以便用序号访问具体类型）<br>在初始化过程中new AccountType构造函数被调用了三次，所以Enum中定义的构造函数中的打印代码被执行了3遍。 </p>
-<hr>
-<p>Java的跨平台特性是指它的字节码可以在多个平台上运行</p>
-
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">-help 帮助</span><br><span class="line">-l 输出行和变量的表</span><br><span class="line">-public 只输出public方法和域</span><br><span class="line">-protected 只输出public和protected类和成员</span><br><span class="line">-package 只输出包，public和protected类和成员，这是默认的</span><br><span class="line">-p -private 输出所有类和成员</span><br><span class="line">-s 输出内部类型签名</span><br><span class="line">-c 输出分解后的代码，例如，类中每一个方法内，包含java字节码的指令，</span><br><span class="line">-verbose 输出栈大小，方法参数的个数</span><br><span class="line">-constants 输出静态final常量</span><br></pre></td></tr></table></figure>
         
         </div>
         <footer class="article-footer">
@@ -279,7 +244,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/09/记录一些容易忘记的东西/" data-id="cjg0pz4bx002txgmyo0vrjrer" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/15/javap/" data-id="cjg0pz4b2001cxgmy9tlwrzmm" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -354,19 +319,10 @@
         
 <nav id="article-nav">
     
-        <a href="/2018/04/09/术语/" id="article-nav-newer" class="article-nav-link-wrap">
-            <strong class="article-nav-caption">上一篇</strong>
-            <div class="article-nav-title">
-                
-                    术语
-                
-            </div>
-        </a>
     
-    
-        <a href="/2018/04/09/区别/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/2018/04/14/Proxy/" id="article-nav-older" class="article-nav-link-wrap">
             <strong class="article-nav-caption">下一篇</strong>
-            <div class="article-nav-title">区别</div>
+            <div class="article-nav-title">Proxy</div>
         </a>
     
 </nav>

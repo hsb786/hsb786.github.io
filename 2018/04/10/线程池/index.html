@@ -14,7 +14,7 @@
 <meta property="og:description" content="Executor框架Exexutor框架是一个根据一组执行策略调用，调度，执行和控制的异步任务的框架，可以用来控制线程的启动、执行和关闭，可以简化并发编程的操作。无限制的创建线程会引起应用程序内存溢出。所以创建一个线程池是个更好的解决方案，因为可以限制线程的数量并且可以回收再利用这些线程。Executor框架包括：线程池、Executor、Exexutors、ExecutorService、Com">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://hsb786.github.io/images/threadPool.png">
-<meta property="og:updated_time" content="2018-04-13T12:04:20.171Z">
+<meta property="og:updated_time" content="2018-04-15T10:42:56.589Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="线程池">
 <meta name="twitter:description" content="Executor框架Exexutor框架是一个根据一组执行策略调用，调度，执行和控制的异步任务的框架，可以用来控制线程的启动、执行和关闭，可以简化并发编程的操作。无限制的创建线程会引起应用程序内存溢出。所以创建一个线程池是个更好的解决方案，因为可以限制线程的数量并且可以回收再利用这些线程。Executor框架包括：线程池、Executor、Exexutors、ExecutorService、Com">
@@ -151,7 +151,7 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                47
+                48
                 <span>文章</span>
             </div>
             <div class="article-info-block">
@@ -274,7 +274,7 @@
 <p>任务提交给线程池之后的处理策略：</p>
 <ol>
 <li>如果当前线程池中的线程数目小于corePoolSize，则每来一个任务，就会创建一个线程去执行这个任务；</li>
-<li>如果当前线程池中的线程数目&gt;=corePoolSize，则每来一个认为，会尝试将其添加到任务缓存队列当中，若添加成功，则该任务会等待空闲线程将其取出来执行；若添加失败（一般来说是任务缓存队列已满），则会尝试创建新的线程去执行这个任务</li>
+<li>如果当前线程池中的线程数目&gt;=corePoolSize，则每来一个任务，尝试将其添加到任务缓存队列当中，若添加成功，则该任务会等待空闲线程将其取出来执行；若添加失败（一般来说是任务缓存队列已满），则会尝试创建新的线程去执行这个任务</li>
 <li>如果当前线程池中的线程数目达到maximumPoolSize，则会采取任务拒绝策略进行处理；</li>
 <li>如果线程池中的线程数量大于corePoolSize时，如果某线程空闲时间超过keepAliveTime，线程将被终止，直至线程池中的线程数目不大于corePoolSize；如果允许为核心池中的线程设置存活时间，那么核心池中的线程空闲时间超过KeepAliveTime，线程也会被终止</li>
 </ol>
@@ -308,7 +308,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/10/线程池/" data-id="cjg0ohpfq0031zomy1z7kv19a" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/10/线程池/" data-id="cjg0pz4bx002oxgmyff5mfajg" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -426,6 +426,25 @@
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/2018/04/15/javap/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/04/15/javap/" class="title">javap</a></p>
+                            <p class="item-date"><time datetime="2018-04-15T11:11:13.000Z" itemprop="datePublished">2018-04-15</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/2018/04/14/Proxy/" class="thumbnail">
     
     
@@ -499,25 +518,6 @@
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2018/04/13/译-如何重置一个ArrayList-clear-vs-removeAll/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"></p>
-                            <p class="item-title"><a href="/2018/04/13/译-如何重置一个ArrayList-clear-vs-removeAll/" class="title">【译】如何重置一个ArrayList--clear vs removeAll （转载）</a></p>
-                            <p class="item-date"><time datetime="2018-04-13T07:55:17.000Z" itemprop="datePublished">2018-04-13</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -529,7 +529,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">归档</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a><span class="archive-list-count">47</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a><span class="archive-list-count">48</span></li></ul>
         </div>
     </div>
 
@@ -538,7 +538,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">标签</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/">HTTP</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MyBatis/">MyBatis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql/">sql</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/剑指Offer/">剑指Offer</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多线程/">多线程</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/术语/">术语</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爪哇/">爪哇</a><span class="tag-list-count">22</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">6</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/">HTTP</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MyBatis/">MyBatis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql/">sql</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/剑指Offer/">剑指Offer</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多线程/">多线程</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/术语/">术语</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爪哇/">爪哇</a><span class="tag-list-count">23</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">6</span></li></ul>
         </div>
     </div>
 
