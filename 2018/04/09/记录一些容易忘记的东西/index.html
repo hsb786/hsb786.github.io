@@ -6,14 +6,14 @@
     <title>记录一些容易忘记的东西 | HuShengBin’s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <meta name="description" content="接口不可以实现接口，可以继承多个接口 抽象类可以继承具体类 static不能被重写，重写是运行时动态绑定的 static变量发生在静态解析阶段，此时已经将字段的符号引用转换成了内存引用，将它与对应的类关联在了一起">
-<meta name="keywords" content="爪哇">
+<meta name="keywords" content="爪哇,长期更新">
 <meta property="og:type" content="article">
 <meta property="og:title" content="记录一些容易忘记的东西">
 <meta property="og:url" content="https://hsb786.github.io/2018/04/09/记录一些容易忘记的东西/index.html">
 <meta property="og:site_name" content="HuShengBin’s blog">
 <meta property="og:description" content="接口不可以实现接口，可以继承多个接口 抽象类可以继承具体类 static不能被重写，重写是运行时动态绑定的 static变量发生在静态解析阶段，此时已经将字段的符号引用转换成了内存引用，将它与对应的类关联在了一起">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-04-15T12:48:35.890Z">
+<meta property="og:updated_time" content="2018-04-16T04:30:34.959Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="记录一些容易忘记的东西">
 <meta name="twitter:description" content="接口不可以实现接口，可以继承多个接口 抽象类可以继承具体类 static不能被重写，重写是运行时动态绑定的 static变量发生在静态解析阶段，此时已经将字段的符号引用转换成了内存引用，将它与对应的类关联在了一起">
@@ -153,7 +153,7 @@
                 <span>文章</span>
             </div>
             <div class="article-info-block">
-                12
+                13
                 <span>标签</span>
             </div>
         </div>
@@ -204,7 +204,7 @@
                         
     <div class="article-tag">
         <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/爪哇/">爪哇</a>
+        <a class="tag-link" href="/tags/爪哇/">爪哇</a>, <a class="tag-link" href="/tags/长期更新/">长期更新</a>
     </div>
 
                     </div>
@@ -257,7 +257,6 @@
 </blockquote>
 <p>也就是当前的线程不是此对象监视器的所有者。当前线程要锁定该对象之后，才能用锁定的对象执行这些方法，这里需要用到synchronized关键字，锁定哪个对象就用哪个对象来执行notify(), notifyAll(),wait(), wait(long), wait(long, int)操作，否则就会报IllegalMonitorStateException异常。 </p>
 <hr>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">enum AccountType</span><br><span class="line">&#123;</span><br><span class="line">    SAVING, FIXED, CURRENT;</span><br><span class="line">    private AccountType()</span><br><span class="line">    &#123;</span><br><span class="line">        System.out.println(“It is a account type”);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">class EnumOne</span><br><span class="line">&#123;</span><br><span class="line">    public static void main(String[]args)</span><br><span class="line">    &#123;</span><br><span class="line">        System.out.println(AccountType.FIXED);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//output   </span><br><span class="line">It is a account type</span><br><span class="line">It is a account type</span><br><span class="line">It is a account type</span><br></pre></td></tr></table></figure>
 <p>Java的跨平台特性是指它的字节码可以在多个平台上运行</p>
 
         
@@ -269,7 +268,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/09/记录一些容易忘记的东西/" data-id="cjg0tg0wv002w00mygs4yhhdy" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/09/记录一些容易忘记的东西/" data-id="cjg1qip1n002vm8mypgclblpo" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -387,6 +386,25 @@
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/2018/04/16/enum/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/04/16/enum/" class="title">enum</a></p>
+                            <p class="item-date"><time datetime="2018-04-16T03:47:49.000Z" itemprop="datePublished">2018-04-16</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/2018/04/15/javap/" class="thumbnail">
     
     
@@ -460,25 +478,6 @@
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2018/04/14/Servlet（转载）/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"></p>
-                            <p class="item-title"><a href="/2018/04/14/Servlet（转载）/" class="title">Servlet（转载）</a></p>
-                            <p class="item-date"><time datetime="2018-04-14T04:35:27.000Z" itemprop="datePublished">2018-04-14</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -499,7 +498,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">标签</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/">HTTP</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MyBatis/">MyBatis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql/">sql</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/剑指Offer/">剑指Offer</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多线程/">多线程</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/术语/">术语</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爪哇/">爪哇</a><span class="tag-list-count">24</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">6</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/">HTTP</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MyBatis/">MyBatis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql/">sql</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/剑指Offer/">剑指Offer</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多线程/">多线程</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/术语/">术语</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爪哇/">爪哇</a><span class="tag-list-count">24</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/长期更新/">长期更新</a><span class="tag-list-count">2</span></li></ul>
         </div>
     </div>
 
@@ -508,7 +507,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">标签云</h3>
         <div class="widget tagcloud">
-            <a href="/tags/HTTP/" style="font-size: 12px;">HTTP</a> <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/MyBatis/" style="font-size: 10px;">MyBatis</a> <a href="/tags/Spring/" style="font-size: 16px;">Spring</a> <a href="/tags/sql/" style="font-size: 14px;">sql</a> <a href="/tags/前端/" style="font-size: 14px;">前端</a> <a href="/tags/剑指Offer/" style="font-size: 18px;">剑指Offer</a> <a href="/tags/多线程/" style="font-size: 18px;">多线程</a> <a href="/tags/工具/" style="font-size: 18px;">工具</a> <a href="/tags/术语/" style="font-size: 10px;">术语</a> <a href="/tags/爪哇/" style="font-size: 20px;">爪哇</a> <a href="/tags/算法/" style="font-size: 18px;">算法</a>
+            <a href="/tags/HTTP/" style="font-size: 12px;">HTTP</a> <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/MyBatis/" style="font-size: 10px;">MyBatis</a> <a href="/tags/Spring/" style="font-size: 16px;">Spring</a> <a href="/tags/sql/" style="font-size: 14px;">sql</a> <a href="/tags/前端/" style="font-size: 14px;">前端</a> <a href="/tags/剑指Offer/" style="font-size: 18px;">剑指Offer</a> <a href="/tags/多线程/" style="font-size: 18px;">多线程</a> <a href="/tags/工具/" style="font-size: 18px;">工具</a> <a href="/tags/术语/" style="font-size: 10px;">术语</a> <a href="/tags/爪哇/" style="font-size: 20px;">爪哇</a> <a href="/tags/算法/" style="font-size: 18px;">算法</a> <a href="/tags/长期更新/" style="font-size: 12px;">长期更新</a>
         </div>
     </div>
 
