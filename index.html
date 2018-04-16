@@ -213,35 +213,15 @@
         
         <div class="article-entry" itemprop="articleBody">
         
-            
-            <p>定义：单例对象的类必须保证只有一个实例存在<br>场景：希望在整个系统中只能出现某个类的一个实例</p>
+            <p><p>定义：单例对象的类必须保证只有一个实例存在<br>场景：希望在整个系统中只能出现某个类的一个实例</p>
 <h2 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h2><ul>
 <li>懒汉式：指全局的单例实例在第一次被使用时构建</li>
 <li>饿汉式：指全局的单例实例在类装载时构建</li>
 </ul>
-<p>日常我们使用的较多的应该是懒汉式的单例，因为按需加载才能做到资源的最大化利用。</p>
-<h2 id="单例模式的实现"><a href="#单例模式的实现" class="headerlink" title="单例模式的实现"></a>单例模式的实现</h2><h3 id="懒汉式单例"><a href="#懒汉式单例" class="headerlink" title="懒汉式单例"></a>懒汉式单例</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">public class Single &#123;</span><br><span class="line">    private static volatile Single instance;</span><br><span class="line">    private Single() &#123;&#125;</span><br><span class="line">    public static Single getInstance() &#123;</span><br><span class="line">        if (instance == null) &#123;</span><br><span class="line">            synchronized (Single.class) &#123;</span><br><span class="line">                if (instance == null) &#123;</span><br><span class="line">                    instance = new Single();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>instance = new Single()；这个语句在JVM中，实际执行的原子语句包括：</p>
-<ol>
-<li>给Single分配内存</li>
-<li>调用Single的构造函数完成初始化，返回类实例</li>
-<li>将instance指向之前分配的完成初始化的内存</li>
-</ol>
-<p>编译器在不改变单线程程序语义的前提下，可以对指令重排序。1-2-3可能会变成1-3-2</p>
-<p>导致的结果可能就是，线程B执行到1- 3 , 已经将instance引用指向了分配的内存，但是并没有执行初始化操作，所以这个时候instance并不等于null，但是没有被初始化。然后，线程B让出CPU，线程A开始执行，判断if(instance==null)，由于instance不等于null，于是线程A就直接返回这个instance，但是这个对象是线程B没有初始化的对象。</p>
-<p>so，加上volatile修饰后，就可以禁止指令重排，遵循happens-before原则。保证B线程对instance的修改happens-before于A线程对instance的读。</p>
-<h3 id="饿汉式单例"><a href="#饿汉式单例" class="headerlink" title="饿汉式单例"></a>饿汉式单例</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public class Singleton &#123;  </span><br><span class="line">    private static Singleton instance = new Singleton();  </span><br><span class="line">    private Singleton ()&#123;&#125;  </span><br><span class="line">    public static Singleton getInstance() &#123;  </span><br><span class="line">         return instance;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>静态内部类实现</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public class Singleton &#123;</span><br><span class="line">    private static class SingletonHolder &#123;</span><br><span class="line">        private static final Singleton INSTANCE = new Singleton();</span><br><span class="line">    &#125;</span><br><span class="line">    private Singleton ()&#123;&#125;</span><br><span class="line">    public static final Singleton getInstance() &#123;</span><br><span class="line">        return SingletonHolder.INSTANCE;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>前一种方法只要Single类被加载了，那么instance就会被实例化。而这种方式是Singleton类被加载了，instance不一定被实例化。因为SingletonHoler类没有被主动使用，只在外部类的Singleton的getInstance()中被调用时才加载，从而实例化Instance，这样就可以启动延迟加载。</p>
-<hr>
-<p><em>参考</em></p>
-<blockquote>
-<p><a href="https://lujunqiu.github.io/2017/11/15/单例模式/" target="_blank" rel="noopener">单例模式</a></p>
-<p><a href="http://www.hollischuang.com/archives/1373" target="_blank" rel="noopener">设计模式（二）——单例模式</a></p>
-<p><a href="http://www.hollischuang.com/archives/205" target="_blank" rel="noopener">[转+注]单例模式的七种写法</a></p>
-</blockquote>
-
+<p>日常我们使用的较多的应该是懒汉式的单例，因为按需加载才能做到资源的最大化利用。<br></p>
+            <p class="article-more-link">
+                <a href="/2018/04/16/单例模式/#more">查看更多</a>
+            </p>
         
         </div>
         <footer class="article-footer">
@@ -251,7 +231,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/16/单例模式/" data-id="cjg23apyw001yecmywwdhxn7o" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/16/单例模式/" data-id="cjg23f5ep002f5wmyeqhkprwn" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -382,7 +362,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/16/Integer/" data-id="cjg23apwp000fecmy44k45rab" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/16/Integer/" data-id="cjg23f5de00075wmyxll60wvp" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -508,7 +488,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/16/String/" data-id="cjg23apxl000yecmyngf4kjpm" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/16/String/" data-id="cjg23f5e9000z5wmy2p9orqeo" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -636,7 +616,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/16/enum/" data-id="cjg23apyw001kecmyf7ny9zr2" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/16/enum/" data-id="cjg23f5e900165wmy23x7k2mu" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -764,7 +744,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/15/javap/" data-id="cjg23apyg001eecmyysbvxnac" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/15/javap/" data-id="cjg23f5e9001e5wmyfv53q0c3" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -897,7 +877,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/14/Proxy/" data-id="cjg23apxl000tecmy8035kygh" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/14/Proxy/" data-id="cjg23f5du000k5wmyfmo2yyl2" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1023,7 +1003,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/14/ThreadLocal/" data-id="cjg23apy00017ecmyggd3jpsf" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/14/ThreadLocal/" data-id="cjg23f5du000x5wmyqp70y57i" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1152,7 +1132,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/14/IOC-实现原理（转载）/" data-id="cjg23apvf0005ecmy6vqgs5ro" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/14/IOC-实现原理（转载）/" data-id="cjg23f5de00085wmypqzfu468" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1279,7 +1259,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/14/Servlet（转载）/" data-id="cjg23apxl000secmyrgrk30gl" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/14/Servlet（转载）/" data-id="cjg23f5du000p5wmymrzb7m8c" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1405,7 +1385,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/13/译-如何重置一个ArrayList-clear-vs-removeAll/" data-id="cjg23aq0m0036ecmyiyowua2a" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/13/译-如何重置一个ArrayList-clear-vs-removeAll/" data-id="cjg23f5f4003b5wmywsj638ov" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding

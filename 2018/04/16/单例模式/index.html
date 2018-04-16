@@ -5,18 +5,18 @@
     
     <title>单例模式 | HuShengBin’s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="定义：单例对象的类必须保证只有一个实例存在场景：希望在整个系统中只能出现某个类的一个实例 分类 懒汉式：指全局的单例实例在第一次被使用时构建 饿汉式：指全局的单例实例在类装载时构建  日常我们使用的较多的应该是懒汉式的单例，因为按需加载才能做到资源的最大化利用。 单例模式的实现懒汉式单例1234567891011121314public class Single &amp;#123;    private">
+    <meta name="description" content="定义：单例对象的类必须保证只有一个实例存在场景：希望在整个系统中只能出现某个类的一个实例 分类 懒汉式：指全局的单例实例在第一次被使用时构建 饿汉式：指全局的单例实例在类装载时构建  日常我们使用的较多的应该是懒汉式的单例，因为按需加载才能做到资源的最大化利用。">
 <meta name="keywords" content="设计模式">
 <meta property="og:type" content="article">
 <meta property="og:title" content="单例模式">
 <meta property="og:url" content="https://hsb786.github.io/2018/04/16/单例模式/index.html">
 <meta property="og:site_name" content="HuShengBin’s blog">
-<meta property="og:description" content="定义：单例对象的类必须保证只有一个实例存在场景：希望在整个系统中只能出现某个类的一个实例 分类 懒汉式：指全局的单例实例在第一次被使用时构建 饿汉式：指全局的单例实例在类装载时构建  日常我们使用的较多的应该是懒汉式的单例，因为按需加载才能做到资源的最大化利用。 单例模式的实现懒汉式单例1234567891011121314public class Single &amp;#123;    private">
+<meta property="og:description" content="定义：单例对象的类必须保证只有一个实例存在场景：希望在整个系统中只能出现某个类的一个实例 分类 懒汉式：指全局的单例实例在第一次被使用时构建 饿汉式：指全局的单例实例在类装载时构建  日常我们使用的较多的应该是懒汉式的单例，因为按需加载才能做到资源的最大化利用。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-04-16T06:19:49.584Z">
+<meta property="og:updated_time" content="2018-04-16T10:24:50.310Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="单例模式">
-<meta name="twitter:description" content="定义：单例对象的类必须保证只有一个实例存在场景：希望在整个系统中只能出现某个类的一个实例 分类 懒汉式：指全局的单例实例在第一次被使用时构建 饿汉式：指全局的单例实例在类装载时构建  日常我们使用的较多的应该是懒汉式的单例，因为按需加载才能做到资源的最大化利用。 单例模式的实现懒汉式单例1234567891011121314public class Single &amp;#123;    private">
+<meta name="twitter:description" content="定义：单例对象的类必须保证只有一个实例存在场景：希望在整个系统中只能出现某个类的一个实例 分类 懒汉式：指全局的单例实例在第一次被使用时构建 饿汉式：指全局的单例实例在类装载时构建  日常我们使用的较多的应该是懒汉式的单例，因为按需加载才能做到资源的最大化利用。">
     
 
     
@@ -220,7 +220,7 @@
 <li>懒汉式：指全局的单例实例在第一次被使用时构建</li>
 <li>饿汉式：指全局的单例实例在类装载时构建</li>
 </ul>
-<p>日常我们使用的较多的应该是懒汉式的单例，因为按需加载才能做到资源的最大化利用。</p>
+<p>日常我们使用的较多的应该是懒汉式的单例，因为按需加载才能做到资源的最大化利用。<br><a id="more"></a></p>
 <h2 id="单例模式的实现"><a href="#单例模式的实现" class="headerlink" title="单例模式的实现"></a>单例模式的实现</h2><h3 id="懒汉式单例"><a href="#懒汉式单例" class="headerlink" title="懒汉式单例"></a>懒汉式单例</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">public class Single &#123;</span><br><span class="line">    private static volatile Single instance;</span><br><span class="line">    private Single() &#123;&#125;</span><br><span class="line">    public static Single getInstance() &#123;</span><br><span class="line">        if (instance == null) &#123;</span><br><span class="line">            synchronized (Single.class) &#123;</span><br><span class="line">                if (instance == null) &#123;</span><br><span class="line">                    instance = new Single();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>instance = new Single()；这个语句在JVM中，实际执行的原子语句包括：</p>
 <ol>
@@ -252,7 +252,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/16/单例模式/" data-id="cjg23apyw001yecmywwdhxn7o" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/16/单例模式/" data-id="cjg23f5ep002f5wmyeqhkprwn" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
