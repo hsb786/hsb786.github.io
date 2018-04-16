@@ -18,7 +18,7 @@
 <meta property="og:image" content="https://hsb786.github.io/images/HTTP03.jpg">
 <meta property="og:image" content="https://hsb786.github.io/images/HTTP04.jpg">
 <meta property="og:image" content="https://hsb786.github.io/images/HTTP05.png">
-<meta property="og:updated_time" content="2018-04-16T11:48:37.023Z">
+<meta property="og:updated_time" content="2018-04-16T11:53:59.308Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HTTP">
 <meta name="twitter:description" content="感觉计算机网络课上学的东西忘得差不多了，怎么办？怎么办？ 还能怎么办，学啊。  TCP/IP百度百科上的解释  Transmission Control Protocol/Internet Protocol的简写，中译名为传输控制协议/因特网互联协议，又名网络通讯协议，是Internet最基本的协议、Internet国际互联网络的基础，由网络层的IP协议和传输层的TCP协议组成。TCP/IP 定">
@@ -260,7 +260,7 @@
 <p>Cookie会根据从服务器端发送的响应报文内的一个叫做Set-Cookie的首部字段信息，通知客户端保存Cookie。当下次客户端再往该服务器发送请求时，客户端会自动在请求报文中加入Cookie值后发送出去。服务器端发现客户端发送过来的Cookie后，会去检查究竟是从哪一个客户端发来的连接请求，然后对比服务器上的记录，最后得到之前的状态信息。</p>
 </blockquote>
 <p><img src="/images/HTTP05.png" alt=""></p>
-<h2 id="GET和POST的区别"><a href="#GET和POST的区别" class="headerlink" title="GET和POST的区别"></a>GET和POST的区别</h2><p>GET和POST最直观的区别就是GET把参数包含在URL中，POST通过request bosy传递参数</p>
+<h2 id="GET和POST的区别"><a href="#GET和POST的区别" class="headerlink" title="GET和POST的区别"></a>GET和POST的区别</h2><p>GET和POST最直观的区别就是GET把参数包含在URL中，POST通过request body传递参数</p>
 <p>W3school的解答</p>
 <table>
 <thead>
@@ -324,12 +324,6 @@
 <p>HTTP是什么？HTTP是基于TCP/IP的关于数据如何在万维网中如何通信的协议</p>
 <p>HTTP的底层是TCP/IP。所以GET和POST的底层也是TCP/IP，也就是说，GET/POST都是TCP链接。GET和POST能做的事情是一样一样的。你要给GET加上request body，给POST带上url参数，技术上是完全行的通的。 </p>
 <p>如果你用GET服务，在request body中存了数据，不同服务器的处理方式是不同的，有些服务器会读出数据，有些服务器直接忽略。所以，虽然GET可以带request body，但不能保证一定能被接受到。</p>
-<p>可以用GET替换POST来优化网站性能吗？</p>
-<ol>
-<li>GET与POST都有自己的语义，不能随便混用。</li>
-<li>据研究，在网络环境好的情况下，发一次包的时间和发两次包的时间差别基本可以无视。而在网络环境差的情况下，两次包的TCP在验证数据包完整性上，有非常大的优点。</li>
-<li>并不是所有浏览器都会在POST中发送两次包，Firefox就只发送一次。</li>
-</ol>
 <h2 id="RFC"><a href="#RFC" class="headerlink" title="RFC"></a>RFC</h2><blockquote>
 <p>征求意见稿（英语：Request For Comments，缩写为RFC），是由互联网工程任务组（IETF）发布的一系列备忘录。文件收集了有关互联网相关信息，以及UNIX和互联网社区的软件文件，以编号排定。目前RFC文件是由互联网协会（ISOC）赞助发行。</p>
 </blockquote>
@@ -372,7 +366,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/16/HTTP/" data-id="cjg26f7h600017wmyf5dqed2u" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/16/HTTP/" data-id="cjg26m6gp0000jwmy6vrrh4gj" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
