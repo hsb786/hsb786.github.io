@@ -3,22 +3,26 @@
 <head>
     <meta charset="utf-8">
     
-    <title>SpringMVC | HuShengBin’s blog</title>
+    <title>HTTP | HuShengBin’s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="SpringMVC工作流程SpringMVC是一种基于Servelt的技术，它提供了控制器DispatchServlet和相关组件，这些SpringMVC的组件一起协调工作，完成对web请求的相应。">
-<meta name="keywords" content="Spring">
+    <meta name="description" content="感觉计算机网络课上学的东西忘得差不多了，怎么办？怎么办？ 还能怎么办，学啊。  TCP/IP百度百科上的解释  Transmission Control Protocol/Internet Protocol的简写，中译名为传输控制协议/因特网互联协议，又名网络通讯协议，是Internet最基本的协议、Internet国际互联网络的基础，由网络层的IP协议和传输层的TCP协议组成。TCP/IP 定">
+<meta name="keywords" content="HTTP">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SpringMVC">
-<meta property="og:url" content="https://hsb786.github.io/2018/04/08/SpringMVC/index.html">
+<meta property="og:title" content="HTTP">
+<meta property="og:url" content="https://hsb786.github.io/2018/04/16/HTTP/index.html">
 <meta property="og:site_name" content="HuShengBin’s blog">
-<meta property="og:description" content="SpringMVC工作流程SpringMVC是一种基于Servelt的技术，它提供了控制器DispatchServlet和相关组件，这些SpringMVC的组件一起协调工作，完成对web请求的相应。">
+<meta property="og:description" content="感觉计算机网络课上学的东西忘得差不多了，怎么办？怎么办？ 还能怎么办，学啊。  TCP/IP百度百科上的解释  Transmission Control Protocol/Internet Protocol的简写，中译名为传输控制协议/因特网互联协议，又名网络通讯协议，是Internet最基本的协议、Internet国际互联网络的基础，由网络层的IP协议和传输层的TCP协议组成。TCP/IP 定">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://hsb786.github.io/images/DispatcherServlet.png">
-<meta property="og:updated_time" content="2018-04-12T10:40:40.410Z">
+<meta property="og:image" content="https://hsb786.github.io/images/HTTP01.jpg">
+<meta property="og:image" content="https://hsb786.github.io/images/HTTP02.jpg">
+<meta property="og:image" content="https://hsb786.github.io/images/HTTP03.jpg">
+<meta property="og:image" content="https://hsb786.github.io/images/HTTP04.jpg">
+<meta property="og:image" content="https://hsb786.github.io/images/HTTP05.png">
+<meta property="og:updated_time" content="2018-04-16T11:48:37.023Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="SpringMVC">
-<meta name="twitter:description" content="SpringMVC工作流程SpringMVC是一种基于Servelt的技术，它提供了控制器DispatchServlet和相关组件，这些SpringMVC的组件一起协调工作，完成对web请求的相应。">
-<meta name="twitter:image" content="https://hsb786.github.io/images/DispatcherServlet.png">
+<meta name="twitter:title" content="HTTP">
+<meta name="twitter:description" content="感觉计算机网络课上学的东西忘得差不多了，怎么办？怎么办？ 还能怎么办，学啊。  TCP/IP百度百科上的解释  Transmission Control Protocol/Internet Protocol的简写，中译名为传输控制协议/因特网互联协议，又名网络通讯协议，是Internet最基本的协议、Internet国际互联网络的基础，由网络层的IP协议和传输层的TCP协议组成。TCP/IP 定">
+<meta name="twitter:image" content="https://hsb786.github.io/images/HTTP01.jpg">
     
 
     
@@ -179,7 +183,7 @@
 </aside>
 
             
-            <section id="main"><article id="post-SpringMVC" class="article article-type-post" itemscope itemprop="blogPost">
+            <section id="main"><article id="post-HTTP" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -187,7 +191,7 @@
                 
     
         <h1 class="article-title" itemprop="name">
-            SpringMVC
+            HTTP
         </h1>
     
 
@@ -196,8 +200,8 @@
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/2018/04/08/SpringMVC/">
-            <time datetime="2018-04-08T09:58:41.000Z" itemprop="datePublished">2018-04-08</time>
+        <a href="/2018/04/16/HTTP/">
+            <time datetime="2018-04-16T10:43:52.000Z" itemprop="datePublished">2018-04-16</time>
         </a>
     </div>
 
@@ -206,7 +210,7 @@
                         
     <div class="article-tag">
         <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/Spring/">Spring</a>
+        <a class="tag-link" href="/tags/HTTP/">HTTP</a>
     </div>
 
                     </div>
@@ -217,49 +221,146 @@
         <div class="article-entry" itemprop="articleBody">
         
             
-            <hr>
-<h2 id="SpringMVC工作流程"><a href="#SpringMVC工作流程" class="headerlink" title="SpringMVC工作流程"></a>SpringMVC工作流程</h2><p>SpringMVC是一种基于Servelt的技术，它提供了控制器DispatchServlet和相关组件，这些SpringMVC的组件一起协调工作，完成对web请求的相应。<br><a id="more"></a></p>
-<ol>
-<li>客户端发出一个HTTP请求，Web服务器接收到这个请求。服务器检查HTTP请求的路径，如果匹配DispatchServelt的请求映射路径(web.xml中指定)，则Web容器将该请求转交给对应的DispatchServlet处理</li>
-<li>DispatchServlet接收到这个请求后，将根据请求的信息以及HandlerMapping配置找到处理请求的处理器（Handler）。HandlerMapping可以简单理解为统一资源标识符URL域与处理器Handler之间的关系。</li>
-<li>找到对应的处理器之后，通过HandlerAdapter对Handler进行封装，再以同一的适配器接口调用Handler。因为为了更加灵活的编码和AOP增强功能，SpringMVC会给处理器加入拦截器，这样就可以在处理器执行前后加入执行前后加入自己的代码，于是就构成了一个处理器的执行链，所以SpringMVC提供了处理器适配器HandlerAdapter，帮助我们运行相应的处理器以及我们添加进去的拦截器。</li>
-<li>处理器完成了请求的业务逻辑之后将返回一个ModelAndView对象给DIspatcherServlet，这里ModelAndView包含了视图的逻辑名和模型数据信息。</li>
-<li>得到了ModelAndView之后，DispatchServlet借助ViewResolver视图解析器将逻辑试图转换为真实视图。</li>
-<li>通过ViewResolver视图解析器得到了真实视图后，DispatServlet使用这个真实视图对象对ModelAndView中的模型数据进行渲染。</li>
-<li>最终DispatchServlet将渲染过后的视图对象返回给请求的客户端，客户端得到的响应可能是一个普通的HTML页面，也可能是一个JSON串，甚至是一张图片等等不同的视图模型。</li>
-</ol>
+            <blockquote>
+<p>感觉计算机网络课上学的东西忘得差不多了，怎么办？怎么办？</p>
+<p>还能怎么办，学啊。</p>
+</blockquote>
+<h2 id="TCP-IP"><a href="#TCP-IP" class="headerlink" title="TCP/IP"></a>TCP/IP</h2><p>百度百科上的解释</p>
+<blockquote>
+<p>Transmission Control Protocol/Internet Protocol的简写，中译名为传输控制协议/因特网互联协议，又名网络通讯协议，是Internet最基本的协议、Internet国际互联网络的基础，由网络层的IP协议和传输层的TCP协议组成。TCP/IP 定义了电子设备如何连入因特网，以及数据如何在它们之间传输的标准。协议采用了4层的层级结构，每一层都呼叫它的下一层所提供的协议来完成自己的需求。通俗而言：TCP负责发现传输的问题，一有问题就发出信号，要求重新传输，直到所有数据安全正确地传输到目的地。而IP是给因特网的每一台联网设备规定一个地址。<br><a id="more"></a></p>
+</blockquote>
+<p>TCP/IP协议族就采用了分层的思想，自上而下分成了四层： 应用层，传输层，网络层，链路层，每一层的协议只约定了特定的功能，HTTP就位于应用层。利用TCP/IP协议族进行网络通信时，会通过分层顺序与对方进行通信。发送端从应用层往下走，接收端则往应用层往上走。一次HTTP请求的典型过程如下图所示</p>
+<p><img src="/images/HTTP01.jpg" alt=""></p>
+<h2 id="URI"><a href="#URI" class="headerlink" title="URI"></a>URI</h2><blockquote>
+<p>URI是Uniform Resource Identifier的缩写，是由某个协议方案表示的资源的定位标识符。协议方案是指访问资源所使用的协议类型名称。 采用HTTP协议时，协议方案就是http。除此之外，还有ftp、mailto、telnet、file等。</p>
+</blockquote>
+<p>比如<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http://</span><br><span class="line">ftp://</span><br></pre></td></tr></table></figure></p>
+<p>我们比较熟悉的URL（<code>Uniform Resource Locator</code>，统一资源定位符）表示资源在互联网上的地址，它其实是URI的一个子集，因为URI仅仅表示「标识」， 标识的类型有很多，比如ISBN号码，电话号码，邮箱，网页链接地址等，而URL则把概念缩小到了「地址」。 由于URI在绝大多数场景下都是以URL的形式存在，大家一般都说URL居多，这也没什么问题，但是在心里要清楚URI和URL还是有所区别的。</p>
+<h2 id="HTTP协议内容"><a href="#HTTP协议内容" class="headerlink" title="HTTP协议内容"></a>HTTP协议内容</h2><p>接下来的内容基于HTTP 1.1版本。</p>
+<h3 id="请求-amp-响应报文结构"><a href="#请求-amp-响应报文结构" class="headerlink" title="请求 &amp; 响应报文结构"></a>请求 &amp; 响应报文结构</h3><blockquote>
+<p>在两台计算机之间使用HTTP协议通信时，在一条通信线路上必定有一端是客户端，另一端则是服务器端。HTTP协议规定，请求从客户端发出， 最后服务器端响应该请求并返回。换句话说，肯定是先从客户端开始建立通信的，服务器端在没有接收到请求之前不会发送响应。</p>
+<p>HTTP报文本身是由多行（用CR+LF作换行符）数据构成的字符串文本。请求端（客户端）的HTTP报文叫做请求报文，响应端（服务器端）的叫做响应报文。HTTP报文大致可分为报文首部和报文主体两块。 两者由最初出现的空行（CR+LF）来划分。通常，并不一定要有报文主体。</p>
+</blockquote>
+<p><img src="/images/HTTP02.jpg" alt=""></p>
+<p>请求报文是由请求方法、请求URI、协议版本、可选的请求首部字段和内容实体构成的。响应报文基本上由协议版本、状态码（表示请求成功或失败的数字代码）、用以解释状态码的原因短语、可选的响应首部字段以及实体主体构成。 如下是一个HTTP请求和响应报文的实例</p>
+<p><img src="/images/HTTP03.jpg" alt=""></p>
+<h3 id="响应状态码"><a href="#响应状态码" class="headerlink" title="响应状态码"></a>响应状态码</h3><blockquote>
+<p>状态码的职责是当客户端向服务器端发送请求时，描述返回的请求结果。借助状态码，用户可以知道服务器端是正常处理了请求，还是出现了错误。 数字中的第一位指定了响应类别，后两位无分类。</p>
+</blockquote>
+<p>状态码主要类型一览：</p>
+<p><img src="/images/HTTP04.jpg" alt=""></p>
+<h3 id="首部-amp-实体"><a href="#首部-amp-实体" class="headerlink" title="首部 &amp; 实体"></a>首部 &amp; 实体</h3><blockquote>
+<p>HTTP首部字段是构成HTTP报文的要素之一。在客户端与服务器之间以HTTP协议进行通信的过程中，无论是请求还是响应都会使用首部字段，它能起到传递额外重要信息的作用。使用首部字段是为了给浏览器和服务器提供报文主体大小、所使用的语言、认证信息等内容。</p>
+</blockquote>
+<p>HTTP首部字段由首部字段名和字段值构成的，中间用冒号“:”分隔。比如：<code>Content-Type: text/html</code>。 HTTP实体是HTTP请求和响应传输的主体内容，根据场景不同可能是表单参数，HTML文本，JSON文本，二进制流等。</p>
+<h3 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h3><blockquote>
+<p>HTTP是一种不保存状态，即无状态（stateless）协议。HTTP协议自身不对请求和响应之间的通信状态进行保存。也就是说在HTTP这个级别，协议对于发送过的请求或响应都不做持久化处理。 使用HTTP协议，每当有新的请求发送时，就会有对应的新响应产生。协议本身并不保留之前一切的请求或响应报文的信息。这是为了更快地处理大量事务，确保协议的可伸缩性，而特意把HTTP协议设计成如此简单的。 不可否认，无状态协议当然也有它的优点。由于不必保存状态，自然可减少服务器的CPU及内存资源的消耗。从另一侧面来说，也正是因为HTTP协议本身是非常简单的，所以才会被应用在各种场景里。</p>
+</blockquote>
+<blockquote>
+<p>Cookie会根据从服务器端发送的响应报文内的一个叫做Set-Cookie的首部字段信息，通知客户端保存Cookie。当下次客户端再往该服务器发送请求时，客户端会自动在请求报文中加入Cookie值后发送出去。服务器端发现客户端发送过来的Cookie后，会去检查究竟是从哪一个客户端发来的连接请求，然后对比服务器上的记录，最后得到之前的状态信息。</p>
+</blockquote>
+<p><img src="/images/HTTP05.png" alt=""></p>
+<h2 id="GET和POST的区别"><a href="#GET和POST的区别" class="headerlink" title="GET和POST的区别"></a>GET和POST的区别</h2><p>GET和POST最直观的区别就是GET把参数包含在URL中，POST通过request bosy传递参数</p>
+<p>W3school的解答</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>GET</th>
+<th>POST</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>后退按钮/刷新</td>
+<td>无害</td>
+<td>数据会被重新提交（浏览器应该告知用户数据会被重新提交）。</td>
+</tr>
+<tr>
+<td>书签</td>
+<td>可收藏为书签</td>
+<td>不可收藏为书签</td>
+</tr>
+<tr>
+<td>缓存</td>
+<td>能被缓存</td>
+<td>不能缓存</td>
+</tr>
+<tr>
+<td>编码类型</td>
+<td>application/x-www-form-urlencoded</td>
+<td>application/x-www-form-urlencoded 或 multipart/form-data。为二进制数据使用多重编码。</td>
+</tr>
+<tr>
+<td>历史</td>
+<td>参数保留在浏览器历史中。</td>
+<td>参数不会保存在浏览器历史中。</td>
+</tr>
+<tr>
+<td>对数据长度的限制</td>
+<td>是的。当发送数据时，GET 方法向 URL 添加数据；URL 的长度是受限制的（URL 的最大长度是 2048 个字符）。</td>
+<td>无限制。</td>
+</tr>
+<tr>
+<td>对数据类型的限制</td>
+<td>只允许 ASCII 字符。</td>
+<td>没有限制。也允许二进制数据。</td>
+</tr>
+<tr>
+<td>安全性</td>
+<td>与 POST 相比，GET 的安全性较差，因为所发送的数据是 URL 的一部分。在发送密码或其他敏感信息时绝不要使用 GET ！</td>
+<td>POST 比 GET 更安全，因为参数不会被保存在浏览器历史或 web 服务器日志中。</td>
+</tr>
+<tr>
+<td>可见性</td>
+<td>数据在 URL 中对所有人都是可见的。</td>
+<td>数据不会显示在 URL 中。</td>
+</tr>
+</tbody>
+</table>
+<p>这个对比只是给出了一些现象上的区别</p>
 <hr>
-<p>另一个说法</p>
-<h2 id="DispatcherServlet是什么"><a href="#DispatcherServlet是什么" class="headerlink" title="DispatcherServlet是什么"></a>DispatcherServlet是什么</h2><p>它是Spring MVC的核心。每个由Spring MVC处理的请求都要经过DispatcherServlet。一般而言，它是前端控制器模式的实现，为应用提供一个统一入口。DispatcherServlet是连接Java与Spring的桥梁，处理所有传入的请求。并且与其他声明在web.xml中的Servlet一样，也是通过一个URL pattern将每个请求映射到DispatcherServlet。<br><!--more--><br>DispatcherServlet负责将请求委派给Spring MVC中其他的组处件理，比如注有@Controller或@RestController的Controller类，HandlerMappers（处理映射），View Resolvers(视图解析器)等等。</p>
-<p>尽管，请求映射是由 @ResquestMapping 注解完成的，但实际上是由 DispatcherServlet 将请求委派给相应的 Controller 来处理的。</p>
-<h2 id="DispatcherServlet如何处理请求"><a href="#DispatcherServlet如何处理请求" class="headerlink" title="DispatcherServlet如何处理请求"></a>DispatcherServlet如何处理请求</h2><p>正如上面所说，DispatcherServlet 被用来处理所有传入的请求，并将它们路由到不同的 Controller 来进行进一步处理。它决定了由哪个 Controller 处理请求。</p>
-<p>DispatcherServlet 使用处理器映射来将传入的请求路由到处理器。默认情况下，使用 BeanNameUrlHandlerMapping 和 由 @RequestMapping 注解驱动的DefaultAnnotationHandlerMapping。</p>
-<p>为了找到正确的方法来处理请求，它会扫描所有声明了 @Controller 注解的类，并且通过 @RequestMapping 注解找到负责处理该请求的方法。@RequestMapping 注解可以通过路径来映射请求(比如: @RequestMapping(“path”)), 也可以通过 HTTP 方法(比如: @RequestMapping(“path”, method=RequestMethod.GET)), 也可以通过请求参数(比如: @RequestMapping(“path””, method=RequestMethod.POST, params=”param1”)),还可以通过 HTTP 请求头(比如: @RequestMapping(“path”, header=”content-type=text/*”))。我们也可以在类级别声明 @RequestMapping 注解来过滤传入的请求。</p>
-<p>在请求处理之后，Controller 会将逻辑视图的名字和 model 返回给 DispatcherServlet。之后利用视图解析器定位到真正的 View 以便渲染结果。我们可以指定使用的视图解析器，默认情况下，DispatcherServlet 使用 InternalResourceViewResolver来将逻辑视图的名字转换成真正的视图，比如 JSP。</p>
-<p>选定视图之后，DispatcherServlet 会将数据模型与视图相结合，并将结果返回给客户端。并不是任何时候都需要视图，比如一个 RESTful 的 web 服务就不需要，它们的处理方法会利用 @ResponseBody 注解直接将请求结果返回给客户端。可以看REST with Spring course了解更多关于如何使用 Spring MVC 开发和测试 RESTful 服务的知识。 </p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ol>
-<li>DispatcherServlet 是 Spring MVC 应用中主要的控制器。所有的请求都会先经由 DispatcherServlet 处理，再由 Controller (声明有 @Controller 注解的类) 处理。</li>
-<li>DispatcherServlet 是前端控制器模式的实现。前端控制器就是个用来处理网站所有请求的控制器。</li>
-<li><p>就像其他的 Servlet， DispatcherServlet 也是声明和配置在 web.xml 文件中的：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;web-app&gt; </span><br><span class="line">&lt;servlet&gt; </span><br><span class="line">&lt;servlet-name&gt;SpringMVC&lt;/servlet-name&gt; </span><br><span class="line">&lt;servlet-class&gt;org.springframework.web.servlet.DispatcherServlet&lt;/servlet-class&gt; </span><br><span class="line">&lt;load-on-startup&gt;1&lt;/load-on-startup&gt; </span><br><span class="line">&lt;/servlet&gt; </span><br><span class="line">&lt;servlet-mapping&gt; </span><br><span class="line">&lt;servlet-name&gt;SpringMVC&lt;/servlet-name&gt; </span><br><span class="line">&lt;url-pattern&gt;*&lt;/url-pattern&gt; </span><br><span class="line">&lt;/servlet-mapping&gt; </span><br><span class="line">&lt;/web-app&gt;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>DispatcherServlet 继承自 HttpServlet 基类。Servlet 引擎(比如 Tomcat) 创建该类的实例，并且调用它不同的方法，比如：init(), service(), destroy()。</p>
-</li>
-<li>DispatcherServlet 为 Spring MVC 应用提供统一入口，处理所有的请求。</li>
-<li>DispatcherServlet 也完全与 Spring IoC 容器集成，可以使用 Spring 框架的每一个特性，比如依赖注入。</li>
-<li>当 DispatcherServlet 被配置为 load-on-startup = 1,意味着该 servlet 会在启动时由容器创建，而不是在请求到达时。这样做会降低第一次请求的响应时间，因为DispatcherServlet 会在启动时做大量工作，包括扫描和查找所有的 Controller 和 RequestMapping。</li>
-<li>在 DispatcherServlet 初始化期间，Spring 框架会在 WEB-INF 文件夹中查找名为 [servlet-name]-servlet.xml 的文件，并创建相应的 bean。比如，如果 servlet 像上面 web.xml 文件中配置的一样，名为 “SpringMVC”，那么会查找 “SpringMVC-Servlet.xml”的文件。如果全局作用域中有相同名字的bean，会被覆盖。可以用 servlet 初始化参数 contextConfigLocation更改配置文件的位置。<br><img src="/images/DispatcherServlet.png" alt=""></li>
-<li>在 Spring MVC 框架中，每个 DispatcherServlet 都有它自己的 WebApplicationContext ，并且继承了根 WebApplicationContext 中定义的所有 bean。这些继承的 bean 在 servlet 指定的作用域中可以被重载，也可以在其指定作用域中定义新的 bean。</li>
-<li>Spring MVC 中的 DispatcherServlet也允许返回 Servlet API 定义的 last-modification-date。为了决定请求最后修改时间，DispatcherServlet会先查找合适的 handler mapping，然后检测处理器是否实现了 LastModified 接口。如果实现了，就调用接口的 getLastModified(request) 方法，并将该值返回给客户端。</li>
+<p>GET和POST是什么？HTTP协议中的两种发送请求的方法。</p>
+<p>HTTP是什么？HTTP是基于TCP/IP的关于数据如何在万维网中如何通信的协议</p>
+<p>HTTP的底层是TCP/IP。所以GET和POST的底层也是TCP/IP，也就是说，GET/POST都是TCP链接。GET和POST能做的事情是一样一样的。你要给GET加上request body，给POST带上url参数，技术上是完全行的通的。 </p>
+<p>如果你用GET服务，在request body中存了数据，不同服务器的处理方式是不同的，有些服务器会读出数据，有些服务器直接忽略。所以，虽然GET可以带request body，但不能保证一定能被接受到。</p>
+<p>可以用GET替换POST来优化网站性能吗？</p>
+<ol>
+<li>GET与POST都有自己的语义，不能随便混用。</li>
+<li>据研究，在网络环境好的情况下，发一次包的时间和发两次包的时间差别基本可以无视。而在网络环境差的情况下，两次包的TCP在验证数据包完整性上，有非常大的优点。</li>
+<li>并不是所有浏览器都会在POST中发送两次包，Firefox就只发送一次。</li>
 </ol>
-<p>以上就是关于 DispatcherSerlvet 的内容。正如上面所讲，DispacherServlet 是 Spring MVC 的骨干，是主要的控制器，用来将不同的 HTTP 请求路由当相应的 Controller。它是前端控制器设计模式的实现，并且为应用提供单一入口。可以在 web.xml 中配置 DispatcherServlet，但建议将 load-on-startup 设置为 1。这样容器会在启动时加载该 Serlvet 而不是请求到达时。这样能减少第一个请求的响应时间。</p>
+<h2 id="RFC"><a href="#RFC" class="headerlink" title="RFC"></a>RFC</h2><blockquote>
+<p>征求意见稿（英语：Request For Comments，缩写为RFC），是由互联网工程任务组（IETF）发布的一系列备忘录。文件收集了有关互联网相关信息，以及UNIX和互联网社区的软件文件，以编号排定。目前RFC文件是由互联网协会（ISOC）赞助发行。</p>
+</blockquote>
+<p>简单理解RFC就是互联网的规范，我们通常所说的「协议」就是以RFC的形式存在，而现行的HTTP/1.1规范的RFC有如下几个： RFC7230， RFC7231， RFC7232， RFC7233， RFC7234， RFC7235。 其中RFC7231里的Section 4. Request Methods涉及到了几个HTTP方法，接下来仔细阅读这一章节。</p>
+<blockquote>
+<p>The request method token is the primary source of request semantics; it indicates the purpose for which the client has made this request and what is expected by the client as a successful result.</p>
+</blockquote>
+<p>semantic[语义]，语法与语义的区别：</p>
+<blockquote>
+<p>一种语言是合法句子的集合。什么样的句子是合法的呢？可以从两方面来判断：语法和语义。语法是和文法结构有关，然而语义是和按照这个结构所组合的单词符号的意义有关。合理的语法结构并不表明语义是合法的。例如我们常说：我上大学，这个句子是符合语法规则的，也符合语义规则。但是大学上我，虽然符合语法规则，但没有什么意义，所以说是不符合语义的。</p>
+</blockquote>
+<p>对于HTTP请求来说，语法是指请求响应的格式，比如请求第一行必须是 方法名 URI 协议/版本 这样的格式。</p>
+<p>语义则定义了这一类型的请求具有什么样的性质。比如GET的语义就是「获取资源」，POST的语义是「处理资源」，那么在具体实现这两个方法时，就必须考虑其语义，做出符合其语义的行为。</p>
+<p>当然在符合语法的前提下实现违背语义的行为也是可以做到的，比如使用GET方法修改用户信息，POST获取资源列表，这样就只能说这个请求是「合法」的，但不是「符合语义」的。 </p>
+<p>RFC7231里紧接着定义了HTTP方法的几个特性：</p>
+<blockquote>
+<p>Safe - 安全<br>这里的「安全」和通常理解的「安全」意义不同，如果一个方法的语义在本质上是「只读」的，那么这个方法就是安全的。客户端向服务端的资源发起的请求如果使用了是安全的方法，就不应该引起服务端任何的状态变化，因此也是无害的。 此RFC定义，GET, HEAD, OPTIONS 和 TRACE 这几个方法是安全的。<br>但是这个定义只是规范，并不能保证方法的实现也是安全的，服务端的实现可能会不符合方法语义，正如上文说过的使用GET修改用户信息的情况。<br>引入安全这个概念的目的是为了方便网络爬虫和缓存，以免调用或者缓存某些不安全方法时引起某些意外的后果。User Agent（浏览器）应该在执行安全和不安全方法时做出区分对待，并给用户以提示。</p>
+<p>Idempotent - 幂等<br>幂等的概念是指同一个请求方法执行多次和仅执行一次的效果完全相同。按照RFC规范，PUT，DELETE和安全方法都是幂等的。同样，这也仅仅是规范，服务端实现是否幂等是无法确保的。<br>引入幂等主要是为了处理同一个请求重复发送的情况，比如在请求响应前失去连接，如果方法是幂等的，就可以放心地重发一次请求。这也是浏览器在后退/刷新时遇到POST会给用户提示的原因：POST语义不是幂等的，重复请求可能会带来意想不到的后果。</p>
+<p>Cacheable - 可缓存性<br>顾名思义就是一个方法是否可以被缓存，此RFC里GET，HEAD和某些情况下的POST都是可缓存的，但是绝大多数的浏览器的实现里仅仅支持GET和HEAD。</p>
+</blockquote>
+<p>在这三个特性里一直在强调同一个事情，那就是协议不等于实现：协议规定安全在实现里不一定安全，协议规定幂等在实现里不一定幂等，协议规定可缓存在实现里不一定可缓存。</p>
+<h3 id="语义之争"><a href="#语义之争" class="headerlink" title="语义之争"></a>语义之争</h3><p>GET的语义是请求获取指定的资源。GET方法是安全、幂等、可缓存的（除非有 Cache-Control Header的约束）,GET方法的报文主体没有任何语义。</p>
+<p>POST的语义是根据请求负荷（报文主体）对指定的资源做出处理，具体的处理方式视资源类型而不同。POST不安全，不幂等，（大部分实现）不可缓存。</p>
 <hr>
 <p><em>参考</em></p>
 <blockquote>
-<p><a href="https://lujunqiu.github.io/2018/01/17/Spring-MVC框架入门/" target="_blank" rel="noopener">Spring-MVC框架入门</a></p>
-</blockquote>
-<blockquote>
-<p><a href="https://yemengying.com/2017/10/07/spring-dispatcherServlet/" target="_blank" rel="noopener">【译】Spring MVC 中的 DispatcherServlet </a></p>
+<p><a href="https://baike.baidu.com/item/TCP%2FIP协议/212915?fr=aladdin&amp;fromid=214077&amp;fromtitle=tcp%2Fip" target="_blank" rel="noopener">TCP/IP协议 百度百科</a></p>
+<p><a href="https://mp.weixin.qq.com/s?__biz=MzI3NzIzMzg3Mw==&amp;mid=100000054&amp;idx=1&amp;sn=71f6c214f3833d9ca20b9f7dcd9d33e4#rd" target="_blank" rel="noopener">99%的人都理解错了HTTP中GET与POST的区别 </a></p>
+<p><a href="https://sunshinevvv.coding.me/blog/2017/01/26/图解HTTP-读书笔记/" target="_blank" rel="noopener">图解HTTP-读书笔记</a></p>
+<p><a href="http://www.w3school.com.cn/tags/html_ref_httpmethods.asp" target="_blank" rel="noopener">HTTP 方法：GET 对比 POST</a></p>
+<p><a href="https://sunshinevvv.coding.me/blog/2017/02/09/HttpGETv.s.POST/" target="_blank" rel="noopener">HTTP协议中GET和POST方法的区别</a></p>
 </blockquote>
 
         
@@ -271,7 +372,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/08/SpringMVC/" data-id="cjg26f7hm000v7wmyhvjgqve2" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/16/HTTP/" data-id="cjg26f7h600017wmyf5dqed2u" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -346,19 +447,10 @@
         
 <nav id="article-nav">
     
-        <a href="/2018/04/08/值传递和引用传递/" id="article-nav-newer" class="article-nav-link-wrap">
-            <strong class="article-nav-caption">上一篇</strong>
-            <div class="article-nav-title">
-                
-                    值传递和引用传递
-                
-            </div>
-        </a>
     
-    
-        <a href="/2018/04/08/防止重复发送 Ajax 请求的解决方案/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/2018/04/16/单例模式/" id="article-nav-older" class="article-nav-link-wrap">
             <strong class="article-nav-caption">下一篇</strong>
-            <div class="article-nav-title">防止重复发送 Ajax 请求的解决方案</div>
+            <div class="article-nav-title">单例模式</div>
         </a>
     
 </nav>
