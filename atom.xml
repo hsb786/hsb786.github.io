@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://hsb786.github.io/"/>
-  <updated>2018-04-17T10:25:56.015Z</updated>
+  <updated>2018-04-17T10:40:01.124Z</updated>
   <id>https://hsb786.github.io/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="https://hsb786.github.io/2018/04/17/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/"/>
     <id>https://hsb786.github.io/2018/04/17/代理模式/</id>
     <published>2018-04-17T10:21:28.000Z</published>
-    <updated>2018-04-17T10:25:56.015Z</updated>
+    <updated>2018-04-17T10:40:01.124Z</updated>
     
-    <content type="html"><![CDATA[<blockquote><p>为其他对象提供一种代理以控制对这个对象的访问<br><a id="more"></a><br><img src="/design-pattern-proxy.png" alt=""></p></blockquote><h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><ul><li><p>代理对象可以在目标对象实现的基础上,增强额外的功能操作,即扩展目标对象的功能，符合开闭原则</p></li><li><p>代理对象可以在客户端和目标对象之间起到中介的作用，这样起到了中介的作用和保护了目标对象的作用。</p></li></ul><h2 id="代理类分类"><a href="#代理类分类" class="headerlink" title="代理类分类"></a>代理类分类</h2><ul><li><p>静态代理:静态定义代理类，我们自己静态定义的代理类。</p></li><li><p>动态代理:通过程序动态生成代理类，该代理类不是我们自己定义的，而是由程序自动生成，常用的动态代理技术有JDK自带的动态代理和CGLIB动态代理。</p></li></ul><hr><p>*参考</p><blockquote><p><a href="https://lujunqiu.github.io/2017/11/30/代理模式/" target="_blank" rel="noopener">代理模式</a></p></blockquote>]]></content>
+    <content type="html"><![CDATA[<blockquote><p>为其他对象提供一种代理以控制对这个对象的访问<br><a id="more"></a><br><img src="/images/design-pattern-proxy.png" alt=""></p></blockquote><h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><ul><li><p>代理对象可以在目标对象实现的基础上,增强额外的功能操作,即扩展目标对象的功能，符合开闭原则</p></li><li><p>代理对象可以在客户端和目标对象之间起到中介的作用，这样起到了中介的作用和保护了目标对象的作用。</p></li></ul><h2 id="代理类分类"><a href="#代理类分类" class="headerlink" title="代理类分类"></a>代理类分类</h2><ul><li><p>静态代理:静态定义代理类，我们自己静态定义的代理类。</p></li><li><p>动态代理:通过程序动态生成代理类，该代理类不是我们自己定义的，而是由程序自动生成，常用的动态代理技术有JDK自带的动态代理和CGLIB动态代理。</p></li></ul><hr><p>*参考</p><blockquote><p><a href="https://lujunqiu.github.io/2017/11/30/代理模式/" target="_blank" rel="noopener">代理模式</a></p></blockquote>]]></content>
     
     <summary type="html">
     
@@ -42,7 +42,7 @@
     <link href="https://hsb786.github.io/2018/04/17/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/"/>
     <id>https://hsb786.github.io/2018/04/17/策略模式/</id>
     <published>2018-04-17T10:07:27.000Z</published>
-    <updated>2018-04-17T10:19:38.391Z</updated>
+    <updated>2018-04-17T10:39:27.268Z</updated>
     
     <content type="html"><![CDATA[<blockquote><p>策略模式(Strategy Pattern)：定义一系列算法，将每一个算法封装起来，并让它们可以相互替换。策略模式让算法独立于使用它的客户而变化，也称为政策模式(Policy)。</p></blockquote><p>根据条件的不同选择不同的策略<br><a id="more"></a></p><p><img src="/images/design-pattern-strategy01.png" alt=""></p><h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><ol><li>策略模式提供了对“开闭原则”的完美支持，用户可以在不修改原有系统的基础上选择算法或行为，也可以灵活地增加新的算法或行为。</li><li>策略模式提供了管理相关的算法族的办法。策略类的等级结构定义了一个算法或行为族。恰当使用继承可以把公共的代码移到父类里面，从而避免代码重复。</li><li>使用策略模式可以避免使用多重条件(if-else)语句。多重条件语句不易维护，它把采取哪一种算法或采取哪一种行为的逻辑与算法或行为的逻辑混合在一起，统统列在一个多重条件语句里面，比使用继承的办法还要原始和落后。</li></ol><h2 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h2><ol><li>客户端必须知道所有的策略类，并自行决定使用哪一个策略类。这就意味着客户端必须理解这些算法的区别，以便适时选择恰当的算法类。</li><li>由于策略模式把每个具体的策略实现都单独封装成为类，如果备选的策略很多的话，那么对象的数目就会很可观。可以通过使用享元模式在一定程度上减少对象的数量。</li></ol><hr><p><em>参考</em></p><blockquote><p><a href="http://www.hollischuang.com/archives/1691" target="_blank" rel="noopener">设计模式（十二）——策略模式</a></p></blockquote>]]></content>
     
@@ -65,9 +65,9 @@
     <link href="https://hsb786.github.io/2018/04/17/%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82/"/>
     <id>https://hsb786.github.io/2018/04/17/抽象工厂/</id>
     <published>2018-04-17T09:17:08.000Z</published>
-    <updated>2018-04-17T09:57:49.384Z</updated>
+    <updated>2018-04-17T10:39:47.202Z</updated>
     
-    <content type="html"><![CDATA[<blockquote><p>提供一个创建一系列相关或相互依赖对象的接口，而无须指定它们具体的类。抽象工厂模式又称为Kit模式，属于对象创建型模式。</p></blockquote><p>将同一产品族的单独的工厂封装起来。通过创建抽象工厂的具体实现，然后使用抽象工厂做为接口来创建这一产品族的具体对象。<br><a id="more"></a><br><img src="/design-pattern-factory02.png" alt=""></p><hr><h2 id="产品等级结构和产品族"><a href="#产品等级结构和产品族" class="headerlink" title="产品等级结构和产品族"></a>产品等级结构和产品族</h2><p>产品等级结构： <strong>产品等级结构即产品的继承结构，同一类产品</strong>，如一个抽象类是电视机，其子类有海尔电视机、海信电视机、TCL电视机，则抽象电视机与具体品牌的电视机之间构成了一个产品等级结构，抽象电视机是父类，而具体品牌的电视机是其子类。</p><p>产品族：在抽象工厂模式中，<strong>产品族是指由同一个工厂生产的，同一个品牌产品</strong>，位于不同产品等级结构中的一组产品，如海尔电器工厂生产的海尔电视机、海尔电冰箱，海尔电视机位于电视机产品等级结构中，海尔电冰箱位于电冰箱产品等级结构中。</p><h2 id="抽象工厂与工厂方法"><a href="#抽象工厂与工厂方法" class="headerlink" title="抽象工厂与工厂方法"></a>抽象工厂与工厂方法</h2><p>抽象工厂和工厂方法最大的区别在于，工厂方法针对的是一个产品等级结构，而抽象工厂模式则需要面对多个产品等级结构。</p><p>工厂方法：用来生产同一等级结构中的固定产品（支持增加任意产品，新增产品是不需要更改已有的工程，需要增加该产品对应的工程。符合单一职责原则、符合开闭原则。但是引入了复杂性）</p><p>抽象工厂：用来生产不同产品族的全部产品。（增加新产品时，需要修改工厂，增加产品族时，需要增加工厂。符合单一职责原则，部分符合开闭原则，降低了复杂性）</p><h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><p>每次可以通过具体工厂类创建一个产品族的多个对象，增加新的具体工厂和产品族很方便。</p><h2 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h2><p>增加新的产品等级结构很复杂，需要修改抽象工厂和所有的具体工厂类。</p><hr><p><em>参考</em></p><blockquote><p><a href="https://lujunqiu.github.io/2017/11/13/工厂模式-下/" target="_blank" rel="noopener">工厂模式-下</a></p><p><a href="http://www.hollischuang.com/archives/1430" target="_blank" rel="noopener">设计模式（八）——工厂模式总结</a><br><a href="http://www.hollischuang.com/archives/1420" target="_blank" rel="noopener">设计模式（七）——抽象工厂模式</a></p></blockquote>]]></content>
+    <content type="html"><![CDATA[<blockquote><p>提供一个创建一系列相关或相互依赖对象的接口，而无须指定它们具体的类。抽象工厂模式又称为Kit模式，属于对象创建型模式。</p></blockquote><p>将同一产品族的单独的工厂封装起来。通过创建抽象工厂的具体实现，然后使用抽象工厂做为接口来创建这一产品族的具体对象。<br><a id="more"></a><br><img src="/images/design-pattern-factory02.png" alt=""></p><hr><h2 id="产品等级结构和产品族"><a href="#产品等级结构和产品族" class="headerlink" title="产品等级结构和产品族"></a>产品等级结构和产品族</h2><p>产品等级结构： <strong>产品等级结构即产品的继承结构，同一类产品</strong>，如一个抽象类是电视机，其子类有海尔电视机、海信电视机、TCL电视机，则抽象电视机与具体品牌的电视机之间构成了一个产品等级结构，抽象电视机是父类，而具体品牌的电视机是其子类。</p><p>产品族：在抽象工厂模式中，<strong>产品族是指由同一个工厂生产的，同一个品牌产品</strong>，位于不同产品等级结构中的一组产品，如海尔电器工厂生产的海尔电视机、海尔电冰箱，海尔电视机位于电视机产品等级结构中，海尔电冰箱位于电冰箱产品等级结构中。</p><h2 id="抽象工厂与工厂方法"><a href="#抽象工厂与工厂方法" class="headerlink" title="抽象工厂与工厂方法"></a>抽象工厂与工厂方法</h2><p>抽象工厂和工厂方法最大的区别在于，工厂方法针对的是一个产品等级结构，而抽象工厂模式则需要面对多个产品等级结构。</p><p>工厂方法：用来生产同一等级结构中的固定产品（支持增加任意产品，新增产品是不需要更改已有的工程，需要增加该产品对应的工程。符合单一职责原则、符合开闭原则。但是引入了复杂性）</p><p>抽象工厂：用来生产不同产品族的全部产品。（增加新产品时，需要修改工厂，增加产品族时，需要增加工厂。符合单一职责原则，部分符合开闭原则，降低了复杂性）</p><h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><p>每次可以通过具体工厂类创建一个产品族的多个对象，增加新的具体工厂和产品族很方便。</p><h2 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h2><p>增加新的产品等级结构很复杂，需要修改抽象工厂和所有的具体工厂类。</p><hr><p><em>参考</em></p><blockquote><p><a href="https://lujunqiu.github.io/2017/11/13/工厂模式-下/" target="_blank" rel="noopener">工厂模式-下</a></p><p><a href="http://www.hollischuang.com/archives/1430" target="_blank" rel="noopener">设计模式（八）——工厂模式总结</a><br><a href="http://www.hollischuang.com/archives/1420" target="_blank" rel="noopener">设计模式（七）——抽象工厂模式</a></p></blockquote>]]></content>
     
     <summary type="html">
     
