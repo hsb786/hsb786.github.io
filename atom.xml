@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://hsb786.github.io/"/>
-  <updated>2018-04-17T09:57:49.384Z</updated>
+  <updated>2018-04-17T10:25:56.015Z</updated>
   <id>https://hsb786.github.io/</id>
   
   <author>
@@ -15,6 +15,50 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>代理模式</title>
+    <link href="https://hsb786.github.io/2018/04/17/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/"/>
+    <id>https://hsb786.github.io/2018/04/17/代理模式/</id>
+    <published>2018-04-17T10:21:28.000Z</published>
+    <updated>2018-04-17T10:25:56.015Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>为其他对象提供一种代理以控制对这个对象的访问<br><a id="more"></a><br><img src="/design-pattern-proxy.png" alt=""></p></blockquote><h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><ul><li><p>代理对象可以在目标对象实现的基础上,增强额外的功能操作,即扩展目标对象的功能，符合开闭原则</p></li><li><p>代理对象可以在客户端和目标对象之间起到中介的作用，这样起到了中介的作用和保护了目标对象的作用。</p></li></ul><h2 id="代理类分类"><a href="#代理类分类" class="headerlink" title="代理类分类"></a>代理类分类</h2><ul><li><p>静态代理:静态定义代理类，我们自己静态定义的代理类。</p></li><li><p>动态代理:通过程序动态生成代理类，该代理类不是我们自己定义的，而是由程序自动生成，常用的动态代理技术有JDK自带的动态代理和CGLIB动态代理。</p></li></ul><hr><p>*参考</p><blockquote><p><a href="https://lujunqiu.github.io/2017/11/30/代理模式/" target="_blank" rel="noopener">代理模式</a></p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;为其他对象提供一种代理以控制对这个对象的访问&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="设计模式" scheme="https://hsb786.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>策略模式</title>
+    <link href="https://hsb786.github.io/2018/04/17/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/"/>
+    <id>https://hsb786.github.io/2018/04/17/策略模式/</id>
+    <published>2018-04-17T10:07:27.000Z</published>
+    <updated>2018-04-17T10:19:38.391Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>策略模式(Strategy Pattern)：定义一系列算法，将每一个算法封装起来，并让它们可以相互替换。策略模式让算法独立于使用它的客户而变化，也称为政策模式(Policy)。</p></blockquote><p>根据条件的不同选择不同的策略<br><a id="more"></a></p><p><img src="/images/design-pattern-strategy01.png" alt=""></p><h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><ol><li>策略模式提供了对“开闭原则”的完美支持，用户可以在不修改原有系统的基础上选择算法或行为，也可以灵活地增加新的算法或行为。</li><li>策略模式提供了管理相关的算法族的办法。策略类的等级结构定义了一个算法或行为族。恰当使用继承可以把公共的代码移到父类里面，从而避免代码重复。</li><li>使用策略模式可以避免使用多重条件(if-else)语句。多重条件语句不易维护，它把采取哪一种算法或采取哪一种行为的逻辑与算法或行为的逻辑混合在一起，统统列在一个多重条件语句里面，比使用继承的办法还要原始和落后。</li></ol><h2 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h2><ol><li>客户端必须知道所有的策略类，并自行决定使用哪一个策略类。这就意味着客户端必须理解这些算法的区别，以便适时选择恰当的算法类。</li><li>由于策略模式把每个具体的策略实现都单独封装成为类，如果备选的策略很多的话，那么对象的数目就会很可观。可以通过使用享元模式在一定程度上减少对象的数量。</li></ol><hr><p><em>参考</em></p><blockquote><p><a href="http://www.hollischuang.com/archives/1691" target="_blank" rel="noopener">设计模式（十二）——策略模式</a></p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;策略模式(Strategy Pattern)：定义一系列算法，将每一个算法封装起来，并让它们可以相互替换。策略模式让算法独立于使用它的客户而变化，也称为政策模式(Policy)。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;根据条件的不同选择不同的策略&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="设计模式" scheme="https://hsb786.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+  </entry>
   
   <entry>
     <title>抽象工厂</title>
@@ -44,16 +88,16 @@
     <link href="https://hsb786.github.io/2018/04/17/%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95/"/>
     <id>https://hsb786.github.io/2018/04/17/工厂方法/</id>
     <published>2018-04-17T09:05:30.000Z</published>
-    <updated>2018-04-17T09:57:57.547Z</updated>
+    <updated>2018-04-17T10:31:24.445Z</updated>
     
-    <content type="html"><![CDATA[<blockquote><p>定义了一个用于创建对象的接口，让子类决定实例化哪一个类。</p></blockquote><p><strong>工厂方法模式(Factory Method Pattern)又称为工厂模式，也叫虚拟构造器(Virtual Constructor)模式或者多态工厂(Polymorphic Factory)模式，它属于类创建型模式。</strong><br><a id="more"></a><br><img src="/images/design-pattern-factory01.png" alt=""></p><h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><ul><li>在系统中加入新产品时，无须修改抽象工厂和抽象产品提供的接口，也无须修改其他的具体工厂和具体产品，而只要添加一个具体工厂和具体产品就可以了。这样，系统的可扩展性也就变得非常好，完全符合“开闭原则”。</li><li>基于工厂角色和产品角色的多态性设计是工厂方法模式的关键。它能够使工厂可以自主确定创建何种产品对象，而如何创建这个对象的细节则完全封装在具体工厂内部。工厂方法模式之所以又被称为多态工厂模式，是因为所有的具体工厂类都具有同一抽象父类。</li></ul><h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><p>在添加新产品时，需要编写新的具体产品类，而且还要提供与之对应的具体工厂类，系统中类的个数将成对增加，在一定程度上增加了系统的复杂度，有更多的类需要编译和运行，会给系统带来一些额外的开销。</p><hr><p><em>参考</em></p><blockquote><p><a href="https://lujunqiu.github.io/2017/11/08/工厂模式/" target="_blank" rel="noopener">工厂模式(上)</a></p><p><a href="http://www.cnblogs.com/xiaoxi/p/7641358.html" target="_blank" rel="noopener">设计模式：工厂方法模式</a></p><p><a href="http://www.hollischuang.com/archives/1401" target="_blank" rel="noopener">设计模式（五）——工厂方法模式</a></p></blockquote>]]></content>
+    <content type="html"><![CDATA[<blockquote><p>定义了一个用于创建对象的接口，让子类决定实例化哪一个类。</p></blockquote><p>工厂方法模式(Factory Method Pattern)又称为工厂模式，也叫虚拟构造器(Virtual Constructor)模式或者多态工厂(Polymorphic Factory)模式，它属于类创建型模式。<br><a id="more"></a><br><img src="/images/design-pattern-factory01.png" alt=""></p><h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><ul><li>在系统中加入新产品时，无须修改抽象工厂和抽象产品提供的接口，也无须修改其他的具体工厂和具体产品，而只要添加一个具体工厂和具体产品就可以了。这样，系统的可扩展性也就变得非常好，完全符合“开闭原则”。</li><li>基于工厂角色和产品角色的多态性设计是工厂方法模式的关键。它能够使工厂可以自主确定创建何种产品对象，而如何创建这个对象的细节则完全封装在具体工厂内部。工厂方法模式之所以又被称为多态工厂模式，是因为所有的具体工厂类都具有同一抽象父类。</li></ul><h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><p>在添加新产品时，需要编写新的具体产品类，而且还要提供与之对应的具体工厂类，系统中类的个数将成对增加，在一定程度上增加了系统的复杂度，有更多的类需要编译和运行，会给系统带来一些额外的开销。</p><hr><p><em>参考</em></p><blockquote><p><a href="https://lujunqiu.github.io/2017/11/08/工厂模式/" target="_blank" rel="noopener">工厂模式(上)</a></p><p><a href="http://www.cnblogs.com/xiaoxi/p/7641358.html" target="_blank" rel="noopener">设计模式：工厂方法模式</a></p><p><a href="http://www.hollischuang.com/archives/1401" target="_blank" rel="noopener">设计模式（五）——工厂方法模式</a></p></blockquote>]]></content>
     
     <summary type="html">
     
       &lt;blockquote&gt;
 &lt;p&gt;定义了一个用于创建对象的接口，让子类决定实例化哪一个类。&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;&lt;strong&gt;工厂方法模式(Factory Method Pattern)又称为工厂模式，也叫虚拟构造器(Virtual Constructor)模式或者多态工厂(Polymorphic Factory)模式，它属于类创建型模式。&lt;/strong&gt;&lt;br&gt;
+&lt;p&gt;工厂方法模式(Factory Method Pattern)又称为工厂模式，也叫虚拟构造器(Virtual Constructor)模式或者多态工厂(Polymorphic Factory)模式，它属于类创建型模式。&lt;br&gt;
     
     </summary>
     
@@ -433,50 +477,6 @@
       <category term="爪哇" scheme="https://hsb786.github.io/tags/%E7%88%AA%E5%93%87/"/>
     
       <category term="JVM" scheme="https://hsb786.github.io/tags/JVM/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>【译】Executor, ExecutorService 和 Executors 间的不同 （转载）</title>
-    <link href="https://hsb786.github.io/2018/04/13/difference-between-executor-executorService/"/>
-    <id>https://hsb786.github.io/2018/04/13/difference-between-executor-executorService/</id>
-    <published>2018-04-13T05:21:41.000Z</published>
-    <updated>2018-04-15T12:27:44.506Z</updated>
-    
-    <content type="html"><![CDATA[<p><code>java.util.concurrent.Executor</code>, <code>java.util.concurrent.ExecutorService</code>, <code>java.util.concurrent. Executors</code> 这三者均是 Java Executor 框架的一部分，用来提供线程池的功能。因为创建和管理线程非常心累，并且操作系统通常对线程数有限制，所以建议使用线程池来并发执行任务，而不是每次请求进来时创建一个线程。使用线程池不仅可以提高应用的响应时间，还可以避免”java.lang.OutOfMemoryError: unable to create new native thread” 之类的错误。<br><a id="more"></a><br>在 Java 1.5 时，开发者需要关心线程池的创建和管理，但在 Java 1.5 之后 Executor 框架提供了多种内置的线程池,例如：FixedThreadPool(包含固定数目的线程)，CachedThreadPool(可根据需要创建新的线程)等等。</p><h2 id="Executor"><a href="#Executor" class="headerlink" title="Executor"></a>Executor</h2><p>Executor, ExecutorService, 和 Executors 最主要的区别是 Executor 是一个抽象层面的核心接口(大致代码如下)。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public interface Executor &#123;</span><br><span class="line">    void execute(Runnable command);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>不同于 java.lang.Thread 类将任务和执行耦合在一起， Executor 将任务本身和执行任务分离，可以阅读 difference between Thread and Executor 来了解 Thread 和 Executor 间更多的不同。</p><h2 id="ExecutorService"><a href="#ExecutorService" class="headerlink" title="ExecutorService"></a>ExecutorService</h2><p>ExecutorService 接口 对 Executor 接口进行了扩展，提供了返回 Future 对象，终止，关闭线程池等方法。当调用 shutDown 方法时，线程池会停止接受新的任务，但会完成正在 pending 中的任务。</p><p>Future 对象提供了异步执行，这意味着无需等待任务执行的完成，只要提交需要执行的任务，然后在需要时检查 Future 是否已经有了结果，如果任务已经执行完成，就可以通过 Future.get() 方法获得执行结果。需要注意的是，Future.get() 方法是一个阻塞式的方法，如果调用时任务还没有完成，会等待直到任务执行结束。</p><p>通过 ExecutorService.submit() 方法返回的 Future 对象，还可以取消任务的执行。Future 提供了 cancel() 方法用来取消执行 pending 中的任务。</p><p>ExecutorService 部分代码如下：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public interface ExecutorService extends Executor &#123;</span><br><span class="line">void shutdown();</span><br><span class="line">&lt;T&gt; Future&lt;T&gt; submit(Callable&lt;T&gt; task);</span><br><span class="line">&lt;T&gt; Future&lt;T&gt; submit(Runnable task, T result);</span><br><span class="line">&lt;T&gt; List&lt;Future&lt;T&gt;&gt; invokeAll(Collection&lt;? extends Callable&lt;T&gt;&gt; tasks, long timeout, TimeUnit unit) throws InterruptedException;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="Executors"><a href="#Executors" class="headerlink" title="Executors"></a>Executors</h2><p>Executors 是一个工具类，类似于 Collections。提供工厂方法来创建不同类型的线程池，比如 FixedThreadPool 或 CachedThreadPool。</p><p>Executors 部分代码：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public class Executors &#123;</span><br><span class="line">    public static ExecutorService newFixedThreadPool(int nThreads) &#123;</span><br><span class="line">        return new ThreadPoolExecutor(nThreads, nThreads, 0L, TimeUnit.MILLISECONDS,new LinkedBlockingQueue&lt;Runnable&gt;());</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">     public static ExecutorService newCachedThreadPool() &#123;</span><br><span class="line">        return new ThreadPoolExecutor(0, Integer.MAX_VALUE, 60L, TimeUnit.SECONDS, new SynchronousQueue&lt;Runnable&gt;());</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>下面详细看一下三者的区别：</p><h2 id="Executor-vs-ExecutorService-vs-Executors"><a href="#Executor-vs-ExecutorService-vs-Executors" class="headerlink" title="Executor vs ExecutorService vs Executors"></a>Executor vs ExecutorService vs Executors</h2><p>正如上面所说，这三者均是 Executor 框架中的一部分。Java 开发者很有必要学习和理解他们，以便更高效的使用 Java 提供的不同类型的线程池。总结一下这三者间的区别，以便大家更好的理解：</p><ul><li>Executor 和 ExecutorService 这两个接口主要的区别是：ExecutorService 接口继承了 Executor 接口，是 Executor 的子接口</li><li>Executor 和 ExecutorService 第二个区别是：Executor 接口定义了 execute()方法用来接收一个Runnable接口的对象，而 ExecutorService 接口中的 submit()方法可以接受Runnable和Callable接口的对象。</li><li>Executor 和 ExecutorService 接口第三个区别是 Executor 中的 execute() 方法不返回任何结果，而 ExecutorService 中的 submit()方法可以通过一个 Future 对象返回运算结果。</li><li>Executor 和 ExecutorService 接口第四个区别是除了允许客户端提交一个任务，ExecutorService 还提供用来控制线程池的方法。比如：调用 shutDown() 方法终止线程池。可以通过 《Java Concurrency in Practice》 一书了解更多关于关闭线程池和如何处理 pending 的任务的知识。</li><li>Executors 类提供工厂方法用来创建不同类型的线程池。比如: newSingleThreadExecutor() 创建一个只有一个线程的线程池，newFixedThreadPool(int numOfThreads)来创建固定线程数的线程池，newCachedThreadPool()可以根据需要创建新的线程，但如果已有线程是空闲的会重用已有线程。</li></ul><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>下表列出了 Executor 和 ExecutorService 的区别：</p><table><thead><tr><th>Executor</th><th>ExecutorService</th></tr></thead><tbody><tr><td>Executor 是 Java 线程池的核心接口，用来并发执行提交的任务</td><td>ExecutorService 是 Executor 接口的扩展，提供了异步执行和关闭线程池的方法</td></tr><tr><td>提供execute()方法用来提交任务</td><td>提供submit()方法用来提交任务</td></tr><tr><td>execute()方法无返回值</td><td>submit()方法返回Future对象，可用来获取任务执行结果</td></tr><tr><td>不能取消任务</td><td>可以通过Future.cancel()取消pending中的任务</td></tr><tr><td>没有提供和关闭线程池有关的方法</td><td>提供了关闭线程池的方法</td></tr></tbody></table><hr><p><em>参考</em></p><blockquote><p><a href="https://yemengying.com/2017/03/17/difference-between-executor-executorService/" target="_blank" rel="noopener">【译】Executor, ExecutorService 和 Executors 间的不同 </a></p></blockquote>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;code&gt;java.util.concurrent.Executor&lt;/code&gt;, &lt;code&gt;java.util.concurrent.ExecutorService&lt;/code&gt;, &lt;code&gt;java.util.concurrent. Executors&lt;/code&gt; 这三者均是 Java Executor 框架的一部分，用来提供线程池的功能。因为创建和管理线程非常心累，并且操作系统通常对线程数有限制，所以建议使用线程池来并发执行任务，而不是每次请求进来时创建一个线程。使用线程池不仅可以提高应用的响应时间，还可以避免”java.lang.OutOfMemoryError: unable to create new native thread” 之类的错误。&lt;br&gt;
-    
-    </summary>
-    
-    
-      <category term="爪哇" scheme="https://hsb786.github.io/tags/%E7%88%AA%E5%93%87/"/>
-    
-      <category term="多线程" scheme="https://hsb786.github.io/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>vscode-database</title>
-    <link href="https://hsb786.github.io/2018/04/13/vscode-database/"/>
-    <id>https://hsb786.github.io/2018/04/13/vscode-database/</id>
-    <published>2018-04-13T03:55:59.000Z</published>
-    <updated>2018-04-13T04:23:59.089Z</updated>
-    
-    <content type="html"><![CDATA[<p><strong>最近发现了一个很好用的vscode插件, vscode-database</strong></p><p>迷上了vscode</p><p><img src="/images/vscode-database.png" alt=""><br><a id="more"></a><br><img src="/images/vscode_mysql.png" alt=""></p><p><strong>快捷键</strong></p><table><thead><tr><th>命令</th><th>语义</th></tr></thead><tbody><tr><td>ctrl q</td><td>querySQL</td></tr><tr><td>ctrl shift e</td><td>Run selected text as SQL query    </td></tr></tbody></table>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;strong&gt;最近发现了一个很好用的vscode插件, vscode-database&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;迷上了vscode&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/images/vscode-database.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;
-    
-    </summary>
-    
-    
-      <category term="工具" scheme="https://hsb786.github.io/tags/%E5%B7%A5%E5%85%B7/"/>
     
   </entry>
   
