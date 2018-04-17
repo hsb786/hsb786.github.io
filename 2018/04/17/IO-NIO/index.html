@@ -3,20 +3,25 @@
 <head>
     <meta charset="utf-8">
     
-    <title>单例模式 | HuShengBin’s blog</title>
+    <title>IO/NIO | HuShengBin’s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="定义：单例对象的类必须保证只有一个实例存在场景：希望在整个系统中只能出现某个类的一个实例 分类 懒汉式：指全局的单例实例在第一次被使用时构建 饿汉式：指全局的单例实例在类装载时构建  日常我们使用的较多的应该是懒汉式的单例，因为按需加载才能做到资源的最大化利用。">
-<meta name="keywords" content="设计模式">
+    <meta name="description" content="IO字节IO字节流处理单元为1个字节，主要用在处理二进制数据，字节用来与文件打交道，所有文件的储存都是通过字节（byte）的方式，在磁盘上保留的并不是文件的字符而是先把字符编码成字节，再储存这些字节到磁盘。在读取文件（特别是文本文件）时，也是一个字节一个字节地读取形成字节序列。   字符IO实际中很多的数据是文本，因此有了字符流的概念，字符流只用于处理文字数据。字符流处理单元为2个字节的Unico">
+<meta name="keywords" content="爪哇">
 <meta property="og:type" content="article">
-<meta property="og:title" content="单例模式">
-<meta property="og:url" content="https://hsb786.github.io/2018/04/16/单例模式/index.html">
+<meta property="og:title" content="IO&#x2F;NIO">
+<meta property="og:url" content="https://hsb786.github.io/2018/04/17/IO-NIO/index.html">
 <meta property="og:site_name" content="HuShengBin’s blog">
-<meta property="og:description" content="定义：单例对象的类必须保证只有一个实例存在场景：希望在整个系统中只能出现某个类的一个实例 分类 懒汉式：指全局的单例实例在第一次被使用时构建 饿汉式：指全局的单例实例在类装载时构建  日常我们使用的较多的应该是懒汉式的单例，因为按需加载才能做到资源的最大化利用。">
+<meta property="og:description" content="IO字节IO字节流处理单元为1个字节，主要用在处理二进制数据，字节用来与文件打交道，所有文件的储存都是通过字节（byte）的方式，在磁盘上保留的并不是文件的字符而是先把字符编码成字节，再储存这些字节到磁盘。在读取文件（特别是文本文件）时，也是一个字节一个字节地读取形成字节序列。   字符IO实际中很多的数据是文本，因此有了字符流的概念，字符流只用于处理文字数据。字符流处理单元为2个字节的Unico">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-04-16T10:24:50.310Z">
+<meta property="og:image" content="https://hsb786.github.io/images/IO01.png">
+<meta property="og:image" content="https://hsb786.github.io/images/IO02.png">
+<meta property="og:image" content="https://hsb786.github.io/images/IO03.png">
+<meta property="og:image" content="https://hsb786.github.io/images/IO04.png">
+<meta property="og:updated_time" content="2018-04-17T11:02:18.313Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="单例模式">
-<meta name="twitter:description" content="定义：单例对象的类必须保证只有一个实例存在场景：希望在整个系统中只能出现某个类的一个实例 分类 懒汉式：指全局的单例实例在第一次被使用时构建 饿汉式：指全局的单例实例在类装载时构建  日常我们使用的较多的应该是懒汉式的单例，因为按需加载才能做到资源的最大化利用。">
+<meta name="twitter:title" content="IO&#x2F;NIO">
+<meta name="twitter:description" content="IO字节IO字节流处理单元为1个字节，主要用在处理二进制数据，字节用来与文件打交道，所有文件的储存都是通过字节（byte）的方式，在磁盘上保留的并不是文件的字符而是先把字符编码成字节，再储存这些字节到磁盘。在读取文件（特别是文本文件）时，也是一个字节一个字节地读取形成字节序列。   字符IO实际中很多的数据是文本，因此有了字符流的概念，字符流只用于处理文字数据。字符流处理单元为2个字节的Unico">
+<meta name="twitter:image" content="https://hsb786.github.io/images/IO01.png">
     
 
     
@@ -177,7 +182,7 @@
 </aside>
 
             
-            <section id="main"><article id="post-单例模式" class="article article-type-post" itemscope itemprop="blogPost">
+            <section id="main"><article id="post-IO-NIO" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -185,7 +190,7 @@
                 
     
         <h1 class="article-title" itemprop="name">
-            单例模式
+            IO/NIO
         </h1>
     
 
@@ -194,8 +199,8 @@
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/2018/04/16/单例模式/">
-            <time datetime="2018-04-16T05:35:59.000Z" itemprop="datePublished">2018-04-16</time>
+        <a href="/2018/04/17/IO-NIO/">
+            <time datetime="2018-04-17T10:55:26.000Z" itemprop="datePublished">2018-04-17</time>
         </a>
     </div>
 
@@ -204,7 +209,7 @@
                         
     <div class="article-tag">
         <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/设计模式/">设计模式</a>
+        <a class="tag-link" href="/tags/爪哇/">爪哇</a>
     </div>
 
                     </div>
@@ -215,33 +220,16 @@
         <div class="article-entry" itemprop="articleBody">
         
             
-            <p>定义：单例对象的类必须保证只有一个实例存在<br>场景：希望在整个系统中只能出现某个类的一个实例</p>
-<h2 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h2><ul>
-<li>懒汉式：指全局的单例实例在第一次被使用时构建</li>
-<li>饿汉式：指全局的单例实例在类装载时构建</li>
-</ul>
-<p>日常我们使用的较多的应该是懒汉式的单例，因为按需加载才能做到资源的最大化利用。<br><a id="more"></a></p>
-<h2 id="单例模式的实现"><a href="#单例模式的实现" class="headerlink" title="单例模式的实现"></a>单例模式的实现</h2><h3 id="懒汉式单例"><a href="#懒汉式单例" class="headerlink" title="懒汉式单例"></a>懒汉式单例</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">public class Single &#123;</span><br><span class="line">    private static volatile Single instance;</span><br><span class="line">    private Single() &#123;&#125;</span><br><span class="line">    public static Single getInstance() &#123;</span><br><span class="line">        if (instance == null) &#123;</span><br><span class="line">            synchronized (Single.class) &#123;</span><br><span class="line">                if (instance == null) &#123;</span><br><span class="line">                    instance = new Single();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>instance = new Single()；这个语句在JVM中，实际执行的原子语句包括：</p>
-<ol>
-<li>给Single分配内存</li>
-<li>调用Single的构造函数完成初始化，返回类实例</li>
-<li>将instance指向之前分配的完成初始化的内存</li>
-</ol>
-<p>编译器在不改变单线程程序语义的前提下，可以对指令重排序。1-2-3可能会变成1-3-2</p>
-<p>导致的结果可能就是，线程B执行到1- 3 , 已经将instance引用指向了分配的内存，但是并没有执行初始化操作，所以这个时候instance并不等于null，但是没有被初始化。然后，线程B让出CPU，线程A开始执行，判断if(instance==null)，由于instance不等于null，于是线程A就直接返回这个instance，但是这个对象是线程B没有初始化的对象。</p>
-<p>so，加上volatile修饰后，就可以禁止指令重排，遵循happens-before原则。保证B线程对instance的修改happens-before于A线程对instance的读。</p>
-<h3 id="饿汉式单例"><a href="#饿汉式单例" class="headerlink" title="饿汉式单例"></a>饿汉式单例</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public class Singleton &#123;  </span><br><span class="line">    private static Singleton instance = new Singleton();  </span><br><span class="line">    private Singleton ()&#123;&#125;  </span><br><span class="line">    public static Singleton getInstance() &#123;  </span><br><span class="line">         return instance;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>静态内部类实现</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public class Singleton &#123;</span><br><span class="line">    private static class SingletonHolder &#123;</span><br><span class="line">        private static final Singleton INSTANCE = new Singleton();</span><br><span class="line">    &#125;</span><br><span class="line">    private Singleton ()&#123;&#125;</span><br><span class="line">    public static final Singleton getInstance() &#123;</span><br><span class="line">        return SingletonHolder.INSTANCE;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>前一种方法只要Single类被加载了，那么instance就会被实例化。而这种方式是Singleton类被加载了，instance不一定被实例化。因为SingletonHoler类没有被主动使用，只在外部类的Singleton的getInstance()中被调用时才加载，从而实例化Instance，这样就可以启动延迟加载。</p>
+            <h2 id="IO"><a href="#IO" class="headerlink" title="IO"></a>IO</h2><h3 id="字节IO"><a href="#字节IO" class="headerlink" title="字节IO"></a>字节IO</h3><p>字节流处理单元为1个字节，主要用在处理二进制数据，字节用来与文件打交道，所有文件的储存都是通过字节（byte）的方式，在磁盘上保留的并不是文件的字符而是先把字符编码成字节，再储存这些字节到磁盘。在读取文件（特别是文本文件）时，也是一个字节一个字节地读取形成字节序列。</p>
+<p><img src="/images/IO01.png" alt=""></p>
+<p><img src="/images/IO02.png" alt=""></p>
+<h3 id="字符IO"><a href="#字符IO" class="headerlink" title="字符IO"></a>字符IO</h3><p>实际中很多的数据是文本，因此有了字符流的概念，字符流只用于处理文字数据。字符流处理单元为2个字节的Unicode字符。</p>
+<p>字符流中的对象融合了编码表，使用的是默认的编码，即当前系统的编码。在实际开发中出现的汉字乱码问题实际上都是在字符流和字节流之间转化不统一而造成的。</p>
+<p><img src="/images/IO03.png" alt=""></p>
+<p><img src="/images/IO04.png" alt=""></p>
 <hr>
-<p><em>参考</em></p>
-<blockquote>
-<p><a href="https://lujunqiu.github.io/2017/11/15/单例模式/" target="_blank" rel="noopener">单例模式</a></p>
-<p><a href="http://www.hollischuang.com/archives/1373" target="_blank" rel="noopener">设计模式（二）——单例模式</a></p>
-<p><a href="http://www.hollischuang.com/archives/205" target="_blank" rel="noopener">[转+注]单例模式的七种写法</a></p>
-</blockquote>
+<h2 id="NIO"><a href="#NIO" class="headerlink" title="NIO"></a>NIO</h2><p><strong>Channel（通道），Buffer（缓存区），Selector（选择器）</strong></p>
+<h3 id="Channel（通道）"><a href="#Channel（通道）" class="headerlink" title="Channel（通道）"></a>Channel（通道）</h3><p>在传统IO中我们要读取一个文件中的内容时InputStream实际上就是为读取文件提供了一个通道，因此可以将NIO 中的Channel同传统IO中的Stream来类比。但是要注意的是，传统IO中的Stream是单向的，比如InputStream只能进行读取操作，OutputStream只能进行写操作；而<strong>Channel是双向的，既可用来进行读操作又可用来进行写操作。</strong></p>
 
         
         </div>
@@ -252,7 +240,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/16/单例模式/" data-id="cjg3mnpq1002pysmykqifji8q" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/17/IO-NIO/" data-id="cjg3mnpoa000cysmy5qcm261p" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -327,19 +315,10 @@
         
 <nav id="article-nav">
     
-        <a href="/2018/04/16/HTTP/" id="article-nav-newer" class="article-nav-link-wrap">
-            <strong class="article-nav-caption">上一篇</strong>
-            <div class="article-nav-title">
-                
-                    HTTP
-                
-            </div>
-        </a>
     
-    
-        <a href="/2018/04/16/Integer/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/2018/04/17/代理模式/" id="article-nav-older" class="article-nav-link-wrap">
             <strong class="article-nav-caption">下一篇</strong>
-            <div class="article-nav-title">Integer</div>
+            <div class="article-nav-title">代理模式</div>
         </a>
     
 </nav>

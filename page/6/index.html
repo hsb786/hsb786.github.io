@@ -147,7 +147,7 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                58
+                59
                 <span>文章</span>
             </div>
             <div class="article-info-block">
@@ -176,7 +176,7 @@
 
             
             <section id="main">
-    <article id="post-事务" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-防止重复发送 Ajax 请求的解决方案" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -184,7 +184,7 @@
                 
     
         <h1 itemprop="name">
-            <a class="article-title" href="/2018/04/08/事务/">事务</a>
+            <a class="article-title" href="/2018/04/08/防止重复发送 Ajax 请求的解决方案/">防止重复发送 Ajax 请求的解决方案</a>
         </h1>
     
 
@@ -193,7 +193,7 @@
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/2018/04/08/事务/">
+        <a href="/2018/04/08/防止重复发送 Ajax 请求的解决方案/">
             <time datetime="2018-04-08T09:58:41.000Z" itemprop="datePublished">2018-04-08</time>
         </a>
     </div>
@@ -203,7 +203,7 @@
                         
     <div class="article-tag">
         <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/Spring/">Spring</a>, <a class="tag-link" href="/tags/sql/">sql</a>
+        <a class="tag-link" href="/tags/前端/">前端</a>
     </div>
 
                     </div>
@@ -214,10 +214,14 @@
         <div class="article-entry" itemprop="articleBody">
         
             <p><hr>
-<blockquote>
-<p>事务（Transaction），一般是指要做的或所做的事情。在计算机术语中是指访问并可能更新数据库中各种数据项的一个程序执行单元（unit）。在计算机术语中，事务通常就是指数据库事务。<br></p>
+<p>连续点击多个按钮，可能导致先请求的数据后显示出来。</p>
+<hr>
+<p><strong>解决方案</strong></p>
+<p><strong>1. 将ajax请求的async设置为false</strong></p>
+<p><strong>2. 利用jquery ajaxPrefilter中断请求</strong></p>
+<p><strong>3. 加遮罩框</strong><br></p>
             <p class="article-more-link">
-                <a href="/2018/04/08/事务/#more">查看更多</a>
+                <a href="/2018/04/08/防止重复发送 Ajax 请求的解决方案/#more">查看更多</a>
             </p>
         
         </div>
@@ -228,7 +232,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/08/事务/" data-id="cjg3jed9w0026dwmy5hkcoxzm" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/08/防止重复发送 Ajax 请求的解决方案/" data-id="cjg3mnprr0041ysmy5muxsuyi" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -355,7 +359,134 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/08/SpringMVC/" data-id="cjg3jed9g0011dwmy0cfgmvdr" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/08/SpringMVC/" data-id="cjg3mnpp5001cysmyzeoh62bk" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
+    <article id="post-一些小技巧" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2018/04/08/一些小技巧/">一些小技巧</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2018/04/08/一些小技巧/">
+            <time datetime="2018-04-08T09:58:41.000Z" itemprop="datePublished">2018-04-08</time>
+        </a>
+    </div>
+
+
+                        
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/爪哇/">爪哇</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            <p><hr>
+<h3 id="位运算直接对内存数据进行操作，不需要转成十进制，因此处理速度非常快"><a href="#位运算直接对内存数据进行操作，不需要转成十进制，因此处理速度非常快" class="headerlink" title="位运算直接对内存数据进行操作，不需要转成十进制，因此处理速度非常快"></a>位运算直接对内存数据进行操作，不需要转成十进制，因此处理速度非常快</h3><p> X % 2^n = X &amp; (2^n-1)<br></p>
+            <p class="article-more-link">
+                <a href="/2018/04/08/一些小技巧/#more">查看更多</a>
+            </p>
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="https://hsb786.github.io/2018/04/08/一些小技巧/" data-id="cjg3mnppl001xysmycsn55me4" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -485,7 +616,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/08/Java虚拟机是如何执行线程同步的/" data-id="cjg3jed91000mdwmyavxf7no7" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/08/Java虚拟机是如何执行线程同步的/" data-id="cjg3mnpoa000iysmy33bctgmn" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -613,7 +744,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/08/lombok/" data-id="cjg3jed9w001udwmyagkuyurl" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/08/lombok/" data-id="cjg3mnppl001vysmyxlgqg6lj" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -745,7 +876,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/08/NaN/" data-id="cjg3jed9g000wdwmy4ozzmlkk" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/08/NaN/" data-id="cjg3mnpoq000sysmy8ob0k8z8" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -899,7 +1030,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/08/VSCode快捷键/" data-id="cjg3jed9g001bdwmysym7rtj2" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/08/VSCode快捷键/" data-id="cjg3mnpoq0014ysmyo2umghih" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1024,7 +1155,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/08/gitCommand/" data-id="cjg3jed9g001hdwmyk0xmhgkh" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/08/gitCommand/" data-id="cjg3mnpp5001hysmy75bpwjyt" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1151,7 +1282,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/08/markdown/" data-id="cjg3jed9w001wdwmyx9k8xje7" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/08/markdown/" data-id="cjg3mnppl0025ysmy0l9oftki" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1244,6 +1375,25 @@
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/2018/04/17/IO-NIO/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/04/17/IO-NIO/" class="title">IO/NIO</a></p>
+                            <p class="item-date"><time datetime="2018-04-17T10:55:26.000Z" itemprop="datePublished">2018-04-17</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/2018/04/17/代理模式/" class="thumbnail">
     
     
@@ -1317,25 +1467,6 @@
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2018/04/16/ClassLoader/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"></p>
-                            <p class="item-title"><a href="/2018/04/16/ClassLoader/" class="title">ClassLoader</a></p>
-                            <p class="item-date"><time datetime="2018-04-16T12:21:34.000Z" itemprop="datePublished">2018-04-16</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -1347,7 +1478,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">归档</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a><span class="archive-list-count">58</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a><span class="archive-list-count">59</span></li></ul>
         </div>
     </div>
 
@@ -1356,7 +1487,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">标签</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/">HTTP</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MyBatis/">MyBatis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql/">sql</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/剑指Offer/">剑指Offer</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多线程/">多线程</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/术语/">术语</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爪哇/">爪哇</a><span class="tag-list-count">26</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/长期更新/">长期更新</a><span class="tag-list-count">3</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/">HTTP</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MyBatis/">MyBatis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql/">sql</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/剑指Offer/">剑指Offer</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多线程/">多线程</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/术语/">术语</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爪哇/">爪哇</a><span class="tag-list-count">27</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/长期更新/">长期更新</a><span class="tag-list-count">3</span></li></ul>
         </div>
     </div>
 
