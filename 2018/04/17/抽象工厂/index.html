@@ -3,20 +3,22 @@
 <head>
     <meta charset="utf-8">
     
-    <title>值传递和引用传递 | HuShengBin’s blog</title>
+    <title>抽象工厂 | HuShengBin’s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="值传递  指在调用函数时将实际参数复制一份传递到函数中，那么在函数中对参数所进行的修改，将不会影响到实际参数。   引用传递 指在调用函数时将实际参数的地址直接传递到函数中，那么在函数中对参数所进行的修改，将影响到实际参数。">
-<meta name="keywords" content="爪哇">
+    <meta name="description" content="提供一个创建一系列相关或相互依赖对象的接口，而无须指定它们具体的类。抽象工厂模式又称为Kit模式，属于对象创建型模式。  将同一产品族的单独的工厂封装起来。通过创建抽象工厂的具体实现，然后使用抽象工厂做为接口来创建这一产品族的具体对象。">
+<meta name="keywords" content="设计模式">
 <meta property="og:type" content="article">
-<meta property="og:title" content="值传递和引用传递">
-<meta property="og:url" content="https://hsb786.github.io/2018/04/08/值传递和引用传递/index.html">
+<meta property="og:title" content="抽象工厂">
+<meta property="og:url" content="https://hsb786.github.io/2018/04/17/抽象工厂/index.html">
 <meta property="og:site_name" content="HuShengBin’s blog">
-<meta property="og:description" content="值传递  指在调用函数时将实际参数复制一份传递到函数中，那么在函数中对参数所进行的修改，将不会影响到实际参数。   引用传递 指在调用函数时将实际参数的地址直接传递到函数中，那么在函数中对参数所进行的修改，将影响到实际参数。">
+<meta property="og:description" content="提供一个创建一系列相关或相互依赖对象的接口，而无须指定它们具体的类。抽象工厂模式又称为Kit模式，属于对象创建型模式。  将同一产品族的单独的工厂封装起来。通过创建抽象工厂的具体实现，然后使用抽象工厂做为接口来创建这一产品族的具体对象。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-04-12T10:43:16.657Z">
+<meta property="og:image" content="https://hsb786.github.io/images/design-pattern-factory02.png">
+<meta property="og:updated_time" content="2018-04-17T09:57:49.384Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="值传递和引用传递">
-<meta name="twitter:description" content="值传递  指在调用函数时将实际参数复制一份传递到函数中，那么在函数中对参数所进行的修改，将不会影响到实际参数。   引用传递 指在调用函数时将实际参数的地址直接传递到函数中，那么在函数中对参数所进行的修改，将影响到实际参数。">
+<meta name="twitter:title" content="抽象工厂">
+<meta name="twitter:description" content="提供一个创建一系列相关或相互依赖对象的接口，而无须指定它们具体的类。抽象工厂模式又称为Kit模式，属于对象创建型模式。  将同一产品族的单独的工厂封装起来。通过创建抽象工厂的具体实现，然后使用抽象工厂做为接口来创建这一产品族的具体对象。">
+<meta name="twitter:image" content="https://hsb786.github.io/images/design-pattern-factory02.png">
     
 
     
@@ -177,7 +179,7 @@
 </aside>
 
             
-            <section id="main"><article id="post-值传递和引用传递" class="article article-type-post" itemscope itemprop="blogPost">
+            <section id="main"><article id="post-抽象工厂" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -185,7 +187,7 @@
                 
     
         <h1 class="article-title" itemprop="name">
-            值传递和引用传递
+            抽象工厂
         </h1>
     
 
@@ -194,8 +196,8 @@
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/2018/04/08/值传递和引用传递/">
-            <time datetime="2018-04-08T09:58:41.000Z" itemprop="datePublished">2018-04-08</time>
+        <a href="/2018/04/17/抽象工厂/">
+            <time datetime="2018-04-17T09:17:08.000Z" itemprop="datePublished">2018-04-17</time>
         </a>
     </div>
 
@@ -204,7 +206,7 @@
                         
     <div class="article-tag">
         <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/爪哇/">爪哇</a>
+        <a class="tag-link" href="/tags/设计模式/">设计模式</a>
     </div>
 
                     </div>
@@ -215,12 +217,24 @@
         <div class="article-entry" itemprop="articleBody">
         
             
-            <hr>
-<p><strong>值传递</strong>  指在调用函数时将实际参数<em>复制</em>一份传递到函数中，那么在函数中对参数所进行的修改，将不会影响到实际参数。  </p>
-<p><strong>引用传递</strong> 指在调用函数时将实际参数的地址<em>直接</em>传递到函数中，那么在函数中对参数所进行的修改，将影响到实际参数。<br><a id="more"></a><br>求值策略 | 求值时间 | 求值方式 | 根本区别<br>—|—|—|—<br>值传递 | 调用前 | 值的结果（原值的副本）| 会创建副本<br>引用传递 | 调用前 | 原值（原始对象，无副本）| 不创建副本</p>
-<p><strong>值传递和引用传递的区别并不是传递的内容，而是实参到底有没有被复制一份到形参</strong></p>
-<p>java只有值传递，不存在引用传递</p>
-<p>java在传递引用类型数据时，把实际参数的内存地址复制了一份，传递给了形参</p>
+            <blockquote>
+<p>提供一个创建一系列相关或相互依赖对象的接口，而无须指定它们具体的类。抽象工厂模式又称为Kit模式，属于对象创建型模式。</p>
+</blockquote>
+<p>将同一产品族的单独的工厂封装起来。通过创建抽象工厂的具体实现，然后使用抽象工厂做为接口来创建这一产品族的具体对象。<br><a id="more"></a><br><img src="/design-pattern-factory02.png" alt=""></p>
+<hr>
+<h2 id="产品等级结构和产品族"><a href="#产品等级结构和产品族" class="headerlink" title="产品等级结构和产品族"></a>产品等级结构和产品族</h2><p>产品等级结构： <strong>产品等级结构即产品的继承结构，同一类产品</strong>，如一个抽象类是电视机，其子类有海尔电视机、海信电视机、TCL电视机，则抽象电视机与具体品牌的电视机之间构成了一个产品等级结构，抽象电视机是父类，而具体品牌的电视机是其子类。</p>
+<p>产品族：在抽象工厂模式中，<strong>产品族是指由同一个工厂生产的，同一个品牌产品</strong>，位于不同产品等级结构中的一组产品，如海尔电器工厂生产的海尔电视机、海尔电冰箱，海尔电视机位于电视机产品等级结构中，海尔电冰箱位于电冰箱产品等级结构中。</p>
+<h2 id="抽象工厂与工厂方法"><a href="#抽象工厂与工厂方法" class="headerlink" title="抽象工厂与工厂方法"></a>抽象工厂与工厂方法</h2><p>抽象工厂和工厂方法最大的区别在于，工厂方法针对的是一个产品等级结构，而抽象工厂模式则需要面对多个产品等级结构。</p>
+<p>工厂方法：用来生产同一等级结构中的固定产品（支持增加任意产品，新增产品是不需要更改已有的工程，需要增加该产品对应的工程。符合单一职责原则、符合开闭原则。但是引入了复杂性）</p>
+<p>抽象工厂：用来生产不同产品族的全部产品。（增加新产品时，需要修改工厂，增加产品族时，需要增加工厂。符合单一职责原则，部分符合开闭原则，降低了复杂性）</p>
+<h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><p>每次可以通过具体工厂类创建一个产品族的多个对象，增加新的具体工厂和产品族很方便。</p>
+<h2 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h2><p>增加新的产品等级结构很复杂，需要修改抽象工厂和所有的具体工厂类。</p>
+<hr>
+<p><em>参考</em></p>
+<blockquote>
+<p><a href="https://lujunqiu.github.io/2017/11/13/工厂模式-下/" target="_blank" rel="noopener">工厂模式-下</a></p>
+<p><a href="http://www.hollischuang.com/archives/1430" target="_blank" rel="noopener">设计模式（八）——工厂模式总结</a><br><a href="http://www.hollischuang.com/archives/1420" target="_blank" rel="noopener">设计模式（七）——抽象工厂模式</a></p>
+</blockquote>
 
         
         </div>
@@ -231,7 +245,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/08/值传递和引用传递/" data-id="cjg3hua99002mcsmyvs2ew2i0" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/17/抽象工厂/" data-id="cjg3hua99002rcsmy8bx231nv" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -306,19 +320,10 @@
         
 <nav id="article-nav">
     
-        <a href="/2018/04/08/hash（转载）/" id="article-nav-newer" class="article-nav-link-wrap">
-            <strong class="article-nav-caption">上一篇</strong>
-            <div class="article-nav-title">
-                
-                    hash（转载）
-                
-            </div>
-        </a>
     
-    
-        <a href="/2018/04/08/事务/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/2018/04/17/工厂方法/" id="article-nav-older" class="article-nav-link-wrap">
             <strong class="article-nav-caption">下一篇</strong>
-            <div class="article-nav-title">事务</div>
+            <div class="article-nav-title">工厂方法</div>
         </a>
     
 </nav>

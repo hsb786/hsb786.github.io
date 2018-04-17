@@ -14,7 +14,7 @@
 <meta property="og:description" content="Java中的所有类，必须被装载到jvm中才能运行，这个装载工作是由jvm中的类装载器完成的，类装载器所做的工作实质是把类文件从硬盘读取到内存中，JVM在加载类的时候，都是通过ClassLoader的loadClass（）方法来加载class的，loadClass使用双亲委派模式。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://hsb786.github.io/images/ClassLoader01.png">
-<meta property="og:updated_time" content="2018-04-16T13:03:11.736Z">
+<meta property="og:updated_time" content="2018-04-16T13:38:14.049Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ClassLoader">
 <meta name="twitter:description" content="Java中的所有类，必须被装载到jvm中才能运行，这个装载工作是由jvm中的类装载器完成的，类装载器所做的工作实质是把类文件从硬盘读取到内存中，JVM在加载类的时候，都是通过ClassLoader的loadClass（）方法来加载class的，loadClass使用双亲委派模式。">
@@ -151,7 +151,7 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                54
+                56
                 <span>文章</span>
             </div>
             <div class="article-info-block">
@@ -227,7 +227,7 @@
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">protected Class&lt;?&gt; loadClass(String name, boolean resolve)</span><br><span class="line">       throws ClassNotFoundException</span><br><span class="line">   &#123;</span><br><span class="line">       synchronized (getClassLoadingLock(name)) &#123;</span><br><span class="line">           // First, check if the class has already been loaded</span><br><span class="line">           Class&lt;?&gt; c = findLoadedClass(name);</span><br><span class="line">           if (c == null) &#123;</span><br><span class="line">               long t0 = System.nanoTime();</span><br><span class="line">               try &#123;</span><br><span class="line">                   if (parent != null) &#123;</span><br><span class="line">                       c = parent.loadClass(name, false);</span><br><span class="line">                   &#125; else &#123;</span><br><span class="line">                       c = findBootstrapClassOrNull(name);</span><br><span class="line">                   &#125;</span><br><span class="line">               &#125; catch (ClassNotFoundException e) &#123;</span><br><span class="line">                   // ClassNotFoundException thrown if class not found</span><br><span class="line">                   // from the non-null parent class loader</span><br><span class="line">               &#125;</span><br><span class="line"></span><br><span class="line">               if (c == null) &#123;</span><br><span class="line">                   // If still not found, then invoke findClass in order</span><br><span class="line">                   // to find the class.</span><br><span class="line">                   long t1 = System.nanoTime();</span><br><span class="line">                   c = findClass(name);</span><br><span class="line"></span><br><span class="line">                   // this is the defining class loader; record the stats</span><br><span class="line">                   sun.misc.PerfCounter.getParentDelegationTime().addTime(t1 - t0);</span><br><span class="line">                   sun.misc.PerfCounter.getFindClassTime().addElapsedTimeFrom(t1);</span><br><span class="line">                   sun.misc.PerfCounter.getFindClasses().increment();</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;</span><br><span class="line">           if (resolve) &#123;</span><br><span class="line">               resolveClass(c);</span><br><span class="line">           &#125;</span><br><span class="line">           return c;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>使用指定的二进制名称来加载类，这个方法的默认实现按照以下顺序查找类： 调用findLoadedClass(String)方法检查这个类是否被加载过 使用父加载器调用loadClass(String)方法，如果父加载器为Null，类加载器装载虚拟机内置的加载器调用findClass(String)方法装载类， 如果，按照以上的步骤成功的找到对应的类，并且该方法接收的resolve参数的值为true,那么就调用resolveClass(Class)方法来处理类。 ClassLoader的子类最好覆盖findClass(String)而不是这个方法。 除非被重写，这个方法默认在整个装载过程中都是同步的（线程安全的）</p>
+<p>使用指定的二进制名称来加载类，这个方法的默认实现按照以下顺序查找类： 调用findLoadedClass(String)方法检查这个类是否被加载过 使用父加载器调用loadClass(String)方法，如果父加载器为Null，类加载器装载虚拟机内置的加载器调用findClass(String)方法装载类， 如果，按照以上的步骤成功的找到对应的类，并且该方法接收的resolve参数的值为true,那么就调用resolveClass(Class)方法来处理类。</p>
 </blockquote>
 <hr>
 <p>java中的类大致分为三种:</p>
@@ -239,7 +239,7 @@
 <p>类装载方式，有两种：</p>
 <ol>
 <li>隐式装载， 程序在运行过程中当碰到通过new 等方式生成对象时，隐式调用类装载器加载对应的类到jvm中。</li>
-<li>显式装载， 通过class.forname()等方法，显式加载需要的类</li>
+<li>显式装载， 通过class.forName()等方法，显式加载需要的类</li>
 </ol>
 <p>类加载的动态性体现：</p>
 <blockquote>
@@ -250,11 +250,18 @@
 <h2 id="类加载器之间是如何协调工作的"><a href="#类加载器之间是如何协调工作的" class="headerlink" title="类加载器之间是如何协调工作的"></a>类加载器之间是如何协调工作的</h2><p>java是如何区分一个类该由哪个类加载器来完成呢。 在这里java采用了委托模型机制，这个机制简单来讲，就是“类装载器有载入类的需求时，会先请示其Parent使用其搜索路径帮忙载入，如果Parent 找不到,那么才由自己依照自己的搜索路径搜索类”</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Public class Test&#123;</span><br><span class="line">    Public static void main(String[] arg)&#123;</span><br><span class="line">        ClassLoader c  = Test.class.getClassLoader();  //获取Test类的类加载器</span><br><span class="line">        System.out.println(c); </span><br><span class="line">        ClassLoader c1 = c.getParent();  //获取c这个类加载器的父类加载器</span><br><span class="line">        System.out.println(c1);</span><br><span class="line">        ClassLoader c2 = c1.getParent();//获取c1这个类加载器的父类加载器</span><br><span class="line">        System.out.println(c2);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//output</span><br><span class="line">AppClassLoader</span><br><span class="line">ExtClassLoader</span><br><span class="line">Null</span><br></pre></td></tr></table></figure>
 <p>可以看出Test是由<strong>AppClassLoader</strong>加载器加载的，<strong>AppClassLoader</strong>的<code>Parent</code> 加载器是 <strong>ExtClassLoader</strong>,但是<strong>ExtClassLoader</strong>的<code>Parent</code>为 <code>null</code> 是怎么回事。<strong>Bootstrap Loader</strong>是用C++语言写的，依java的观点来看，逻辑上并不存在<strong>Bootstrap Loader</strong>的类实体，所以在java程序代码里试图打印出其内容时，我们就会看到输出为<code>null</code>。</p>
+<p>java类加载器基于三个机制：委托，可见，单一。</p>
+<ul>
+<li>委托机制：指的是将加载类的请求传递给父加载器，如果父加载器找不到或者不能加载这个类，那么再加载他。</li>
+<li>可见性机制：指的是父加载器加载的类都能被子加载器看见，但是子加载器加载的类父加载器是看不见的。</li>
+<li>单一性机制：指的是一个类只能被同一种加载器加载一次。</li>
+</ul>
+<hr>
 <h2 id="JVM加载class文件的原理机制"><a href="#JVM加载class文件的原理机制" class="headerlink" title="JVM加载class文件的原理机制"></a>JVM加载class文件的原理机制</h2><p>类装载器就是寻找类或接口字节码文件进行解析并构造JVM内部对象表示的组件，在java中类装载器把一个类装入JVM，经过以下步骤：</p>
 <ul>
 <li>装载：查找和导入Class文件</li>
 <li>链接：<ul>
-<li>检查：检查载入的class文件数据的正确性</li>
+<li>验证：检查载入的class文件数据的正确性</li>
 <li>准备： 给类的静态变量分配存储空间</li>
 <li>解析： 将符号引用转成直接引用</li>
 </ul>
@@ -270,19 +277,28 @@
 <p>类加载器的一个重要用途是在<code>JVM</code>中为相同名称的Java类创建隔离空间。在<code>JVM</code>中，判断两个类是否相同，不仅是根据该类的二进制名称，还需要根据两个类的定义类加载器。只有两者完全一样，才认为两个类的是相同的。因此，即便是同样的<code>Java</code>字节代码，被两个不同的类加载器定义之后，所得到的<code>Java</code>类也是不同的。如果试图在两个类的对象之间进行赋值操作，会抛出<code>java.lang.ClassCastException</code>。这个特性为同样名称的<code>Java</code>类在<code>JVM</code>中共存创造了条件。在实际的应用中，可能会要求同一名称的<code>Java</code>类的不同版本在<code>JVM</code>中可以同时存在。通过类加载器就可以满足这种需求。</p>
 </blockquote>
 <h2 id="Java类的链接"><a href="#Java类的链接" class="headerlink" title="Java类的链接"></a>Java类的链接</h2><p>Java类的链接指的是将Java类的二进制代码合并到JVM的运行状态之中的过程。在链接之前，这个类必须被成功加载。<br>链接的过程比加载过程要复杂很多，这是实现java的动态性的重要一步！分为三部分：<code>verification</code> （验证）， <code>preparation</code>（准备） 和 <code>resolution</code>（解析）</p>
-<p><strong>1. verification（验证）：</strong><br>验证是用来确保Java类的二进制表示在结构上是完全正确的。如果验证过程出现错误的话，会抛出java.lang.VerifyError错误。</p>
-<p>linking的resolve会把类中成员方法、成员变量、类和接口的符号引用替换为直接引用，而在这之前，需要检测被引用的类型正确性和接入属性是否正确（就是public ,private的的问题）诸如，检查final class 没有被继承，检查静态变量的正确性等等</p>
+<p><strong>1. verification（验证）：</strong><br>验证是用来确保Java类的二进制表示在结构上是完全正确的。要验证比如class文件格式规范、这个类是否继承了final类、不能把一个父类对象赋值给子类数据类型等等。如果验证过程出现错误的话，会抛出java.lang.VerifyError错误。</p>
 <p><strong>2.preparation（准备）：</strong></p>
-<p>准备过程则是创建Java类中的静态域，并将这些域的值设为默认值。准备过程并不会执行代码。</p>
+<p>准备阶段为方法区中的静态变量分配内存空间。并将其赋值为初始值，所有原始类型的值都为0。如float为0f、 int为0、boolean为0、引用类型为null。</p>
 <p><strong>3.resolution（解析）：</strong></p>
 <p>解析的过程就是确保这些被引用的类能被正确的找到。解析的过程可能会导致其它的Java类被加载。</p>
 <p>为类、接口、方法、成员变量的符号引用定位直接引用。</p>
+<p>符号引用是一个字符串，它唯一标识一个类、一个字段、一个方法等目标。</p>
+<p>而直接引用对于类变量、类方法指的是指向方法区的指针，然后对于实例方法、实例对象来说就是偏移量，比如一个实例方法，子类中方法表中的偏移量和父类是一致的，这个偏移量可以确定某个方法的位置。</p>
 <h2 id="Java类的初始化"><a href="#Java类的初始化" class="headerlink" title="Java类的初始化"></a>Java类的初始化</h2><p>类的初始化是延迟的，直到类第一次被主动使用(active use)，JVM 才会初始化类。<br>当一个Java类第一次被真正使用到的时候，JVM会进行该类的初始化操作。初始化过程的主要操作是执行静态代码块和初始化静态域。在一个类被初始化之前，它的直接父类也需要被初始化。但是，一个接口的初始化，不会引起其父接口的初始化。在初始化的时候，会按照源代码中从上到下的顺序依次执行静态代码块和初始化静态域。</p>
+<p>初始化过程会被触发的条件汇总：</p>
+<ol>
+<li>使用new关键字实例化对象、访问一个类的静态字段、静态方法的时候。</li>
+<li>对类进行反射调用的时候。</li>
+<li>当初始化子类时，如果发现其父类还没有进行过初始化，则进行父类的初始化。</li>
+</ol>
 <hr>
 <p><em>参考</em></p>
 <blockquote>
 <p><a href="http://www.hollischuang.com/archives/199" target="_blank" rel="noopener">深度分析Java的ClassLoader机制（源码级别）</a></p>
 <p><a href="http://www.hollischuang.com/archives/201" target="_blank" rel="noopener">Java类的加载、链接和初始化</a></p>
+<p><a href="http://brianway.github.io/2016/02/03/javase-learn-note-3-ClassLoader/" target="_blank" rel="noopener">java基础巩固笔记(3)-类加载器</a></p>
+<p><a href="https://blog.csdn.net/seu_calvin/article/details/52301541" target="_blank" rel="noopener">JVM——Java类加载机制总结 </a></p>
 </blockquote>
 
         
@@ -294,7 +310,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/16/ClassLoader/" data-id="cjg292nwb000278my4ln7i39h" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/16/ClassLoader/" data-id="cjg3hua7i0001csmyv43s43wn" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -369,6 +385,15 @@
         
 <nav id="article-nav">
     
+        <a href="/2018/04/17/工厂方法/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">上一篇</strong>
+            <div class="article-nav-title">
+                
+                    工厂方法
+                
+            </div>
+        </a>
+    
     
         <a href="/2018/04/16/HTTP/" id="article-nav-older" class="article-nav-link-wrap">
             <strong class="article-nav-caption">下一篇</strong>
@@ -399,6 +424,44 @@
         <h3 class="widget-title">最新文章</h3>
         <div class="widget">
             <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/04/17/抽象工厂/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/design-pattern-factory02.png)" alt="抽象工厂" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/04/17/抽象工厂/" class="title">抽象工厂</a></p>
+                            <p class="item-date"><time datetime="2018-04-17T09:17:08.000Z" itemprop="datePublished">2018-04-17</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/04/17/工厂方法/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/design-pattern-factory01.png)" alt="工厂方法" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2018/04/17/工厂方法/" class="title">工厂方法</a></p>
+                            <p class="item-date"><time datetime="2018-04-17T09:05:30.000Z" itemprop="datePublished">2018-04-17</time></p>
+                        </div>
+                    </li>
                 
                     <li>
                         
@@ -457,44 +520,6 @@
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2018/04/16/Integer/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"></p>
-                            <p class="item-title"><a href="/2018/04/16/Integer/" class="title">Integer</a></p>
-                            <p class="item-date"><time datetime="2018-04-16T05:09:49.000Z" itemprop="datePublished">2018-04-16</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2018/04/16/String/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"></p>
-                            <p class="item-title"><a href="/2018/04/16/String/" class="title">String</a></p>
-                            <p class="item-date"><time datetime="2018-04-16T04:35:57.000Z" itemprop="datePublished">2018-04-16</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -506,7 +531,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">归档</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a><span class="archive-list-count">54</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a><span class="archive-list-count">56</span></li></ul>
         </div>
     </div>
 
@@ -515,7 +540,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">标签</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/">HTTP</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MyBatis/">MyBatis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql/">sql</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/剑指Offer/">剑指Offer</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多线程/">多线程</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/术语/">术语</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爪哇/">爪哇</a><span class="tag-list-count">26</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/长期更新/">长期更新</a><span class="tag-list-count">3</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/">HTTP</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MyBatis/">MyBatis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql/">sql</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/剑指Offer/">剑指Offer</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多线程/">多线程</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/术语/">术语</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爪哇/">爪哇</a><span class="tag-list-count">26</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/长期更新/">长期更新</a><span class="tag-list-count">3</span></li></ul>
         </div>
     </div>
 
@@ -524,7 +549,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">标签云</h3>
         <div class="widget tagcloud">
-            <a href="/tags/HTTP/" style="font-size: 13.33px;">HTTP</a> <a href="/tags/JVM/" style="font-size: 11.67px;">JVM</a> <a href="/tags/MyBatis/" style="font-size: 10px;">MyBatis</a> <a href="/tags/Spring/" style="font-size: 15px;">Spring</a> <a href="/tags/sql/" style="font-size: 13.33px;">sql</a> <a href="/tags/前端/" style="font-size: 13.33px;">前端</a> <a href="/tags/剑指Offer/" style="font-size: 16.67px;">剑指Offer</a> <a href="/tags/多线程/" style="font-size: 16.67px;">多线程</a> <a href="/tags/工具/" style="font-size: 18.33px;">工具</a> <a href="/tags/术语/" style="font-size: 10px;">术语</a> <a href="/tags/爪哇/" style="font-size: 20px;">爪哇</a> <a href="/tags/算法/" style="font-size: 16.67px;">算法</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a> <a href="/tags/长期更新/" style="font-size: 13.33px;">长期更新</a>
+            <a href="/tags/HTTP/" style="font-size: 13.33px;">HTTP</a> <a href="/tags/JVM/" style="font-size: 11.67px;">JVM</a> <a href="/tags/MyBatis/" style="font-size: 10px;">MyBatis</a> <a href="/tags/Spring/" style="font-size: 15px;">Spring</a> <a href="/tags/sql/" style="font-size: 13.33px;">sql</a> <a href="/tags/前端/" style="font-size: 13.33px;">前端</a> <a href="/tags/剑指Offer/" style="font-size: 16.67px;">剑指Offer</a> <a href="/tags/多线程/" style="font-size: 16.67px;">多线程</a> <a href="/tags/工具/" style="font-size: 18.33px;">工具</a> <a href="/tags/术语/" style="font-size: 10px;">术语</a> <a href="/tags/爪哇/" style="font-size: 20px;">爪哇</a> <a href="/tags/算法/" style="font-size: 16.67px;">算法</a> <a href="/tags/设计模式/" style="font-size: 13.33px;">设计模式</a> <a href="/tags/长期更新/" style="font-size: 13.33px;">长期更新</a>
         </div>
     </div>
 
