@@ -6,14 +6,14 @@
     <title>【译】以生产者消费者为例阐述如何使用wait，notify和notifyAll （转载） | HuShengBin’s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <meta name="description" content="在Java中可以利用use,notify,notifyAll来完成线程之间的通信。举个例子，假设你的程序中有两个线程(eg:Producer(生产者)和Consumer(消费者))，Producer要和Consumer通信，通知Consumer队列中有元素了可以开始消费。相似的，Consumer也需要通知Producer队列中有空闲可以插入元素了。一个线程可以可以在一定条件下调用wait方法暂停什">
-<meta name="keywords" content="爪哇,多线程">
+<meta name="keywords" content="多线程">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【译】以生产者消费者为例阐述如何使用wait，notify和notifyAll （转载）">
 <meta property="og:url" content="https://hsb786.github.io/2018/04/13/译-以生产者消费者为例阐述如何使用wait，notify和notifyAll/index.html">
 <meta property="og:site_name" content="HuShengBin’s blog">
 <meta property="og:description" content="在Java中可以利用use,notify,notifyAll来完成线程之间的通信。举个例子，假设你的程序中有两个线程(eg:Producer(生产者)和Consumer(消费者))，Producer要和Consumer通信，通知Consumer队列中有元素了可以开始消费。相似的，Consumer也需要通知Producer队列中有空闲可以插入元素了。一个线程可以可以在一定条件下调用wait方法暂停什">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-04-13T07:49:23.236Z">
+<meta property="og:updated_time" content="2018-04-18T11:22:43.098Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【译】以生产者消费者为例阐述如何使用wait，notify和notifyAll （转载）">
 <meta name="twitter:description" content="在Java中可以利用use,notify,notifyAll来完成线程之间的通信。举个例子，假设你的程序中有两个线程(eg:Producer(生产者)和Consumer(消费者))，Producer要和Consumer通信，通知Consumer队列中有元素了可以开始消费。相似的，Consumer也需要通知Producer队列中有空闲可以插入元素了。一个线程可以可以在一定条件下调用wait方法暂停什">
@@ -204,7 +204,7 @@
                         
     <div class="article-tag">
         <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/多线程/">多线程</a>, <a class="tag-link" href="/tags/爪哇/">爪哇</a>
+        <a class="tag-link" href="/tags/多线程/">多线程</a>
     </div>
 
                     </div>
@@ -237,7 +237,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/13/译-以生产者消费者为例阐述如何使用wait，notify和notifyAll/" data-id="cjg4r471y003o2gmy1m85eltd" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/13/译-以生产者消费者为例阐述如何使用wait，notify和notifyAll/" data-id="cjg509tkm003n08myuorl0cpq" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -467,7 +467,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">标签</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/">HTTP</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MyBatis/">MyBatis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql/">sql</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多线程/">多线程</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/术语/">术语</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爪哇/">爪哇</a><span class="tag-list-count">25</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/长期更新/">长期更新</a><span class="tag-list-count">3</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/">HTTP</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MyBatis/">MyBatis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql/">sql</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多线程/">多线程</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/术语/">术语</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爪哇/">爪哇</a><span class="tag-list-count">19</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/长期更新/">长期更新</a><span class="tag-list-count">3</span></li></ul>
         </div>
     </div>
 
