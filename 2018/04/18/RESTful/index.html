@@ -3,20 +3,20 @@
 <head>
     <meta charset="utf-8">
     
-    <title>旋转数组的最小数字 | HuShengBin’s blog</title>
+    <title>RESTful | HuShengBin’s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="把一个数组最开始的若干个元素搬到数组的末尾，我们称之为数组的旋转。输入一个递增排序数组的一个旋转，输出旋转数组的最小元素。">
-<meta name="keywords" content="剑指Offer,算法">
+    <meta name="description" content="起源REST这个词，是Roy Thomas Fielding在他2000年的博士论文中提出的。Fielding是一个非常重要的人，他是HTTP协议（1.0版和1.1版）的主要设计者、Apache服务器软件的作者之一、Apache基金会的第一任主席。所以，他的这篇论文一经发表，就引起了关注，并且立即对互联网开发产生了深远的影响。 他在论文中提到：  “本文研究计算机科学两大前沿—-软件和网络—-的交">
+<meta name="keywords" content="HTTP">
 <meta property="og:type" content="article">
-<meta property="og:title" content="旋转数组的最小数字">
-<meta property="og:url" content="https://hsb786.github.io/2018/04/10/旋转数组的最小数字/index.html">
+<meta property="og:title" content="RESTful">
+<meta property="og:url" content="https://hsb786.github.io/2018/04/18/RESTful/index.html">
 <meta property="og:site_name" content="HuShengBin’s blog">
-<meta property="og:description" content="把一个数组最开始的若干个元素搬到数组的末尾，我们称之为数组的旋转。输入一个递增排序数组的一个旋转，输出旋转数组的最小元素。">
+<meta property="og:description" content="起源REST这个词，是Roy Thomas Fielding在他2000年的博士论文中提出的。Fielding是一个非常重要的人，他是HTTP协议（1.0版和1.1版）的主要设计者、Apache服务器软件的作者之一、Apache基金会的第一任主席。所以，他的这篇论文一经发表，就引起了关注，并且立即对互联网开发产生了深远的影响。 他在论文中提到：  “本文研究计算机科学两大前沿—-软件和网络—-的交">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-04-12T05:27:51.508Z">
+<meta property="og:updated_time" content="2018-04-18T06:03:55.130Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="旋转数组的最小数字">
-<meta name="twitter:description" content="把一个数组最开始的若干个元素搬到数组的末尾，我们称之为数组的旋转。输入一个递增排序数组的一个旋转，输出旋转数组的最小元素。">
+<meta name="twitter:title" content="RESTful">
+<meta name="twitter:description" content="起源REST这个词，是Roy Thomas Fielding在他2000年的博士论文中提出的。Fielding是一个非常重要的人，他是HTTP协议（1.0版和1.1版）的主要设计者、Apache服务器软件的作者之一、Apache基金会的第一任主席。所以，他的这篇论文一经发表，就引起了关注，并且立即对互联网开发产生了深远的影响。 他在论文中提到：  “本文研究计算机科学两大前沿—-软件和网络—-的交">
     
 
     
@@ -177,7 +177,7 @@
 </aside>
 
             
-            <section id="main"><article id="post-旋转数组的最小数字" class="article article-type-post" itemscope itemprop="blogPost">
+            <section id="main"><article id="post-RESTful" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -185,7 +185,7 @@
                 
     
         <h1 class="article-title" itemprop="name">
-            旋转数组的最小数字
+            RESTful
         </h1>
     
 
@@ -194,8 +194,8 @@
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/2018/04/10/旋转数组的最小数字/">
-            <time datetime="2018-04-10T08:11:33.000Z" itemprop="datePublished">2018-04-10</time>
+        <a href="/2018/04/18/RESTful/">
+            <time datetime="2018-04-18T05:37:06.000Z" itemprop="datePublished">2018-04-18</time>
         </a>
     </div>
 
@@ -204,7 +204,7 @@
                         
     <div class="article-tag">
         <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/剑指Offer/">剑指Offer</a>, <a class="tag-link" href="/tags/算法/">算法</a>
+        <a class="tag-link" href="/tags/HTTP/">HTTP</a>
     </div>
 
                     </div>
@@ -215,12 +215,112 @@
         <div class="article-entry" itemprop="articleBody">
         
             
-            <p>把一个数组最开始的若干个元素搬到数组的末尾，我们称之为数组的旋转。<br>输入一个递增排序数组的一个旋转，输出旋转数组的最小元素。<br><a id="more"></a><br><strong>旋转数组的特点：</strong></p>
-<ol>
-<li>旋转之后的数组可以分为两个排序的子数组，且前面的子数组的元素都大于或等于后面子数组的元素。 </li>
-<li>最小或者最大元素位于两个子数组的分界</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 由于旋转数组的特点，前一个数组一定大于后一个数组。数组内部是升序的。</span><br><span class="line"> * 所以就可以使用二分查找。</span><br><span class="line"> * 定义minIndex为0，highIndex为length-1</span><br><span class="line"> * 若中间位大于array[minIndex]，则代表中间位处于前面部分,将minIndex设为midIndex；</span><br><span class="line"> * 小于则处于后面部分,将highIndex设为midIndex</span><br><span class="line"> * 最终minIndex位于前一个数组的最后一位，highIndex位于后一个数组的第一位</span><br><span class="line"> * 显然最小值就是highIndex所在的值。</span><br><span class="line"> * 特殊情况，但minIndex与highIndex上的值相等时，无法判断中间值是在前，还是在后。</span><br><span class="line"> * 所以只能用顺序查找</span><br><span class="line"> * @author: husb   </span><br><span class="line"> * @date: 2018年4月10日 下午2:56:26 </span><br><span class="line"> */</span><br><span class="line">public static int findMin(int[] array) &#123;</span><br><span class="line">	int lowIndex = 0;</span><br><span class="line">	int highIndex = array.length - 1;</span><br><span class="line">	int midIndex = (lowIndex + highIndex) / 2;</span><br><span class="line">	// 当代查找数组第一位大于最后一位时，代表是旋转数组</span><br><span class="line">	while (array[lowIndex] &gt;= array[highIndex]) &#123;</span><br><span class="line">		// 临界条件 前面最后一位，后面第一位。 后面第一位就是最小值</span><br><span class="line">		if (highIndex - lowIndex == 1) &#123;</span><br><span class="line">			return array[highIndex];</span><br><span class="line">		&#125;</span><br><span class="line">		// 当左下标的元素等于右下标的元素时，无法判断中间位是位于前面还是后面的。</span><br><span class="line">		// 只能用顺序查找</span><br><span class="line">		if (array[lowIndex] == array[highIndex]) &#123;</span><br><span class="line">			return findMinInOrder(array, lowIndex, highIndex);</span><br><span class="line">		&#125;</span><br><span class="line">		// 当中间位大于前面第一位时，代表处于前面</span><br><span class="line">		if (array[midIndex] &gt; array[lowIndex]) &#123;</span><br><span class="line">			lowIndex = midIndex;</span><br><span class="line">		&#125; else &#123;</span><br><span class="line">			// 否则处于后面</span><br><span class="line">			highIndex = midIndex;</span><br><span class="line">		&#125;</span><br><span class="line">		// 计算中间位</span><br><span class="line">		midIndex = (lowIndex + highIndex) / 2;</span><br><span class="line">	&#125;</span><br><span class="line">	//已排好序，返回低位即可</span><br><span class="line">	return array[lowIndex];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * @Description: 当有重复元素的时候，无法确定中间的元素是前面的还是后面的</span><br><span class="line"> * @author: husb</span><br><span class="line"> * @date: 2018年4月10日 下午2:33:52</span><br><span class="line"> */</span><br><span class="line">private static int findMinInOrder(int[] array, int lowIndex, int highIndex) &#123;</span><br><span class="line">	int result = array[lowIndex];</span><br><span class="line">	for (int i = lowIndex + 1; i &lt;= highIndex; i++) &#123;</span><br><span class="line">		if (result &gt; array[i]) &#123;</span><br><span class="line">			result = array[i];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	return result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            <h2 id="起源"><a href="#起源" class="headerlink" title="起源"></a>起源</h2><p>REST这个词，是Roy Thomas Fielding在他2000年的博士论文中提出的。Fielding是一个非常重要的人，他是HTTP协议（1.0版和1.1版）的主要设计者、Apache服务器软件的作者之一、Apache基金会的第一任主席。所以，他的这篇论文一经发表，就引起了关注，并且立即对互联网开发产生了深远的影响。</p>
+<p>他在论文中提到：</p>
+<blockquote>
+<p>“本文研究计算机科学两大前沿—-软件和网络—-的交叉点。长期以来，软件研究主要关注软件设计的分类、设计方法的演化，很少客观地评估不同的设计选择对系统行为的影响。而相反地，网络研究主要关注系统之间通信行为的细节、如何改进特定通信机制的表现，常常忽视了一个事实，那就是改变应用程序的互动风格比改变互动协议，对整体表现有更大的影响。我这篇文章的写作目的，就是想在符合架构原理的前提下，理解和评估以网络为基础的应用软件的架构设计，得到一个功能强、性能好、适宜通信的架构。”<br><a id="more"></a></p>
+</blockquote>
+<h2 id="REST"><a href="#REST" class="headerlink" title="REST"></a>REST</h2><p>Fielding将他对互联网软件的架构原则，定名为REST，即Representational State Transfer（表现层状态转化）的缩写。</p>
+<p>如果一个架构符合REST原则，就称它为RESTful架构。</p>
+<h2 id="资源（Resources）"><a href="#资源（Resources）" class="headerlink" title="资源（Resources）"></a>资源（Resources）</h2><p>REST的名称”表现层状态转化”中，省略了主语。”表现层”其实指的是”资源”（Resources）的”表现层”。</p>
+<p><strong>所谓”资源”，就是网络上的一个实体，或者说是网络上的一个具体信息</strong>。它可以是一段文本、一张图片、一首歌曲、一种服务，总之就是一个具体的实在。你可以用一个URI（统一资源定位符）指向它，每种资源对应一个特定的URI。要获取这个资源，访问它的URI就可以，因此URI就成了每一个资源的地址或独一无二的识别符。</p>
+<p>所谓”上网”，就是与互联网上一系列的”资源”互动，调用它的URI。</p>
+<h2 id="表现层（Representation）"><a href="#表现层（Representation）" class="headerlink" title="表现层（Representation）"></a>表现层（Representation）</h2><p>“资源”是一种信息实体，它可以有多种外在表现形式。<strong>我们把”资源”具体呈现出来的形式，叫做它的”表现层”（Representation）</strong>。</p>
+<p>比如，文本可以用txt格式表现，也可以用HTML格式、XML格式、JSON格式表现，甚至可以采用二进制格式；图片可以用JPG格式表现，也可以用PNG格式表现。</p>
+<p>URI只代表资源的实体，不代表它的形式。严格地说，有些网址最后的”.html”后缀名是不必要的，因为这个后缀名表示格式，属于”表现层”范畴，而URI应该只代表”资源”的位置。它的具体表现形式，应该在HTTP请求的头信息中用Accept和Content-Type字段指定，这两个字段才是对”表现层”的描述。</p>
+<h2 id="状态转化（State-Transfer）"><a href="#状态转化（State-Transfer）" class="headerlink" title="状态转化（State Transfer）"></a>状态转化（State Transfer）</h2><p>访问一个网站，就代表了客户端和服务器的一个互动过程。在这个过程中，势必涉及到数据和状态的变化。</p>
+<p>互联网通信协议HTTP协议，是一个无状态协议。这意味着，所有的状态都保存在服务器端。因此，<strong>如果客户端想要操作服务器，必须通过某种手段，让服务器端发生”状态转化”（State Transfer）。而这种转化是建立在表现层之上的，所以就是”表现层状态转化”。</strong></p>
+<hr>
+<h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><h3 id="HTTP协议，是一个无状态协议，无状态是什么意思"><a href="#HTTP协议，是一个无状态协议，无状态是什么意思" class="headerlink" title="HTTP协议，是一个无状态协议，无状态是什么意思"></a>HTTP协议，是一个无状态协议，无状态是什么意思</h3><h4 id="回答1"><a href="#回答1" class="headerlink" title="回答1"></a>回答1</h4><p>有状态：<br>A：你今天中午吃的啥？<br>B：吃的大盘鸡。<br>A：味道怎么样呀？<br>B：还不错，挺好吃的。  </p>
+<p>无状态：<br>A：你今天中午吃的啥？<br>B：吃的大盘鸡。<br>A：味道怎么样呀？<br>B：？？？啊？啥？啥味道怎么样？</p>
+<p>所以需要cookie这种东西：<br>A：你今天中午吃的啥？<br>B：吃的大盘鸡。<br>A：你今天中午吃的大盘鸡味道怎么样呀？<br>B：还不错，挺好吃的。</p>
+<h4 id="回答2"><a href="#回答2" class="headerlink" title="回答2"></a>回答2</h4><ul>
+<li>协议对于事务处理没有记忆能力</li>
+<li>对同一个url请求没有上下文关系</li>
+<li>每次的请求都是独立的，它的执行情况和结果与前面的请求和之后的请求是无直接关系的，它不会受前面的请求应答情况直接影响，也不会直接影响后面的请求应答情况</li>
+<li>服务器中没有保存客户端的状态，客户端必须每次带上自己的状态去请求服务器</li>
+<li>人生若只如初见</li>
+</ul>
+<p>【状态】的含义就是：客户端和服务器在某次会话中产生的数据，从而【无状态】就意味着，这些数据不会被保留</p>
+<p>但是：</p>
+<ul>
+<li>通过增加cookie和session机制，现在的网络请求其实是有状态的</li>
+<li>在没有状态的http协议下，服务器也一定会保留你每次网络请求对数据的修改，但这跟保留每次访问的数据是不一样的，保留的只是会话产生的结果，而没有保留会话</li>
+</ul>
+<h2 id="路径（Endpoint）"><a href="#路径（Endpoint）" class="headerlink" title="路径（Endpoint）"></a>路径（Endpoint）</h2><p>路径又称”终点”（endpoint），表示API的具体网址。</p>
+<p>在RESTful架构中，每个网址代表一种资源（resource），所以网址中不能有动词，只能有名词，而且所用的名词往往与数据库的表格名对应。一般来说，数据库中的表都是同种记录的”集合”（collection），所以API中的名词也应该使用复数。</p>
+<p>举例来说，有一个API提供动物园（zoo）的信息，还包括各种动物和雇员的信息，则它的路径应该设计成下面这样。</p>
+<ul>
+<li><a href="https://api.example.com/v1/zoos" target="_blank" rel="noopener">https://api.example.com/v1/zoos</a></li>
+<li><a href="https://api.example.com/v1/animals" target="_blank" rel="noopener">https://api.example.com/v1/animals</a></li>
+<li><a href="https://api.example.com/v1/employees" target="_blank" rel="noopener">https://api.example.com/v1/employees</a></li>
+</ul>
+<h2 id="HTTP动词"><a href="#HTTP动词" class="headerlink" title="HTTP动词"></a>HTTP动词</h2><p>对于资源的具体操作类型，由HTTP动词表示。</p>
+<p>常用的HTTP动词有下面五个（括号里是对应的SQL命令）。</p>
+<ul>
+<li>GET（SELECT）：从服务器取出资源（一项或多项）。</li>
+<li>POST（CREATE）：在服务器新建一个资源。</li>
+<li>PUT（UPDATE）：在服务器更新资源（客户端提供改变后的完整资源）。</li>
+<li>PATCH（UPDATE）：在服务器更新资源（客户端提供改变的属性）。</li>
+<li>DELETE（DELETE）：从服务器删除资源。</li>
+</ul>
+<p>例子</p>
+<ul>
+<li>GET /zoos：列出所有动物园</li>
+<li>POST /zoos：新建一个动物园</li>
+<li>GET /zoos/ID：获取某个指定动物园的信息</li>
+<li>PUT /zoos/ID：更新某个指定动物园的信息（提供该动物园的全部信息）</li>
+<li>PATCH /zoos/ID：更新某个指定动物园的信息（提供该动物园的部分信息）</li>
+<li>DELETE /zoos/ID：删除某个动物园</li>
+<li>GET /zoos/ID/animals：列出某个指定动物园的所有动物</li>
+<li>DELETE /zoos/ID/animals/ID：删除某个指定动物园的指定动物</li>
+</ul>
+<h2 id="过滤信息（Filtering）"><a href="#过滤信息（Filtering）" class="headerlink" title="过滤信息（Filtering）"></a>过滤信息（Filtering）</h2><p>如果记录数量很多，服务器不可能都将它们返回给用户。API应该提供参数，过滤返回结果。</p>
+<ul>
+<li>?limit=10：指定返回记录的数量</li>
+<li>?offset=10：指定返回记录的开始位置。</li>
+<li>?page=2&amp;per_page=100：指定第几页，以及每页的记录数。</li>
+<li>?sortby=name&amp;order=asc：指定返回结果按照哪个属性排序，以及排序顺序。</li>
+<li>?animal_type_id=1：指定筛选条件</li>
+</ul>
+<h2 id="状态码（Status-Codes）"><a href="#状态码（Status-Codes）" class="headerlink" title="状态码（Status Codes）"></a>状态码（Status Codes）</h2><p>服务器向用户返回的状态码和提示信息，常见的有以下一些（方括号中是该状态码对应的HTTP动词）。</p>
+<ul>
+<li>200 OK - [GET]：服务器成功返回用户请求的数据，该操作是幂等的（Idempotent）。</li>
+<li>201 CREATED - [POST/PUT/PATCH]：用户新建或修改数据成功。</li>
+<li>202 Accepted - [*]：表示一个请求已经进入后台排队（异步任务）</li>
+<li>204 NO CONTENT - [DELETE]：用户删除数据成功。</li>
+<li>400 INVALID REQUEST - [POST/PUT/PATCH]：用户发出的请求有错误，服务器没有进行新建或修改数据的操作，该操作是幂等的。</li>
+<li>401 Unauthorized - [*]：表示用户没有权限（令牌、用户名、密码错误）。</li>
+<li>403 Forbidden - [*] 表示用户得到授权（与401错误相对），但是访问是被禁止的。</li>
+<li>404 NOT FOUND - [*]：用户发出的请求针对的是不存在的记录，服务器没有进行操作，该操作是幂等的。</li>
+<li>406 Not Acceptable - [GET]：用户请求的格式不可得（比如用户请求JSON格式，但是只有XML格式）。</li>
+<li>410 Gone -[GET]：用户请求的资源被永久删除，且不会再得到的。</li>
+<li>422 Unprocesable entity - [POST/PUT/PATCH] 当创建一个对象时，发生一个验证错误。</li>
+<li>500 INTERNAL SERVER ERROR - [*]：服务器发生错误，用户将无法判断发出的请求是否成功。</li>
+</ul>
+<h2 id="返回结果"><a href="#返回结果" class="headerlink" title="返回结果"></a>返回结果</h2><p>针对不同操作，服务器向用户返回的结果应该符合以下规范。</p>
+<ul>
+<li>GET /collection：返回资源对象的列表（数组）</li>
+<li>GET /collection/resource：返回单个资源对象</li>
+<li>POST /collection：返回新生成的资源对象</li>
+<li>PUT /collection/resource：返回完整的资源对象</li>
+<li>PATCH /collection/resource：返回完整的资源对象</li>
+<li>DELETE /collection/resource：返回一个空文档</li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li>每一个URI代表一种资源；</li>
+<li>客户端和服务器之间，传递这种资源的某种表现层；</li>
+<li>客户端通过HTTP动词，对服务器端资源进行操作，实现”表现层状态转化”。</li>
+</ul>
+<hr>
+<p><em>参考</em></p>
+<blockquote>
+<p><a href="http://www.ruanyifeng.com/blog/2011/09/restful.html" target="_blank" rel="noopener">理解RESTful架构</a></p>
+<p><a href="https://www.zhihu.com/question/23202402" target="_blank" rel="noopener">HTTP是一个无状态的协议。这句话里的无状态是什么意思？</a></p>
+<p><a href="http://www.cnblogs.com/bellkosmos/p/5237146.html" target="_blank" rel="noopener">http协议无状态中的 “状态” 到底指的是什么？！</a></p>
+<p><a href="http://www.ruanyifeng.com/blog/2014/05/restful_api" target="_blank" rel="noopener">RESTful API 设计指南</a></p>
+</blockquote>
+
         
         </div>
         <footer class="article-footer">
@@ -230,7 +330,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/10/旋转数组的最小数字/" data-id="cjg4oprty0030somy4acov2s8" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/18/RESTful/" data-id="cjg4oprs7000jsomyqsb7jy5l" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -305,19 +405,10 @@
         
 <nav id="article-nav">
     
-        <a href="/2018/04/10/Spring/" id="article-nav-newer" class="article-nav-link-wrap">
-            <strong class="article-nav-caption">上一篇</strong>
-            <div class="article-nav-title">
-                
-                    Spring
-                
-            </div>
-        </a>
     
-    
-        <a href="/2018/04/10/用两个队列实现一个栈/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/2018/04/18/基本排序算法/" id="article-nav-older" class="article-nav-link-wrap">
             <strong class="article-nav-caption">下一篇</strong>
-            <div class="article-nav-title">用两个队列实现一个栈</div>
+            <div class="article-nav-title">基本排序算法</div>
         </a>
     
 </nav>
