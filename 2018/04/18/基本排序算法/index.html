@@ -3,22 +3,22 @@
 <head>
     <meta charset="utf-8">
     
-    <title>策略模式 | HuShengBin’s blog</title>
+    <title>基本排序算法 | HuShengBin’s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="策略模式(Strategy Pattern)：定义一系列算法，将每一个算法封装起来，并让它们可以相互替换。策略模式让算法独立于使用它的客户而变化，也称为政策模式(Policy)。  根据条件的不同选择不同的策略">
-<meta name="keywords" content="设计模式">
+    <meta name="description" content="快速排序基本思想：通过一趟排序将要排序的数据分割成独立的两部分，其中一部分的所有数据都比另外一部分的所有数据都要小，然后再按此方法对这两部分数据分别进行快速排序，整个排序过程可以递归进行，以此达到整个数据变成有序序列">
+<meta name="keywords" content="爪哇,算法">
 <meta property="og:type" content="article">
-<meta property="og:title" content="策略模式">
-<meta property="og:url" content="https://hsb786.github.io/2018/04/17/策略模式/index.html">
+<meta property="og:title" content="基本排序算法">
+<meta property="og:url" content="https://hsb786.github.io/2018/04/18/基本排序算法/index.html">
 <meta property="og:site_name" content="HuShengBin’s blog">
-<meta property="og:description" content="策略模式(Strategy Pattern)：定义一系列算法，将每一个算法封装起来，并让它们可以相互替换。策略模式让算法独立于使用它的客户而变化，也称为政策模式(Policy)。  根据条件的不同选择不同的策略">
+<meta property="og:description" content="快速排序基本思想：通过一趟排序将要排序的数据分割成独立的两部分，其中一部分的所有数据都比另外一部分的所有数据都要小，然后再按此方法对这两部分数据分别进行快速排序，整个排序过程可以递归进行，以此达到整个数据变成有序序列">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://hsb786.github.io/images/design-pattern-strategy01.png">
-<meta property="og:updated_time" content="2018-04-17T10:39:27.268Z">
+<meta property="og:image" content="https://hsb786.github.io/images/sort-merge.png">
+<meta property="og:updated_time" content="2018-04-18T05:06:57.384Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="策略模式">
-<meta name="twitter:description" content="策略模式(Strategy Pattern)：定义一系列算法，将每一个算法封装起来，并让它们可以相互替换。策略模式让算法独立于使用它的客户而变化，也称为政策模式(Policy)。  根据条件的不同选择不同的策略">
-<meta name="twitter:image" content="https://hsb786.github.io/images/design-pattern-strategy01.png">
+<meta name="twitter:title" content="基本排序算法">
+<meta name="twitter:description" content="快速排序基本思想：通过一趟排序将要排序的数据分割成独立的两部分，其中一部分的所有数据都比另外一部分的所有数据都要小，然后再按此方法对这两部分数据分别进行快速排序，整个排序过程可以递归进行，以此达到整个数据变成有序序列">
+<meta name="twitter:image" content="https://hsb786.github.io/images/sort-merge.png">
     
 
     
@@ -179,7 +179,7 @@
 </aside>
 
             
-            <section id="main"><article id="post-策略模式" class="article article-type-post" itemscope itemprop="blogPost">
+            <section id="main"><article id="post-基本排序算法" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -187,7 +187,7 @@
                 
     
         <h1 class="article-title" itemprop="name">
-            策略模式
+            基本排序算法
         </h1>
     
 
@@ -196,8 +196,8 @@
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/2018/04/17/策略模式/">
-            <time datetime="2018-04-17T10:07:27.000Z" itemprop="datePublished">2018-04-17</time>
+        <a href="/2018/04/18/基本排序算法/">
+            <time datetime="2018-04-18T04:27:50.000Z" itemprop="datePublished">2018-04-18</time>
         </a>
     </div>
 
@@ -206,7 +206,7 @@
                         
     <div class="article-tag">
         <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/设计模式/">设计模式</a>
+        <a class="tag-link" href="/tags/爪哇/">爪哇</a>, <a class="tag-link" href="/tags/算法/">算法</a>
     </div>
 
                     </div>
@@ -217,26 +217,10 @@
         <div class="article-entry" itemprop="articleBody">
         
             
-            <blockquote>
-<p>策略模式(Strategy Pattern)：定义一系列算法，将每一个算法封装起来，并让它们可以相互替换。策略模式让算法独立于使用它的客户而变化，也称为政策模式(Policy)。</p>
-</blockquote>
-<p>根据条件的不同选择不同的策略<br><a id="more"></a></p>
-<p><img src="/images/design-pattern-strategy01.png" alt=""></p>
-<h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><ol>
-<li>策略模式提供了对“开闭原则”的完美支持，用户可以在不修改原有系统的基础上选择算法或行为，也可以灵活地增加新的算法或行为。</li>
-<li>策略模式提供了管理相关的算法族的办法。策略类的等级结构定义了一个算法或行为族。恰当使用继承可以把公共的代码移到父类里面，从而避免代码重复。</li>
-<li>使用策略模式可以避免使用多重条件(if-else)语句。多重条件语句不易维护，它把采取哪一种算法或采取哪一种行为的逻辑与算法或行为的逻辑混合在一起，统统列在一个多重条件语句里面，比使用继承的办法还要原始和落后。</li>
-</ol>
-<h2 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h2><ol>
-<li>客户端必须知道所有的策略类，并自行决定使用哪一个策略类。这就意味着客户端必须理解这些算法的区别，以便适时选择恰当的算法类。</li>
-<li>由于策略模式把每个具体的策略实现都单独封装成为类，如果备选的策略很多的话，那么对象的数目就会很可观。可以通过使用享元模式在一定程度上减少对象的数量。</li>
-</ol>
-<hr>
-<p><em>参考</em></p>
-<blockquote>
-<p><a href="http://www.hollischuang.com/archives/1691" target="_blank" rel="noopener">设计模式（十二）——策略模式</a></p>
-</blockquote>
-
+            <h2 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h2><p>基本思想：<strong>通过一趟排序将要排序的数据分割成独立的两部分，其中一部分的所有数据都比另外一部分的所有数据都要小，然后再按此方法对这两部分数据分别进行快速排序，整个排序过程可以递归进行，以此达到整个数据变成有序序列</strong><br><a id="more"></a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">static void quickSort(int[] array) &#123;</span><br><span class="line">    quickSort(array, 0, array.length - 1);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">static void quickSort(int[] array, int left, int right) &#123;</span><br><span class="line">    if (left &gt;= right) &#123;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    int mid = partion(array, left, right);</span><br><span class="line">    quickSort(array, left, mid - 1);</span><br><span class="line">    quickSort(array, mid + 1, right);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">static int partion(int[] array, int left, int right) &#123;</span><br><span class="line">    // 取第一个数为基准元素</span><br><span class="line">    int tmp = array[left];</span><br><span class="line">    while (left &lt; right) &#123;</span><br><span class="line">        while (left &lt; right &amp;&amp; array[right] &gt;= tmp) &#123;</span><br><span class="line">            right--;</span><br><span class="line">        &#125;</span><br><span class="line">        // 比基准元素小的移动到低端</span><br><span class="line">        array[left] = array[right];</span><br><span class="line">        while (left &lt; right &amp;&amp; array[left] &lt;= tmp) &#123;</span><br><span class="line">            left++;</span><br><span class="line">        &#125;</span><br><span class="line">        // 比基准元素大的移动到高端</span><br><span class="line">        array[right] = array[left];</span><br><span class="line">    &#125;</span><br><span class="line">    // 插入基准元素</span><br><span class="line">    array[left] = tmp;</span><br><span class="line">    return left;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h2><p>基本思想：<strong>归并排序（MERGE-SORT）是建立在归并操作上的一种有效的排序算法,该算法是采用分治法（Divide and Conquer）的一个非常典型的应用。将已有序的子序列合并，得到完全有序的序列</strong></p>
+<p><img src="/images/sort-merge.png" alt=""></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">static void mergeSort(int[] arr) &#123;</span><br><span class="line">	int[] temp = new int[arr.length];</span><br><span class="line">	mergeSort(arr, 0, arr.length - 1, temp);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">static void mergeSort(int[] arr, int left, int right, int[] temp) &#123;</span><br><span class="line">	if (left &lt; right) &#123;</span><br><span class="line">		int mid = (left + right) / 2;</span><br><span class="line">		mergeSort(arr, left, mid, temp);// 左边归并排序，使得左子序列有序</span><br><span class="line">		mergeSort(arr, mid + 1, right, temp);// 右边归并排序，使得右子序列有序</span><br><span class="line">		merge(arr, left, mid, right, temp);// 将两个有序子数组合并操作</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">static void merge(int[] arr, int left, int mid, int right, int[] temp) &#123;</span><br><span class="line">	int i = left;// 左序列指针</span><br><span class="line">	int j = mid + 1;// 右序列指针</span><br><span class="line">	int t = 0;// 临时数组指针</span><br><span class="line">	while (i &lt;= mid &amp;&amp; j &lt;= right) &#123;</span><br><span class="line">		if (arr[i] &lt;= arr[j]) &#123;</span><br><span class="line">			temp[t++] = arr[i++];</span><br><span class="line">		&#125; else &#123;</span><br><span class="line">			temp[t++] = arr[j++];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	while (i &lt;= mid) &#123;// 将左边剩余元素填充进temp中</span><br><span class="line">		temp[t++] = arr[i++];</span><br><span class="line">	&#125;</span><br><span class="line">	while (j &lt;= right) &#123;// 将右序列剩余元素填充进temp中</span><br><span class="line">		temp[t++] = arr[j++];</span><br><span class="line">	&#125;</span><br><span class="line">	t = 0;</span><br><span class="line">	// 将temp中的元素全部拷贝到原数组中</span><br><span class="line">	while (left &lt;= right) &#123;</span><br><span class="line">		arr[left++] = temp[t++];</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
         
         </div>
         <footer class="article-footer">
@@ -246,7 +230,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/17/策略模式/" data-id="cjg4m2juj003c1cmyd3v8c7vk" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/18/基本排序算法/" data-id="cjg4m2ju3002n1cmy528115gs" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -321,19 +305,10 @@
         
 <nav id="article-nav">
     
-        <a href="/2018/04/17/代理模式/" id="article-nav-newer" class="article-nav-link-wrap">
-            <strong class="article-nav-caption">上一篇</strong>
-            <div class="article-nav-title">
-                
-                    代理模式
-                
-            </div>
-        </a>
     
-    
-        <a href="/2018/04/17/抽象工厂/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/2018/04/17/代理模式/" id="article-nav-older" class="article-nav-link-wrap">
             <strong class="article-nav-caption">下一篇</strong>
-            <div class="article-nav-title">抽象工厂</div>
+            <div class="article-nav-title">代理模式</div>
         </a>
     
 </nav>
