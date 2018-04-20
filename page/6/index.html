@@ -243,7 +243,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/09/记录一些容易忘记的东西/" data-id="cjg80cog6005jwkmyk2xa69yd" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/09/记录一些容易忘记的东西/" data-id="cjg80h2e7005g7wmy2nmlyam2" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -378,7 +378,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/09/区别/" data-id="cjg80cofb003vwkmy5ccnhq8p" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/09/区别/" data-id="cjg80h2dc003v7wmytioshe8y" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -510,139 +510,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/08/hash/" data-id="cjg80coeg002dwkmyeid5ok9u" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-
-        </footer>
-    </div>
-    
-</article>
-
-
-
-    <article id="post-一些小技巧" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2018/04/08/一些小技巧/">一些小技巧</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2018/04/08/一些小技巧/">
-            <time datetime="2018-04-08T09:58:41.000Z" itemprop="datePublished">2018-04-08</time>
-        </a>
-    </div>
-
-
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/爪哇/">爪哇</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/爪哇/">爪哇</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            <p><hr>
-<h3 id="位运算直接对内存数据进行操作，不需要转成十进制，因此处理速度非常快"><a href="#位运算直接对内存数据进行操作，不需要转成十进制，因此处理速度非常快" class="headerlink" title="位运算直接对内存数据进行操作，不需要转成十进制，因此处理速度非常快"></a>位运算直接对内存数据进行操作，不需要转成十进制，因此处理速度非常快</h3><p> X % 2^n = X &amp; (2^n-1)<br></p>
-            <p class="article-more-link">
-                <a href="/2018/04/08/一些小技巧/#more">查看更多</a>
-            </p>
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="https://hsb786.github.io/2018/04/08/一些小技巧/" data-id="cjg80coev0036wkmy6c7a6778" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/08/hash/" data-id="cjg80h2cw002e7wmytolvfufu" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -774,7 +642,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/08/SpringMVC/" data-id="cjg80coe0001qwkmy2b8f18ch" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/08/SpringMVC/" data-id="cjg80h2ch001r7wmydfnmcbxd" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -850,7 +718,7 @@
 
 
 
-    <article id="post-事务" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-一些小技巧" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -858,7 +726,7 @@
                 
     
         <h1 itemprop="name">
-            <a class="article-title" href="/2018/04/08/事务/">事务</a>
+            <a class="article-title" href="/2018/04/08/一些小技巧/">一些小技巧</a>
         </h1>
     
 
@@ -867,7 +735,7 @@
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/2018/04/08/事务/">
+        <a href="/2018/04/08/一些小技巧/">
             <time datetime="2018-04-08T09:58:41.000Z" itemprop="datePublished">2018-04-08</time>
         </a>
     </div>
@@ -876,13 +744,13 @@
                         
     <div class="article-category">
     	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/sql/">sql</a>
+        <a class="article-category-link" href="/categories/爪哇/">爪哇</a>
     </div>
 
                         
     <div class="article-tag">
         <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/Spring/">Spring</a>, <a class="tag-link" href="/tags/sql/">sql</a>
+        <a class="tag-link" href="/tags/爪哇/">爪哇</a>
     </div>
 
                     </div>
@@ -893,10 +761,9 @@
         <div class="article-entry" itemprop="articleBody">
         
             <p><hr>
-<blockquote>
-<p>事务（Transaction），一般是指要做的或所做的事情。在计算机术语中是指访问并可能更新数据库中各种数据项的一个程序执行单元（unit）。在计算机术语中，事务通常就是指数据库事务。<br></p>
+<h3 id="位运算直接对内存数据进行操作，不需要转成十进制，因此处理速度非常快"><a href="#位运算直接对内存数据进行操作，不需要转成十进制，因此处理速度非常快" class="headerlink" title="位运算直接对内存数据进行操作，不需要转成十进制，因此处理速度非常快"></a>位运算直接对内存数据进行操作，不需要转成十进制，因此处理速度非常快</h3><p> X % 2^n = X &amp; (2^n-1)<br></p>
             <p class="article-more-link">
-                <a href="/2018/04/08/事务/#more">查看更多</a>
+                <a href="/2018/04/08/一些小技巧/#more">查看更多</a>
             </p>
         
         </div>
@@ -907,7 +774,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/08/事务/" data-id="cjg80cofb003nwkmyb7r2d4ke" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/08/一些小技巧/" data-id="cjg80h2cw00397wmynd1lng48" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1040,7 +907,140 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/08/值传递和引用传递/" data-id="cjg80coev003kwkmytrpin4kd" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/08/值传递和引用传递/" data-id="cjg80h2dc003n7wmy3ii318hf" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
+    <article id="post-事务" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2018/04/08/事务/">事务</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2018/04/08/事务/">
+            <time datetime="2018-04-08T09:58:41.000Z" itemprop="datePublished">2018-04-08</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/sql/">sql</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Spring/">Spring</a>, <a class="tag-link" href="/tags/sql/">sql</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            <p><hr>
+<blockquote>
+<p>事务（Transaction），一般是指要做的或所做的事情。在计算机术语中是指访问并可能更新数据库中各种数据项的一个程序执行单元（unit）。在计算机术语中，事务通常就是指数据库事务。<br></p>
+            <p class="article-more-link">
+                <a href="/2018/04/08/事务/#more">查看更多</a>
+            </p>
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="https://hsb786.github.io/2018/04/08/事务/" data-id="cjg80h2dc003c7wmydg6cv3uo" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1177,7 +1177,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/08/防止重复发送 Ajax 请求的解决方案/" data-id="cjg80cog6005pwkmyuliq7gww" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/08/防止重复发送 Ajax 请求的解决方案/" data-id="cjg80h2e7005p7wmyzsuwfqb8" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1312,7 +1312,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/08/Java虚拟机是如何执行线程同步的/" data-id="cjg80codk000wwkmy56lanvoh" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/08/Java虚拟机是如何执行线程同步的/" data-id="cjg80h2c100107wmy6hk95wk1" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1445,7 +1445,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/08/lombok/" data-id="cjg80coev002xwkmy5ck5n8vl" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/08/lombok/" data-id="cjg80h2cw00307wmy1tbdm3eh" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
