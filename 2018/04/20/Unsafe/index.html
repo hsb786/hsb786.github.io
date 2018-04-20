@@ -3,20 +3,20 @@
 <head>
     <meta charset="utf-8">
     
-    <title>触发器 | HuShengBin’s blog</title>
+    <title>Unsafe | HuShengBin’s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="对某一个表的某种操作，触发某种条件，从而执行的一段程序 new: 新数据，数据库里原先没有，将要有的数据。例如将要更新的数据或者是新增的数据。 old：旧数据，数据库里原先有的数据">
-<meta name="keywords" content="sql">
+    <meta name="description" content="sun.misc.Unsafe类提供的原子操作是基于操作系统直接对CPU进行操作  Unsafe类包装了很多低级别的非安全性操作，可以直接操作任意的内存。虽然该类的大部分方法都是public的，但是它只能被受信任的代码使用（jdk中的代码）">
+<meta name="keywords" content="爪哇">
 <meta property="og:type" content="article">
-<meta property="og:title" content="触发器">
-<meta property="og:url" content="https://hsb786.github.io/2018/04/13/触发器/index.html">
+<meta property="og:title" content="Unsafe">
+<meta property="og:url" content="https://hsb786.github.io/2018/04/20/Unsafe/index.html">
 <meta property="og:site_name" content="HuShengBin’s blog">
-<meta property="og:description" content="对某一个表的某种操作，触发某种条件，从而执行的一段程序 new: 新数据，数据库里原先没有，将要有的数据。例如将要更新的数据或者是新增的数据。 old：旧数据，数据库里原先有的数据">
+<meta property="og:description" content="sun.misc.Unsafe类提供的原子操作是基于操作系统直接对CPU进行操作  Unsafe类包装了很多低级别的非安全性操作，可以直接操作任意的内存。虽然该类的大部分方法都是public的，但是它只能被受信任的代码使用（jdk中的代码）">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-04-13T04:38:27.314Z">
+<meta property="og:updated_time" content="2018-04-20T11:53:03.434Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="触发器">
-<meta name="twitter:description" content="对某一个表的某种操作，触发某种条件，从而执行的一段程序 new: 新数据，数据库里原先没有，将要有的数据。例如将要更新的数据或者是新增的数据。 old：旧数据，数据库里原先有的数据">
+<meta name="twitter:title" content="Unsafe">
+<meta name="twitter:description" content="sun.misc.Unsafe类提供的原子操作是基于操作系统直接对CPU进行操作  Unsafe类包装了很多低级别的非安全性操作，可以直接操作任意的内存。虽然该类的大部分方法都是public的，但是它只能被受信任的代码使用（jdk中的代码）">
     
 
     
@@ -177,7 +177,7 @@
 </aside>
 
             
-            <section id="main"><article id="post-触发器" class="article article-type-post" itemscope itemprop="blogPost">
+            <section id="main"><article id="post-Unsafe" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -185,7 +185,7 @@
                 
     
         <h1 class="article-title" itemprop="name">
-            触发器
+            Unsafe
         </h1>
     
 
@@ -194,8 +194,8 @@
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/2018/04/13/触发器/">
-            <time datetime="2018-04-13T03:43:11.000Z" itemprop="datePublished">2018-04-13</time>
+        <a href="/2018/04/20/Unsafe/">
+            <time datetime="2018-04-20T10:48:25.000Z" itemprop="datePublished">2018-04-20</time>
         </a>
     </div>
 
@@ -204,7 +204,7 @@
                         
     <div class="article-tag">
         <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/sql/">sql</a>
+        <a class="tag-link" href="/tags/爪哇/">爪哇</a>
     </div>
 
                     </div>
@@ -215,11 +215,32 @@
         <div class="article-entry" itemprop="articleBody">
         
             
-            <p>对某一个表的某种操作，触发某种条件，从而执行的一段程序</p>
-<p>new: 新数据，数据库里原先没有，将要有的数据。例如将要更新的数据或者是新增的数据。</p>
-<p>old：旧数据，数据库里原先有的数据<br><a id="more"></a></p>
-<p>说明：在把userjob(用户岗位关联表)中的success(审批状态)更新为true时，自动在成绩表中出入数据；否则说明没有审批没有通过，把成绩表中对应的数据删除<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">CREATE TRIGGER `insertScore` AFTER UPDATE ON `userjob` FOR EACH ROW if new.success=true then</span><br><span class="line">insert into score(id) values(new.id);</span><br><span class="line">else delete from score where id=new.id;</span><br><span class="line">end if</span><br></pre></td></tr></table></figure></p>
-<p>说明：在删除userjob(用户岗位关联表)的数据时，自动删除成绩表对应中的数据<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">CREATE TRIGGER `deleteScore` BEFORE DELETE ON `userjob` FOR EACH ROW if old.success=true then</span><br><span class="line">delete from score where id=old.id;</span><br><span class="line">end if</span><br></pre></td></tr></table></figure></p>
+            <blockquote>
+<p>sun.misc.Unsafe类提供的原子操作是基于操作系统直接对CPU进行操作</p>
+</blockquote>
+<p>Unsafe类包装了很多低级别的非安全性操作，可以直接操作任意的内存。虽然该类的大部分方法都是public的，但是它只能被受信任的代码使用（jdk中的代码）<br><a id="more"></a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">public final class Unsafe &#123;</span><br><span class="line"></span><br><span class="line">    private static native void registerNatives();</span><br><span class="line">    static &#123;</span><br><span class="line">        registerNatives();</span><br><span class="line">        sun.reflect.Reflection.registerMethodsToFilter(Unsafe.class, &quot;getUnsafe&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //饿汉式单例</span><br><span class="line">    private Unsafe() &#123;&#125;</span><br><span class="line"></span><br><span class="line">    private static final Unsafe theUnsafe = new Unsafe();</span><br><span class="line"></span><br><span class="line">    @CallerSensitive</span><br><span class="line">    public static Unsafe getUnsafe() &#123;</span><br><span class="line">        //获取调用该方法的调用者信息</span><br><span class="line">        Class&lt;?&gt; caller = Reflection.getCallerClass();</span><br><span class="line">        //判断类加载器是否是系统类加载器</span><br><span class="line">        if (!VM.isSystemDomainLoader(caller.getClassLoader()))</span><br><span class="line">            throw new SecurityException(&quot;Unsafe&quot;);</span><br><span class="line">        return theUnsafe;</span><br><span class="line">    &#125;</span><br><span class="line">    .............</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//VM.class</span><br><span class="line"> public static boolean isSystemDomainLoader(ClassLoader loader) &#123;</span><br><span class="line">        return loader == null;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Unsafe.getUnsafe()只能被boostrap classloader加载的类使用，所以可以利用java反射来获取Unsafe的实例。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//获取Unsafe类中的theUnsafe字段</span><br><span class="line">Field f = Unsafe.class.getDeclaredField(&quot;theUnsafe&quot;);</span><br><span class="line">//由于theUnsafe被private修饰，所以要跳过安全检查</span><br><span class="line">f.setAccessible(true);</span><br><span class="line">//获取当前f的值，也就是Unsafe的实例</span><br><span class="line">Unsafe unsafe = (Unsafe) f.get(null);</span><br></pre></td></tr></table></figure>
+<p><code>public native long objectFieldOffset(Field f)</code>和<code>public native long staticFieldOffset(Field f)</code>：用于返回类定义中某个属性在主内存中设定的偏移量。相当于CAS中的V。</p>
+<p><code>public final native boolean compareAndSwapInt(Object o, long offset, int expected, int x);</code>：对属性进行比较并替换（CAS过程——Compare And Swap）。offect：V，expected：A，x：B </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">//java8</span><br><span class="line">public final int getAndAddInt(Object o, long offset, int delta) &#123;</span><br><span class="line">    int v;</span><br><span class="line">    do &#123;</span><br><span class="line">        //自旋，一直循环直到compareAndSwapInt执行成功</span><br><span class="line">        v = getIntVolatile(o, offset);</span><br><span class="line">    &#125; while (!compareAndSwapInt(o, offset, v, v + delta));</span><br><span class="line">    return v;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public native int     getIntVolatile(Object o, long offset);</span><br></pre></td></tr></table></figure>
+<p><code>getAndAddInt()</code>采用的是基于Unsafe的”乐观锁”进行实现的，乐观地认为程序中的并发情况不那么严重，所以让线程不断去尝试更新。适合并发量不高的情况。</p>
+<hr>
+<h2 id="CallerSensitive"><a href="#CallerSensitive" class="headerlink" title="@CallerSensitive"></a>@CallerSensitive</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">//sun.reflect.CallerSensitive</span><br><span class="line">/**</span><br><span class="line"> * A method annotated @CallerSensitive is sensitive to its calling class,</span><br><span class="line"> * via &#123;@link sun.reflect.Reflection#getCallerClass Reflection.getCallerClass&#125;,</span><br><span class="line"> * or via some equivalent.</span><br><span class="line"> *</span><br><span class="line"> * @author John R. Rose</span><br><span class="line"> */</span><br><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">@Target(&#123;METHOD&#125;)</span><br><span class="line">public @interface CallerSensitive &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//sun.reflect.Reflection</span><br><span class="line">/** Returns the class of the caller of the method calling this method,</span><br><span class="line">    ignoring frames associated with java.lang.reflect.Method.invoke()</span><br><span class="line">    and its implementation. */</span><br><span class="line">@CallerSensitive</span><br><span class="line">public static native Class&lt;?&gt; getCallerClass();</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>用@CallerSensitive注解修饰的方法从一开始就知道具体调用它的对象，这样就不用再经过一系列的检查才能确定具体调用它的对象了。它实际上是调用sun.reflect.Reflection.getCallerClass方法。</p>
+</blockquote>
+<p>Reflection类位于调用栈中的0帧位置，sun.reflect.Reflection.getCallerClass()方法返回调用栈中从0帧开始的第x帧中的类实例。该方法提供的机制可用于确定调用者类，从而实现“感知调用者（Caller Sensitive）”的行为，即允许应用程序根据调用类或调用栈中的其它类来改变其自身的行为。</p>
+<p><em>感觉不太懂，做个标记，以后再来看吧</em></p>
+<hr>
+<p><em>参考</em></p>
+<blockquote>
+<p><a href="https://blog.csdn.net/yinwenjie/article/details/72909981" target="_blank" rel="noopener">线程进阶：多任务处理（17）——Java中的锁（Unsafe基础） </a></p>
+<p><a href="https://juejin.im/post/5921927c44d904006cca9720" target="_blank" rel="noopener">跟我一起剖析 Java 并发源码之 Unsafe</a></p>
+<p><a href="https://blog.csdn.net/aguda_king/article/details/72355807" target="_blank" rel="noopener">JDK8的@CallerSensitive</a></p>
+<p><a href="https://blog.csdn.net/HEL_WOR/article/details/50199797" target="_blank" rel="noopener">JVM注解@CallSensitive</a></p>
+<p><a href="http://www.sczyh30.com/posts/Java/java-reflection-2/" target="_blank" rel="noopener">深入解析Java反射（2） - invoke方法 </a></p>
+</blockquote>
 
         
         </div>
@@ -230,7 +251,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/13/触发器/" data-id="cjg7vl3aq003jf4my92hws7n8" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/20/Unsafe/" data-id="cjg7vl38k001df4myaqp7fcd6" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -305,19 +326,10 @@
         
 <nav id="article-nav">
     
-        <a href="/2018/04/13/vscode-database/" id="article-nav-newer" class="article-nav-link-wrap">
-            <strong class="article-nav-caption">上一篇</strong>
-            <div class="article-nav-title">
-                
-                    vscode-database
-                
-            </div>
-        </a>
     
-    
-        <a href="/2018/04/12/索引/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/2018/04/20/多线程基础2/" id="article-nav-older" class="article-nav-link-wrap">
             <strong class="article-nav-caption">下一篇</strong>
-            <div class="article-nav-title">索引</div>
+            <div class="article-nav-title">多线程基础2</div>
         </a>
     
 </nav>
