@@ -6,7 +6,7 @@
     <title>Java虚拟机 | HuShengBin’s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <meta name="description" content="内存区域Java虚拟机在执行Java程序的过程中会把他所管理的内存划分为若干个不同的数据区域。Java虚拟机规范将JVM所管理的内存分为以下几个运行时数据区：程序计数器、Java虚拟机栈、本地方法栈、Java堆、方法区。下面详细阐述各数据区所存储的数据类型。">
-<meta name="keywords" content="爪哇">
+<meta name="keywords" content="JVM">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java虚拟机">
 <meta property="og:url" content="https://hsb786.github.io/2018/04/12/Java虚拟机/index.html">
@@ -14,7 +14,7 @@
 <meta property="og:description" content="内存区域Java虚拟机在执行Java程序的过程中会把他所管理的内存划分为若干个不同的数据区域。Java虚拟机规范将JVM所管理的内存分为以下几个运行时数据区：程序计数器、Java虚拟机栈、本地方法栈、Java堆、方法区。下面详细阐述各数据区所存储的数据类型。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://hsb786.github.io/images/java虚拟机.png">
-<meta property="og:updated_time" content="2018-04-14T12:37:13.002Z">
+<meta property="og:updated_time" content="2018-04-20T13:17:33.717Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java虚拟机">
 <meta name="twitter:description" content="内存区域Java虚拟机在执行Java程序的过程中会把他所管理的内存划分为若干个不同的数据区域。Java虚拟机规范将JVM所管理的内存分为以下几个运行时数据区：程序计数器、Java虚拟机栈、本地方法栈、Java堆、方法区。下面详细阐述各数据区所存储的数据类型。">
@@ -60,6 +60,10 @@
                     <a class="main-nav-link" href="/.">Home</a>
                 
                     <a class="main-nav-link" href="/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/tags">Tags</a>
                 
                     <a class="main-nav-link" href="/about">About</a>
                 
@@ -122,6 +126,10 @@
                 
                     <td><a class="main-nav-link" href="/archives">Archives</a></td>
                 
+                    <td><a class="main-nav-link" href="/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">Tags</a></td>
+                
                     <td><a class="main-nav-link" href="/about">About</a></td>
                 
                 <td>
@@ -151,7 +159,7 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                62
+                63
                 <span>文章</span>
             </div>
             <div class="article-info-block">
@@ -203,10 +211,15 @@
 
 
                         
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/JVM/">JVM</a>
+    </div>
+
                         
     <div class="article-tag">
         <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/爪哇/">爪哇</a>
+        <a class="tag-link" href="/tags/JVM/">JVM</a>
     </div>
 
                     </div>
@@ -241,6 +254,16 @@
 <h3 id="方法区（Method-Area）"><a href="#方法区（Method-Area）" class="headerlink" title="方法区（Method Area）"></a>方法区（Method Area）</h3><p>方法区也是各个线程共享的内存区域，它用于存储已经被虚拟机加载的类信息、常量、静态变量、即时编译器编译后的代码等数据。方法区域又被称为“永久代”。</p>
 <p>由于使用反射机制的原因，虚拟机很难推测哪个类信息不再使用，因此这块区域的回收很难。另外，对这块区域主要是针对常量池回收，但java7已经把常量池转移到堆里面了。</p>
 <p>根据Java虚拟机规范的规定，当方法区无法满足内存分配需求时，将抛出OutOfMemoryError异常。</p>
+<p>在JDK1.7及以前的HotSpot JVM中，方法区位于永久代（Permanent Generation，PermGen）中。由于永久代内可能会发生内存泄露或溢出等问题而导致的java.lang.OutOfMemoryError: PermGen ，JEP小组从JDK1.7开始就筹划移除永久代（JEP 122: Remove the Permanent Generation），并且在JDK 1.7中把字符串常量，符号引用等移出了永久代。到了Java 8，永久代被彻底地移出了JVM，取而代之的是元空间（Metaspace）</p>
+<h3 id="运行时常量池-（runtime-constant-pool）"><a href="#运行时常量池-（runtime-constant-pool）" class="headerlink" title="运行时常量池 （runtime constant pool）)"></a>运行时常量池 （runtime constant pool）)</h3><p>运行时常量池是class文件中每一个类或接口的常量池表的运行时表示形式，是方法区的一部分。它包括了若干种不同的常量。常量池表存放编译器生成的各种字面量和符号引用，这部分内容将在类加载后进入方法区的运行时常量池中存放。运行时常量池具有动态性，运行期间也可以将新的量放到运行时常量池中，典型的应用是String类的intern方法:</p>
+<blockquote>
+<p>public native String intern()</p>
+</blockquote>
+<p>JDK 1.7开始，字符串常量和符号引用等就被移出永久代：</p>
+<ul>
+<li>符号引用迁移至系统堆内存(Native Heap)</li>
+<li>字符串字面量迁移至Java堆(Java Heap)</li>
+</ul>
 <hr>
 <p><em>参考</em></p>
 <blockquote>
@@ -257,7 +280,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/12/Java虚拟机/" data-id="cjg7vl384000pf4my3hyos25s" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/12/Java虚拟机/" data-id="cjg7yxdyz000f2kmy00901q3i" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -362,164 +385,6 @@
     
 
 </section>
-            
-                
-<aside id="sidebar">
-   
-        
-    <div class="widget-wrap">
-        <h3 class="widget-title">最新文章</h3>
-        <div class="widget">
-            <ul id="recent-post" class="">
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2018/04/20/Unsafe/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"></p>
-                            <p class="item-title"><a href="/2018/04/20/Unsafe/" class="title">Unsafe</a></p>
-                            <p class="item-date"><time datetime="2018-04-20T10:48:25.000Z" itemprop="datePublished">2018-04-20</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2018/04/20/多线程基础2/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"></p>
-                            <p class="item-title"><a href="/2018/04/20/多线程基础2/" class="title">多线程基础2</a></p>
-                            <p class="item-date"><time datetime="2018-04-20T05:28:33.000Z" itemprop="datePublished">2018-04-20</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2018/04/19/CAS/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"></p>
-                            <p class="item-title"><a href="/2018/04/19/CAS/" class="title">CAS</a></p>
-                            <p class="item-date"><time datetime="2018-04-19T09:41:51.000Z" itemprop="datePublished">2018-04-19</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2018/04/18/RESTful/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"></p>
-                            <p class="item-title"><a href="/2018/04/18/RESTful/" class="title">RESTful</a></p>
-                            <p class="item-date"><time datetime="2018-04-18T05:37:06.000Z" itemprop="datePublished">2018-04-18</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2018/04/18/基本排序算法/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"></p>
-                            <p class="item-title"><a href="/2018/04/18/基本排序算法/" class="title">基本排序算法</a></p>
-                            <p class="item-date"><time datetime="2018-04-18T04:27:50.000Z" itemprop="datePublished">2018-04-18</time></p>
-                        </div>
-                    </li>
-                
-            </ul>
-        </div>
-    </div>
-
-    
-        
-    
-        
-    <div class="widget-wrap">
-        <h3 class="widget-title">归档</h3>
-        <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a><span class="archive-list-count">62</span></li></ul>
-        </div>
-    </div>
-
-    
-        
-    <div class="widget-wrap">
-        <h3 class="widget-title">标签</h3>
-        <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/">HTTP</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MyBatis/">MyBatis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql/">sql</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多线程/">多线程</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/术语/">术语</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爪哇/">爪哇</a><span class="tag-list-count">21</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/长期更新/">长期更新</a><span class="tag-list-count">3</span></li></ul>
-        </div>
-    </div>
-
-    
-        
-    <div class="widget-wrap">
-        <h3 class="widget-title">标签云</h3>
-        <div class="widget tagcloud">
-            <a href="/tags/HTTP/" style="font-size: 15px;">HTTP</a> <a href="/tags/JVM/" style="font-size: 11.67px;">JVM</a> <a href="/tags/MyBatis/" style="font-size: 10px;">MyBatis</a> <a href="/tags/Spring/" style="font-size: 15px;">Spring</a> <a href="/tags/sql/" style="font-size: 13.33px;">sql</a> <a href="/tags/前端/" style="font-size: 13.33px;">前端</a> <a href="/tags/多线程/" style="font-size: 18.33px;">多线程</a> <a href="/tags/工具/" style="font-size: 18.33px;">工具</a> <a href="/tags/术语/" style="font-size: 10px;">术语</a> <a href="/tags/爪哇/" style="font-size: 20px;">爪哇</a> <a href="/tags/算法/" style="font-size: 18.33px;">算法</a> <a href="/tags/设计模式/" style="font-size: 16.67px;">设计模式</a> <a href="/tags/长期更新/" style="font-size: 13.33px;">长期更新</a>
-        </div>
-    </div>
-
-    
-        
-    <div class="widget-wrap widget-list">
-        <h3 class="widget-title">链接</h3>
-        <div class="widget">
-            <ul>
-                
-                    <li>
-                        <a href="https://www.douban.com/people/122973953/">我的豆瓣</a>
-                    </li>
-                
-            </ul>
-        </div>
-    </div>
-
-
-    
-    <div id="toTop" class="fa fa-angle-up"></div>
-</aside>
-
             
         </div>
         <footer id="footer">

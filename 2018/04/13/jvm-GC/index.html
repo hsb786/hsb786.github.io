@@ -6,7 +6,7 @@
     <title>jvm-GC（转载） | HuShengBin’s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <meta name="description" content="关键字约定 Young generation –&amp;gt;新生代 Tenured / Old Generation –&amp;gt;老年代 Perm Area –&amp;gt;永久代  重要的东东 在Java中，对象实例都是在堆上创建。一些类信息，常量，静态变量等存储在方法区。堆和方法区都是线程共享的。 GC机制是由JVM提供，用来清理需要清除的对象，回收堆内存。 GC机制将Java程序员从内存管理中解放了出来">
-<meta name="keywords" content="爪哇,JVM">
+<meta name="keywords" content="JVM">
 <meta property="og:type" content="article">
 <meta property="og:title" content="jvm-GC（转载）">
 <meta property="og:url" content="https://hsb786.github.io/2018/04/13/jvm-GC/index.html">
@@ -19,7 +19,7 @@
 <meta property="og:image" content="https://hsb786.github.io/images/copy.jpg">
 <meta property="og:image" content="https://hsb786.github.io/images/compact.jpg">
 <meta property="og:image" content="https://hsb786.github.io/images/jvm-parameter.png">
-<meta property="og:updated_time" content="2018-04-13T12:08:44.969Z">
+<meta property="og:updated_time" content="2018-04-20T13:18:16.847Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="jvm-GC（转载）">
 <meta name="twitter:description" content="关键字约定 Young generation –&amp;gt;新生代 Tenured / Old Generation –&amp;gt;老年代 Perm Area –&amp;gt;永久代  重要的东东 在Java中，对象实例都是在堆上创建。一些类信息，常量，静态变量等存储在方法区。堆和方法区都是线程共享的。 GC机制是由JVM提供，用来清理需要清除的对象，回收堆内存。 GC机制将Java程序员从内存管理中解放了出来">
@@ -65,6 +65,10 @@
                     <a class="main-nav-link" href="/.">Home</a>
                 
                     <a class="main-nav-link" href="/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/tags">Tags</a>
                 
                     <a class="main-nav-link" href="/about">About</a>
                 
@@ -127,6 +131,10 @@
                 
                     <td><a class="main-nav-link" href="/archives">Archives</a></td>
                 
+                    <td><a class="main-nav-link" href="/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">Tags</a></td>
+                
                     <td><a class="main-nav-link" href="/about">About</a></td>
                 
                 <td>
@@ -156,7 +164,7 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                62
+                63
                 <span>文章</span>
             </div>
             <div class="article-info-block">
@@ -208,10 +216,15 @@
 
 
                         
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/JVM/">JVM</a>
+    </div>
+
                         
     <div class="article-tag">
         <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/JVM/">JVM</a>, <a class="tag-link" href="/tags/爪哇/">爪哇</a>
+        <a class="tag-link" href="/tags/JVM/">JVM</a>
     </div>
 
                     </div>
@@ -286,7 +299,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/13/jvm-GC/" data-id="cjg7vl39f001yf4my4ndzqnis" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/13/jvm-GC/" data-id="cjg7yxe09001x2kmyimx15tfg" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -391,164 +404,6 @@
     
 
 </section>
-            
-                
-<aside id="sidebar">
-   
-        
-    <div class="widget-wrap">
-        <h3 class="widget-title">最新文章</h3>
-        <div class="widget">
-            <ul id="recent-post" class="">
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2018/04/20/Unsafe/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"></p>
-                            <p class="item-title"><a href="/2018/04/20/Unsafe/" class="title">Unsafe</a></p>
-                            <p class="item-date"><time datetime="2018-04-20T10:48:25.000Z" itemprop="datePublished">2018-04-20</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2018/04/20/多线程基础2/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"></p>
-                            <p class="item-title"><a href="/2018/04/20/多线程基础2/" class="title">多线程基础2</a></p>
-                            <p class="item-date"><time datetime="2018-04-20T05:28:33.000Z" itemprop="datePublished">2018-04-20</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2018/04/19/CAS/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"></p>
-                            <p class="item-title"><a href="/2018/04/19/CAS/" class="title">CAS</a></p>
-                            <p class="item-date"><time datetime="2018-04-19T09:41:51.000Z" itemprop="datePublished">2018-04-19</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2018/04/18/RESTful/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"></p>
-                            <p class="item-title"><a href="/2018/04/18/RESTful/" class="title">RESTful</a></p>
-                            <p class="item-date"><time datetime="2018-04-18T05:37:06.000Z" itemprop="datePublished">2018-04-18</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2018/04/18/基本排序算法/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"></p>
-                            <p class="item-title"><a href="/2018/04/18/基本排序算法/" class="title">基本排序算法</a></p>
-                            <p class="item-date"><time datetime="2018-04-18T04:27:50.000Z" itemprop="datePublished">2018-04-18</time></p>
-                        </div>
-                    </li>
-                
-            </ul>
-        </div>
-    </div>
-
-    
-        
-    
-        
-    <div class="widget-wrap">
-        <h3 class="widget-title">归档</h3>
-        <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a><span class="archive-list-count">62</span></li></ul>
-        </div>
-    </div>
-
-    
-        
-    <div class="widget-wrap">
-        <h3 class="widget-title">标签</h3>
-        <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/">HTTP</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/">JVM</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MyBatis/">MyBatis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql/">sql</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多线程/">多线程</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/术语/">术语</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爪哇/">爪哇</a><span class="tag-list-count">21</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/长期更新/">长期更新</a><span class="tag-list-count">3</span></li></ul>
-        </div>
-    </div>
-
-    
-        
-    <div class="widget-wrap">
-        <h3 class="widget-title">标签云</h3>
-        <div class="widget tagcloud">
-            <a href="/tags/HTTP/" style="font-size: 15px;">HTTP</a> <a href="/tags/JVM/" style="font-size: 11.67px;">JVM</a> <a href="/tags/MyBatis/" style="font-size: 10px;">MyBatis</a> <a href="/tags/Spring/" style="font-size: 15px;">Spring</a> <a href="/tags/sql/" style="font-size: 13.33px;">sql</a> <a href="/tags/前端/" style="font-size: 13.33px;">前端</a> <a href="/tags/多线程/" style="font-size: 18.33px;">多线程</a> <a href="/tags/工具/" style="font-size: 18.33px;">工具</a> <a href="/tags/术语/" style="font-size: 10px;">术语</a> <a href="/tags/爪哇/" style="font-size: 20px;">爪哇</a> <a href="/tags/算法/" style="font-size: 18.33px;">算法</a> <a href="/tags/设计模式/" style="font-size: 16.67px;">设计模式</a> <a href="/tags/长期更新/" style="font-size: 13.33px;">长期更新</a>
-        </div>
-    </div>
-
-    
-        
-    <div class="widget-wrap widget-list">
-        <h3 class="widget-title">链接</h3>
-        <div class="widget">
-            <ul>
-                
-                    <li>
-                        <a href="https://www.douban.com/people/122973953/">我的豆瓣</a>
-                    </li>
-                
-            </ul>
-        </div>
-    </div>
-
-
-    
-    <div id="toTop" class="fa fa-angle-up"></div>
-</aside>
-
             
         </div>
         <footer id="footer">
