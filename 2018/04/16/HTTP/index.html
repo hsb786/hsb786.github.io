@@ -18,7 +18,8 @@
 <meta property="og:image" content="https://hsb786.github.io/images/HTTP03.jpg">
 <meta property="og:image" content="https://hsb786.github.io/images/HTTP04.jpg">
 <meta property="og:image" content="https://hsb786.github.io/images/HTTP05.png">
-<meta property="og:updated_time" content="2018-04-20T13:16:27.303Z">
+<meta property="og:image" content="https://hsb786.github.io/images/三次握手.png">
+<meta property="og:updated_time" content="2018-04-21T06:02:00.519Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HTTP">
 <meta name="twitter:description" content="感觉计算机网络课上学的东西忘得差不多了，怎么办？怎么办？ 还能怎么办，学啊。  TCP/IP百度百科上的解释  Transmission Control Protocol/Internet Protocol的简写，中译名为传输控制协议/因特网互联协议，又名网络通讯协议，是Internet最基本的协议、Internet国际互联网络的基础，由网络层的IP协议和传输层的TCP协议组成。TCP/IP 定">
@@ -361,6 +362,10 @@
 <h3 id="语义之争"><a href="#语义之争" class="headerlink" title="语义之争"></a>语义之争</h3><p>GET的语义是请求获取指定的资源。GET方法是安全、幂等、可缓存的（除非有 Cache-Control Header的约束）,GET方法的报文主体没有任何语义。</p>
 <p>POST的语义是根据请求负荷（报文主体）对指定的资源做出处理，具体的处理方式视资源类型而不同。POST不安全，不幂等，（大部分实现）不可缓存。</p>
 <hr>
+<h2 id="TCP为什么是三次握手"><a href="#TCP为什么是三次握手" class="headerlink" title="TCP为什么是三次握手"></a>TCP为什么是三次握手</h2><p><img src="/images/三次握手.png" alt=""></p>
+<p>TCP作为一种可靠传输控制协议,其核心思想:<strong>既要保证数据可靠传输,又要提高传输的效率</strong></p>
+<p>三次是保证双方互相明确对方能收能发的最低值</p>
+<hr>
 <p><em>参考</em></p>
 <blockquote>
 <p><a href="https://baike.baidu.com/item/TCP%2FIP协议/212915?fr=aladdin&amp;fromid=214077&amp;fromtitle=tcp%2Fip" target="_blank" rel="noopener">TCP/IP协议 百度百科</a></p>
@@ -368,6 +373,7 @@
 <p><a href="https://sunshinevvv.coding.me/blog/2017/01/26/图解HTTP-读书笔记/" target="_blank" rel="noopener">图解HTTP-读书笔记</a></p>
 <p><a href="http://www.w3school.com.cn/tags/html_ref_httpmethods.asp" target="_blank" rel="noopener">HTTP 方法：GET 对比 POST</a></p>
 <p><a href="https://sunshinevvv.coding.me/blog/2017/02/09/HttpGETv.s.POST/" target="_blank" rel="noopener">HTTP协议中GET和POST方法的区别</a></p>
+<p><a href="https://www.zhihu.com/question/24853633" target="_blank" rel="noopener">TCP 为什么是三次握手，而不是两次或四次？</a></p>
 </blockquote>
 
         
@@ -379,7 +385,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/16/HTTP/" data-id="cjg8ymp8j0005gcmy7rc1vpkr" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/16/HTTP/" data-id="cjg8z852n0002q4myb6eg9d5j" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
