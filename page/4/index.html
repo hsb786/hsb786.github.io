@@ -155,7 +155,7 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                66
+                67
                 <span>文章</span>
             </div>
             <div class="article-info-block">
@@ -184,6 +184,137 @@
 
             
             <section id="main">
+    <article id="post-difference-between-executor-executorService" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2018/04/13/difference-between-executor-executorService/">【译】Executor, ExecutorService 和 Executors 间的不同 （转载）</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2018/04/13/difference-between-executor-executorService/">
+            <time datetime="2018-04-13T05:21:41.000Z" itemprop="datePublished">2018-04-13</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/多线程/">多线程</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/多线程/">多线程</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            <p><p><code>java.util.concurrent.Executor</code>, <code>java.util.concurrent.ExecutorService</code>, <code>java.util.concurrent. Executors</code> 这三者均是 Java Executor 框架的一部分，用来提供线程池的功能。因为创建和管理线程非常心累，并且操作系统通常对线程数有限制，所以建议使用线程池来并发执行任务，而不是每次请求进来时创建一个线程。使用线程池不仅可以提高应用的响应时间，还可以避免”java.lang.OutOfMemoryError: unable to create new native thread” 之类的错误。<br></p>
+            <p class="article-more-link">
+                <a href="/2018/04/13/difference-between-executor-executorService/#more">查看更多</a>
+            </p>
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="https://hsb786.github.io/2018/04/13/difference-between-executor-executorService/" data-id="cjg9g5025002nagmyabn4i0j8" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
     <article id="post-vscode-database" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
@@ -241,7 +372,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/13/vscode-database/" data-id="cjg9e711a003bwomyol3hox9x" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/13/vscode-database/" data-id="cjg9g5025003iagmy8zfkg0q8" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -374,7 +505,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/13/触发器/" data-id="cjg9e712l005uwomymqpfisp6" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/13/触发器/" data-id="cjg9g503g005sagmyhqidjc5u" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -507,7 +638,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/12/索引/" data-id="cjg9e7125005dwomyr89krfvc" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/12/索引/" data-id="cjg9g503g005nagmy0wbaaxqq" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -638,7 +769,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/12/Java虚拟机基础/" data-id="cjg9e710f000ywomyji7n4ljf" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/12/Java虚拟机基础/" data-id="cjg9g501a000zagmy05yo3ke4" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -769,7 +900,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/12/java8新特性（转载）/" data-id="cjg9e711a003swomybfa28rux" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/12/java8新特性（转载）/" data-id="cjg9g50250037agmy87ici8ot" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -900,7 +1031,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/12/合并两个排序的链表/" data-id="cjg9e711q004bwomyotl8jxko" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/12/合并两个排序的链表/" data-id="cjg9g502l004lagmy174yl56g" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1033,7 +1164,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/12/MyBatis/" data-id="cjg9e710f001swomyw8nsgb90" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/12/MyBatis/" data-id="cjg9g501p001qagmymtp7j5r0" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1165,7 +1296,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/12/HashMap/" data-id="cjg9e70zj0000womythop4wzs" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/12/HashMap/" data-id="cjg9g500u000eagmy0vxcky4s" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1299,140 +1430,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/11/工具网站/" data-id="cjg9e711q004vwomyxih0zzr9" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-
-        </footer>
-    </div>
-    
-</article>
-
-
-
-    <article id="post-EasyUI" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2018/04/11/EasyUI/">EasyUI</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2018/04/11/EasyUI/">
-            <time datetime="2018-04-11T03:28:06.000Z" itemprop="datePublished">2018-04-11</time>
-        </a>
-    </div>
-
-
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/前端/">前端</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/前端/">前端</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            
-            <p><strong>当请求远程数据时，发送的额外参数。</strong></p>
-<p>在datagrid构造中加入queryParams参数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">dataGrid = $(&apos;#dg&apos;).datagrid(&#123;</span><br><span class="line">			url : &apos;$&#123;pageContext.request.contextPath&#125;/companys/datagrid&apos;,</span><br><span class="line">			method : &apos;GET&apos;,</span><br><span class="line">			.........................</span><br><span class="line">			queryParams : &#123;</span><br><span class="line">				//传入当前日期查询</span><br><span class="line">				startTime : getNowFormatDate()</span><br><span class="line">			&#125;,</span><br></pre></td></tr></table></figure></p>
-<p><strong>重新加载行，保持在当前页</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(&apos;#dg&apos;).datagrid(&apos;reload&apos;);</span><br></pre></td></tr></table></figure></p>
-<p><strong>加载并显示第一页的行,通过传递一些从参数进行查询，该方法被调用来从服务器加载新数据。</strong> </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$(&quot;#dg&quot;).datagrid(&apos;load&apos;, &#123;</span><br><span class="line">			&quot;job.name&quot; : $(&quot;#jobname&quot;).val(),</span><br><span class="line">			&quot;user.realname&quot; : $(&quot;#realname&quot;).val()</span><br><span class="line">		&#125;);</span><br></pre></td></tr></table></figure>
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="https://hsb786.github.io/2018/04/11/EasyUI/" data-id="cjg9e70zj0002womy6vkxertv" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/11/工具网站/" data-id="cjg9g50300052agmyvr0y4q6a" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding

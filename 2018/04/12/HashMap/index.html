@@ -15,7 +15,8 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://hsb786.github.io/images/HashMap3.png">
 <meta property="og:image" content="https://hsb786.github.io/images/HashMap2.png">
-<meta property="og:updated_time" content="2018-04-21T12:10:19.704Z">
+<meta property="og:image" content="https://hsb786.github.io/images/HashMap05.png">
+<meta property="og:updated_time" content="2018-04-21T13:24:39.728Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HashMap">
 <meta name="twitter:description" content="HashMap内部存储结构 HashMap内部存储使用了一个Node数组（默认大小是16），而Node类包含一个类型为Node的next变量，也就是相当于一个链表，所有根据hash值计算的bucket一样的key会存储到同一个链表里（即产生了冲突）。">
@@ -160,7 +161,7 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                66
+                67
                 <span>文章</span>
             </div>
             <div class="article-info-block">
@@ -288,6 +289,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public V get(Object key) &#123;</span><br><span class="line">    Node&lt;K,V&gt; e;</span><br><span class="line">    return (e = getNode(hash(key), key)) == null ? null : e.value;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>根据入参的key对象计算出key的hash值，调用getNode()方法，再来看看getNode()方法。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">final Node&lt;K,V&gt; getNode(int hash, Object key) &#123;</span><br><span class="line">    Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; first, e; int n; K k;</span><br><span class="line">    if ((tab = table) != null &amp;&amp; (n = tab.length) &gt; 0 &amp;&amp;</span><br><span class="line">        (first = tab[(n - 1) &amp; hash]) != null) &#123;</span><br><span class="line">        if (first.hash == hash &amp;&amp; // always check first node</span><br><span class="line">            ((k = first.key) == key || (key != null &amp;&amp; key.equals(k))))</span><br><span class="line">            return first;</span><br><span class="line">        if ((e = first.next) != null) &#123;</span><br><span class="line">            if (first instanceof TreeNode)</span><br><span class="line">                return ((TreeNode&lt;K,V&gt;)first).getTreeNode(hash, key);</span><br><span class="line">            do &#123;</span><br><span class="line">                if (e.hash == hash &amp;&amp;</span><br><span class="line">                    ((k = e.key) == key || (key != null &amp;&amp; key.equals(k))))</span><br><span class="line">                    return e;</span><br><span class="line">            &#125; while ((e = e.next) != null);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return null;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>通过key的hash值与key对象，来查找key对应的键值对的值，如果查找失败则返回null。如何查找的呢？首先，通过key的hash值计算出对应数组的索引，如果索引到的第一个Node节点的key和hash值与入参相等，直接返回该Node。否则，循环遍历下一个节点(可能是链表也有可能是红黑树)。</p>
+<p><img src="/images/HashMap05.png" alt=""></p>
 <hr>
 <p><strong>为什么线程不安全</strong></p>
 <ol>
@@ -320,6 +322,7 @@
 <li>除了Hashtable之外，WeakHashMap和IdentityHashMap也不会在频繁冲突的情况下使用平衡树。</li>
 <li>使用HashMap之所以会产生冲突是因为使用了键对象的hashCode()方法，而equals()和hashCode()方法不保证不同对象的hashCode是不同的。需要记住的是，相同对象的hashCode一定是相同的，但相同的hashCode不一定是相同的对象。</li>
 <li>在HashTable和HashMap中，冲突的产生是由于不同对象的hashCode()方法返回了一样的值。</li>
+<li>Java7在多线程操作hashmap时可能引起死循环，原因是扩容转移后前后链表顺序倒置，在转移过程中修改了原来链表中节点的引用关系；Java8在同样的前提下并不会引起死循环，原因是扩容转移后前后链表顺序不变，保持之前节点的引用关系。</li>
 </ol>
 <hr>
 <p><em>参考</em></p>
@@ -338,7 +341,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/12/HashMap/" data-id="cjg9e70zj0000womythop4wzs" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/12/HashMap/" data-id="cjg9g500u000eagmy0vxcky4s" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
