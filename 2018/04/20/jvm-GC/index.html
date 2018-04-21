@@ -21,7 +21,7 @@
 <meta property="og:image" content="https://hsb786.github.io/images/JVM22.png">
 <meta property="og:image" content="https://hsb786.github.io/images/JVM23.png">
 <meta property="og:image" content="https://hsb786.github.io/images/JVM24.png">
-<meta property="og:updated_time" content="2018-04-21T05:11:35.158Z">
+<meta property="og:updated_time" content="2018-04-21T05:43:18.997Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="jvm-GC">
 <meta name="twitter:description" content="关键字约定 Young generation –&amp;gt;新生代 Tenured / Old Generation –&amp;gt;老年代 Perm Area –&amp;gt;永久代">
@@ -267,20 +267,62 @@
 </ul>
 <h2 id="GC针对什么对象？"><a href="#GC针对什么对象？" class="headerlink" title="GC针对什么对象？"></a>GC针对什么对象？</h2><p>了解GC机制的第一步就是理解什么样的对象会被回收。当一个对象通过一系列根对象(比如：静态属性引用的常量)都不可达时就会被回收。简而言之，当一个对象的所有引用都为null。循环依赖不算做引用，如果对象A有一个指向对象B的引用，对象B也有一个指向对象A的引用，除此之外，它们没有其他引用，那么对象A和对象B都、需要被回收(如下图,ObjA和ObjB需要被回收)。</p>
 <p><img src="/images/GC-Object.png" alt="GC回收对象"></p>
-<h2 id="GC-Root"><a href="#GC-Root" class="headerlink" title="GC Root"></a>GC Root</h2><p>当一个对象通过一系列根对象(Root)都不可达时就会被回收。GC Root：</p>
+<h2 id="引用记数法"><a href="#引用记数法" class="headerlink" title="引用记数法"></a>引用记数法</h2><ul>
+<li>思想：给对象设置引用计数器，没引用该对象一次，计数器就+1，引用失效时，计数器就-1，当任意时候引用计数器的值都为0时，则该对象可被回收</li>
+<li>Java不适用原因：无法解决对象互相循环引用的问题</li>
+</ul>
+<h2 id="GC-Root"><a href="#GC-Root" class="headerlink" title="GC Root"></a>GC Root</h2><p>可达性分析法, 当一个对象通过一系列根对象(Root)都不可达时就会被回收。</p>
+<p>可作为GC Root的对象有:</p>
 <ul>
-<li>Class: 由系统类加载器(system class loader)加载的类，它们不能被卸载。 由自定义的类加载器加载的类不是Root，除非相应的java.lang.Class的实例是其它类型的Root</li>
-<li>Thread: 活着的线程</li>
-<li>Stack Local:Java方法的参数或者本地变量</li>
-<li>JNI Local: JNI方法的参数或者本地变量</li>
-<li>Monitor Used：同步用的监控器</li>
-<li>Held by JVM: JVM自己持有的对象，比如系统类加载器，一些异常等</li>
+<li>虚拟机栈（栈帧中的局部变量表）中引用的对象</li>
+<li>方法区中类静态属性引用的对象</li>
+<li>方法区中常量引用的对象</li>
+<li>本地方法栈中JNI（Native方法）引用的对象</li>
+</ul>
+<p>在可达性分析过程中，对象引用类型会对对象的生命周期产生影响，JAVA中有这几种类型的引用：</p>
+<ul>
+<li>强引用：只要该引用还有效，GC就不会回收</li>
+<li>软引用：内存空间足够时不进行回收，在内存溢出发生前进行回收、用SoftReference类实现</li>
+<li>弱引用：弱引用关联的对象只能存活到下一次Gc收集、用WeakReference类实现</li>
+<li>虚引用：无法通过虚引用获得对象实例，也不会对对象的生存时间产生影响、唯一目的：当该对象被Gc收集时，收到一个系统通知。用PhantomReference类实现</li>
+</ul>
+<p>一个对象真正不可用，要经历两次标记过程：</p>
+<ul>
+<li>首先进行可达性分析，筛选出与GC Root没用引用链的对象，进行第一次标记</li>
+<li>第一次标记后，再进行一次筛选，筛选条件是是否有必要执行finalize()方法。若对象有没有重写finalize()方法，或者finalize()是否已被jvm调用过，则没必要执行，GC会回收该对象</li>
+<li>若有必要执行，则该对象会被放入F-Queue中，由jvm开启一个低优先级的线程去执行它（但不一定等待finalize执行完毕）。</li>
+<li>finalize()是对象最后一次自救的机会，若对象在finalize()中重新加入到引用链中，则它会被移出要回收的对象的集合。其他对象则会被第二次标记，进行回收</li>
 </ul>
 <h2 id="GC算法"><a href="#GC算法" class="headerlink" title="GC算法"></a>GC算法</h2><ol>
 <li>标记清除算法<br> 分为标记和清除两个阶段：首先标记出所有需要回收的对象，在标记完成后统一回收所有被标记的对象。该算法的缺点是效率不高并且会产生不连续的内存碎片。<br><img src="/images/sweep.jpg" alt=""></li>
 <li>复制算法<br> 把内存空间划为两个区域，每次只使用其中一个区域。垃圾回收时，遍历当前使用区域，把正在使用中的对象复制到另外一个区域中。此算法每次只处理正在使用中的对象，因此复制成本比较小，同时复制过去以后还能进行相应的内存整理，不会出现“碎片”问题。优点：实现简单，运行高效。缺点：会浪费一定的内存。一般新生代采用这种算法。<br><img src="/images/copy.jpg" alt=""></li>
 <li>标记整理算法<br> 标记阶段与标记清除算法一样。但后续并不是直接对可回收的对象进行清理，而是让所有存活对象都向一端移动，然后清理。优点是不会造成内存碎片。<br><img src="/images/compact.jpg" alt=""></li>
 </ol>
+<h2 id="内存分配规则"><a href="#内存分配规则" class="headerlink" title="内存分配规则"></a>内存分配规则</h2><ul>
+<li>对象优先在Eden分配<ul>
+<li>当Eden区没有足够的空间时就会发起一次Minor GC</li>
+</ul>
+</li>
+<li>大对象直接进入老年代<ul>
+<li>典型的大对象是很长的字符串和数组</li>
+</ul>
+</li>
+<li>长期存活的对象进入老年代<ul>
+<li>每个对象有年龄计数器，每经过一次GC，计数器值加一，当到达一定程度时（默认15），就会进入老年代</li>
+<li>年龄的阈值可通过参数 -XX:MaxTenuringThreshold设置</li>
+</ul>
+</li>
+<li>对象年龄的判定<ul>
+<li>Survivor空间中相同年龄所有对象大小的总和大于Survivor空间的一半，年龄大于等于该年龄的对象就可直接进入老年代，无须等到MaxTenuringThreshold要求的年龄</li>
+</ul>
+</li>
+<li>空间分配担保<ul>
+<li>发生Minor GC前，jvm会检查老年代最大可用的连续空间是否大于新生代所有对象总空间，若大于，则Minor GC是安全的</li>
+<li>若不大于，jvm会查看HandlePromotionFailure是否允许担保失败，若不允许，则改为一次Full GC</li>
+<li>若允许担保失败，则检查老年代最大可用的连续空间是否大于历次晋升到老年代对象的平均大小，若大于，则尝试进行Minor GC；若小于，则要改为Full GC</li>
+</ul>
+</li>
+</ul>
 <h2 id="Java中垃圾回收器的类型"><a href="#Java中垃圾回收器的类型" class="headerlink" title="Java中垃圾回收器的类型"></a>Java中垃圾回收器的类型</h2><p>Java提供多种类型的垃圾回收器。JVM中的垃圾收集一般都采用“分代收集”，不同的堆内存区域采用不同的收集算法，主要目的就是为了增加吞吐量或降低停顿时间。</p>
 <ul>
 <li>Serial收集器：新生代收集器，使用复制算法，使用一个线程进行GC，串行，其它工作线程暂停。</li>
@@ -364,7 +406,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/20/jvm-GC/" data-id="cjg8wwhrj002dewmy03mulnhs" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/20/jvm-GC/" data-id="cjg8ymp9e002igcmy6p33cp89" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
