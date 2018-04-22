@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <meta charset="utf-8">
+    
+    <title>LinkedHashMap | HuShengBin’s blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="LinkedHashMap 保证插入数据的有序性">
+<meta name="keywords" content="爪哇">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LinkedHashMap">
+<meta property="og:url" content="https://hsb786.github.io/2018/04/22/LinkedHashMap/index.html">
+<meta property="og:site_name" content="HuShengBin’s blog">
+<meta property="og:description" content="LinkedHashMap 保证插入数据的有序性">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-04-22T12:47:42.631Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="LinkedHashMap">
+<meta name="twitter:description" content="LinkedHashMap 保证插入数据的有序性">
+    
+
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                
+                <span class="site-title">HuShengBin’s blog</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">Home</a>
+                
+                    <a class="main-nav-link" href="/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/tags">Tags</a>
+                
+                    <a class="main-nav-link" href="/about">About</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/css/images/txx.jpg" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">Tags</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/css/images/txx.jpg" />
+            <h2 id="name">hushengbin</h2>
+            <h3 id="title">JavaWeb Developer</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>Nanchang, Jiangxi, China</span>
+            <a id="follow" target="_blank" href="https://github.com/hsb786">关注我</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                69
+                <span>文章</span>
+            </div>
+            <div class="article-info-block">
+                13
+                <span>标签</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="https://github.com/hsb786" target="_blank" title="github" class=tooltip>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-LinkedHashMap" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            LinkedHashMap
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2018/04/22/LinkedHashMap/">
+            <time datetime="2018-04-22T11:37:01.000Z" itemprop="datePublished">2018-04-22</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/爪哇/">爪哇</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/爪哇/集合/">集合</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/爪哇/">爪哇</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <blockquote>
+<p>LinkedHashMap 保证插入数据的有序性</p>
+</blockquote>
+<a id="more"></a>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">public class LinkedHashMap&lt;K,V&gt; extends HashMap&lt;K,V&gt; implements Map&lt;K,V&gt;&#123;</span><br><span class="line">    static class Entry&lt;K,V&gt; extends HashMap.Node&lt;K,V&gt; &#123;</span><br><span class="line">        Entry&lt;K,V&gt; before, after;</span><br><span class="line">        Entry(int hash, K key, V value, Node&lt;K,V&gt; next) &#123;</span><br><span class="line">            super(hash, key, value, next);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * The head (eldest) of the doubly linked list.</span><br><span class="line">     */</span><br><span class="line">    transient LinkedHashMap.Entry&lt;K,V&gt; head;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * The tail (youngest) of the doubly linked list.</span><br><span class="line">     */</span><br><span class="line">    transient LinkedHashMap.Entry&lt;K,V&gt; tail;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * The iteration ordering method for this linked hash map: &lt;tt&gt;true&lt;/tt&gt;</span><br><span class="line">     * for access-order, &lt;tt&gt;false&lt;/tt&gt; for insertion-order.</span><br><span class="line">     *</span><br><span class="line">     * @serial</span><br><span class="line">     */</span><br><span class="line"></span><br><span class="line">    public LinkedHashMap() &#123;</span><br><span class="line">        super();</span><br><span class="line">        accessOrder = false;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>LinkedHashMap内部没有重写put方法，很好奇，是怎么把链表加上去的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//HashMap.class</span><br><span class="line">final V putVal(int hash, K key, V value, boolean onlyIfAbsent,boolean evict) &#123;</span><br><span class="line">    ....................</span><br><span class="line">    afterNodeInsertion(evict);</span><br><span class="line">    return null;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在一篇博客上看到加链表是通过<code>afterNodeInsertion(evict)</code>。可以看出每次put的时候都调用了<code>afterNodeInsertion(evict)</code>; 而这个afterNodeInsertion在LinkedHashMap中是重写了的。然后就傻呼呼的相信了，but 在<code>afterNodeInsertion(evict)</code>中并没有添加链表啊，傻傻的盯着这段代码看了很久。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">void afterNodeInsertion(boolean evict) &#123; // possibly remove eldest</span><br><span class="line">    LinkedHashMap.Entry&lt;K,V&gt; first;</span><br><span class="line">    if (evict &amp;&amp; (first = head) != null &amp;&amp; removeEldestEntry(first)) &#123;</span><br><span class="line">        K key = first.key;</span><br><span class="line">        removeNode(hash(key), key, null, false, true);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>于是，开始自己找。发现了<code>linkNodeLast()</code>方法，这不就是实现链表的关键吗。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// link at the end of list</span><br><span class="line">private void linkNodeLast(LinkedHashMap.Entry&lt;K,V&gt; p) &#123;</span><br><span class="line">    LinkedHashMap.Entry&lt;K,V&gt; last = tail;</span><br><span class="line">    tail = p;</span><br><span class="line">    if (last == null)</span><br><span class="line">        head = p;</span><br><span class="line">    else &#123;</span><br><span class="line">        p.before = last;</span><br><span class="line">        last.after = p;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>接着发现<code>linkNodeLast()</code>在<code>newNode()</code>中调用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Node&lt;K,V&gt; newNode(int hash, K key, V value, Node&lt;K,V&gt; e) &#123;</span><br><span class="line">    LinkedHashMap.Entry&lt;K,V&gt; p =</span><br><span class="line">        new LinkedHashMap.Entry&lt;K,V&gt;(hash, key, value, e);</span><br><span class="line">    linkNodeLast(p);</span><br><span class="line">    return p;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>并且newNode()在HashMap中也存在。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//HashMap.class</span><br><span class="line">Node&lt;K,V&gt; newNode(int hash, K key, V value, Node&lt;K,V&gt; next) &#123;</span><br><span class="line">    return new Node&lt;&gt;(hash, key, value, next);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>在<code>putVal()</code>中调用了<code>newNode()</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"> final V putVal(int hash, K key, V value, boolean onlyIfAbsent,</span><br><span class="line">                   boolean evict) &#123;</span><br><span class="line">        Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; p; int n, i;</span><br><span class="line">        if ((tab = table) == null || (n = tab.length) == 0)</span><br><span class="line">            n = (tab = resize()).length;</span><br><span class="line">        if ((p = tab[i = (n - 1) &amp; hash]) == null)</span><br><span class="line">            tab[i] = newNode(hash, key, value, null);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这样就解释通了，LinkedHashMap没有重写put方法。为了保证有序，那么他是怎么实现链表的呢？</p>
+<p>利用多态，通过重写<code>newNode()</code>方法，在<code>newNode()</code>方法中实现了链表的连接。而<code>newNode</code>方法在<code>putVal()</code>中调用了。so，每次添加元素的时候，同时会维护一个双向链表。通过链表实现了有序。</p>
+<p>看来，平时不能太依赖于网上别人分析的东西，不一定是对的。</p>
+<hr>
+<p><strong>accessOrder</strong></p>
+<p>LinkedHashMap中定义了accessOrder属性。官方是这样解释的：accessOrder为true时，迭代顺序就是访问顺序；为false时，迭代顺序就是插入顺序。<br>插入顺序倒好理解，访问顺序是什么意思？<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">* The iteration ordering method for this linked hash map: &lt;tt&gt;true&lt;/tt&gt;</span><br><span class="line">* for access-order, &lt;tt&gt;false&lt;/tt&gt; for insertion-order.</span><br><span class="line">*</span><br><span class="line">* @serial</span><br><span class="line">*/</span><br><span class="line">final boolean accessOrder;</span><br></pre></td></tr></table></figure></p>
+<p>LinkedHashMap重写了<code>get(Object key)</code>方法。accessOrder为true时，调用了<code>afterNodeAccess(e);</code>方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public V get(Object key) &#123;</span><br><span class="line">    Node&lt;K,V&gt; e;</span><br><span class="line">    if ((e = getNode(hash(key), key)) == null)</span><br><span class="line">        return null;</span><br><span class="line">    if (accessOrder)</span><br><span class="line">        afterNodeAccess(e);</span><br><span class="line">    return e.value;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><code>void afterNodeAccess(Node&lt;K,V&gt; e)</code> 方法注解写的很明白，move node to last，把node移动到最后。意思就是如果accessOrder设为true时，每次通过get()获取，都会把获取的元素移到链表的最后面。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">void afterNodeAccess(Node&lt;K,V&gt; e) &#123; // move node to last</span><br><span class="line">    LinkedHashMap.Entry&lt;K,V&gt; last;</span><br><span class="line">    if (accessOrder &amp;&amp; (last = tail) != e) &#123;</span><br><span class="line">        LinkedHashMap.Entry&lt;K,V&gt; p =</span><br><span class="line">            (LinkedHashMap.Entry&lt;K,V&gt;)e, b = p.before, a = p.after;</span><br><span class="line">        p.after = null;</span><br><span class="line">        if (b == null)</span><br><span class="line">            head = a;</span><br><span class="line">        else</span><br><span class="line">            b.after = a;</span><br><span class="line">        if (a != null)</span><br><span class="line">            a.before = b;</span><br><span class="line">        else</span><br><span class="line">            last = b;</span><br><span class="line">        if (last == null)</span><br><span class="line">            head = p;</span><br><span class="line">        else &#123;</span><br><span class="line">            p.before = last;</span><br><span class="line">            last.after = p;</span><br><span class="line">        &#125;</span><br><span class="line">        tail = p;</span><br><span class="line">        ++modCount;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><code>final boolean accessOrder;</code> accessOrder包访问权限，也没有set方法，只能通过<code>public LinkedHashMap(int initialCapacity,float loadFactor, boolean accessOrder)</code> 构造函数来将accessOrder设为true。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public LinkedHashMap(int initialCapacity,</span><br><span class="line">                         float loadFactor,</span><br><span class="line">                         boolean accessOrder) &#123;</span><br><span class="line">        super(initialCapacity, loadFactor);</span><br><span class="line">        this.accessOrder = accessOrder;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="https://hsb786.github.io/2018/04/22/LinkedHashMap/" data-id="cjgascyjs001aakmy5ii1t42z" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2018/04/22/HashSet/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">HashSet</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    
+        <section id="comments">
+    <div id="valine-thread"></div>
+</section>
+    
+
+</section>
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2018 HuShengBin<br>
+    </div>
+</footer>
+        
+    
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//cdn.jsdelivr.net/gh/xcss/valine@v1.1.6/dist/Valine.min.js"></script>
+    <script>
+        new Valine({
+            el: '#valine-thread' ,
+            notify:false,
+            verify:false,
+            app_id: 'eqjWlM0tCYgxhh8nvvV6DleG-gzGzoHsz',
+            app_key: 'CRXn0n9IAsJdOeMDUIxyh1Hb',
+            placeholder: '(。・∀・)ノ说一句吧'
+        });
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

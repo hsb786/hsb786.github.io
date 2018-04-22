@@ -155,7 +155,7 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                67
+                69
                 <span>文章</span>
             </div>
             <div class="article-info-block">
@@ -184,6 +184,272 @@
 
             
             <section id="main">
+    <article id="post-enum" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2018/04/16/enum/">enum</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2018/04/16/enum/">
+            <time datetime="2018-04-16T03:47:49.000Z" itemprop="datePublished">2018-04-16</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/爪哇/">爪哇</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/爪哇/">爪哇</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            <p><blockquote>
+<p>Enum类是java.lang包中的一个类，他是Java语言中所有枚举类型的公共基类</p>
+</blockquote></p>
+            <p class="article-more-link">
+                <a href="/2018/04/16/enum/#more">查看更多</a>
+            </p>
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="https://hsb786.github.io/2018/04/16/enum/" data-id="cjgascyko0031akmyvx540u7n" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
+    <article id="post-javap" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2018/04/15/javap/">javap</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2018/04/15/javap/">
+            <time datetime="2018-04-15T11:11:13.000Z" itemprop="datePublished">2018-04-15</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/爪哇/">爪哇</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/爪哇/">爪哇</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            <p><blockquote>
+<p>javap是jdk自带的一个工具，可以对代码反编译，也可以查看java编译器生成的字节码文件</p>
+</blockquote></p>
+            <p class="article-more-link">
+                <a href="/2018/04/15/javap/#more">查看更多</a>
+            </p>
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="https://hsb786.github.io/2018/04/15/javap/" data-id="cjgascyl30038akmy98gjarhd" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
     <article id="post-LinkedList" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
@@ -240,7 +506,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/15/LinkedList/" data-id="cjgaofl3u00181cmycr5hiqjh" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/15/LinkedList/" data-id="cjgascyk8001hakmyej8v365n" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -373,7 +639,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/15/ArrayList/" data-id="cjgaofl2y00001cmyozhhegaj" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/15/ArrayList/" data-id="cjgascyix0001akmyyainqijz" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -511,7 +777,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/14/Proxy/" data-id="cjgaofl49001o1cmydearxppk" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/14/Proxy/" data-id="cjgascyk80025akmy9q5brjh2" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -642,7 +908,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/14/ThreadLocal/" data-id="cjgaofl54002e1cmyaxmw1nc8" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/14/ThreadLocal/" data-id="cjgascyko002jakmy9ecq0est" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -776,7 +1042,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/14/IOC-实现原理（转载）/" data-id="cjgaofl3e000p1cmyopc0ppha" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/14/IOC-实现原理（转载）/" data-id="cjgascyjs000rakmyp2ggkagl" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -909,7 +1175,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/14/Servlet/" data-id="cjgaofl49001r1cmykrtkb7hs" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/14/Servlet/" data-id="cjgascyk8001xakmyazfzgze4" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1040,7 +1306,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/13/译-如何重置一个ArrayList-clear-vs-removeAll/" data-id="cjgaofl6v00671cmyknvhhn24" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/13/译-如何重置一个ArrayList-clear-vs-removeAll/" data-id="cjgascyme006dakmyyhnro0sa" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1171,269 +1437,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/13/译-以生产者消费者为例阐述如何使用wait，notify和notifyAll/" data-id="cjgaofl6v005y1cmyzz2maj12" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-
-        </footer>
-    </div>
-    
-</article>
-
-
-
-    <article id="post-Java-8中的扩展-Default-Defender-Extension-方法" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2018/04/13/Java-8中的扩展-Default-Defender-Extension-方法/">【译】Java8中的扩展(default/extension)方法 （转载）</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2018/04/13/Java-8中的扩展-Default-Defender-Extension-方法/">
-            <time datetime="2018-04-13T07:14:18.000Z" itemprop="datePublished">2018-04-13</time>
-        </a>
-    </div>
-
-
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/爪哇/">爪哇</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/爪哇/">爪哇</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            <p><p>Java 8允许开发者使用<code>default</code>和<code>static</code>两个关键字在接口中加入非抽象的方法。带有default关键字的方法在Java中也被称作defender方法或defaul方法。在Java 8之前，想要改变一个已经发布的接口几乎是不可能的，任何改动(例如增加一个新的方法)都会影响该接口现有的实现类。这也是为什么在Java 8想要改变内部iterator的实现，使用forEach()方法时面临了一个巨大的挑战，因为这会破坏了现有的Iterable接口的实现类。毫无疑问，向后兼容是Java工程师最优先考虑的事，所以要破坏现有的实现类是不可行的。因此，他们提出了一个解决办法，引入default方法。这是一个绝妙的想法，因为现在你可以用扩展现有的接口。JDK本身也使用了许多default方法,java.util.Map接口扩展了许多default方法，例如replaceAll(),putIfAbsent(Key k,Value v)….。另外，由于default方法可以扩展现有的接口也被称作extension方法。一个接口中的default方法是数量不受限制的。我相信，在这次改变之后，将不再需要抽象类来提供骨架实现(skeletal implementation),例如List接口有AbstractList，Collection接口有AbstractCollection，Set接口有AbstractSet，Map接口有AbstractMap。我们可以通过在接口中定义default方法来替代创建一个新的抽象类。相似的，static方法的引入也使得接口的工具类变得冗余。例如，Collection接口的Collections类，Path接口的Paths类，因为你可以直接在接口中定义静态工具方法。如果你想了解更多关于Java 8的新特性，我建议阅读Cay S. Horstmann写的Java SE 8 Really Impatient。这是我最喜欢的关于Java 8的书之一，它详细的介绍了Java7与Java 8不同的特性。<br></p>
-            <p class="article-more-link">
-                <a href="/2018/04/13/Java-8中的扩展-Default-Defender-Extension-方法/#more">查看更多</a>
-            </p>
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="https://hsb786.github.io/2018/04/13/Java-8中的扩展-Default-Defender-Extension-方法/" data-id="cjgaofl3u000x1cmy79lgwomj" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-
-        </footer>
-    </div>
-    
-</article>
-
-
-
-    <article id="post-【译】如何在java中使用ConcurrentHashMap" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2018/04/13/【译】如何在java中使用ConcurrentHashMap/">【译】如何在java中使用ConcurrentHashMap（转载）</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2018/04/13/【译】如何在java中使用ConcurrentHashMap/">
-            <time datetime="2018-04-13T06:41:41.000Z" itemprop="datePublished">2018-04-13</time>
-        </a>
-    </div>
-
-
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/爪哇/">爪哇</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/爪哇/">爪哇</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            <p><p>ConcurrentHashMap(简称<code>CHM</code>)是在Java 1.5作为<code>Hashtable</code>的替代选择新引入的，是concurrent包的重要成员。在Java 1.5之前，如果想要实现一个可以在多线程和并发的程序中安全使用的Map,只能在HashTable和synchronized Map中选择，因为HashMap并不是线程安全的。但再引入了CHM之后，我们有了更好的选择。CHM不但是线程安全的，而且比HashTable和synchronizedMap的性能要好。相对于HashTable和synchronizedMap锁住了整个Map，CHM只锁住部分Map。CHM允许并发的读操作，同时通过同步锁在写操作时保持数据完整性。<br></p>
-            <p class="article-more-link">
-                <a href="/2018/04/13/【译】如何在java中使用ConcurrentHashMap/#more">查看更多</a>
-            </p>
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="https://hsb786.github.io/2018/04/13/【译】如何在java中使用ConcurrentHashMap/" data-id="cjgaofl60003n1cmy0nk1k4ae" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/13/译-以生产者消费者为例阐述如何使用wait，notify和notifyAll/" data-id="cjgascyme006aakmyq7t4apo4" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding

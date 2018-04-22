@@ -3,22 +3,20 @@
 <head>
     <meta charset="utf-8">
     
-    <title>enum | HuShengBin’s blog</title>
+    <title>HashSet | HuShengBin’s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="Enum类是java.lang包中的一个类，他是Java语言中所有枚举类型的公共基类">
+    <meta name="description" content="HashSet 底层由HashMap实现">
 <meta name="keywords" content="爪哇">
 <meta property="og:type" content="article">
-<meta property="og:title" content="enum">
-<meta property="og:url" content="https://hsb786.github.io/2018/04/16/enum/index.html">
+<meta property="og:title" content="HashSet">
+<meta property="og:url" content="https://hsb786.github.io/2018/04/22/HashSet/index.html">
 <meta property="og:site_name" content="HuShengBin’s blog">
-<meta property="og:description" content="Enum类是java.lang包中的一个类，他是Java语言中所有枚举类型的公共基类">
+<meta property="og:description" content="HashSet 底层由HashMap实现">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://hsb786.github.io/images/enum01.png">
-<meta property="og:updated_time" content="2018-04-20T13:15:16.177Z">
+<meta property="og:updated_time" content="2018-04-22T11:37:57.346Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="enum">
-<meta name="twitter:description" content="Enum类是java.lang包中的一个类，他是Java语言中所有枚举类型的公共基类">
-<meta name="twitter:image" content="https://hsb786.github.io/images/enum01.png">
+<meta name="twitter:title" content="HashSet">
+<meta name="twitter:description" content="HashSet 底层由HashMap实现">
     
 
     
@@ -187,7 +185,7 @@
 </aside>
 
             
-            <section id="main"><article id="post-enum" class="article article-type-post" itemscope itemprop="blogPost">
+            <section id="main"><article id="post-HashSet" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -195,7 +193,7 @@
                 
     
         <h1 class="article-title" itemprop="name">
-            enum
+            HashSet
         </h1>
     
 
@@ -204,8 +202,8 @@
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/2018/04/16/enum/">
-            <time datetime="2018-04-16T03:47:49.000Z" itemprop="datePublished">2018-04-16</time>
+        <a href="/2018/04/22/HashSet/">
+            <time datetime="2018-04-22T10:44:43.000Z" itemprop="datePublished">2018-04-22</time>
         </a>
     </div>
 
@@ -213,7 +211,7 @@
                         
     <div class="article-category">
     	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/爪哇/">爪哇</a>
+        <a class="article-category-link" href="/categories/爪哇/">爪哇</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/爪哇/集合/">集合</a>
     </div>
 
                         
@@ -231,29 +229,9 @@
         
             
             <blockquote>
-<p>Enum类是java.lang包中的一个类，他是Java语言中所有枚举类型的公共基类</p>
+<p>HashSet 底层由HashMap实现<br><a id="more"></a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">public class HashSet&lt;E&gt; extends AbstractSet&lt;E&gt; implements Set&lt;E&gt;, Cloneable, java.io.Serializable&#123;</span><br><span class="line">    //HashSet底层使用HashMap实现</span><br><span class="line">    private transient HashMap&lt;E,Object&gt; map;</span><br><span class="line"></span><br><span class="line">    // Dummy value to associate with an Object in the backing Map</span><br><span class="line">    //HashSet add(E e)方法中，key为e，value为PRESENT</span><br><span class="line">    private static final Object PRESENT = new Object();</span><br><span class="line"></span><br><span class="line">    public HashSet() &#123;</span><br><span class="line">        map = new HashMap&lt;&gt;();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * Constructs a new, empty linked hash set.  (This package private</span><br><span class="line">     * constructor is only used by LinkedHashSet.) The backing</span><br><span class="line">     * HashMap instance is a LinkedHashMap with the specified initial</span><br><span class="line">     * capacity and the specified load factor.</span><br><span class="line">     *</span><br><span class="line">     * @param      initialCapacity   the initial capacity of the hash map</span><br><span class="line">     * @param      loadFactor        the load factor of the hash map</span><br><span class="line">     * @param      dummy             ignored (distinguishes this</span><br><span class="line">     *             constructor from other int, float constructor.)</span><br><span class="line">     * @throws     IllegalArgumentException if the initial capacity is less</span><br><span class="line">     *             than zero, or if the load factor is nonpositive</span><br><span class="line">     */</span><br><span class="line">     //这个就有点意思了，dummy参数其实没用，只是为了重载，与其它方法区分开了而已，这样也行！</span><br><span class="line">     //注意的是返回的是LinkedHashMap，数据是有顺序的。</span><br><span class="line">    HashSet(int initialCapacity, float loadFactor, boolean dummy) &#123;</span><br><span class="line">        map = new LinkedHashMap&lt;&gt;(initialCapacity, loadFactor);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 </blockquote>
-<a id="more"></a>
-<pre><code>public abstract class Enum&lt;E extends Enum&lt;E&gt;&gt; implements Comparable&lt;E&gt;, Serializable
-</code></pre><p><img src="/images/enum01.png" alt=""></p>
-<p><strong>Enum类无法被继承</strong></p>
-<p>定义一个Color枚举</p>
-<pre><code>enum Color {RED, GREEN, YELLOW}
-</code></pre><p>反编译后的结果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public final class EnumTest.Color extends java.lang.Enum&lt;EnumTest.Color&gt; &#123;</span><br><span class="line">  public static final EnumTest.Color RED;</span><br><span class="line">  public static final EnumTest.Color GREEN;</span><br><span class="line">  public static final EnumTest.Color YELLOW;</span><br><span class="line">  private static final EnumTest.Color[] ENUM$VALUES;</span><br><span class="line">  static &#123;&#125;;</span><br><span class="line">  private EnumTest.Color(java.lang.String, int);</span><br><span class="line">  public static EnumTest.Color[] values();</span><br><span class="line">  public static EnumTest.Color valueOf(java.lang.String);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>从反编译之后的代码中，我们发现，编译器不让我们继承Enum，但是当我们使用enum关键字定义一个枚举的时候，他会帮我们在编译后默认继承java.lang.Enum类，而不像其他的类一样默认继承Object类。且采用enum声明后，该类会被编译器加上final声明，故该类是无法继承的。</p>
-<hr>
-<p>Enum实现了Serializable和Comparable接口，进行比较时只有同类型的enum才能进行比较，要想实现不同类型的enum之间的比较，只能重写compareTo方法</p>
-<p><strong>Enum&lt;E extends Enum&lt;E>></strong></p>
-<p>一个Enum只接受一个Enum或者他的子类作为参数</p>
-<p><strong>compartTo</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public final int compareTo(E o) &#123;</span><br><span class="line">        Enum&lt;?&gt; other = (Enum&lt;?&gt;)o;</span><br><span class="line">        Enum&lt;E&gt; self = this;</span><br><span class="line">        if (self.getClass() != other.getClass() &amp;&amp; // optimization</span><br><span class="line">            self.getDeclaringClass() != other.getDeclaringClass())</span><br><span class="line">            throw new ClassCastException();</span><br><span class="line">        return self.ordinal - other.ordinal;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
-<p>Java使用Enum&lt;E extends Enum<e>&gt;声明Enum，并且在compareTo的中使用E作为参数。这两个条件限制Color.RED只能和Color定义出来的枚举进行比较</e></p>
-<p><strong>成员变量</strong><br>在Enum中，有两个成员变量，一个是名字(name)，一个是序号(ordinal)。序号是一个枚举常量，表示在枚举中的位置，从0开始，依次递增。</p>
-<p><strong>构造函数</strong><br>Enum是一个抽象类，不能被实例化，但是他也有构造函数。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">protected Enum(String name，int ordinal)&#123;</span><br><span class="line">      this.name=name;</span><br><span class="line">      this.ordinal=ordinal;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<hr>
-<p><em>参考</em></p>
-<blockquote>
-<p><a href="http://www.hollischuang.com/archives/92" target="_blank" rel="noopener">Java 7 源码学习系列（二）——Enum</a></p>
-</blockquote>
+<p><code>add(E e)</code>,<code>remove(Object o)</code>只是直接调用HashMap的put和remove方法。<br>key: e ; value : PRESENT<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public boolean add(E e) &#123;</span><br><span class="line">    return map.put(e, PRESENT)==null;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public boolean remove(Object o) &#123;</span><br><span class="line">    return map.remove(o)==PRESENT;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
         
         </div>
@@ -264,7 +242,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/16/enum/" data-id="cjgascyko0031akmyvx540u7n" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/22/HashSet/" data-id="cjgascyjs000jakmyfezi3wh6" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -339,19 +317,19 @@
         
 <nav id="article-nav">
     
-        <a href="/2018/04/16/String/" id="article-nav-newer" class="article-nav-link-wrap">
+        <a href="/2018/04/22/LinkedHashMap/" id="article-nav-newer" class="article-nav-link-wrap">
             <strong class="article-nav-caption">上一篇</strong>
             <div class="article-nav-title">
                 
-                    String
+                    LinkedHashMap
                 
             </div>
         </a>
     
     
-        <a href="/2018/04/15/javap/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/2018/04/21/Java内存访问重排序的研究/" id="article-nav-older" class="article-nav-link-wrap">
             <strong class="article-nav-caption">下一篇</strong>
-            <div class="article-nav-title">javap</div>
+            <div class="article-nav-title">Java内存访问重排序的研究（转载）</div>
         </a>
     
 </nav>
