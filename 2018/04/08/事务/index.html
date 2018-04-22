@@ -14,7 +14,7 @@
 <meta property="og:description" content="事务（Transaction），一般是指要做的或所做的事情。在计算机术语中是指访问并可能更新数据库中各种数据项的一个程序执行单元（unit）。在计算机术语中，事务通常就是指数据库事务。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://hsb786.github.io/images/transaction.png">
-<meta property="og:updated_time" content="2018-04-20T13:25:03.009Z">
+<meta property="og:updated_time" content="2018-04-22T10:33:32.463Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="事务">
 <meta name="twitter:description" content="事务（Transaction），一般是指要做的或所做的事情。在计算机术语中是指访问并可能更新数据库中各种数据项的一个程序执行单元（unit）。在计算机术语中，事务通常就是指数据库事务。">
@@ -466,15 +466,44 @@
 <p> 除了 JDBC 给我们提供的事务隔离级别这种解决方案以外，还有哪些解决方案可以完善事务管理功能呢？ </p>
 <p>  不妨看看 Spring 的解决方案吧，其实它是对 JDBC 的一个补充或扩展。它提供了一个非常重要的功能，就是：事务传播行为（Transaction Propagation Behavior）。 </p>
 <hr>
-<h2 id="事务传播行为（Transaction-Propagation-Behavior）"><a href="#事务传播行为（Transaction-Propagation-Behavior）" class="headerlink" title="事务传播行为（Transaction Propagation Behavior）"></a>事务传播行为（Transaction Propagation Behavior）</h2><ol>
-<li>PROPAGATION_REQUIRED</li>
-<li>RROPAGATION_REQUIRES_NEW</li>
-<li>PROPAGATION_NESTED</li>
-<li>PROPAGATION_SUPPORTS</li>
-<li>PROPAGATION_NOT_SUPPORTED</li>
-<li>PROPAGATION_NEVER</li>
-<li>PROPAGATION_MANDATORY</li>
-</ol>
+<h2 id="事务传播行为（Transaction-Propagation-Behavior）"><a href="#事务传播行为（Transaction-Propagation-Behavior）" class="headerlink" title="事务传播行为（Transaction Propagation Behavior）"></a>事务传播行为（Transaction Propagation Behavior）</h2><table>
+<thead>
+<tr>
+<th>事务传播行为类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PROPAGATION_REQUIRED</td>
+<td>有就加入到当前事务；没有就新建一个事务。Spring提供的默认事务传播行为</td>
+</tr>
+<tr>
+<td>RROPAGATION_REQUIRES_NEW</td>
+<td>新建事务，将原来的事务挂起，和原来事务没有关系。</td>
+</tr>
+<tr>
+<td>PROPAGATION_SUPPORTS</td>
+<td>有就使用当前事务；没有就以非事务方式执行。没有就没有，有就有，有点无所谓的态度，反正我是支持你的。</td>
+</tr>
+<tr>
+<td>PROPAGATION_NOT_SUPPORTED</td>
+<td>有就挂起当前事务；没有就以非事务方式执行。这种方式非常强硬，没有就没有，有我也不支持你，把你挂起来，不鸟你。</td>
+</tr>
+<tr>
+<td>PROPAGATION_NEVER</td>
+<td>如果没有，就以非事务方式执行；如果有，就抛出异常。</td>
+</tr>
+<tr>
+<td>PROPAGATION_MANDATORY</td>
+<td>如果没有，就抛出异常；如果有，就使用当前事务。</td>
+</tr>
+<tr>
+<td>PROPAGATION_NESTED</td>
+<td>如果没有，就新建一个事务；如果有，就在当前事务中嵌套其他事务。所嵌套的子事务与主事务之间是有关联的（当主事务提交或回滚，子事务也会提交或回滚）。</td>
+</tr>
+</tbody>
+</table>
 <p>首先要明确的是，事务是从哪里来？传播到哪里去？答案是，从方法 A 传播到方法 B。Spring 解决的只是方法之间的事务传播，那情况就多了，比如:</p>
 <ol>
 <li>方法 A 有事务，方法 B 也有事务。</li>
@@ -482,20 +511,9 @@
 <li>方法 A 没有事务，方法 B 有事务。</li>
 <li>方法 A 没有事务，方法 B 也没有事务。 </li>
 </ol>
-<p>假设事务从方法 A 传播到方法 B，您需要面对方法 B，问自己一个问题： </p>
-<p>方法 A 有事务吗？ </p>
+<p> Spring 给我们带来了事务传播行为，这确实是一个非常强大而又实用的功能。除此以外，也提供了一些小的附加功能，比如： </p>
 <ol>
-<li>如果没有，就新建一个事务；如果有，就加入当前事务。这就是 PROPAGATION_REQUIRED，它也是 Spring 提供的默认事务传播行为，适合绝大多数情况。</li>
-<li>如果没有，就新建一个事务；如果有，就将当前事务挂起。这就是 RROPAGATION_REQUIRES_NEW，意思就是创建了一个新事务，它和原来的事务没有任何关系了。</li>
-<li>如果没有，就新建一个事务；如果有，就在当前事务中嵌套其他事务。这就是 PROPAGATION_NESTED，也就是传说中的“嵌套事务”了，所嵌套的子事务与主事务之间是有关联的（当主事务提交或回滚，子事务也会提交或回滚）。</li>
-<li>如果没有，就以非事务方式执行；如果有，就使用当前事务。这就是 PROPAGATION_SUPPORTS，这种方式非常随意，没有就没有，有就有，有点无所谓的态度，反正我是支持你的。</li>
-<li>如果没有，就以非事务方式执行；如果有，就将当前事务挂起。这就是 PROPAGATION_NOT_SUPPORTED，这种方式非常强硬，没有就没有，有我也不支持你，把你挂起来，不鸟你。</li>
-<li>如果没有，就以非事务方式执行；如果有，就抛出异常。这就是 PROPAGATION_NEVER，这种方式更猛，没有就没有，有了反而报错，确实够牛的，它说：我从不支持事务！</li>
-<li><p>如果没有，就抛出异常；如果有，就使用当前事务。这就是 PROPAGATION_MANDATORY，这种方式可以说是牛逼中的牛逼了，没有事务直接就报错，确实够狠的，它说：我必须要有事务！</p>
-<p>Spring 给我们带来了事务传播行为，这确实是一个非常强大而又实用的功能。除此以外，也提供了一些小的附加功能，比如： </p>
-</li>
-<li><p>事务超时（Transaction Timeout）：为了解决事务时间太长，消耗太多的资源，所以故意给事务设置一个最大时常，如果超过了，就回滚事务。</p>
-</li>
+<li>事务超时（Transaction Timeout）：为了解决事务时间太长，消耗太多的资源，所以故意给事务设置一个最大时常，如果超过了，就回滚事务。</li>
 <li>只读事务（Readonly Transaction）：为了忽略那些不需要事务的方法，比如读取数据，这样可以有效地提高一些性能。</li>
 </ol>
 <p><img src="/images/transaction.png" alt=""></p>
@@ -588,7 +606,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/08/事务/" data-id="cjg9gi80f003qz8mypcb0sr8i" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/08/事务/" data-id="cjgaofl60003t1cmyb9ydht3g" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -673,9 +691,9 @@
         </a>
     
     
-        <a href="/2018/04/08/SpringMVC/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/2018/04/08/值传递和引用传递/" id="article-nav-older" class="article-nav-link-wrap">
             <strong class="article-nav-caption">下一篇</strong>
-            <div class="article-nav-title">SpringMVC</div>
+            <div class="article-nav-title">值传递和引用传递</div>
         </a>
     
 </nav>
