@@ -20,7 +20,7 @@
 <meta property="og:image" content="https://hsb786.github.io/images/CAS05.png">
 <meta property="og:image" content="https://hsb786.github.io/images/CAS06.png">
 <meta property="og:image" content="https://hsb786.github.io/images/CAS07.png">
-<meta property="og:updated_time" content="2018-04-20T13:14:19.777Z">
+<meta property="og:updated_time" content="2018-04-23T04:49:32.394Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CAS">
 <meta name="twitter:description" content="CAS（Compare And Swap），翻译过来就是比较和替换。 CAS机制当中使用了3个基本操作数：内存地址V，旧的预期值A，要修改的新值B。 更新一个变量的时候，只有当变量的预期值A和内存地址V当中的实际值相同时，才会将内存地址V对应的值修改成B。">
@@ -281,7 +281,7 @@
 <p>getAndIncrement方法内部会不停的循环，直到unsafe.comparAndSwapInt方法执行成功。<br>valueOffset相当于前面讲的V，expect：旧的预期值A，update：新的预期值B</p>
 <hr>
 <p>java8中的实现<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//AtomicInteger.class</span><br><span class="line">public final int getAndIncrement() &#123;</span><br><span class="line">    return unsafe.getAndAddInt(this, valueOffset, 1);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p><em>这时需要查看Unsafe的源码，可以下载openjdk，openjdk中有关于<code>sun.misc</code>包中的源码</em></p>
+<p><em>这时需要查看Unsafe的源码，可以下载openjdk，openjdk中有关于<code>sun.misc</code>包中的源码</em>。需要注意的是，由于版本不一致，导致跟代码的时候会不准确。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">//Unsafe.class</span><br><span class="line">public final int getAndAddInt(Object o, long offset, int delta) &#123;</span><br><span class="line">    int v;</span><br><span class="line">    do &#123;</span><br><span class="line">        v = getIntVolatile(o, offset);</span><br><span class="line">    &#125; while (!compareAndSwapInt(o, offset, v, v + delta));</span><br><span class="line">    return v;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public native int     getIntVolatile(Object o, long offset);</span><br><span class="line"></span><br><span class="line">public final native boolean compareAndSwapInt(Object o, long offset,</span><br><span class="line">                                                  int expected,</span><br><span class="line">                                                  int x);</span><br></pre></td></tr></table></figure>
 <p>感觉跟jdk7差不多，只是把具体的实现从AtomicInteger移动到了Unsafe中。为了重用？这只是我的个人理解，错了欢迎指正。</p>
 <p>Java语言CAS底层就是利用unsafe提供的原子性操作方法来实现的。</p>
@@ -308,7 +308,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/19/CAS/" data-id="cjgatpse5000004my9bozclal" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/19/CAS/" data-id="cjgbqksah0005lgmyu4hjlm90" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
