@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://hsb786.github.io/"/>
-  <updated>2018-04-22T12:59:39.466Z</updated>
+  <updated>2018-04-23T10:23:45.330Z</updated>
   <id>https://hsb786.github.io/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>HotSpot</title>
+    <link href="https://hsb786.github.io/2018/04/23/HotSpot/"/>
+    <id>https://hsb786.github.io/2018/04/23/HotSpot/</id>
+    <published>2018-04-23T10:15:36.000Z</published>
+    <updated>2018-04-23T10:23:45.330Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>经常看到HotSpot，但不知道是什么。so，这是一篇科普文。摘自&lt;&lt;深入理解Java虚拟机：JVM高级特性与最佳实践&gt;&gt;。等以后工作了，一定要看这本神书，看下有没有传说中的那么神奇。</p></blockquote><a id="more"></a><p>提起HotSpot VM，相信所有Java程序员都知道，它是Sun JDK和OpenJDK中所带的虚拟机，也是目前使用范围最广的Java虚拟机。但不一定所有人都知道的是，这个目前看起来“血统纯正”的虚拟机在最初并非由Sun公司开发，而是由一家名为“Longview Technologies”的小公司设计的；甚至这个虚拟机最初并非是为Java语言而开发的，它来源于Strongtalk VM，而这款虚拟机中相当多的技术又是来源于一款支持Self语言实现“达到C语言50%以上的执行效率”的目标而设计的虚拟机，Sun公司注意到了这款虚拟机在JIT编译上有许多优秀的理念和实际效果，在1997年收购了Longview Technologies公司，从而获得了HotSpot VM。</p><p>HotSpot VM既继承了Sun之前两款商用虚拟机的优点（如前面提到的准确式内存管理），也有许多自己新的技术优势，如它名称中的HotSpot指的就是它的热点代码探测技术（其实两个VM基本上是同时期的独立产品，HotSpot还稍早一些，HotSpot一开始就是准确式GC，而Exact VM之中也有与HotSpot几乎一样的热点探测。为了Exact VM和HotSpot VM哪个成为Sun主要支持的VM产品，在Sun公司内部还有过争论，HotSpot打败Exact并不能算技术上的胜利），<strong>HotSpot VM的热点代码探测能力可以通过执行计数器找出最具有编译价值的代码，然后通知<a href="https://hsb786.github.io/2018/04/09/术语/">JIT编译器</a>以方法为单位进行编译。如果一个方法被频繁调用，或方法中有效循环次数很多，将会分别触发标准编译和OSR（栈上替换）编译动作。通过编译器与解释器恰当地协同工作，可以在最优化的程序响应时间与最佳执行性能中取得平衡，而且无须等待本地代码输出才能执行程序，即时编译的时间压力也相对减小，这样有助于引入更多的代码优化技术，输出质量更高的本地代码。</strong></p><p>在2006年的JavaOne大会上，Sun公司宣布最终会把Java开源，并在随后的一年，陆续将JDK的各个部分（其中当然也包括了HotSpot VM）在GPL协议下公开了源码，并在此基础上建立了OpenJDK。这样，HotSpot VM便成为了Sun JDK和OpenJDK两个实现极度接近的JDK项目的共同虚拟机。</p><p>在2008年和2009年，Oracle公司分别收购了BEA公司和Sun公司，这样Oracle就同时拥有了两款优秀的Java虚拟机：JRockit VM和HotSpot VM。Oracle公司宣布在不久的将来（大约应在发布JDK 8的时候）会完成这两款虚拟机的整合工作，使之优势互补。整合的方式大致上是在HotSpot的基础上，移植JRockit的优秀特性，譬如使用JRockit的垃圾回收器与MissionControl服务，使用HotSpot的JIT编译器与混合的运行时系统。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;经常看到HotSpot，但不知道是什么。so，这是一篇科普文。摘自&amp;lt;&amp;lt;深入理解Java虚拟机：JVM高级特性与最佳实践&amp;gt;&amp;gt;。等以后工作了，一定要看这本神书，看下有没有传说中的那么神奇。&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="JVM" scheme="https://hsb786.github.io/categories/JVM/"/>
+    
+    
+      <category term="JVM" scheme="https://hsb786.github.io/tags/JVM/"/>
+    
+  </entry>
   
   <entry>
     <title>LinkedHashMap</title>
@@ -483,28 +507,6 @@
 &lt;li&gt;Integer实现了Comparable接口，所以可以用compareTo进行比较并且Integer对象只能和Integer类型的对象进行比较&lt;/li&gt;
 &lt;li&gt;Integer继承了Number类，所以该类可以调用longValue、floatValue、doubleValue等系列方法返回对应的类型的值&lt;/li&gt;
 &lt;/ol&gt;
-    
-    </summary>
-    
-      <category term="爪哇" scheme="https://hsb786.github.io/categories/%E7%88%AA%E5%93%87/"/>
-    
-    
-      <category term="爪哇" scheme="https://hsb786.github.io/tags/%E7%88%AA%E5%93%87/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>String</title>
-    <link href="https://hsb786.github.io/2018/04/16/String/"/>
-    <id>https://hsb786.github.io/2018/04/16/String/</id>
-    <published>2018-04-16T04:35:57.000Z</published>
-    <updated>2018-04-20T13:19:36.084Z</updated>
-    
-    <content type="html"><![CDATA[<p>Java语言提供了对字符串连接元素符的特别支持（+），该符号也可用于将其他类型转换成字符串。字符串的连接实际上是通过<code>StringBuilder</code>的<code>append()</code>方法来实现的，字符串的转换通过<code>toString</code>方法实现。<br><a id="more"></a></p><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><pre><code>public final class String implements java.io.Serializable, Comparable&lt;String&gt;, CharSequence{}</code></pre><h2 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h2><pre><code>private final char value[];</code></pre><p>这是一个字符数组，并且是final类型，它用于存储字符串内容，从final这个关键字中我们可以看出，String的内容一旦被初始化了是不能被改变的。</p><pre><code>private int hash;</code></pre><p>缓存字符串的hashCode，默认值为0</p><h2 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h2><h3 id="1-使用字符数组、字符串构造一个String"><a href="#1-使用字符数组、字符串构造一个String" class="headerlink" title="1. 使用字符数组、字符串构造一个String"></a>1. 使用字符数组、字符串构造一个String</h3><p>但我们使用字符数组创建String的时候，会用到<code>Arrays.copyOf</code>方法和<code>Arrays.copyOfRange</code>方法。这两个方法是将原有的字符数组中的内容逐一复制到String中的字符数组中。同样，我们也可以用一个String类型的对象来初始化一个String。这里将直接将<code>源String</code>中的<code>value</code>和<code>hash</code>两个属性直接赋值给<code>目标String</code>。因为String是不可变的，所以不用担心改变<code>源String</code>的值会影响到<code>目标String</code>的值</p><h3 id="2-使用字节数组构造一个String"><a href="#2-使用字节数组构造一个String" class="headerlink" title="2.使用字节数组构造一个String"></a>2.使用字节数组构造一个String</h3><p>在Java中，String实例中保存有一个<code>char[]</code>字符数组，<code>char[]</code>字符数组是以unicode码来存储的，String 和 char 为内存形式，byte是网络传输或存储的序列化形式。所以在很多传输和存储的过程中需要将byte[]数组和String进行相互转化。所以，String提供了一系列重载的构造方法来将一个字符数组转化成String，提到byte[]和String之间的相互转换就不得不关注编码问题。<code>String(byte[] bytes, Charset charset)</code>是指通过charset来解码指定的byte数组，将其解码成unicode的char[]数组，构造成新的String。</p><h3 id="3-使用StringBuffer和StringBuider构造一个String"><a href="#3-使用StringBuffer和StringBuider构造一个String" class="headerlink" title="3.使用StringBuffer和StringBuider构造一个String"></a>3.使用StringBuffer和StringBuider构造一个String</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public String(StringBuffer buffer) &#123;</span><br><span class="line">    synchronized(buffer) &#123;</span><br><span class="line">        this.value = Arrays.copyOf(buffer.getValue(), buffer.length());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public String(StringBuilder builder) &#123;</span><br><span class="line">    this.value = Arrays.copyOf(builder.getValue(), builder.length());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>很少用到，当我们有了StringBuffer或者StringBuilfer对象之后可以直接使用他们的toString方法来得到String。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public String toString() &#123;</span><br><span class="line">    // Create a copy, don&apos;t share the array</span><br><span class="line">    return new String(value, 0, count);</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line">this.value = Arrays.copyOfRange(value, offset, offset+count);</span><br></pre></td></tr></table></figure><h2 id="intern"><a href="#intern" class="headerlink" title="intern()"></a>intern()</h2><p>java7以后，常量池被放入到堆空间中。导致intern()函数的功能不同。intern()检查常量池是否存在该字符串，存在的话就直接返回；否则返回首次在堆中声明的相同字符串的引用</p><hr><p><em>参考</em></p><blockquote><p><a href="http://www.hollischuang.com/archives/99" target="_blank" rel="noopener">Java 7 源码学习系列（一）——String</a></p></blockquote>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Java语言提供了对字符串连接元素符的特别支持（+），该符号也可用于将其他类型转换成字符串。字符串的连接实际上是通过&lt;code&gt;StringBuilder&lt;/code&gt;的&lt;code&gt;append()&lt;/code&gt;方法来实现的，字符串的转换通过&lt;code&gt;toString&lt;/code&gt;方法实现。&lt;br&gt;
     
     </summary>
     
