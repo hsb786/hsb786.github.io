@@ -14,7 +14,7 @@
 <meta property="og:description" content="Servlet概述Servlet是在Java中创建web应用程序的J2ee 服务端技术。javax.servlet 和 javax.servlet.http包中提供了编写servlet的接口和类。所有的servlet都要实现javax.servlet.Servlet接口。该接口中定义了一个Servlet生命周期中的所有方法。 Servlet接口定义了Servlet与Servlet容器之间的契约，S">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://hsb786.github.io/images/Servlet-Hierarchy.png">
-<meta property="og:updated_time" content="2018-04-20T13:19:19.304Z">
+<meta property="og:updated_time" content="2018-04-23T06:28:27.056Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Servlet">
 <meta name="twitter:description" content="Servlet概述Servlet是在Java中创建web应用程序的J2ee 服务端技术。javax.servlet 和 javax.servlet.http包中提供了编写servlet的接口和类。所有的servlet都要实现javax.servlet.Servlet接口。该接口中定义了一个Servlet生命周期中的所有方法。 Servlet接口定义了Servlet与Servlet容器之间的契约，S">
@@ -267,7 +267,7 @@
 </blockquote>
 <h2 id="ServletResponse-接口"><a href="#ServletResponse-接口" class="headerlink" title="ServletResponse 接口"></a>ServletResponse 接口</h2><p>servlet使用ServletResponse向客户端发送响应。和ServletRequest类似，一个客户端请求到达Servlet容器的时候，他都会创建一个ServletResponse对象，并将其传递对应的servlet的service()方法。最终，该response对象用于给客户端生成html响应。</p>
 <h2 id="RequestDispatcher-接口"><a href="#RequestDispatcher-接口" class="headerlink" title="RequestDispatcher 接口"></a>RequestDispatcher 接口</h2><p>RequestDispatcher 接口用于把一个请求转发给同一个servlet上下文中的其他的资源（Html、jsp、servlet）来处理。也可以用它来把另一个资源的内容包含到响应中。此接口用于同一个servlet上下文中的servlet相互沟通。</p>
-<p>RequestDispatcher 接口的主要方法： <code>void forward(ServletRequest request, ServletResponse response)</code>  把一个servlet的请求转发到服务器上的其他资源中（Html、jsp、servlet）。</p>
+<p>RequestDispatcher 接口的主要方法:<br><code>void forward(ServletRequest request, ServletResponse response)</code>  把一个servlet的请求转发到服务器上的其他资源中（Html、jsp、servlet）。</p>
 <p><code>void include(ServletRequest request, ServletResponse response)</code>  把另一个资源的内容包含到当前响应中。</p>
 <blockquote>
 <p>forward和include的区别：</p>
@@ -293,7 +293,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/14/Servlet/" data-id="cjgbqkscn002flgmy60b9p8i4" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/14/Servlet/" data-id="cjgbug0ug0021a0mywfq2a1ct" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding

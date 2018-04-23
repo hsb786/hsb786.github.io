@@ -18,10 +18,11 @@
 <meta property="og:image" content="https://hsb786.github.io/images/sweep.jpg">
 <meta property="og:image" content="https://hsb786.github.io/images/copy.jpg">
 <meta property="og:image" content="https://hsb786.github.io/images/compact.jpg">
+<meta property="og:image" content="https://hsb786.github.io/images/java虚拟机2.png">
 <meta property="og:image" content="https://hsb786.github.io/images/JVM22.png">
 <meta property="og:image" content="https://hsb786.github.io/images/JVM23.png">
 <meta property="og:image" content="https://hsb786.github.io/images/JVM24.png">
-<meta property="og:updated_time" content="2018-04-21T07:35:23.737Z">
+<meta property="og:updated_time" content="2018-04-23T06:56:02.982Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="jvm-GC">
 <meta name="twitter:description" content="关键字约定 Young generation –&amp;gt;新生代 Tenured / Old Generation –&amp;gt;老年代 Perm Area –&amp;gt;永久代">
@@ -296,8 +297,18 @@
 <h2 id="GC算法"><a href="#GC算法" class="headerlink" title="GC算法"></a>GC算法</h2><ol>
 <li>标记清除算法<br> 分为标记和清除两个阶段：首先标记出所有需要回收的对象，在标记完成后统一回收所有被标记的对象。该算法的缺点是效率不高并且会产生不连续的内存碎片。<br><img src="/images/sweep.jpg" alt=""></li>
 <li>复制算法<br> 把内存空间划为两个区域，每次只使用其中一个区域。垃圾回收时，遍历当前使用区域，把正在使用中的对象复制到另外一个区域中。此算法每次只处理正在使用中的对象，因此复制成本比较小，同时复制过去以后还能进行相应的内存整理，不会出现“碎片”问题。优点：实现简单，运行高效。缺点：会浪费一定的内存。一般新生代采用这种算法。<br><img src="/images/copy.jpg" alt=""></li>
-<li>标记整理算法<br> 标记阶段与标记清除算法一样。但后续并不是直接对可回收的对象进行清理，而是让所有存活对象都向一端移动，然后清理。优点是不会造成内存碎片。<br><img src="/images/compact.jpg" alt=""></li>
+<li><p>标记整理算法<br> 标记阶段与标记清除算法一样。但后续并不是直接对可回收的对象进行清理，而是让所有存活对象都向一端移动，然后清理。优点是不会造成内存碎片。<br><img src="/images/compact.jpg" alt=""></p>
+</li>
+<li><p>分代收集算法</p>
+</li>
 </ol>
+<ul>
+<li>把堆分为新生代和老年代</li>
+<li>新生代使用复制算法</li>
+<li>将新生代内存分为一块大的Eden区和两块小的Survivor；每次使用Eden和一个Survivor，回收时将Eden和Survivor存活的对象复制到另一个Survivor（HotSpot的比例Eden：Survivor = 8：1）</li>
+<li>老年代使用标记-清理或者标记-整理</li>
+</ul>
+<p><img src="/images/java虚拟机2.png" alt=""></p>
 <h2 id="内存分配规则"><a href="#内存分配规则" class="headerlink" title="内存分配规则"></a>内存分配规则</h2><ul>
 <li>对象优先在Eden分配<ul>
 <li>当Eden区没有足够的空间时就会发起一次Minor GC</li>
@@ -406,7 +417,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/21/jvm-GC/" data-id="cjgbqksd30040lgmyiutxhkdg" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/21/jvm-GC/" data-id="cjgbug0vb003oa0myi8c3daly" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
