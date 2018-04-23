@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <meta charset="utf-8">
+    
+    <title>RandomAccess | HuShengBin’s blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="JDK官方文档上的解释：  Marker interface used by List implementations to indicate that they support fast (generally constant time) random access.  The primary purpose of this interface is to allow generic algor">
+<meta name="keywords" content="爪哇">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RandomAccess">
+<meta property="og:url" content="https://hsb786.github.io/2018/04/23/RandomAccess/index.html">
+<meta property="og:site_name" content="HuShengBin’s blog">
+<meta property="og:description" content="JDK官方文档上的解释：  Marker interface used by List implementations to indicate that they support fast (generally constant time) random access.  The primary purpose of this interface is to allow generic algor">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-04-23T10:58:03.042Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="RandomAccess">
+<meta name="twitter:description" content="JDK官方文档上的解释：  Marker interface used by List implementations to indicate that they support fast (generally constant time) random access.  The primary purpose of this interface is to allow generic algor">
+    
+
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                
+                <span class="site-title">HuShengBin’s blog</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">Home</a>
+                
+                    <a class="main-nav-link" href="/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/tags">Tags</a>
+                
+                    <a class="main-nav-link" href="/about">About</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/css/images/txx.jpg" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">Tags</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/css/images/txx.jpg" />
+            <h2 id="name">hushengbin</h2>
+            <h3 id="title">JavaWeb Developer</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>Nanchang, Jiangxi, China</span>
+            <a id="follow" target="_blank" href="https://github.com/hsb786">关注我</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                71
+                <span>文章</span>
+            </div>
+            <div class="article-info-block">
+                13
+                <span>标签</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="https://github.com/hsb786" target="_blank" title="github" class=tooltip>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-RandomAccess" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            RandomAccess
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2018/04/23/RandomAccess/">
+            <time datetime="2018-04-23T10:30:51.000Z" itemprop="datePublished">2018-04-23</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/爪哇/">爪哇</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/爪哇/">爪哇</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p>JDK官方文档上的解释：</p>
+<blockquote>
+<p>Marker interface used by List implementations to indicate that they support fast (generally constant time) random access.  The primary purpose of this interface is to allow generic algorithms to alter their behavior to provide good performance when applied to either random or sequential access lists.<br>大致意思就是：RandomAccess 是一个标记接口，用于标明实现该接口的List支持快速随机访问，主要目的是使算法能够在随机顺序访问的list中表现的更加高效。<br><a id="more"></a></p>
+</blockquote>
+<p>只定义了一个接口，里面什么都没有<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">public interface RandomAccess &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>注释上举了个栗子🎂，例如下面代码中第一种循环运行比第二种快<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">this loop:</span><br><span class="line"> * &lt;pre&gt;</span><br><span class="line"> *     for (int i=0, n=list.size(); i &amp;lt; n; i++)</span><br><span class="line"> *         list.get(i);</span><br><span class="line"> * &lt;/pre&gt;</span><br><span class="line"> * runs faster than this loop:</span><br><span class="line"> * &lt;pre&gt;</span><br><span class="line"> *     for (Iterator i=list.iterator(); i.hasNext(); )</span><br><span class="line"> *         i.next();</span><br><span class="line"> * &lt;/pre&gt;</span><br></pre></td></tr></table></figure></p>
+<p>so，在遍历ArrayList时，优先使用第一种循环；在遍历LinkedList则使用第二种循环。<br>根据有没有实现RandomAccess接口来判断。<br>ArrayList实现了RandomAccess接口，LinkedList没有实现</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//Collections.class</span><br><span class="line">public static &lt;T&gt;</span><br><span class="line">int binarySearch(List&lt;? extends Comparable&lt;? super T&gt;&gt; list, T key) &#123;</span><br><span class="line">    if (list instanceof RandomAccess || list.size()&lt;BINARYSEARCH_THRESHOLD)</span><br><span class="line">        return Collections.indexedBinarySearch(list, key);</span><br><span class="line">    else</span><br><span class="line">        return Collections.iteratorBinarySearch(list, key);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>foreach内部是通过Iterator实现的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public class T01 &#123;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		List&lt;String&gt; list=new ArrayList&lt;&gt;();</span><br><span class="line">		list.add(&quot;a&quot;);</span><br><span class="line">		list.add(&quot;b&quot;);</span><br><span class="line">		for(String s:list) &#123;</span><br><span class="line">			System.out.println(s);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>反编译后的字节码文件。<br>从第27，37，54行可以看出，foreach其实是通过Iterator来实现的。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">public class al.T01 &#123;</span><br><span class="line">  public al.T01();</span><br><span class="line">    Code:</span><br><span class="line">       0: aload_0</span><br><span class="line">       1: invokespecial #8                  // Method java/lang/Object.&quot;&lt;init&gt;&quot;:()V</span><br><span class="line">       4: return</span><br><span class="line"></span><br><span class="line">  public static void main(java.lang.String[]) throws java.lang.Exception;</span><br><span class="line">    Code:</span><br><span class="line">       0: new           #19                 // class java/util/ArrayList</span><br><span class="line">       3: dup</span><br><span class="line">       4: invokespecial #21                 // Method java/util/ArrayList.&quot;&lt;init&gt;&quot;:()V</span><br><span class="line">       7: astore_1</span><br><span class="line">       8: aload_1</span><br><span class="line">       9: ldc           #22                 // String a</span><br><span class="line">      11: invokeinterface #24,  2           // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z</span><br><span class="line">      16: pop</span><br><span class="line">      17: aload_1</span><br><span class="line">      18: ldc           #30                 // String b</span><br><span class="line">      20: invokeinterface #24,  2           // InterfaceMethod java/util/List.add:(Ljava/lang/Object;)Z</span><br><span class="line">      25: pop</span><br><span class="line">      26: aload_1</span><br><span class="line">      27: invokeinterface #32,  1           // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;</span><br><span class="line">      32: astore_3</span><br><span class="line">      33: goto          53</span><br><span class="line">      36: aload_3</span><br><span class="line">      37: invokeinterface #36,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;</span><br><span class="line">      42: checkcast     #42                 // class java/lang/String</span><br><span class="line">      45: astore_2</span><br><span class="line">      46: getstatic     #44                 // Field java/lang/System.out:Ljava/io/PrintStream;</span><br><span class="line">      49: aload_2</span><br><span class="line">      50: invokevirtual #50                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V</span><br><span class="line">      53: aload_3</span><br><span class="line">      54: invokeinterface #56,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z</span><br><span class="line">      59: ifne          36</span><br><span class="line">      62: return</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="https://hsb786.github.io/2018/04/23/RandomAccess/" data-id="cjgc4gu9g0028egmyaa9xtc0n" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2018/04/23/HotSpot/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">HotSpot</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    
+        <section id="comments">
+    <div id="valine-thread"></div>
+</section>
+    
+
+</section>
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2018 HuShengBin<br>
+    </div>
+</footer>
+        
+    
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//cdn.jsdelivr.net/gh/xcss/valine@v1.1.6/dist/Valine.min.js"></script>
+    <script>
+        new Valine({
+            el: '#valine-thread' ,
+            notify:false,
+            verify:false,
+            app_id: 'eqjWlM0tCYgxhh8nvvV6DleG-gzGzoHsz',
+            app_key: 'CRXn0n9IAsJdOeMDUIxyh1Hb',
+            placeholder: '(。・∀・)ノ说一句吧'
+        });
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>
