@@ -3,20 +3,20 @@
 <head>
     <meta charset="utf-8">
     
-    <title>HashSet | HuShengBin’s blog</title>
+    <title>山鬼 | HuShengBin’s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="HashSet 底层由HashMap实现">
-<meta name="keywords" content="爪哇">
+    <meta name="description" content="最近在循环的一首音乐，歌词出自屈原《楚辞·九歌》中的第九章。">
+<meta name="keywords" content="杂谈">
 <meta property="og:type" content="article">
-<meta property="og:title" content="HashSet">
-<meta property="og:url" content="https://hsb786.github.io/2018/04/22/HashSet/index.html">
+<meta property="og:title" content="山鬼">
+<meta property="og:url" content="https://hsb786.github.io/2018/04/24/山鬼/index.html">
 <meta property="og:site_name" content="HuShengBin’s blog">
-<meta property="og:description" content="HashSet 底层由HashMap实现">
+<meta property="og:description" content="最近在循环的一首音乐，歌词出自屈原《楚辞·九歌》中的第九章。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-04-22T11:37:57.346Z">
+<meta property="og:updated_time" content="2018-04-24T05:18:15.750Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="HashSet">
-<meta name="twitter:description" content="HashSet 底层由HashMap实现">
+<meta name="twitter:title" content="山鬼">
+<meta name="twitter:description" content="最近在循环的一首音乐，歌词出自屈原《楚辞·九歌》中的第九章。">
     
 
     
@@ -185,7 +185,7 @@
 </aside>
 
             
-            <section id="main"><article id="post-HashSet" class="article article-type-post" itemscope itemprop="blogPost">
+            <section id="main"><article id="post-山鬼" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -193,7 +193,7 @@
                 
     
         <h1 class="article-title" itemprop="name">
-            HashSet
+            山鬼
         </h1>
     
 
@@ -202,8 +202,8 @@
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/2018/04/22/HashSet/">
-            <time datetime="2018-04-22T10:44:43.000Z" itemprop="datePublished">2018-04-22</time>
+        <a href="/2018/04/24/山鬼/">
+            <time datetime="2018-04-24T05:10:17.000Z" itemprop="datePublished">2018-04-24</time>
         </a>
     </div>
 
@@ -211,13 +211,13 @@
                         
     <div class="article-category">
     	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/爪哇/">爪哇</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/爪哇/集合/">集合</a>
+        <a class="article-category-link" href="/categories/杂谈/">杂谈</a>
     </div>
 
                         
     <div class="article-tag">
         <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/爪哇/">爪哇</a>
+        <a class="tag-link" href="/tags/杂谈/">杂谈</a>
     </div>
 
                     </div>
@@ -229,9 +229,25 @@
         
             
             <blockquote>
-<p>HashSet 底层由HashMap实现<br><a id="more"></a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">public class HashSet&lt;E&gt; extends AbstractSet&lt;E&gt; implements Set&lt;E&gt;, Cloneable, java.io.Serializable&#123;</span><br><span class="line">    //HashSet底层使用HashMap实现</span><br><span class="line">    private transient HashMap&lt;E,Object&gt; map;</span><br><span class="line"></span><br><span class="line">    // Dummy value to associate with an Object in the backing Map</span><br><span class="line">    //HashSet add(E e)方法中，key为e，value为PRESENT</span><br><span class="line">    private static final Object PRESENT = new Object();</span><br><span class="line"></span><br><span class="line">    public HashSet() &#123;</span><br><span class="line">        map = new HashMap&lt;&gt;();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * Constructs a new, empty linked hash set.  (This package private</span><br><span class="line">     * constructor is only used by LinkedHashSet.) The backing</span><br><span class="line">     * HashMap instance is a LinkedHashMap with the specified initial</span><br><span class="line">     * capacity and the specified load factor.</span><br><span class="line">     *</span><br><span class="line">     * @param      initialCapacity   the initial capacity of the hash map</span><br><span class="line">     * @param      loadFactor        the load factor of the hash map</span><br><span class="line">     * @param      dummy             ignored (distinguishes this</span><br><span class="line">     *             constructor from other int, float constructor.)</span><br><span class="line">     * @throws     IllegalArgumentException if the initial capacity is less</span><br><span class="line">     *             than zero, or if the load factor is nonpositive</span><br><span class="line">     */</span><br><span class="line">     //这个就有点意思了，dummy参数其实没用，只是为了重载，与其它方法区分开了而已，这样也行！</span><br><span class="line">     //注意的是返回的是LinkedHashMap，数据是有顺序的。</span><br><span class="line">    HashSet(int initialCapacity, float loadFactor, boolean dummy) &#123;</span><br><span class="line">        map = new LinkedHashMap&lt;&gt;(initialCapacity, loadFactor);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>最近在循环的一首音乐，歌词出自屈原《楚辞·九歌》中的第九章。<br><a id="more"></a></p>
 </blockquote>
-<p><code>add(E e)</code>,<code>remove(Object o)</code>只是直接调用HashMap的put和remove方法。<br>key: e ; value : PRESENT<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public boolean add(E e) &#123;</span><br><span class="line">    return map.put(e, PRESENT)==null;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public boolean remove(Object o) &#123;</span><br><span class="line">    return map.remove(o)==PRESENT;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>九歌·山鬼</strong></p>
+<p> 若有人兮山之阿，被薜荔兮带女罗。</p>
+<p> 既含睇兮又宜笑，子慕予兮善窈窕。</p>
+<p> 乘赤豹兮从文里，辛夷车兮结旗。</p>
+<p> 被石兰兮带杜衡。折芳馨兮遗所思。</p>
+<p> 余处幽篁兮终不见天，路险难兮独后来。</p>
+<p> 表独立兮山之类上，云容容兮而在下。</p>
+<p> 杳冥冥兮羌昼晦，东风飘兮神灵雨。</p>
+<p> 留灵修兮忘归，岁既晏兮孰华予。</p>
+<p> 采三秀兮於山间，石磊磊兮葛蔓蔓。</p>
+<p> 怨公子兮怅忘归，君思我兮不得闲。</p>
+<p> 山中人兮芳杜若，饮石泉兮荫松柏。</p>
+<p> 君我兮然疑作。</p>
+<p> 雷填填兮雨冥冥，猿啾啾兮又夜鸣。</p>
+<p> 风飒飒兮木萧萧，思公子兮徙离忧。 </p>
+<hr>
+<p> <a href="https://music.douban.com/review/8790064/" target="_blank" rel="noopener"> 山鬼自啼风雨·《山鬼》乐评. </a></p>
 
         
         </div>
@@ -242,7 +258,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/22/HashSet/" data-id="cjgd7skkf000l1omykmgch3mo" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/24/山鬼/" data-id="cjgd7skmm004p1omydd5nrrzq" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -317,19 +333,10 @@
         
 <nav id="article-nav">
     
-        <a href="/2018/04/22/LinkedHashMap/" id="article-nav-newer" class="article-nav-link-wrap">
-            <strong class="article-nav-caption">上一篇</strong>
-            <div class="article-nav-title">
-                
-                    LinkedHashMap
-                
-            </div>
-        </a>
     
-    
-        <a href="/2018/04/21/Java内存访问重排序的研究/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/2018/04/23/RandomAccess/" id="article-nav-older" class="article-nav-link-wrap">
             <strong class="article-nav-caption">下一篇</strong>
-            <div class="article-nav-title">Java内存访问重排序的研究（转载）</div>
+            <div class="article-nav-title">RandomAccess</div>
         </a>
     
 </nav>
