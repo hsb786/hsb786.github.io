@@ -20,7 +20,7 @@
 <meta property="og:image" content="https://hsb786.github.io/images/CAS05.png">
 <meta property="og:image" content="https://hsb786.github.io/images/CAS06.png">
 <meta property="og:image" content="https://hsb786.github.io/images/CAS07.png">
-<meta property="og:updated_time" content="2018-04-23T04:49:32.394Z">
+<meta property="og:updated_time" content="2018-04-24T06:25:08.055Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CAS">
 <meta name="twitter:description" content="CAS（Compare And Swap），翻译过来就是比较和替换。 CAS机制当中使用了3个基本操作数：内存地址V，旧的预期值A，要修改的新值B。 更新一个变量的时候，只有当变量的预期值A和内存地址V当中的实际值相同时，才会将内存地址V对应的值修改成B。">
@@ -240,7 +240,7 @@
 <p><strong>CAS机制当中使用了3个基本操作数：内存地址V，旧的预期值A，要修改的新值B。</strong></p>
 <p><strong>更新一个变量的时候，只有当变量的预期值A和内存地址V当中的实际值相同时，才会将内存地址V对应的值修改成B。</strong></p>
 <a id="more"></a>
-<p>举个例子</p>
+<p>举个栗子🎂</p>
 <ol>
 <li>在内存地址V当中，存储着值为10的变量。</li>
 </ol>
@@ -270,20 +270,20 @@
 </ol>
 <p><img src="/images/CAS07.png" alt=""></p>
 <hr>
-<h2 id="synchronized与CAS"><a href="#synchronized与CAS" class="headerlink" title="synchronized与CAS"></a>synchronized与CAS</h2><p>synchronized关键字会让没有得到线程锁资源的线程进入BLOCKED状态，而后在争夺到锁资源后恢复为RUNNABLE状态，这个过程中涉及到操作系统用户模式和内核模式的切换，代价比较高。</p>
+<h2 id="synchronized与CAS"><a href="#synchronized与CAS" class="headerlink" title="synchronized与CAS"></a>synchronized与CAS</h2><p><strong>synchronized关键字会让没有得到线程锁资源的线程进入BLOCKED状态，而后在争夺到锁资源后恢复为RUNNABLE状态，这个过程中涉及到操作系统用户模式和内核模式的切换，代价比较高。</strong></p>
 <p>从思想上来说，Synchronized属于悲观锁，悲观地认为程序中的并发情况严重，所以严防死守。CAS属于乐观锁，乐观地认为程序中的并发情况不那么严重，所以让线程不断去尝试更新。</p>
 <h2 id="原子操作类"><a href="#原子操作类" class="headerlink" title="原子操作类"></a>原子操作类</h2><p>指的是<code>java.util.concurrent.atomic</code>包下，一系列以Atomic开头的包装类。例如<code>AtomicBoolean</code>，<code>AtomicInteger</code>，<code>AtomicLong</code>。</p>
 <h2 id="AtomicInteger"><a href="#AtomicInteger" class="headerlink" title="AtomicInteger"></a>AtomicInteger</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">private volatile int value;</span><br><span class="line">private static final Unsafe unsafe = Unsafe.getUnsafe();</span><br><span class="line">private static final long valueOffset;</span><br><span class="line"></span><br><span class="line">static &#123;</span><br><span class="line">    try &#123;</span><br><span class="line">        valueOffset = unsafe.objectFieldOffset</span><br><span class="line">            (AtomicInteger.class.getDeclaredField(&quot;value&quot;));</span><br><span class="line">    &#125; catch (Exception ex) &#123; throw new Error(ex); &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>unsafe</strong>：Java语言不像C，C++那样可以直接访问底层操作系统，但是JVM为我们提供了一个后门，这个后门就是unsafe。unsafe为我们提供了硬件级别的原子操作。</p>
+<p><strong>unsafe</strong>：Java语言不像C，C++那样可以直接访问底层操作系统，但是JVM为我们提供了一个后门，这个后门就是unsafe。<strong>unsafe为我们提供了硬件级别的原子操作。</strong></p>
 <p><strong>valueOffset</strong>：至于valueOffset对象，是通过unsafe.objectFieldOffset方法得到，所代表的是AtomicInteger对象value成员变量在内存中的偏移量。我们可以简单地把valueOffset理解为value变量的内存地址。</p>
 <p>getAndIncrement 相当于i++，先返回值再加1</p>
 <p>在java7中是这样实现的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">//AtomicInteger.class</span><br><span class="line">public final int getAndIncrement() &#123;</span><br><span class="line">    for (;;) &#123;</span><br><span class="line">        int current = get();</span><br><span class="line">        int next = current + 1;</span><br><span class="line">        if (compareAndSet(current, next))</span><br><span class="line">            return current;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public final boolean compareAndSet(int expect, int update) &#123;</span><br><span class="line">    return unsafe.compareAndSwapInt(this, valueOffset, expect, update);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>getAndIncrement方法内部会不停的循环，直到unsafe.comparAndSwapInt方法执行成功。<br>valueOffset相当于前面讲的V，expect：旧的预期值A，update：新的预期值B</p>
 <hr>
 <p>java8中的实现<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//AtomicInteger.class</span><br><span class="line">public final int getAndIncrement() &#123;</span><br><span class="line">    return unsafe.getAndAddInt(this, valueOffset, 1);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p><em>这时需要查看Unsafe的源码，可以下载openjdk，openjdk中有关于<code>sun.misc</code>包中的源码</em>。需要注意的是，由于版本不一致，导致跟代码的时候会不准确。</p>
+<p><em>这时需要查看Unsafe的源码，可以下载openjdk，openjdk中有关于<code>sun.misc</code>包中的源码</em>。需要注意的是，由于版本不一致，导致跟代码的时候会不准确。而且我发现同样是java8，代码还有些不一样，可能是java8的版本不一致导致的。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">//Unsafe.class</span><br><span class="line">public final int getAndAddInt(Object o, long offset, int delta) &#123;</span><br><span class="line">    int v;</span><br><span class="line">    do &#123;</span><br><span class="line">        v = getIntVolatile(o, offset);</span><br><span class="line">    &#125; while (!compareAndSwapInt(o, offset, v, v + delta));</span><br><span class="line">    return v;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public native int     getIntVolatile(Object o, long offset);</span><br><span class="line"></span><br><span class="line">public final native boolean compareAndSwapInt(Object o, long offset,</span><br><span class="line">                                                  int expected,</span><br><span class="line">                                                  int x);</span><br></pre></td></tr></table></figure>
-<p>感觉跟jdk7差不多，只是把具体的实现从AtomicInteger移动到了Unsafe中。为了重用？这只是我的个人理解，错了欢迎指正。</p>
+<p>感觉跟jdk7差不多，只是把自旋部分的代码从AtomicInteger移动到了Unsafe中。</p>
 <p>Java语言CAS底层就是利用unsafe提供的原子性操作方法来实现的。</p>
 <h2 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h2><p><strong>1. CPU开销较大</strong></p>
 <p>在并发量比较高的情况下，如果许多线程反复尝试更新某一个变量，却又一直更新不成功，循环往复，会给CPU带来很大的压力。</p>
@@ -308,7 +308,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/19/CAS/" data-id="cjgd88g1n00016smyu21dxn4u" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/19/CAS/" data-id="cjgd8qsey0008m4my7y0nld9y" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding

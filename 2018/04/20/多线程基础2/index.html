@@ -17,7 +17,7 @@
 <meta property="og:image" content="https://hsb786.github.io/images/Thread02.png">
 <meta property="og:image" content="https://hsb786.github.io/images/Thread03.png">
 <meta property="og:image" content="https://hsb786.github.io/images/Thread04.png">
-<meta property="og:updated_time" content="2018-04-23T04:52:14.399Z">
+<meta property="og:updated_time" content="2018-04-24T06:20:42.586Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="多线程基础2">
 <meta name="twitter:description" content="线程是一个操作系统级别的概念。JAVA语言（包括其他编程语言）本身不创建线程；而是调用操作系统层提供的接口创建、控制、销毁线程实例。">
@@ -241,7 +241,7 @@
 <p>根据操作系统使用线程的进程的不一样，线程还分为用户线程和操作系统线程。操作系统线程（内核线程），是指操作系统内核为了完成硬件接口层操作，<strong>由操作系统内核创建的线程</strong>：例如I/O操作的内核线程，这些线程应用程序是不能干预的；用户线程，是指用户安装/管理的应用程序，为执行某一种操作，而<strong>由这个应用程序创建的线程</strong>。</p>
 <p><img src="/images/Thread01.jpg" alt=""></p>
 <p>黄色钥匙代表对象锁</p>
-<h2 id="Thread-interrupted-与thread-isInterrupted"><a href="#Thread-interrupted-与thread-isInterrupted" class="headerlink" title="Thread.interrupted()与thread.isInterrupted()"></a>Thread.interrupted()与thread.isInterrupted()</h2><p><img src="/images/Thread02.png" alt=""></p>
+<h2 id="thread-interrupt-，Thread-interrupted-，thread-isInterrupted"><a href="#thread-interrupt-，Thread-interrupted-，thread-isInterrupted" class="headerlink" title="thread.interrupt()，Thread.interrupted()，thread.isInterrupted()"></a>thread.interrupt()，Thread.interrupted()，thread.isInterrupted()</h2><p><img src="/images/Thread02.png" alt=""></p>
 <p><img src="/images/Thread03.png" alt=""></p>
 <p>当Thread收到interrupt信号是，可能的两种结果:</p>
 <ol>
@@ -253,7 +253,7 @@
 <p><strong>ClearInterrupted参数向操作系统指明是否在获取状态后将当前线程的interrupted状态重置为false。</strong></p>
 <p>这就意味着当某个线程的isInterrupt属性成功被置为true后，如果您使用对象方法thread.isInterrupted()获取值，无论您获取多少次得到的返回值都是true；但是如果您使用静态方法Thread.interrupted()获取值，那么只有第一次获取的结果是true，随后线程的isInterrupt属性将被恢复成false，后续无论使用Thread.interrupted()调用还是使用thread.isInterrupted()调用，获取的结果都是false。</p>
 <p>wait和sleep都是让<strong>当前线程</strong>进入阻塞状态，yield是让主线程等待调用yield的线程执行完。</p>
-<p>sleep是static方法</p>
+<p>sleep和yield都是public static native void方法</p>
 <hr>
 <p>Java语言为我们提供了两种基础线程池的选择：ScheduledThreadPoolExecutor和ThreadPoolExecutor。它们都实现了ExecutorService接口（注意，ExecutorService接口本身和“线程池”并没有直接关系，它的定义更接近“执行器”，而“使用线程管理的方式进行实现”只是其中的一种实现方式）。</p>
 <h2 id="JAVA主要线程池的继承结构"><a href="#JAVA主要线程池的继承结构" class="headerlink" title="JAVA主要线程池的继承结构"></a>JAVA主要线程池的继承结构</h2><p><img src="/images/Thread04.png" alt=""></p>
@@ -264,7 +264,7 @@
 </ul>
 <h2 id="ThreadFactory"><a href="#ThreadFactory" class="headerlink" title="ThreadFactory"></a>ThreadFactory</h2><p>线程池最主要的一项工作，就是在满足某些条件的情况下创建线程。而在ThreadPoolExecutor线程池中，创建线程的工作交给ThreadFactory来完成。要使用线程池，就必须要指定ThreadFactory。</p>
 <p>如果我们使用的构造函数时并没有指定使用的ThreadFactory，这个时候ThreadPoolExecutor会使用一个默认的ThreadFactory：DefaultThreadFactory。（这个类在Executors工具类中）</p>
-<p>Executors工具类和ThreadPoolExecutor类存在循环依赖：ThreadPoolExecutor中使用了Executors工具类中定义的DefaultThreadFactory；而在Executors工具类中却又在创建ThreadPoolExecutor的对象实例。</p>
+<p><strong>Executors工具类和ThreadPoolExecutor类存在循环依赖：ThreadPoolExecutor中使用了Executors工具类中定义的DefaultThreadFactory；而在Executors工具类中却又在创建ThreadPoolExecutor的对象实例。</strong></p>
 <hr>
 <p><em>参考</em></p>
 <blockquote>
@@ -280,7 +280,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/20/多线程基础2/" data-id="cjgd88g4o00576smyk41jt61l" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/20/多线程基础2/" data-id="cjgd8qsiv0053m4my0jpxwfxa" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding

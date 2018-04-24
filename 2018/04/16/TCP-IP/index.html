@@ -19,7 +19,7 @@
 <meta property="og:image" content="https://hsb786.github.io/images/HTTP04.jpg">
 <meta property="og:image" content="https://hsb786.github.io/images/HTTP05.png">
 <meta property="og:image" content="https://hsb786.github.io/images/三次握手.png">
-<meta property="og:updated_time" content="2018-04-21T07:34:20.144Z">
+<meta property="og:updated_time" content="2018-04-24T06:41:47.404Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="TCP&#x2F;IP">
 <meta name="twitter:description" content="感觉计算机网络课上学的东西忘得差不多了，怎么办？怎么办？ 还能怎么办，学啊。  TCP/IP百度百科上的解释  Transmission Control Protocol/Internet Protocol的简写，中译名为传输控制协议/因特网互联协议，又名网络通讯协议，是Internet最基本的协议、Internet国际互联网络的基础，由网络层的IP协议和传输层的TCP协议组成。TCP/IP 定">
@@ -268,10 +268,10 @@
 </blockquote>
 <p>HTTP首部字段由首部字段名和字段值构成的，中间用冒号“:”分隔。比如：<code>Content-Type: text/html</code>。 HTTP实体是HTTP请求和响应传输的主体内容，根据场景不同可能是表单参数，HTML文本，JSON文本，二进制流等。</p>
 <h3 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h3><blockquote>
-<p>HTTP是一种不保存状态，即无状态（stateless）协议。HTTP协议自身不对请求和响应之间的通信状态进行保存。也就是说在HTTP这个级别，协议对于发送过的请求或响应都不做持久化处理。 使用HTTP协议，每当有新的请求发送时，就会有对应的新响应产生。协议本身并不保留之前一切的请求或响应报文的信息。这是为了更快地处理大量事务，确保协议的可伸缩性，而特意把HTTP协议设计成如此简单的。 不可否认，无状态协议当然也有它的优点。由于不必保存状态，自然可减少服务器的CPU及内存资源的消耗。从另一侧面来说，也正是因为HTTP协议本身是非常简单的，所以才会被应用在各种场景里。</p>
+<p>HTTP是一种不保存状态，即无状态（stateless）协议。<strong>HTTP协议自身不对请求和响应之间的通信状态进行保存</strong>。也就是说在HTTP这个级别，协议对于发送过的请求或响应都不做持久化处理。 使用HTTP协议，每当有新的请求发送时，就会有对应的新响应产生。<strong>协议本身并不保留之前一切的请求或响应报文的信息</strong>。这是为了更快地处理大量事务，确保协议的可伸缩性，而特意把HTTP协议设计成如此简单的。 不可否认，无状态协议当然也有它的优点。由于不必保存状态，自然可减少服务器的CPU及内存资源的消耗。从另一侧面来说，也正是因为HTTP协议本身是非常简单的，所以才会被应用在各种场景里。</p>
 </blockquote>
 <blockquote>
-<p>Cookie会根据从服务器端发送的响应报文内的一个叫做Set-Cookie的首部字段信息，通知客户端保存Cookie。当下次客户端再往该服务器发送请求时，客户端会自动在请求报文中加入Cookie值后发送出去。服务器端发现客户端发送过来的Cookie后，会去检查究竟是从哪一个客户端发来的连接请求，然后对比服务器上的记录，最后得到之前的状态信息。</p>
+<p><strong>Cookie会根据从服务器端发送的响应报文内的一个叫做Set-Cookie的首部字段信息，通知客户端保存Cookie。当下次客户端再往该服务器发送请求时，客户端会自动在请求报文中加入Cookie值后发送出去。服务器端发现客户端发送过来的Cookie后，会去检查究竟是从哪一个客户端发来的连接请求，然后对比服务器上的记录，最后得到之前的状态信息</strong>。</p>
 </blockquote>
 <p><img src="/images/HTTP05.png" alt=""></p>
 <h2 id="GET和POST的区别"><a href="#GET和POST的区别" class="headerlink" title="GET和POST的区别"></a>GET和POST的区别</h2><p>GET和POST最直观的区别就是GET把参数包含在URL中，POST通过request body传递参数</p>
@@ -336,8 +336,8 @@
 <hr>
 <p>GET和POST是什么？HTTP协议中的两种发送请求的方法。</p>
 <p>HTTP是什么？HTTP是基于TCP/IP的关于数据如何在万维网中如何通信的协议</p>
-<p>HTTP的底层是TCP/IP。所以GET和POST的底层也是TCP/IP，也就是说，GET/POST都是TCP链接。GET和POST能做的事情是一样一样的。你要给GET加上request body，给POST带上url参数，技术上是完全行的通的。 </p>
-<p>如果你用GET服务，在request body中存了数据，不同服务器的处理方式是不同的，有些服务器会读出数据，有些服务器直接忽略。所以，虽然GET可以带request body，但不能保证一定能被接受到。</p>
+<p><strong>HTTP的底层是TCP/IP。所以GET和POST的底层也是TCP/IP，也就是说，GET/POST都是TCP链接。GET和POST能做的事情是一样一样的。你要给GET加上request body，给POST带上url参数，技术上是完全行的通的</strong>。 </p>
+<p><strong>如果你用GET服务，在request body中存了数据，不同服务器的处理方式是不同的，有些服务器会读出数据，有些服务器直接忽略。所以，虽然GET可以带request body，但不能保证一定能被接受到</strong>。</p>
 <h2 id="RFC"><a href="#RFC" class="headerlink" title="RFC"></a>RFC</h2><blockquote>
 <p>征求意见稿（英语：Request For Comments，缩写为RFC），是由互联网工程任务组（IETF）发布的一系列备忘录。文件收集了有关互联网相关信息，以及UNIX和互联网社区的软件文件，以编号排定。目前RFC文件是由互联网协会（ISOC）赞助发行。</p>
 </blockquote>
@@ -351,20 +351,20 @@
 </blockquote>
 <p>对于HTTP请求来说，语法是指请求响应的格式，比如请求第一行必须是 方法名 URI 协议/版本 这样的格式。</p>
 <p>语义则定义了这一类型的请求具有什么样的性质。比如GET的语义就是「获取资源」，POST的语义是「处理资源」，那么在具体实现这两个方法时，就必须考虑其语义，做出符合其语义的行为。</p>
-<p>当然在符合语法的前提下实现违背语义的行为也是可以做到的，比如使用GET方法修改用户信息，POST获取资源列表，这样就只能说这个请求是「合法」的，但不是「符合语义」的。 </p>
+<p><strong>当然在符合语法的前提下实现违背语义的行为也是可以做到的，比如使用GET方法修改用户信息，POST获取资源列表，这样就只能说这个请求是「合法」的，但不是「符合语义」的</strong>。 </p>
 <p>RFC7231里紧接着定义了HTTP方法的几个特性：</p>
 <blockquote>
 <p>Safe - 安全<br>这里的「安全」和通常理解的「安全」意义不同，如果一个方法的语义在本质上是「只读」的，那么这个方法就是安全的。客户端向服务端的资源发起的请求如果使用了是安全的方法，就不应该引起服务端任何的状态变化，因此也是无害的。 此RFC定义，GET, HEAD, OPTIONS 和 TRACE 这几个方法是安全的。<br>但是这个定义只是规范，并不能保证方法的实现也是安全的，服务端的实现可能会不符合方法语义，正如上文说过的使用GET修改用户信息的情况。<br>引入安全这个概念的目的是为了方便网络爬虫和缓存，以免调用或者缓存某些不安全方法时引起某些意外的后果。User Agent（浏览器）应该在执行安全和不安全方法时做出区分对待，并给用户以提示。</p>
 <p>Idempotent - 幂等<br>幂等的概念是指同一个请求方法执行多次和仅执行一次的效果完全相同。按照RFC规范，PUT，DELETE和安全方法都是幂等的。同样，这也仅仅是规范，服务端实现是否幂等是无法确保的。<br>引入幂等主要是为了处理同一个请求重复发送的情况，比如在请求响应前失去连接，如果方法是幂等的，就可以放心地重发一次请求。这也是浏览器在后退/刷新时遇到POST会给用户提示的原因：POST语义不是幂等的，重复请求可能会带来意想不到的后果。</p>
 <p>Cacheable - 可缓存性<br>顾名思义就是一个方法是否可以被缓存，此RFC里GET，HEAD和某些情况下的POST都是可缓存的，但是绝大多数的浏览器的实现里仅仅支持GET和HEAD。</p>
 </blockquote>
-<p>在这三个特性里一直在强调同一个事情，那就是协议不等于实现：协议规定安全在实现里不一定安全，协议规定幂等在实现里不一定幂等，协议规定可缓存在实现里不一定可缓存。</p>
-<h3 id="语义之争"><a href="#语义之争" class="headerlink" title="语义之争"></a>语义之争</h3><p>GET的语义是请求获取指定的资源。GET方法是安全、幂等、可缓存的（除非有 Cache-Control Header的约束）,GET方法的报文主体没有任何语义。</p>
-<p>POST的语义是根据请求负荷（报文主体）对指定的资源做出处理，具体的处理方式视资源类型而不同。POST不安全，不幂等，（大部分实现）不可缓存。</p>
+<p><strong>在这三个特性里一直在强调同一个事情，那就是协议不等于实现：协议规定安全在实现里不一定安全，协议规定幂等在实现里不一定幂等，协议规定可缓存在实现里不一定可缓存。</strong></p>
+<h3 id="语义之争"><a href="#语义之争" class="headerlink" title="语义之争"></a>语义之争</h3><p>GET的语义是请求获取指定的资源。<strong>GET方法是安全、幂等、可缓存的</strong>（除非有 Cache-Control Header的约束）,GET方法的报文主体没有任何语义。</p>
+<p>POST的语义是根据请求负荷（报文主体）对指定的资源做出处理，具体的处理方式视资源类型而不同。<strong>POST不安全，不幂等，（大部分实现）不可缓存</strong>。</p>
 <hr>
 <h2 id="TCP为什么是三次握手"><a href="#TCP为什么是三次握手" class="headerlink" title="TCP为什么是三次握手"></a>TCP为什么是三次握手</h2><p><img src="/images/三次握手.png" alt=""></p>
 <p>TCP作为一种可靠传输控制协议,其核心思想:<strong>既要保证数据可靠传输,又要提高传输的效率</strong></p>
-<p>三次是保证双方互相明确对方能收能发的最低值</p>
+<p><strong>三次是保证双方互相明确对方能收能发的最低值</strong></p>
 <hr>
 <p><em>参考</em></p>
 <blockquote>
@@ -385,7 +385,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/16/TCP-IP/" data-id="cjgd88g3e002m6smy9krlbqk1" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/16/TCP-IP/" data-id="cjgd8qsgp002nm4mykn9k8kng" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding

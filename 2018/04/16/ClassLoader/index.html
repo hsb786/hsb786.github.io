@@ -14,7 +14,7 @@
 <meta property="og:description" content="Java中的所有类，必须被装载到jvm中才能运行，这个装载工作是由jvm中的类装载器完成的，类装载器所做的工作实质是把类文件从硬盘读取到内存中，JVM在加载类的时候，都是通过ClassLoader的loadClass（）方法来加载class的，loadClass使用双亲委派模式。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://hsb786.github.io/images/ClassLoader01.png">
-<meta property="og:updated_time" content="2018-04-20T13:25:48.321Z">
+<meta property="og:updated_time" content="2018-04-24T06:31:55.684Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ClassLoader">
 <meta name="twitter:description" content="Java中的所有类，必须被装载到jvm中才能运行，这个装载工作是由jvm中的类装载器完成的，类装载器所做的工作实质是把类文件从硬盘读取到内存中，JVM在加载类的时候，都是通过ClassLoader的loadClass（）方法来加载class的，loadClass使用双亲委派模式。">
@@ -260,7 +260,7 @@
 </blockquote>
 <h2 id="java类装载器"><a href="#java类装载器" class="headerlink" title="java类装载器"></a>java类装载器</h2><p>Java中的类装载器实质上也是类，功能是把类载入jvm中，jvm的类装载器有三个，层次结构如下：</p>
 <p><img src="/images/ClassLoader01.png" alt=""></p>
-<h2 id="类加载器之间是如何协调工作的"><a href="#类加载器之间是如何协调工作的" class="headerlink" title="类加载器之间是如何协调工作的"></a>类加载器之间是如何协调工作的</h2><p>java是如何区分一个类该由哪个类加载器来完成呢。 在这里java采用了委托模型机制，这个机制简单来讲，就是“类装载器有载入类的需求时，会先请示其Parent使用其搜索路径帮忙载入，如果Parent 找不到,那么才由自己依照自己的搜索路径搜索类”</p>
+<h2 id="类加载器之间是如何协调工作的"><a href="#类加载器之间是如何协调工作的" class="headerlink" title="类加载器之间是如何协调工作的"></a>类加载器之间是如何协调工作的</h2><p>java是如何区分一个类该由哪个类加载器来完成呢。 在这里java采用了委托模型机制，这个机制简单来讲，就是“<strong>类装载器有载入类的需求时，会先请示其Parent使用其搜索路径帮忙载入，如果Parent 找不到,那么才由自己依照自己的搜索路径搜索类</strong>”</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Public class Test&#123;</span><br><span class="line">    Public static void main(String[] arg)&#123;</span><br><span class="line">        ClassLoader c  = Test.class.getClassLoader();  //获取Test类的类加载器</span><br><span class="line">        System.out.println(c); </span><br><span class="line">        ClassLoader c1 = c.getParent();  //获取c这个类加载器的父类加载器</span><br><span class="line">        System.out.println(c1);</span><br><span class="line">        ClassLoader c2 = c1.getParent();//获取c1这个类加载器的父类加载器</span><br><span class="line">        System.out.println(c2);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//output</span><br><span class="line">AppClassLoader</span><br><span class="line">ExtClassLoader</span><br><span class="line">Null</span><br></pre></td></tr></table></figure>
 <p>可以看出Test是由<strong>AppClassLoader</strong>加载器加载的，<strong>AppClassLoader</strong>的<code>Parent</code> 加载器是 <strong>ExtClassLoader</strong>,但是<strong>ExtClassLoader</strong>的<code>Parent</code>为 <code>null</code> 是怎么回事。<strong>Bootstrap Loader</strong>是用C++语言写的，依java的观点来看，逻辑上并不存在<strong>Bootstrap Loader</strong>的类实体，所以在java程序代码里试图打印出其内容时，我们就会看到输出为<code>null</code>。</p>
 <p>java类加载器基于三个机制：委托，可见，单一。</p>
@@ -323,7 +323,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/16/ClassLoader/" data-id="cjgd88g23000d6smydvkhrtvb" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/16/ClassLoader/" data-id="cjgd8qsej0000m4myizyez13p" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
