@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="HuShengBin’s blog">
 <meta property="og:description" content="接口不可以实现接口，可以继承多个接口 抽象类可以继承具体类 static不能被重写，重写是运行时动态绑定的 static变量发生在静态解析阶段，此时已经将字段的符号引用转换成了内存引用，将它与对应的类关联在了一起">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-04-20T13:26:09.837Z">
+<meta property="og:updated_time" content="2018-04-24T08:06:42.355Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="记录一些容易忘记的东西">
 <meta name="twitter:description" content="接口不可以实现接口，可以继承多个接口 抽象类可以继承具体类 static不能被重写，重写是运行时动态绑定的 static变量发生在静态解析阶段，此时已经将字段的符号引用转换成了内存引用，将它与对应的类关联在了一起">
@@ -241,10 +241,7 @@
 <p>java的8中基本类型，除了float和double之外，其它6种都实现了常量池</p>
 <p>boolean类型不允许进行任何类型的转换处理</p>
 <p>java7以后，常量池被放入到堆空间中。导致intern()函数的功能不同。intern()检查常量池是否存在该字符串，存在的话就直接返回；否则返回首次在堆中声明的相同字符串的引用</p>
-<p>ArrayList 默认容量 10                HashMap   16</p>
 <p>newInstance 低效率，只能调用<em>无参</em>构造。<br>将new这个方式分解为两步： 首先调用class的加载方式加载某个类，然后实例化  </p>
-<p>HashSet底层借用HashMap，利用HashMap中key不重复的特性</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">private static final Object PRESENT=new Object();  </span><br><span class="line"></span><br><span class="line"> public boolean add(E e) &#123;</span><br><span class="line">    return map.put(e, PRESENT)==null;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>字符只有在内存中才会形成，其它都是以字节的方式进行的</p>
 <p>强引用： Object obj=new Object()，只要引用还在，就不会被回收<br>软引用： 内存不够才会被回收<br>弱引用： 下一次垃圾收集器工作时会被回收。<br>虚引用： 随时可能被回收，目的是能在这个对象被回收时收到一个系统通知</p>
 <p>内加载器： JVM动态加载所需的类。  委托、可见、单一。<br>双亲委派，交给父加载器；父加载器加载的类子加载器都能看到；一个类只能被一个加载一次</p>
@@ -252,43 +249,23 @@
 <p>ReentrantLock结合Condition可以有选择性地进行通知，在调度上更加灵活</p>
 <p>指令重排序： 编译器和处理器为了优化程序性能而对指令序列进行重新排序的一种手段</p>
 <p>null可以强制转换为任何java类类型；其返回值还是null，可以调用static方法</p>
-<hr>
-<hr>
 <p>基本类型与包装类比较；包装类拆箱，进行值比较</p>
-<hr>
 <p>子类，也叫导出类、派生类</p>
-<hr>
 <p>Math.round()    +0.5<br>Math.ceil()     向上取整<br>Math.floor()    向下取整</p>
-<hr>
 <p>类变量有默认值，局部变量是没有默认值的</p>
-<hr>
 <p>wait，sleep都必须进行异常捕获</p>
-<hr>
-<p>IllegalMonitorStateException  </p>
-<blockquote>
-<p>抛出该异常表明某一线程已经试图等待对象的监视器，或者试图通知其他正在等待对象的监视器，然而本身没有指定的监视器的线程。  </p>
-</blockquote>
-<p>也就是当前的线程不是此对象监视器的所有者。当前线程要锁定该对象之后，才能用锁定的对象执行这些方法，这里需要用到synchronized关键字，锁定哪个对象就用哪个对象来执行notify(), notifyAll(),wait(), wait(long), wait(long, int)操作，否则就会报IllegalMonitorStateException异常。 </p>
-<hr>
+<p>IllegalMonitorStateException<br>抛出该异常表明某一线程已经试图等待对象的监视器，或者试图通知其他正在等待对象的监视器，然而本身没有指定的监视器的线程。<br>也就是当前的线程不是此对象监视器的所有者。当前线程要锁定该对象之后，才能用锁定的对象执行这些方法，这里需要用到synchronized关键字，锁定哪个对象就用哪个对象来执行notify(), notifyAll(),wait(), wait(long), wait(long, int)操作，否则就会报IllegalMonitorStateException异常。 </p>
 <p>Java的跨平台特性是指它的字节码可以在多个平台上运行</p>
-<hr>
 <p>getMethods 返回Method对象数组，包括当前类及父类所有public方法<br>getDeclaredMethod 方法Method对象数组，包括当前类的所有方法。不包括父类。</p>
-<hr>
 <ul>
 <li>java用来运行一个.class文件</li>
 <li>javadoc用来生成api文档</li>
 <li>jar用来生成jar包</li>
 <li>javac用来把.java文件编译为.class文件</li>
 </ul>
-<hr>
 <p>notify调用后，要等同步语句块执行完才释放锁；wait不是。</p>
-<hr>
-<pre><code>public static int parseInt(String s) throws NumberFormatException {}
-</code></pre><p>Integer.parseInt 返回int 类型</p>
-<hr>
 <p>getClass() 返回的是实际类</p>
-<hr>
-<p>关于try和finally</p>
+<p>关于try和finally </p>
 <ol>
 <li>首先执行try里的return，但是有finally语句还要执行，于是先执行return后面的语句，把要返回的值保存到局部变量。</li>
 <li>执行finally语句的内容，其中有return语句，这时就会忽略try中的return，直接返回。</li>
@@ -304,7 +281,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/09/记录一些容易忘记的东西/" data-id="cjgd8qsja006am4myh94skocv" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/09/记录一些容易忘记的东西/" data-id="cjgdcs54k006ds0my05yb00fj" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding

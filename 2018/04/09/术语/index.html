@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="HuShengBin’s blog">
 <meta property="og:description" content="happens-before在JMM中，如果一个操作执行的结果需要对另一个操作可见，那么这两个操作之间必须要存在happens-before关系     需要注意的是，上面提到的两个操作可以是在不同线程之间的，而且并不意味着前一个操作必须要在后一个操作之前执行，仅仅要求前一个操作的执行结果对后一个操作可见">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-04-23T06:32:09.148Z">
+<meta property="og:updated_time" content="2018-04-24T08:16:48.118Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="术语">
 <meta name="twitter:description" content="happens-before在JMM中，如果一个操作执行的结果需要对另一个操作可见，那么这两个操作之间必须要存在happens-before关系     需要注意的是，上面提到的两个操作可以是在不同线程之间的，而且并不意味着前一个操作必须要在后一个操作之前执行，仅仅要求前一个操作的执行结果对后一个操作可见">
@@ -243,64 +243,64 @@
 <hr>
 <h2 id="fail-fast"><a href="#fail-fast" class="headerlink" title="fail-fast"></a>fail-fast</h2><p><strong>fail-fast机制是java集合(Collection)中的一种错误机制。当多个线程对同一集合的内容进行操作时，就可能会产生fail-fast事件。</strong>  </p>
 <p>例如：当某一个线程A通过iterator去遍历某集合的过程中，若该集合的内容被其他线程所改变了；那么线程A访问集合时，就会抛出ConcurrentModificationException异常，产生fail-fast事件  </p>
-<p>要了解fail-fast机制，我们首先要对ConcurrentModificationException 异常有所了解。当方法检测到对象的并发修改，但不允许这种修改时就抛出该异常。同时需要注意的是，该异常不会始终指出对象已经由不同线程并发修改，如果单线程违反了规则，同样也有可能会抛出改异常。<br>诚然，迭代器的快速失败行为无法得到保证，它不能保证一定会出现该错误，但是快速失败操作会尽最大努力抛出ConcurrentModificationException异常</p>
+<p>要了解fail-fast机制，我们首先要对ConcurrentModificationException 异常有所了解。<strong>当方法检测到对象的并发修改，但不允许这种修改时就抛出该异常</strong>。同时需要注意的是，该异常不会始终指出对象已经由不同线程并发修改，如果单线程违反了规则，同样也有可能会抛出改异常。<br>诚然，迭代器的快速失败行为无法得到保证，它不能保证一定会出现该错误，但是快速失败操作会尽最大努力抛出ConcurrentModificationException异常</p>
 <p>当使用fail-fast iterator对Collection或对Map进行操作过程中尝试直接修改Collection/Map的内容时，即使是在单线程下运行，java.util.ConcurrentModificationException异常也将抛出  </p>
-<p>Iterator是工作在一个独立的线程，并且拥有一个mutex锁。<em>Iterator被创建之后会建立一个指向原来对象的单链索引表，当原来对象发生变化时，这个索引表的内容不会同步该表，所以当索引指针往后移动的时候就找不到要迭代的对象，所以按照fail-fast原则Iterator会马上抛出ConsurrentModificationException异常</em>。</p>
-<p>所以Iterator在工作的时候是不允许被迭代的对象被改变的。但你可以使用Iterator本身的方法remove()来删除对象，Iteraror.remove()方法会在删除当前迭代对象的同时维护索引的一致性。</p>
+<p>Iterator是工作在一个独立的线程，并且拥有一个mutex锁。<strong>Iterator被创建之后会建立一个指向原来对象的单链索引表，当原来对象发生变化时，这个索引表的内容不会同步该表，所以当索引指针往后移动的时候就找不到要迭代的对象，所以按照fail-fast原则Iterator会马上抛出ConsurrentModificationException异常</strong>。</p>
+<p>所以Iterator在工作的时候是不允许被迭代的对象被改变的。但你可以使用Iterator本身的方法remove()来删除对象，<strong>Iteraror.remove()方法会在删除当前迭代对象的同时维护索引的一致性</strong>。</p>
 <hr>
-<h3 id="fail-safe"><a href="#fail-safe" class="headerlink" title="fail-safe"></a>fail-safe</h3><p> 采用安全失败机制的集合容器，在遍历时不是直接在集合内容上访问的，而是先复制原有集合内容，在拷贝的集合上进行遍历。</p>
+<h2 id="fail-safe"><a href="#fail-safe" class="headerlink" title="fail-safe"></a>fail-safe</h2><p> <strong>采用安全失败机制的集合容器，在遍历时不是直接在集合内容上访问的，而是先复制原有集合内容，在拷贝的集合上进行遍历。</strong></p>
 <p>原理：由于迭代时是对原集合的拷贝进行遍历，所以在遍历过程中对原集合所作的修改并不能被迭代器检测到，所以不会触发Concurrent Modification Exception。</p>
-<p>缺点：基于拷贝内容的优点是避免了Concurrent Modification Exception，但同样地，迭代器并不能访问到修改后的内容，即：迭代器遍历的是开始遍历那一刻拿到的集合拷贝，在遍历期间原集合发生的修改迭代器是不知道的。</p>
-<p>场景：java.util.concurrent包下的容器都是安全失败，可以在多线程下并发使用，并发修改。 </p>
+<p>缺点：基于拷贝内容的优点是避免了Concurrent Modification Exception，但同样地，迭代器并不能访问到修改后的内容，即：<strong>迭代器遍历的是开始遍历那一刻拿到的集合拷贝，在遍历期间原集合发生的修改迭代器是不知道的</strong>。</p>
+<p>场景：<strong>java.util.concurrent包下的容器都是安全失败，可以在多线程下并发使用，并发修改</strong>。 </p>
 <hr>
 <h2 id="CAS-Compare-and-Swap"><a href="#CAS-Compare-and-Swap" class="headerlink" title="CAS(Compare and Swap)"></a>CAS(Compare and Swap)</h2><p>CAS有3个操作数——内存值V，旧的预期值A，要修改的新值B。当且仅当预期值A和内存值V相同时，将内存值V修改为B，否则什么都不做。</p>
-<h3 id="ABA问题"><a href="#ABA问题" class="headerlink" title="ABA问题"></a>ABA问题</h3><p>比如说一个线程one从内存位置V中取出A，这时候另一个线程two也从内存中取出A，并且two进行了一些操作变成了B，然后two又将V位置的数据变成A，这时候线程one进行CAS操作发现内存中仍然是A，然后one操作成功。尽管线程one的CAS操作成功，但是不代表这个过程就是没有问题的。</p>
+<h2 id="ABA问题"><a href="#ABA问题" class="headerlink" title="ABA问题"></a>ABA问题</h2><p>比如说一个线程one从内存位置V中取出A，这时候另一个线程two也从内存中取出A，并且two进行了一些操作变成了B，然后two又将V位置的数据变成A，这时候线程one进行CAS操作发现内存中仍然是A，然后one操作成功。尽管线程one的CAS操作成功，但是不代表这个过程就是没有问题的。</p>
 <p>通过加版本号version可以解决这个问题</p>
 <hr>
-<h3 id="as-if-serial"><a href="#as-if-serial" class="headerlink" title="as-if-serial"></a>as-if-serial</h3><p>As-if-serial语义的意思是，所有的动作(Action)都可以为了优化而被重排序，但是必须保证它们重排序后的结果和程序代码本身的应有结果是一致的。Java编译器和处理器都会保证单线程下的as-if-serial语义。</p>
+<h2 id="as-if-serial"><a href="#as-if-serial" class="headerlink" title="as-if-serial"></a>as-if-serial</h2><p>As-if-serial语义的意思是，所有的动作(Action)都可以为了优化而被重排序，但是必须保证它们重排序后的结果和程序代码本身的应有结果是一致的。Java编译器和处理器都会保证单线程下的as-if-serial语义。</p>
 <hr>
-<h3 id="JIT编译器（Just-In-Time-Compiler）"><a href="#JIT编译器（Just-In-Time-Compiler）" class="headerlink" title="JIT编译器（Just-In-Time Compiler）"></a>JIT编译器（Just-In-Time Compiler）</h3><p>JIT是一种提高程序运行效率的方法。通常，程序有两种运行方式：静态编译与动态解释。静态编译的程序在执行前全部被翻译为机器码，而解释执行的则是一句一句边运行边翻译。</p>
+<h2 id="JIT编译器（Just-In-Time-Compiler）"><a href="#JIT编译器（Just-In-Time-Compiler）" class="headerlink" title="JIT编译器（Just-In-Time Compiler）"></a>JIT编译器（Just-In-Time Compiler）</h2><p>JIT是一种提高程序运行效率的方法。通常，程序有两种运行方式：静态编译与动态解释。静态编译的程序在执行前全部被翻译为机器码，而解释执行的则是一句一句边运行边翻译。</p>
 <p>在Java编程语言和环境中，即时编译器（JIT compiler，just-in-time compiler）是一个把Java的字节码（包括需要被解释的指令的程序）转换成可以直接发送给处理器的指令的程序。</p>
 <hr>
-<h3 id="内存屏障"><a href="#内存屏障" class="headerlink" title="内存屏障"></a>内存屏障</h3><p>内存屏障（Memory Barrier，或有时叫做内存栅栏，Memory Fence）是一种CPU指令，用于控制特定条件下的重排序和内存可见性问题。Java编译器也会根据内存屏障的规则禁止重排序。</p>
+<h2 id="内存屏障"><a href="#内存屏障" class="headerlink" title="内存屏障"></a>内存屏障</h2><p>内存屏障（Memory Barrier，或有时叫做内存栅栏，Memory Fence）是一种CPU指令，用于控制特定条件下的重排序和内存可见性问题。Java编译器也会根据内存屏障的规则禁止重排序。</p>
 <hr>
-<h3 id="Java缩写"><a href="#Java缩写" class="headerlink" title="Java缩写"></a>Java缩写</h3><p><strong>JMM</strong> Java Memory Model ，Java内存模型</p>
+<h2 id="缩写"><a href="#缩写" class="headerlink" title="缩写"></a>缩写</h2><p><strong>JMM</strong> Java Memory Model ，Java内存模型</p>
 <p><strong>JUC</strong>   java.util.concurrent  ，同步包</p>
 <p><strong>CHM</strong> ConcurrentHashMap</p>
 <hr>
-<h3 id="数据库三大范式"><a href="#数据库三大范式" class="headerlink" title="数据库三大范式"></a>数据库三大范式</h3><ol>
+<h2 id="数据库三大范式"><a href="#数据库三大范式" class="headerlink" title="数据库三大范式"></a>数据库三大范式</h2><ol>
 <li>1NF：字段不可再分</li>
 <li>2NF：主键依赖，一张表里的数据，必须是跟主键相关的</li>
 <li>3NF：任意两个表不能出现重复的非主键字段</li>
 </ol>
 <hr>
-<h3 id="设计模式六大原则"><a href="#设计模式六大原则" class="headerlink" title="设计模式六大原则"></a>设计模式六大原则</h3><p><strong>单一职责(Single Responsibility Principle)</strong>：一个类只负责一个功能领域中的相应职责</p>
+<h2 id="设计模式六大原则"><a href="#设计模式六大原则" class="headerlink" title="设计模式六大原则"></a>设计模式六大原则</h2><p><strong>单一职责(Single Responsibility Principle)</strong>：一个类只负责一个功能领域中的相应职责</p>
 <p><strong>开闭(Open-Closed Principle)</strong>：对扩展开放，对修改关闭</p>
 <p><strong>里氏替换(Liskov Subsitution Principle)</strong>：子类能出现在基类出现的地方</p>
 <p><strong>依赖倒置(Dependency Inversion Principle)</strong>：针对接口编程，而不是针对实现类编程</p>
 <p><strong>接口隔离(Interface Segregation Principle)</strong>：使用多个专门的接口，而不使用单一的总接口</p>
 <p><strong>迪米特(Law of Demeter)</strong>：一个类尽可能少的与其它类发生相互作用</p>
 <hr>
-<h3 id="分布式领域CAP理论"><a href="#分布式领域CAP理论" class="headerlink" title="分布式领域CAP理论"></a>分布式领域CAP理论</h3><p><strong>Consistency(一致性)</strong>：数据一致更新，所有数据变动都是同步的</p>
+<h2 id="分布式领域CAP理论"><a href="#分布式领域CAP理论" class="headerlink" title="分布式领域CAP理论"></a>分布式领域CAP理论</h2><p><strong>Consistency(一致性)</strong>：数据一致更新，所有数据变动都是同步的</p>
 <p><strong>Availability(可用性)</strong>：好的响应性能</p>
 <p><strong>Partition tolerance(分区容忍性)</strong>：可靠性</p>
 <p><strong>定理</strong>：任何分布式系统只可同时满足二点，没法三者兼顾。</p>
 <p><strong>忠告</strong>：架构师不要将精力浪费在如何设计能满足三者的完美分布式系统，而是应该进行取舍。</p>
 <hr>
-<h3 id="强一致性-弱一致性-最终一致性"><a href="#强一致性-弱一致性-最终一致性" class="headerlink" title="强一致性,弱一致性,最终一致性"></a>强一致性,弱一致性,最终一致性</h3><p><strong>强一致性</strong></p>
+<h2 id="强一致性-弱一致性-最终一致性"><a href="#强一致性-弱一致性-最终一致性" class="headerlink" title="强一致性,弱一致性,最终一致性"></a>强一致性,弱一致性,最终一致性</h2><p><strong>强一致性</strong></p>
 <blockquote>
-<p>当更新操作完成之后，任何多个后续进程或者线程的访问都会返回最新的更新过的值。这种是对用户最友好的，就是用户上一次写什么，下一次就保证能读到什么。根据 CAP 理论，这种实现需要牺牲可用性。</p>
+<p><strong>当更新操作完成之后，任何多个后续进程或者线程的访问都会返回最新的更新过的值</strong>。这种是对用户最友好的，就是用户上一次写什么，下一次就保证能读到什么。根据 CAP 理论，这种实现需要牺牲可用性。</p>
 </blockquote>
 <p><strong>弱一致性</strong></p>
 <blockquote>
-<p>系统并不保证续进程或者线程的访问都会返回最新的更新过的值。系统在数据写入成功之后，不承诺立即可以读到最新写入的值，也不会具体的承诺多久之后可以读到。</p>
+<p><strong>系统并不保证续进程或者线程的访问都会返回最新的更新过的值</strong>。系统在数据写入成功之后，不承诺立即可以读到最新写入的值，也不会具体的承诺多久之后可以读到。</p>
 </blockquote>
 <p><strong>最终一致性</strong></p>
 <blockquote>
 <p>弱一致性的特定形式。系统保证在没有后续更新的前提下，系统最终返回上一次更新操作的值。在没有故障发生的前提下，不一致窗口的时间主要受通信延迟，系统负载和复制副本的个数影响。DNS 是一个典型的最终一致性系统。</p>
 </blockquote>
 <hr>
-<h3 id="假唤醒-spurious-wake-up"><a href="#假唤醒-spurious-wake-up" class="headerlink" title="假唤醒(spurious wake up)"></a>假唤醒(spurious wake up)</h3><p>Linux中帮助中提到的：<br>在多核处理器下，pthread_cond_signal可能会激活多于一个线程（阻塞在条件变量上的线程）。</p>
+<h2 id="假唤醒-spurious-wake-up"><a href="#假唤醒-spurious-wake-up" class="headerlink" title="假唤醒(spurious wake up)"></a>假唤醒(spurious wake up)</h2><p>Linux中帮助中提到的：<br>在多核处理器下，pthread_cond_signal可能会激活多于一个线程（阻塞在条件变量上的线程）。</p>
 <p>结果是，当一个线程调用pthread_cond_signal()后，多个调用pthread_cond_wait()或pthread_cond_timedwait()的线程返回。这种效应成为”虚假唤醒”(spurious wakeup) </p>
 <p>虽然虚假唤醒在pthread_cond_wait函数中可以解决，为了发生概率很低的情况而降低边缘条件（fringe condition）效率是不值得的，纠正这个问题会降低对所有基于它的所有更高级的同步操作的并发度。所以pthread_cond_wait的实现上没有去解决它。</p>
 <p>所以通常的标准解决办法是这样的：将条件的判断从if 改为while</p>
@@ -317,11 +317,11 @@
 <h3 id="POJO-plain-ordinary-java-object-简单无规则-java-对象"><a href="#POJO-plain-ordinary-java-object-简单无规则-java-对象" class="headerlink" title="POJO(plain ordinary java object) 简单无规则 java 对象"></a>POJO(plain ordinary java object) 简单无规则 java 对象</h3><p>纯的传统意义的 java 对象。就是说在一些 Object/Relation Mapping 工具中，能够做到维护数据库表记录的 persisent object 完全是一个符合 Java Bean 规范的纯 Java 对象，没有增加别的属性和方法。我的理解就是最基本的 Java Bean ，只有属性字段及 setter 和 getter 方法！。</p>
 <h3 id="DAO-data-access-object-数据访问对象"><a href="#DAO-data-access-object-数据访问对象" class="headerlink" title="DAO(data access object) 数据访问对象"></a>DAO(data access object) 数据访问对象</h3><p>是一个 sun 的一个标准 j2ee 设计模式， 这个模式中有个接口就是 DAO ，它负持久层的操作。为业务层提供接口。此对象用于访问数据库。通常和 PO 结合使用， DAO 中包含了各种数据库的操作方法。通过它的方法 , 结合 PO 对数据库进行相关的操作。夹在业务逻辑与数据库资源中间。配合 VO, 提供数据库的 CRUD 操作</p>
 <hr>
-<h3 id="设计模式分类"><a href="#设计模式分类" class="headerlink" title="设计模式分类"></a>设计模式分类</h3><p>设计模式分为三种类型，共23种。</p>
+<h2 id="设计模式分类"><a href="#设计模式分类" class="headerlink" title="设计模式分类"></a>设计模式分类</h2><p>设计模式分为三种类型，共23种。</p>
 <p>创建型模式：单例模式、抽象工厂模式、建造者模式、工厂模式、原型模式。</p>
 <p>结构型模式：适配器模式、桥接模式、装饰模式、组合模式、外观模式、享元模式、代理模式。</p>
 <p>行为型模式：模版方法模式、命令模式、迭代器模式、观察者模式、中介者模式、备忘录模式、解释器模式（Interpreter模式）、状态模式、策略模式、职责链模式(责任链模式)、访问者模式。</p>
-<h3 id="23种设计模式简单介绍"><a href="#23种设计模式简单介绍" class="headerlink" title="23种设计模式简单介绍"></a>23种设计模式简单介绍</h3><p>Abstract Factory（抽象工厂模式）：提供一个创建一系列相关或相互依赖对象的接口，而无需指定它们具体的类。</p>
+<h2 id="23种设计模式简单介绍"><a href="#23种设计模式简单介绍" class="headerlink" title="23种设计模式简单介绍"></a>23种设计模式简单介绍</h2><p>Abstract Factory（抽象工厂模式）：提供一个创建一系列相关或相互依赖对象的接口，而无需指定它们具体的类。</p>
 <p>Adapter（适配器模式）：将一个类的接口转换成客户希望的另外一个接口。Adapter模式使得原本由于接口不兼容而不能一起工作的那些类可以一起工作。</p>
 <p>Bridge（桥接模式）：将抽象部分与它的实现部分分离，使它们都可以独立地变化。</p>
 <p>Builder（建造者模式）：将一个复杂对象的构建与它的表示分离，使得同样的构建过程可以创建不同的表示。</p>
@@ -344,7 +344,6 @@
 <p>Template Method（模板方法模式）：定义一个操作中的算法的骨架，而将一些步骤延迟到子类中。Template Method使得子类可以不改变一个算法的结构即可重定义该算法的某些特定步骤。</p>
 <p>Visitor（访问者模式）：表示一个作用于某对象结构中的各元素的操作。它使你可以在不改变各元素的类的前提下定义作用于这些元素的新操作。</p>
 <h2 id="创建型模式"><a href="#创建型模式" class="headerlink" title="创建型模式"></a>创建型模式</h2><p>创建型模式(Creational Pattern)对类的实例化过程进行了抽象，能够将软件模块中对象的创建和对象的使用分离。为了使软件的结构更加清晰，外界对于这些对象只需要知道它们共同的接口，而不清楚其具体的实现细节，使整个系统的设计更加符合单一职责原则。</p>
-<hr>
 
         
         </div>
@@ -355,7 +354,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/09/术语/" data-id="cjgd8qsja005wm4myxowwdwr0" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/09/术语/" data-id="cjgdcs544005zs0mynl7yuc4q" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding

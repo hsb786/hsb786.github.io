@@ -14,7 +14,7 @@
 <meta property="og:description" content="初始化顺序 父类（静态变量，静态语句块） 子类（静态变量，静态语句块） 父类（实例变量，普通语句块） 父类（构造函数） 子类（实例变量，普通语句块） 子类（构造函数）">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://hsb786.github.io/images/exception.jpg">
-<meta property="og:updated_time" content="2018-04-20T13:26:21.921Z">
+<meta property="og:updated_time" content="2018-04-24T08:25:39.494Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java基础总结">
 <meta name="twitter:description" content="初始化顺序 父类（静态变量，静态语句块） 子类（静态变量，静态语句块） 父类（实例变量，普通语句块） 父类（构造函数） 子类（实例变量，普通语句块） 子类（构造函数）">
@@ -242,12 +242,6 @@
 <hr>
 <h2 id="Object"><a href="#Object" class="headerlink" title="Object"></a>Object</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">public final native Class&lt;?&gt; getClass()</span><br><span class="line"></span><br><span class="line">public native int hashCode()</span><br><span class="line"></span><br><span class="line">public boolean equals(Object obj)</span><br><span class="line"></span><br><span class="line">protected native Object clone() throws CloneNotSupportedException</span><br><span class="line"></span><br><span class="line">public String toString()</span><br><span class="line"></span><br><span class="line">public final native void notify()</span><br><span class="line"></span><br><span class="line">public final native void notifyAll()</span><br><span class="line"></span><br><span class="line">public final native void wait(long timeout) throws InterruptedException</span><br><span class="line"></span><br><span class="line">public final void wait(long timeout, int nanos) throws InterruptedException</span><br><span class="line"></span><br><span class="line">public final void wait() throws InterruptedException</span><br><span class="line"></span><br><span class="line">protected void finalize() throws Throwable &#123;&#125;</span><br></pre></td></tr></table></figure>
 <hr>
-<h2 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h2><p>Throwable可以用来表示任何可以作为异常抛出的类，分为两种：Error和Exception。其中Error用来表示JVM无法处理的错误，Exception分为两种：</p>
-<ol>
-<li><strong>受检异常（checked exception）</strong>：需要try…catch…语句捕获并进行处理，并且可以从一场恢复</li>
-<li><strong>非受检异常（unchecked exception）</strong>：是程序运行时错误，例如除0会引发Arithmetic Exceptino，此时程序崩溃并且无法恢复 </li>
-</ol>
-<hr>
 <h2 id="创建对象的方式"><a href="#创建对象的方式" class="headerlink" title="创建对象的方式"></a>创建对象的方式</h2><ol>
 <li>直接new</li>
 <li>反射<ul>
@@ -265,7 +259,7 @@
 <li>Class.forName(“类名”)</li>
 </ol>
 <hr>
-<h2 id="泛型-generics"><a href="#泛型-generics" class="headerlink" title="泛型(generics)"></a>泛型(generics)</h2><p>允许在定义类和接口的时候使用类型参数E(type parameter)。声明的类型参数在使用时用用具体的类型来替换。</p>
+<h2 id="泛型-generics"><a href="#泛型-generics" class="headerlink" title="泛型(generics)"></a>泛型(generics)</h2><p>允许在定义类和接口的时候使用类型参数E(type parameter)。声明的类型参数在使用时用具体的类型来替换。</p>
 <p>java集合有一个缺点是当把一个对象放入集合里面之后，集合就会”忘记”这个对象的数据类型，当再次取出该对象的时候，该对象的编译类型就变成了Object类型(该对象的运行时类型没变)。</p>
 <p>造成的问题：</p>
 <ol>
@@ -301,7 +295,7 @@
 <td>读作”typeof”</td>
 </tr>
 <tr>
-<td>ArrayList&lt;Intege\r&gt;</td>
+<td>ArrayList<integer></integer></td>
 <td>参数化的类型</td>
 </tr>
 <tr>
@@ -331,7 +325,12 @@
 </ol>
 <h2 id="throw和throws"><a href="#throw和throws" class="headerlink" title="throw和throws"></a>throw和throws</h2><p>throw: 表示抛出一个类的实例。throw关键字可以写在任何地方，并不强制必须写在catch块中，运行到throw所在的行，打印异常并立即退出当前方法。</p>
 <p>throws: 用于方法声明，指明可能发生的异常。</p>
-<h2 id="try能单独和finally一起使用"><a href="#try能单独和finally一起使用" class="headerlink" title="try能单独和finally一起使用"></a>try能单独和finally一起使用</h2><h2 id="异常-1"><a href="#异常-1" class="headerlink" title="异常"></a>异常</h2><p><img src="/images/exception.jpg" alt=""></p>
+<h2 id="try能单独和finally一起使用"><a href="#try能单独和finally一起使用" class="headerlink" title="try能单独和finally一起使用"></a>try能单独和finally一起使用</h2><h2 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h2><p>Throwable可以用来表示任何可以作为异常抛出的类，分为两种：Error和Exception。其中Error用来表示JVM无法处理的错误，Exception分为两种：</p>
+<ol>
+<li><strong>受检异常（checked exception）</strong>：需要try…catch…语句捕获并进行处理，并且可以从异常恢复</li>
+<li><strong>非受检异常（unchecked exception）</strong>：是程序运行时错误，例如除0会引发Arithmetic Exceptino，此时程序崩溃并且无法恢复 </li>
+</ol>
+<p><img src="/images/exception.jpg" alt=""></p>
 <h2 id="ArrayList"><a href="#ArrayList" class="headerlink" title="ArrayList"></a>ArrayList</h2><pre><code>transient Object[] elementData; 
 </code></pre><p>扩容1.5倍</p>
 <pre><code>int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);
@@ -353,7 +352,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/09/java基础总结/" data-id="cjgd8qshk003fm4my2n0o66ne" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/09/java基础总结/" data-id="cjgdcs539003ls0mysv71bnye" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding

@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="HuShengBin’s blog">
 <meta property="og:description" content="线程间通信线程是操作系统中独立的个体，但这些个体如果不经过特殊处理就不能成为一个整体。在线程间进行通信后，系统之间的交互性会更加强大，在大大提高CPU利用率的同时还会使程序员对各线程任务在处理的过程中进行有效的把控与监督。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-04-20T13:20:38.566Z">
+<meta property="og:updated_time" content="2018-04-24T08:17:51.478Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="多线程基础">
 <meta name="twitter:description" content="线程间通信线程是操作系统中独立的个体，但这些个体如果不经过特殊处理就不能成为一个整体。在线程间进行通信后，系统之间的交互性会更加强大，在大大提高CPU利用率的同时还会使程序员对各线程任务在处理的过程中进行有效的把控与监督。">
@@ -230,7 +230,7 @@
             
             <h2 id="线程间通信"><a href="#线程间通信" class="headerlink" title="线程间通信"></a>线程间通信</h2><p>线程是操作系统中独立的个体，但这些个体如果不经过特殊处理就不能成为一个整体。在线程间进行通信后，系统之间的交互性会更加强大，在大大提高CPU利用率的同时还会使程序员对各线程任务在处理的过程中进行有效的把控与监督。</p>
 <a id="more"></a>
-<h2 id="锁队列"><a href="#锁队列" class="headerlink" title="锁队列"></a>锁队列</h2><p>每个锁对象都有两个队列，一个是就绪队列，一个是阻塞队列。就绪队列存储了将要获得锁的线程，阻塞队列存储了被阻塞的线程。一个线程被唤醒后，才会进入就绪队列，等待CPU的调度；反之，一个线程被wait后，就会进入阻塞队列，等待下一次被唤醒。</p>
+<h2 id="锁队列"><a href="#锁队列" class="headerlink" title="锁队列"></a>锁队列</h2><p>每个锁对象都有两个队列，一个是就绪队列，一个是阻塞队列。<strong>就绪队列存储了将要获得锁的线程，阻塞队列存储了被阻塞的线程</strong>。一个线程被唤醒后，才会进入就绪队列，等待CPU的调度；反之，一个线程被wait后，就会进入阻塞队列，等待下一次被唤醒。</p>
 <h2 id="多线程对象的常用函数"><a href="#多线程对象的常用函数" class="headerlink" title="多线程对象的常用函数"></a>多线程对象的常用函数</h2><ul>
 <li>Thread.currentThread()方法返回代码段正在被哪个线程调用的信息</li>
 <li>Thread对象实例.isAlive()方法的功能是判断当前线程是否处于活跃状态(正在运行状态或者准备开始运行状态)</li>
@@ -304,7 +304,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/09/多线程基础/" data-id="cjgd8qsiv0050m4myz1glo72f" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/09/多线程基础/" data-id="cjgdcs544005cs0my3h57wmdf" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
