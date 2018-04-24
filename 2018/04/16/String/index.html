@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="HuShengBin’s blog">
 <meta property="og:description" content="Java语言提供了对字符串连接元素符的特别支持（+），该符号也可用于将其他类型转换成字符串。字符串的连接实际上是通过StringBuilder的append()方法来实现的，字符串的转换通过toString方法实现。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-04-20T13:19:36.084Z">
+<meta property="og:updated_time" content="2018-04-24T11:27:31.510Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="String">
 <meta name="twitter:description" content="Java语言提供了对字符串连接元素符的特别支持（+），该符号也可用于将其他类型转换成字符串。字符串的连接实际上是通过StringBuilder的append()方法来实现的，字符串的转换通过toString方法实现。">
@@ -234,17 +234,11 @@
 </code></pre><p>这是一个字符数组，并且是final类型，它用于存储字符串内容，从final这个关键字中我们可以看出，String的内容一旦被初始化了是不能被改变的。</p>
 <pre><code>private int hash;
 </code></pre><p>缓存字符串的hashCode，默认值为0</p>
-<h2 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h2><h3 id="1-使用字符数组、字符串构造一个String"><a href="#1-使用字符数组、字符串构造一个String" class="headerlink" title="1. 使用字符数组、字符串构造一个String"></a>1. 使用字符数组、字符串构造一个String</h3><p>但我们使用字符数组创建String的时候，会用到<code>Arrays.copyOf</code>方法和<code>Arrays.copyOfRange</code>方法。这两个方法是将原有的字符数组中的内容逐一复制到String中的字符数组中。同样，我们也可以用一个String类型的对象来初始化一个String。这里将直接将<code>源String</code>中的<code>value</code>和<code>hash</code>两个属性直接赋值给<code>目标String</code>。因为String是不可变的，所以不用担心改变<code>源String</code>的值会影响到<code>目标String</code>的值</p>
-<h3 id="2-使用字节数组构造一个String"><a href="#2-使用字节数组构造一个String" class="headerlink" title="2.使用字节数组构造一个String"></a>2.使用字节数组构造一个String</h3><p>在Java中，String实例中保存有一个<code>char[]</code>字符数组，<code>char[]</code>字符数组是以unicode码来存储的，String 和 char 为内存形式，byte是网络传输或存储的序列化形式。所以在很多传输和存储的过程中需要将byte[]数组和String进行相互转化。所以，String提供了一系列重载的构造方法来将一个字符数组转化成String，提到byte[]和String之间的相互转换就不得不关注编码问题。<code>String(byte[] bytes, Charset charset)</code>是指通过charset来解码指定的byte数组，将其解码成unicode的char[]数组，构造成新的String。</p>
-<h3 id="3-使用StringBuffer和StringBuider构造一个String"><a href="#3-使用StringBuffer和StringBuider构造一个String" class="headerlink" title="3.使用StringBuffer和StringBuider构造一个String"></a>3.使用StringBuffer和StringBuider构造一个String</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public String(StringBuffer buffer) &#123;</span><br><span class="line">    synchronized(buffer) &#123;</span><br><span class="line">        this.value = Arrays.copyOf(buffer.getValue(), buffer.length());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public String(StringBuilder builder) &#123;</span><br><span class="line">    this.value = Arrays.copyOf(builder.getValue(), builder.length());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>很少用到，当我们有了StringBuffer或者StringBuilfer对象之后可以直接使用他们的toString方法来得到String。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public String toString() &#123;</span><br><span class="line">    // Create a copy, don&apos;t share the array</span><br><span class="line">    return new String(value, 0, count);</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line">this.value = Arrays.copyOfRange(value, offset, offset+count);</span><br></pre></td></tr></table></figure>
 <h2 id="intern"><a href="#intern" class="headerlink" title="intern()"></a>intern()</h2><p>java7以后，常量池被放入到堆空间中。导致intern()函数的功能不同。intern()检查常量池是否存在该字符串，存在的话就直接返回；否则返回首次在堆中声明的相同字符串的引用</p>
-<hr>
-<p><em>参考</em></p>
-<blockquote>
-<p><a href="http://www.hollischuang.com/archives/99" target="_blank" rel="noopener">Java 7 源码学习系列（一）——String</a></p>
-</blockquote>
+<h2 id=""><a href="#" class="headerlink" title="+"></a>+</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String str=&quot;11&quot;;</span><br><span class="line">System.out.println(&quot;ab&quot; + &quot;c&quot;+str + &quot;e&quot;);</span><br></pre></td></tr></table></figure>
+<p>编译器优化后的结果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String str = &quot;11&quot;;</span><br><span class="line">System.out.println(&quot;abc&quot; + str + &quot;e&quot;);</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Code:</span><br><span class="line">       0: ldc           #19                 // String 11</span><br><span class="line">       2: astore_1</span><br><span class="line">       3: getstatic     #21                 // Field java/lang/System.out:Ljava/io/PrintStream;</span><br><span class="line">       6: new           #27                 // class java/lang/StringBuilder</span><br><span class="line">       9: dup</span><br><span class="line">      10: ldc           #29                 // String abc</span><br><span class="line">      12: invokespecial #31                 // Method java/lang/StringBuilder.&quot;&lt;init&gt;&quot;:(Ljava/lang/String;)V</span><br><span class="line">      15: aload_1</span><br><span class="line">      16: invokevirtual #34                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;</span><br><span class="line">      19: ldc           #38                 // String e</span><br><span class="line">      21: invokevirtual #34                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;</span><br><span class="line">      24: invokevirtual #40                 // Method java/lang/StringBuilder.toString:()Ljava/lang/String;</span><br><span class="line">      27: invokevirtual #44                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V</span><br><span class="line">      30: return</span><br></pre></td></tr></table></figure>
+<p>实际执行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String str = &quot;11&quot;;</span><br><span class="line">System.out.println(new StringBuilder(&quot;abc&quot;).apend(str) .addpend(&quot;e&quot;).toString());</span><br></pre></td></tr></table></figure></p>
 
         
         </div>
@@ -255,7 +249,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/16/String/" data-id="cjgdcs52e002fs0my8nvtufer" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/16/String/" data-id="cjgdko04c001x04mydu82713e" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding

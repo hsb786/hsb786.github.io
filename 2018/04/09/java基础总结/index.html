@@ -14,7 +14,7 @@
 <meta property="og:description" content="初始化顺序 父类（静态变量，静态语句块） 子类（静态变量，静态语句块） 父类（实例变量，普通语句块） 父类（构造函数） 子类（实例变量，普通语句块） 子类（构造函数）">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://hsb786.github.io/images/exception.jpg">
-<meta property="og:updated_time" content="2018-04-24T08:25:39.494Z">
+<meta property="og:updated_time" content="2018-04-24T11:14:06.713Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java基础总结">
 <meta name="twitter:description" content="初始化顺序 父类（静态变量，静态语句块） 子类（静态变量，静态语句块） 父类（实例变量，普通语句块） 父类（构造函数） 子类（实例变量，普通语句块） 子类（构造函数）">
@@ -342,6 +342,9 @@
 <p>String类的equals方法，与其它类型比较返回false。其他包装类也一样。</p>
 <pre><code>public boolean equals(Object anObject) 
 </code></pre><hr>
+<p><code>public static native void arraycopy(Object src,  int  srcPos,Object dest, int destPos, int length);</code></p>
+<p>int[] arr={0,1,2,3,4,5,6,7};<br>System.arraycopy(arr,0,arr,1,2);</p>
+<p>//结果<br>arr={0,0,1,3,4,5,6,7};</p>
 
         
         </div>
@@ -352,7 +355,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/09/java基础总结/" data-id="cjgdcs539003ls0mysv71bnye" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/09/java基础总结/" data-id="cjgdko057003d04my0ud55t9p" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
