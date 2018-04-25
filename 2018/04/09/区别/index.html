@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="HuShengBin’s blog">
 <meta property="og:description" content="sleep和wait区别 sleep是Thread类的static方法； wait是Object类的方法 sleep睡眠时保持对象锁； wait释放锁 sleep可以放在任何地方； wait必须放在synchronized block中，否则会在runtime时扔出IllegalMonitorStateExcetion异常">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-04-24T07:58:06.441Z">
+<meta property="og:updated_time" content="2018-04-25T06:43:20.293Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="区别">
 <meta name="twitter:description" content="sleep和wait区别 sleep是Thread类的static方法； wait是Object类的方法 sleep睡眠时保持对象锁； wait释放锁 sleep可以放在任何地方； wait必须放在synchronized block中，否则会在runtime时扔出IllegalMonitorStateExcetion异常">
@@ -245,14 +245,14 @@
 <hr>
 <h2 id="内部类"><a href="#内部类" class="headerlink" title="内部类"></a>内部类</h2><p>在类中定义一个类(私有内部类，静态内部类)<br>在方法中定义一个类(局部内部类，匿名内部类)  </p>
 <ol>
-<li>私有内部类<br>编译器做的手脚<ul>
+<li>成员内部类<br>编译器做的手脚<ul>
 <li>在内部类中创建了包可见构造器，从而使外部类获得了创建权限</li>
-<li>在外部类中创建了访问私有变量的静态方法，从而使内部类获得了范围权限</li>
+<li>在外部类中创建了访问私有变量的静态方法，从而使内部类获得了范围权限<br>必须通过外部类才能获取内部类</li>
 </ul>
 </li>
 <li>静态内部类<br>只能访问其外部类的静态成员</li>
 <li>局部内部类<br>没有修饰符，局部内部类只能范围该方法中的局部变量，并且这些局部变量一定要是final修饰的常量或者隐含是final的(java8)</li>
-<li>匿名内部类<br>不能抽象；仅能被使用一次；不能存在静态成员变量和方法  </li>
+<li>匿名内部类<br>不能抽象；仅能被使用一次；不能存在静态成员变量和方法  ；是唯一一种没有构造器的类。</li>
 </ol>
 <hr>
 <h2 id="Session和Cookie的区别"><a href="#Session和Cookie的区别" class="headerlink" title="Session和Cookie的区别"></a>Session和Cookie的区别</h2><p> <strong>Session</strong>是在服务端保存的一个数据结构，用来跟踪用户的状态，这个数据可以保存在集群、数据库、文件中。<br> <strong>Cookie</strong>是客户端保存用户信息的一种机制，用来记录用户的一些信息，也是实现Session的一种方式。<br> 客户端传JSESSIONID，服务端就可以通过这个ID，来将存储到服务端的数据取出</p>
@@ -393,7 +393,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/09/区别/" data-id="cjgdko05n004l04mypx3ebn7v" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/09/区别/" data-id="cjgel7jre004xx4myi8q7ifjr" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding

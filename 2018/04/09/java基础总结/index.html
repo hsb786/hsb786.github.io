@@ -14,7 +14,7 @@
 <meta property="og:description" content="初始化顺序 父类（静态变量，静态语句块） 子类（静态变量，静态语句块） 父类（实例变量，普通语句块） 父类（构造函数） 子类（实例变量，普通语句块） 子类（构造函数）">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://hsb786.github.io/images/exception.jpg">
-<meta property="og:updated_time" content="2018-04-24T11:14:06.713Z">
+<meta property="og:updated_time" content="2018-04-25T05:09:32.352Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java基础总结">
 <meta name="twitter:description" content="初始化顺序 父类（静态变量，静态语句块） 子类（静态变量，静态语句块） 父类（实例变量，普通语句块） 父类（构造函数） 子类（实例变量，普通语句块） 子类（构造函数）">
@@ -268,8 +268,8 @@
 </ol>
 <hr>
 <p>在Java7以前，如果使用带有泛型的接口，类定义常量，那么调用构造器创建对象时构造器的后面也必须带泛型，这显得有些多余了。</p>
-<p>从java7开始，java允许在构造器后不需要带完整的泛型信息，只要给出一对尖括号(&lt;&gt;)即可，Java可以推断括号里面应该是什么泛型信息。即上面两条语句可以改写成为如下的形式：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; strList=new ArrayList&lt;String&gt;();</span><br><span class="line">Map&lt;String,Integer&gt; scores=new HashMap&lt;String,Integer&gt;();</span><br></pre></td></tr></table></figure>
+<p>从java7开始，java允许在构造器后不需要带完整的泛型信息，只要给出一对尖括号(&lt;&gt;)即可，Java可以推断括号里面应该是什么泛型信息。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; strList=new ArrayList&lt;&gt;();</span><br><span class="line">Map&lt;String,Integer&gt; scores=new HashMap&lt;&gt;();</span><br></pre></td></tr></table></figure>
 <table>
 <thead>
 <tr>
@@ -331,20 +331,14 @@
 <li><strong>非受检异常（unchecked exception）</strong>：是程序运行时错误，例如除0会引发Arithmetic Exceptino，此时程序崩溃并且无法恢复 </li>
 </ol>
 <p><img src="/images/exception.jpg" alt=""></p>
-<h2 id="ArrayList"><a href="#ArrayList" class="headerlink" title="ArrayList"></a>ArrayList</h2><pre><code>transient Object[] elementData; 
-</code></pre><p>扩容1.5倍</p>
-<pre><code>int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);
-</code></pre><ol>
-<li>底层基于数组实现</li>
-<li>插入和删除的时候，涉及到元素复制</li>
-</ol>
-<hr>
 <p>String类的equals方法，与其它类型比较返回false。其他包装类也一样。</p>
 <pre><code>public boolean equals(Object anObject) 
 </code></pre><hr>
 <p><code>public static native void arraycopy(Object src,  int  srcPos,Object dest, int destPos, int length);</code></p>
 <p>int[] arr={0,1,2,3,4,5,6,7};<br>System.arraycopy(arr,0,arr,1,2);</p>
 <p>//结果<br>arr={0,0,1,3,4,5,6,7};</p>
+<hr>
+<p>1&lt;&lt;2=4    二进制向左移<br>4&gt;&gt;&gt;1=2 二进制向右移</p>
 
         
         </div>
@@ -355,7 +349,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/09/java基础总结/" data-id="cjgdko057003d04my0ud55t9p" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/09/java基础总结/" data-id="cjgel7jqi003kx4mycnj8gxhf" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding

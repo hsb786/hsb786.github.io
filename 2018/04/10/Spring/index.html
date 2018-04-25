@@ -14,7 +14,7 @@
 <meta property="og:description" content="Spring结构Spring框架的核心组件只有三个：Bean，Context，Core">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://hsb786.github.io/images/spring.png">
-<meta property="og:updated_time" content="2018-04-20T13:19:26.177Z">
+<meta property="og:updated_time" content="2018-04-25T05:22:58.164Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spring">
 <meta name="twitter:description" content="Spring结构Spring框架的核心组件只有三个：Bean，Context，Core">
@@ -242,6 +242,7 @@
 <p>为了更好理解IOC，大家经常使用依赖注入来代替控制反转这个概念，即让调用类对某一接口的实现类的依赖关系由第三方容器注入，以移除调用类对某一接口实现类的依赖。那么IOC容器的工作就是通过配置文件和注解来描述类和类之间的依赖关系。利用反射机制完成类的初始化和依赖注入。</p>
 <h2 id="BeanFactory和ApplicationContext"><a href="#BeanFactory和ApplicationContext" class="headerlink" title="BeanFactory和ApplicationContext"></a>BeanFactory和ApplicationContext</h2><p>BeanFactory是Spring框架核心接口，提供了IOC的配置机制，是Spring的基础设施，面向Spring本身</p>
 <p>ApplicationContext是建立在BeanFactory之上，提供了更多的面向应用的功能，是Spring给开发者提高了IOC容器接口</p>
+<p>BeanFactroy采用的是延迟加载形式来注入Bean的，即只有在使用到某个Bean时(调用getBean())，才对该Bean进行加载实例化；<br>而ApplicationContext则相反，它是在容器启动时，一次性创建了所有的Bean。</p>
 <h2 id="Bean的生命周期"><a href="#Bean的生命周期" class="headerlink" title="Bean的生命周期"></a>Bean的生命周期</h2><p><img src="/images/bean.png" alt=""></p>
 <ol>
 <li>如果在配置文件中声明了工厂后处理器接口BeanFactoryPostProcessor的实现类，那么在Spring容器装载配置文件之后，初始化Bean实例之前将调用这些BeanFactoryPostProcessor对配置信息进行加工处理。也就是说工厂后处理器是容器级别的，仅在容器初始化的时候调用一次，对配置文件进行加工</li>
@@ -268,13 +269,13 @@
 <li>容器级生命周期接口方法：这些方法是容器来配置实现类的，无需Bean来实现，在流程图中用黑点标识的方法。由于是容器级别的后处理器，这些方法对容器中所有的Bean都起作用。</li>
 </ol>
 <p>在ApplicationContext中，只需要在配置文件中通过定义工厂后处理器和Bean后处理器，容器就会按照预定的机制运行。以上就是Spring容器中管理的Bean的生命周期，并不是每一步都在实际中用到，但是这些生命周期体现了Spring容器对Bean的管理理念，提供给开发者足够的空间来自己控制Bean。</p>
-<h2 id="FactoryBean"><a href="#FactoryBean" class="headerlink" title="FactoryBean"></a>FactoryBean</h2><p>如果某些Bean的实例化过程比较复杂，如果按照XML或者注解来配置的话需要大量的配置信息，并且灵活性也受限制。Spring为了解决这一情况，提供了FactoryBean，我们可以通过实现该工厂接口来定制实例化Bean的逻辑。FactoryBean接口定义了3个方法：</p>
+<h2 id="BeanFactory"><a href="#BeanFactory" class="headerlink" title="BeanFactory"></a>BeanFactory</h2><p>如果某些Bean的实例化过程比较复杂，如果按照XML或者注解来配置的话需要大量的配置信息，并且灵活性也受限制。Spring为了解决这一情况，提供了BeanFactory，我们可以通过实现该工厂接口来定制实例化Bean的逻辑。BeanFactory接口定义了3个方法：</p>
 <ul>
-<li>T getObject():返回由FactoryBean创建的Bean的实例。</li>
-<li>boolean isSingleton():由FactoryBean创建的Bean是Singleton还是prototype</li>
-<li>Class&lt;?&gt; getObjectType():返回FactoryBean创建的Bean的类型</li>
+<li>T getObject():    返回由BeanFactory创建的Bean的实例。</li>
+<li>boolean isSingleton():    由BeanFactory创建的Bean是Singleton还是prototype</li>
+<li>Class&lt;?&gt; getObjectType(): 返回BeanFactory创建的Bean的类型</li>
 </ul>
-<p>当配置文件中的类型是FactoryBean时，容器通过getBean()方法返回的不是FactoryBean本身，而是FactoryBean.getObject()方法所返回的对象。Spring提供了FactoryBean接口给我们提供了自定义实例化Bean的方法，在某些复杂的情况下很有用处。</p>
+<p>当配置文件中的类型是BeanFactory时，容器通过getBean()方法返回的不是BeanFactory本身，而是BeanFactory.getObject()方法所返回的对象。Spring提供了方法返回的不是BeanFactory本身，而是BeanFactory接口给我们提供了自定义实例化Bean的方法，在某些复杂的情况下很有用处。</p>
 <hr>
 <h2 id="Spring中用到的设计模式"><a href="#Spring中用到的设计模式" class="headerlink" title="Spring中用到的设计模式"></a>Spring中用到的设计模式</h2><ul>
 <li>工厂模式:IOC容器</li>
@@ -300,7 +301,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/10/Spring/" data-id="cjgdko04r002b04my3oihvdpd" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/10/Spring/" data-id="cjgel7jq30027x4mymqm969vc" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
