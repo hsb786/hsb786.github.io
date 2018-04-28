@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="HuShengBin’s blog">
 <meta property="og:description" content="接口不可以实现接口，可以继承多个接口 抽象类可以继承具体类 static不能被重写，重写是运行时动态绑定的 static变量发生在静态解析阶段，此时已经将字段的符号引用转换成了内存引用，将它与对应的类关联在了一起">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-04-24T08:06:42.355Z">
+<meta property="og:updated_time" content="2018-04-28T06:05:08.864Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="记录一些容易忘记的东西">
 <meta name="twitter:description" content="接口不可以实现接口，可以继承多个接口 抽象类可以继承具体类 static不能被重写，重写是运行时动态绑定的 static变量发生在静态解析阶段，此时已经将字段的符号引用转换成了内存引用，将它与对应的类关联在了一起">
@@ -157,7 +157,7 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                72
+                73
                 <span>文章</span>
             </div>
             <div class="article-info-block">
@@ -271,6 +271,12 @@
 <li>执行finally语句的内容，其中有return语句，这时就会忽略try中的return，直接返回。</li>
 </ol>
 <p>返回值问题，可以认为try（或者catch）中的return语句的返回值放入线程栈的顶部：如果返回值是基本类型则顶部存放的就是值，如果是引用类型，则顶部存放的是引用。finally中的return语句可以修改引用所对应的对象，无法修改基本类型。</p>
+<p>true、false和null并不是关键字，而是<strong>“字面常量”</strong>，就和String类型的abc一样</p>
+<hr>
+<p>二进制问题</p>
+<p>计算机将所有数据以二进制的形式存储<br>计算机用有限的大小来存储数据</p>
+<p>二进制能用有限的位数表示的有：0.5、0.25、0.125等</p>
+<p>所以0.1+0.2!=0.3</p>
 
         
         </div>
@@ -281,7 +287,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/09/记录一些容易忘记的东西/" data-id="cjgel7js9006ix4myc79ikgmp" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/09/记录一些容易忘记的东西/" data-id="cjgj1geug006rfgmypg56v4ds" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding

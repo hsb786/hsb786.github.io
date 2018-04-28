@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://hsb786.github.io/"/>
-  <updated>2018-04-24T05:25:15.267Z</updated>
+  <updated>2018-04-28T07:11:10.232Z</updated>
   <id>https://hsb786.github.io/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>二进制问题</title>
+    <link href="https://hsb786.github.io/2018/04/28/%E4%BA%8C%E8%BF%9B%E5%88%B6%E9%97%AE%E9%A2%98/"/>
+    <id>https://hsb786.github.io/2018/04/28/二进制问题/</id>
+    <published>2018-04-28T06:12:09.000Z</published>
+    <updated>2018-04-28T07:11:10.232Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>0.1+0.2=0.30000000000000004，今天偶尔看到这个问题，刚好前不久笔试的时候也遇到过，只知道是精度问题，但忘了是为什么，回顾一下。🍳</p></blockquote><a id="more"></a><p>有个网站域名就是0.30000000000000004<br><a href="http://0.30000000000000004.com/" target="_blank" rel="noopener">0.30000000000000004.com</a></p><p>网站上举的栗子🎂</p><table><thead><tr><th>运算</th><th>结果</th></tr></thead><tbody><tr><td>.1 + .2</td><td>0.30000000000000004</td></tr><tr><td>.1F + .2F</td><td>0.3</td></tr></tbody></table><blockquote><p>Java has built-in support for arbitrary precision numbers using the BigDecimal class.<br>可以使用BigDecimal解决这个问题</p></blockquote><h2 id="导致这个问题的原因"><a href="#导致这个问题的原因" class="headerlink" title="导致这个问题的原因"></a>导致这个问题的原因</h2><ul><li>计算机将所有数据以二进制的形式存储  </li><li>计算机用有限的大小来存储数据</li></ul><h3 id="二进制十进制小数转换"><a href="#二进制十进制小数转换" class="headerlink" title="二进制十进制小数转换"></a>二进制十进制小数转换</h3><p>例如十进制0.125转换成二进制</p><table><thead><tr><th>二进制</th><th>十进制</th></tr></thead><tbody><tr><td>0.125*2=0.25</td><td>取整数部分0</td></tr><tr><td>0.25*2=0.5</td><td>取整数部分0</td></tr><tr><td>0.5*2=1</td><td>取整数部分1</td></tr></tbody></table><p>最终得到的结果就是0.001</p><p>例如二进制0.001转换成十进制</p><table><thead><tr><th>十进制</th><th>二进制</th></tr></thead><tbody><tr><td>0* 2^-1</td><td>0</td></tr><tr><td>0* 2^-2</td><td>0</td></tr><tr><td>1* 2^-3</td><td>0.125</td></tr></tbody></table><p>最终得到的结果就是0+0+0.125=0.125</p><hr><p>知道了这些就不难理解为什么0.1+0.2！=0.3</p><p>首先看0.1二进制表示：0.0 00110011001100110011001100110011    </p><p>无穷循环，而计算机只能用有限位来存储数据，所以必然会有精度丢失的问题。</p><p>java采用BigDecimal来解决这个问题</p><hr><h2 id="BigDecimal"><a href="#BigDecimal" class="headerlink" title="BigDecimal"></a>BigDecimal</h2><p>例如<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.1+.2=0.30000000000000004</span><br><span class="line">new BigDecimal(.1).add(new BigDecimal(.2))=0.3000000000000000166533453693773481063544750213623046875</span><br><span class="line">new BigDecimal(String.valueOf(.1)).add(new BigDecimal(String.valueOf(.2)))=0.3</span><br></pre></td></tr></table></figure></p><p>由于0.1无法用二进制表示，所以调用new BIgDecimal(Double val)依然是有问题的，最好转化为String类型。</p><h2 id="需要注意的东西"><a href="#需要注意的东西" class="headerlink" title="需要注意的东西"></a>需要注意的东西</h2><p>BigDecimal是不可变的，在进行每一步运算时，都会产生一个新的对象，由于所以不适合大量的数学运算，适用于商业计算中对进度要求比较高的。</p><p><em>感觉不懂的还有很多</em></p><hr><p><em>参考</em></p><blockquote><p><a href="http://0.30000000000000004.com/" target="_blank" rel="noopener">0.30000000000000004.com</a></p><p><a href="https://www.zhihu.com/question/56545018" target="_blank" rel="noopener">为什么java里面3*0.1=0.30000000000000004，而4*0.1=0.4？</a></p><p><a href=""></a></p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;0.1+0.2=0.30000000000000004，今天偶尔看到这个问题，刚好前不久笔试的时候也遇到过，只知道是精度问题，但忘了是为什么，回顾一下。🍳&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="爪哇" scheme="https://hsb786.github.io/categories/%E7%88%AA%E5%93%87/"/>
+    
+    
+      <category term="爪哇" scheme="https://hsb786.github.io/tags/%E7%88%AA%E5%93%87/"/>
+    
+  </entry>
   
   <entry>
     <title>山鬼</title>
@@ -479,34 +503,6 @@
     
     
       <category term="JVM" scheme="https://hsb786.github.io/tags/JVM/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>TCP/IP</title>
-    <link href="https://hsb786.github.io/2018/04/16/TCP-IP/"/>
-    <id>https://hsb786.github.io/2018/04/16/TCP-IP/</id>
-    <published>2018-04-16T10:43:52.000Z</published>
-    <updated>2018-04-25T06:57:56.248Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote><p>感觉计算机网络课上学的东西忘得差不多了，怎么办？怎么办？</p><p>还能怎么办，学啊。</p></blockquote><h2 id="TCP-IP"><a href="#TCP-IP" class="headerlink" title="TCP/IP"></a>TCP/IP</h2><p>百度百科上的解释</p><blockquote><p>Transmission Control Protocol/Internet Protocol的简写，中译名为传输控制协议/因特网互联协议，又名网络通讯协议，是Internet最基本的协议、Internet国际互联网络的基础，由网络层的IP协议和传输层的TCP协议组成。TCP/IP 定义了电子设备如何连入因特网，以及数据如何在它们之间传输的标准。协议采用了4层的层级结构，每一层都呼叫它的下一层所提供的协议来完成自己的需求。通俗而言：TCP负责发现传输的问题，一有问题就发出信号，要求重新传输，直到所有数据安全正确地传输到目的地。而IP是给因特网的每一台联网设备规定一个地址。<br><a id="more"></a></p></blockquote><p>TCP/IP协议族就采用了分层的思想，自上而下分成了四层： 应用层，传输层，网络层，链路层，每一层的协议只约定了特定的功能，HTTP就位于应用层。利用TCP/IP协议族进行网络通信时，会通过分层顺序与对方进行通信。发送端从应用层往下走，接收端则往应用层往上走。一次HTTP请求的典型过程如下图所示</p><p><img src="/images/HTTP01.jpg" alt=""></p><h2 id="URI"><a href="#URI" class="headerlink" title="URI"></a>URI</h2><blockquote><p>URI是Uniform Resource Identifier的缩写，是由某个协议方案表示的资源的定位标识符。协议方案是指访问资源所使用的协议类型名称。 采用HTTP协议时，协议方案就是http。除此之外，还有ftp、mailto、telnet、file等。</p></blockquote><p>比如<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http://</span><br><span class="line">ftp://</span><br></pre></td></tr></table></figure></p><p>我们比较熟悉的URL（<code>Uniform Resource Locator</code>，统一资源定位符）表示资源在互联网上的地址，它其实是URI的一个子集，因为URI仅仅表示「标识」， 标识的类型有很多，比如ISBN号码，电话号码，邮箱，网页链接地址等，而URL则把概念缩小到了「地址」。 由于URI在绝大多数场景下都是以URL的形式存在，大家一般都说URL居多，这也没什么问题，但是在心里要清楚URI和URL还是有所区别的。</p><h2 id="HTTP协议内容"><a href="#HTTP协议内容" class="headerlink" title="HTTP协议内容"></a>HTTP协议内容</h2><p>接下来的内容基于HTTP 1.1版本。</p><h3 id="请求-amp-响应报文结构"><a href="#请求-amp-响应报文结构" class="headerlink" title="请求 &amp; 响应报文结构"></a>请求 &amp; 响应报文结构</h3><blockquote><p>在两台计算机之间使用HTTP协议通信时，在一条通信线路上必定有一端是客户端，另一端则是服务器端。HTTP协议规定，请求从客户端发出， 最后服务器端响应该请求并返回。换句话说，肯定是先从客户端开始建立通信的，服务器端在没有接收到请求之前不会发送响应。</p><p>HTTP报文本身是由多行（用CR+LF作换行符）数据构成的字符串文本。请求端（客户端）的HTTP报文叫做请求报文，响应端（服务器端）的叫做响应报文。HTTP报文大致可分为报文首部和报文主体两块。 两者由最初出现的空行（CR+LF）来划分。通常，并不一定要有报文主体。</p></blockquote><p><img src="/images/HTTP02.jpg" alt=""></p><p>请求报文是由请求方法、请求URI、协议版本、可选的请求首部字段和内容实体构成的。响应报文基本上由协议版本、状态码（表示请求成功或失败的数字代码）、用以解释状态码的原因短语、可选的响应首部字段以及实体主体构成。 如下是一个HTTP请求和响应报文的实例</p><p><img src="/images/HTTP03.jpg" alt=""></p><h3 id="响应状态码"><a href="#响应状态码" class="headerlink" title="响应状态码"></a>响应状态码</h3><blockquote><p>状态码的职责是当客户端向服务器端发送请求时，描述返回的请求结果。借助状态码，用户可以知道服务器端是正常处理了请求，还是出现了错误。 数字中的第一位指定了响应类别，后两位无分类。</p></blockquote><p>状态码主要类型一览：</p><p><img src="/images/HTTP04.jpg" alt=""></p><h3 id="首部-amp-实体"><a href="#首部-amp-实体" class="headerlink" title="首部 &amp; 实体"></a>首部 &amp; 实体</h3><blockquote><p>HTTP首部字段是构成HTTP报文的要素之一。在客户端与服务器之间以HTTP协议进行通信的过程中，无论是请求还是响应都会使用首部字段，它能起到传递额外重要信息的作用。使用首部字段是为了给浏览器和服务器提供报文主体大小、所使用的语言、认证信息等内容。</p></blockquote><p>HTTP首部字段由首部字段名和字段值构成的，中间用冒号“:”分隔。比如：<code>Content-Type: text/html</code>。 HTTP实体是HTTP请求和响应传输的主体内容，根据场景不同可能是表单参数，HTML文本，JSON文本，二进制流等。</p><h3 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h3><blockquote><p>HTTP是一种不保存状态，即无状态（stateless）协议。<strong>HTTP协议自身不对请求和响应之间的通信状态进行保存</strong>。也就是说在HTTP这个级别，协议对于发送过的请求或响应都不做持久化处理。 使用HTTP协议，每当有新的请求发送时，就会有对应的新响应产生。<strong>协议本身并不保留之前一切的请求或响应报文的信息</strong>。这是为了更快地处理大量事务，确保协议的可伸缩性，而特意把HTTP协议设计成如此简单的。 不可否认，无状态协议当然也有它的优点。由于不必保存状态，自然可减少服务器的CPU及内存资源的消耗。从另一侧面来说，也正是因为HTTP协议本身是非常简单的，所以才会被应用在各种场景里。</p></blockquote><blockquote><p><strong>Cookie会根据从服务器端发送的响应报文内的一个叫做Set-Cookie的首部字段信息，通知客户端保存Cookie。当下次客户端再往该服务器发送请求时，客户端会自动在请求报文中加入Cookie值后发送出去。服务器端发现客户端发送过来的Cookie后，会去检查究竟是从哪一个客户端发来的连接请求，然后对比服务器上的记录，最后得到之前的状态信息</strong>。</p></blockquote><p><img src="/images/HTTP05.png" alt=""></p><h2 id="GET和POST的区别"><a href="#GET和POST的区别" class="headerlink" title="GET和POST的区别"></a>GET和POST的区别</h2><p><strong>GET和POST最直观的区别就是GET把参数包含在URL中，POST通过request body传递参数</strong></p><p>W3school的解答</p><table><thead><tr><th>方法</th><th>GET</th><th>POST</th></tr></thead><tbody><tr><td>后退按钮/刷新</td><td>无害</td><td>数据会被重新提交（浏览器应该告知用户数据会被重新提交）。</td></tr><tr><td>书签</td><td>可收藏为书签</td><td>不可收藏为书签</td></tr><tr><td>缓存</td><td>能被缓存</td><td>不能缓存</td></tr><tr><td>编码类型</td><td>application/x-www-form-urlencoded</td><td>application/x-www-form-urlencoded 或 multipart/form-data。为二进制数据使用多重编码。</td></tr><tr><td>历史</td><td>参数保留在浏览器历史中。</td><td>参数不会保存在浏览器历史中。</td></tr><tr><td>对数据长度的限制</td><td>是的。当发送数据时，GET 方法向 URL 添加数据；URL 的长度是受限制的（URL 的最大长度是 2048 个字符）。</td><td>无限制。</td></tr><tr><td>对数据类型的限制</td><td>只允许 ASCII 字符。</td><td>没有限制。也允许二进制数据。</td></tr><tr><td>安全性</td><td>与 POST 相比，GET 的安全性较差，因为所发送的数据是 URL 的一部分。在发送密码或其他敏感信息时绝不要使用 GET ！</td><td>POST 比 GET 更安全，因为参数不会被保存在浏览器历史或 web 服务器日志中。</td></tr><tr><td>可见性</td><td>数据在 URL 中对所有人都是可见的。</td><td>数据不会显示在 URL 中。</td></tr></tbody></table><p>这个对比只是给出了一些现象上的区别</p><hr><p>GET和POST是什么？<strong>HTTP协议中的两种发送请求的方法。</strong></p><p>HTTP是什么？<strong>HTTP是基于TCP/IP的关于数据如何在万维网中如何通信的协议</strong></p><p><strong>HTTP的底层是TCP/IP。所以GET和POST的底层也是TCP/IP，也就是说，GET/POST都是TCP链接。GET和POST能做的事情是一样的。你要给GET加上request body，给POST带上url参数，技术上是完全行的通的</strong>。 </p><p><strong>如果你用GET服务，在request body中存了数据，不同服务器的处理方式是不同的，有些服务器会读出数据，有些服务器直接忽略。所以，虽然GET可以带request body，但不能保证一定能被接受到</strong>。</p><h2 id="RFC"><a href="#RFC" class="headerlink" title="RFC"></a>RFC</h2><blockquote><p>征求意见稿（英语：Request For Comments，缩写为RFC），是由互联网工程任务组（IETF）发布的一系列备忘录。文件收集了有关互联网相关信息，以及UNIX和互联网社区的软件文件，以编号排定。目前RFC文件是由互联网协会（ISOC）赞助发行。</p></blockquote><p>简单理解RFC就是互联网的规范，我们通常所说的「协议」就是以RFC的形式存在，而现行的HTTP/1.1规范的RFC有如下几个： RFC7230， RFC7231， RFC7232， RFC7233， RFC7234， RFC7235。 其中RFC7231里的Section 4. Request Methods涉及到了几个HTTP方法，接下来仔细阅读这一章节。</p><blockquote><p>The request method token is the primary source of request semantics; it indicates the purpose for which the client has made this request and what is expected by the client as a successful result.</p></blockquote><p>semantic[语义]，语法与语义的区别：</p><blockquote><p>一种语言是合法句子的集合。什么样的句子是合法的呢？可以从两方面来判断：语法和语义。语法是和文法结构有关，然而语义是和按照这个结构所组合的单词符号的意义有关。合理的语法结构并不表明语义是合法的。例如我们常说：我上大学，这个句子是符合语法规则的，也符合语义规则。但是大学上我，虽然符合语法规则，但没有什么意义，所以说是不符合语义的。</p></blockquote><p>对于HTTP请求来说，语法是指请求响应的格式，比如请求第一行必须是 方法名 URI 协议/版本 这样的格式。</p><p>语义则定义了这一类型的请求具有什么样的性质。比如GET的语义就是「获取资源」，POST的语义是「处理资源」，那么在具体实现这两个方法时，就必须考虑其语义，做出符合其语义的行为。</p><p><strong>当然在符合语法的前提下实现违背语义的行为也是可以做到的，比如使用GET方法修改用户信息，POST获取资源列表，这样就只能说这个请求是「合法」的，但不是「符合语义」的</strong>。 </p><p>RFC7231里紧接着定义了HTTP方法的几个特性：</p><blockquote><p>Safe - 安全<br>这里的「安全」和通常理解的「安全」意义不同，如果一个方法的语义在本质上是「只读」的，那么这个方法就是安全的。客户端向服务端的资源发起的请求如果使用了是安全的方法，就不应该引起服务端任何的状态变化，因此也是无害的。 此RFC定义，GET, HEAD, OPTIONS 和 TRACE 这几个方法是安全的。<br>但是这个定义只是规范，并不能保证方法的实现也是安全的，服务端的实现可能会不符合方法语义，正如上文说过的使用GET修改用户信息的情况。<br>引入安全这个概念的目的是为了方便网络爬虫和缓存，以免调用或者缓存某些不安全方法时引起某些意外的后果。User Agent（浏览器）应该在执行安全和不安全方法时做出区分对待，并给用户以提示。</p><p>Idempotent - 幂等<br>幂等的概念是指同一个请求方法执行多次和仅执行一次的效果完全相同。按照RFC规范，PUT，DELETE和安全方法都是幂等的。同样，这也仅仅是规范，服务端实现是否幂等是无法确保的。<br>引入幂等主要是为了处理同一个请求重复发送的情况，比如在请求响应前失去连接，如果方法是幂等的，就可以放心地重发一次请求。这也是浏览器在后退/刷新时遇到POST会给用户提示的原因：POST语义不是幂等的，重复请求可能会带来意想不到的后果。</p><p>Cacheable - 可缓存性<br>顾名思义就是一个方法是否可以被缓存，此RFC里GET，HEAD和某些情况下的POST都是可缓存的，但是绝大多数的浏览器的实现里仅仅支持GET和HEAD。</p></blockquote><p><strong>在这三个特性里一直在强调同一个事情，那就是协议不等于实现：协议规定安全在实现里不一定安全，协议规定幂等在实现里不一定幂等，协议规定可缓存在实现里不一定可缓存。</strong></p><h3 id="语义之争"><a href="#语义之争" class="headerlink" title="语义之争"></a>语义之争</h3><p>GET的语义是请求获取指定的资源。<strong>GET方法是安全、幂等、可缓存的</strong>（除非有 Cache-Control Header的约束）,GET方法的报文主体没有任何语义。</p><p>POST的语义是根据请求负荷（报文主体）对指定的资源做出处理，具体的处理方式视资源类型而不同。<strong>POST不安全，不幂等，（大部分实现）不可缓存</strong>。</p><hr><h2 id="TCP为什么是三次握手"><a href="#TCP为什么是三次握手" class="headerlink" title="TCP为什么是三次握手"></a>TCP为什么是三次握手</h2><p><img src="/images/三次握手.png" alt=""></p><p>TCP作为一种可靠传输控制协议,其核心思想:<strong>既要保证数据可靠传输,又要提高传输的效率</strong></p><p><strong>三次是保证双方互相明确对方能收能发的最低值</strong></p><hr><p><em>参考</em></p><blockquote><p><a href="https://baike.baidu.com/item/TCP%2FIP协议/212915?fr=aladdin&amp;fromid=214077&amp;fromtitle=tcp%2Fip" target="_blank" rel="noopener">TCP/IP协议 百度百科</a></p><p><a href="https://mp.weixin.qq.com/s?__biz=MzI3NzIzMzg3Mw==&amp;mid=100000054&amp;idx=1&amp;sn=71f6c214f3833d9ca20b9f7dcd9d33e4#rd" target="_blank" rel="noopener">99%的人都理解错了HTTP中GET与POST的区别 </a></p><p><a href="https://sunshinevvv.coding.me/blog/2017/01/26/图解HTTP-读书笔记/" target="_blank" rel="noopener">图解HTTP-读书笔记</a></p><p><a href="http://www.w3school.com.cn/tags/html_ref_httpmethods.asp" target="_blank" rel="noopener">HTTP 方法：GET 对比 POST</a></p><p><a href="https://sunshinevvv.coding.me/blog/2017/02/09/HttpGETv.s.POST/" target="_blank" rel="noopener">HTTP协议中GET和POST方法的区别</a></p><p><a href="https://www.zhihu.com/question/24853633" target="_blank" rel="noopener">TCP 为什么是三次握手，而不是两次或四次？</a></p></blockquote>]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;感觉计算机网络课上学的东西忘得差不多了，怎么办？怎么办？&lt;/p&gt;
-&lt;p&gt;还能怎么办，学啊。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id=&quot;TCP-IP&quot;&gt;&lt;a href=&quot;#TCP-IP&quot; class=&quot;headerlink&quot; title=&quot;TCP/IP&quot;&gt;&lt;/a&gt;TCP/IP&lt;/h2&gt;&lt;p&gt;百度百科上的解释&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Transmission Control Protocol/Internet Protocol的简写，中译名为传输控制协议/因特网互联协议，又名网络通讯协议，是Internet最基本的协议、Internet国际互联网络的基础，由网络层的IP协议和传输层的TCP协议组成。TCP/IP 定义了电子设备如何连入因特网，以及数据如何在它们之间传输的标准。协议采用了4层的层级结构，每一层都呼叫它的下一层所提供的协议来完成自己的需求。通俗而言：TCP负责发现传输的问题，一有问题就发出信号，要求重新传输，直到所有数据安全正确地传输到目的地。而IP是给因特网的每一台联网设备规定一个地址。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="HTTP" scheme="https://hsb786.github.io/categories/HTTP/"/>
-    
-    
-      <category term="HTTP" scheme="https://hsb786.github.io/tags/HTTP/"/>
     
   </entry>
   
