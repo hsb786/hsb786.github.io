@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <meta charset="utf-8">
+    
+    <title>流【Java8实战】 | HuShengBin’s blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="流是Java API的新成员，它允许你以声明性方式处理数据集合（通过查询语句来表达，而不是临时编写一个实现）">
+<meta name="keywords" content="爪哇">
+<meta property="og:type" content="article">
+<meta property="og:title" content="流【Java8实战】">
+<meta property="og:url" content="https://hsb786.github.io/2018/04/29/流【Java8实战】/index.html">
+<meta property="og:site_name" content="HuShengBin’s blog">
+<meta property="og:description" content="流是Java API的新成员，它允许你以声明性方式处理数据集合（通过查询语句来表达，而不是临时编写一个实现）">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://hsb786.github.io/images/stream01.png">
+<meta property="og:image" content="https://hsb786.github.io/images/stream02.png">
+<meta property="og:image" content="https://hsb786.github.io/images/stream03.png">
+<meta property="og:image" content="https://hsb786.github.io/images/stream04.png">
+<meta property="og:image" content="https://hsb786.github.io/images/stream05.png">
+<meta property="og:image" content="https://hsb786.github.io/images/stream06.png">
+<meta property="og:image" content="https://hsb786.github.io/images/stream07.png">
+<meta property="og:image" content="https://hsb786.github.io/images/stream08.png">
+<meta property="og:image" content="https://hsb786.github.io/images/stream09.png">
+<meta property="og:updated_time" content="2018-04-29T13:18:30.692Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="流【Java8实战】">
+<meta name="twitter:description" content="流是Java API的新成员，它允许你以声明性方式处理数据集合（通过查询语句来表达，而不是临时编写一个实现）">
+<meta name="twitter:image" content="https://hsb786.github.io/images/stream01.png">
+    
+
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                
+                <span class="site-title">HuShengBin’s blog</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">Home</a>
+                
+                    <a class="main-nav-link" href="/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/tags">Tags</a>
+                
+                    <a class="main-nav-link" href="/about">About</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/css/images/txx.jpg" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">Tags</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/css/images/txx.jpg" />
+            <h2 id="name">hushengbin</h2>
+            <h3 id="title">JavaWeb Developer</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>Nanchang, Jiangxi, China</span>
+            <a id="follow" target="_blank" href="https://github.com/hsb786">关注我</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                76
+                <span>文章</span>
+            </div>
+            <div class="article-info-block">
+                14
+                <span>标签</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="https://github.com/hsb786" target="_blank" title="github" class=tooltip>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-流【Java8实战】" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            流【Java8实战】
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2018/04/29/流【Java8实战】/">
+            <time datetime="2018-04-29T08:02:22.000Z" itemprop="datePublished">2018-04-29</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/爪哇/">爪哇</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/爪哇/Java8实战/">Java8实战</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/爪哇/">爪哇</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <blockquote>
+<p>流是Java API的新成员，它允许你<strong>以声明性方式处理数据集合</strong>（通过查询语句来表达，而不是临时编写一个实现）</p>
+</blockquote>
+<a id="more"></a>
+<p>举个栗子🎂</p>
+<p><img src="/images/stream01.png" alt=""></p>
+<ul>
+<li>代码是以声明性方式写的：说明想要完成什么而不是说明如何实现一个操作</li>
+<li>可以把几个基础操作链接起来，来表达复杂的数据处理流水线，同时保持代码清晰可读</li>
+</ul>
+<p>Stream API:</p>
+<ul>
+<li>声明性——更简洁，更易读</li>
+<li>可复合——更灵活</li>
+<li>可并行——性能很好</li>
+</ul>
+<h2 id="流简介"><a href="#流简介" class="headerlink" title="流简介"></a>流简介</h2><p>简短的定义就是“<strong>从支持数据处理操作的源生成的元素序列</strong>”</p>
+<ul>
+<li>元素序列——就像集合一样，流也提供了一个接口，可以访问特定元素类型的一组有序值。因为集合是数据结构，所以它的主要目的是以特定的时间/空间复杂度存储和访问元素（如ArrayList与LinkedList）。但流的目的在于表达计算，比如你前面见到的filter、sorted和map。<strong>集合讲的是数据，流讲的是计算</strong>。</li>
+<li>源——流会使用一个提供数据的源，如集合、数组或输入/输出资源。请注意，从有序集合生成流时会保留原有的顺序。由列表生成的流，其元素顺序与列表一致。</li>
+<li>数据处理操作——流的数据处理功能支持类似于数据库的操作，以及函数式编程语言中的常用操作，如filter、map、reduce、find、match、sort等。流操作可以顺序执行，也可并行执行</li>
+</ul>
+<p>特点：</p>
+<ul>
+<li>流水线——很多流操作本身会返回一个流，这样多个操作就可以链接起来，形成一个大的流水线。</li>
+<li>内部迭代——与使用迭代器显式迭代的集合不同，流的迭代操作是在背后进行的。</li>
+</ul>
+<p><img src="/images/stream02.png" alt="用流来筛选菜单，找出三个高热量菜肴的名字"></p>
+<h2 id="流与集合"><a href="#流与集合" class="headerlink" title="流与集合"></a>流与集合</h2><p>集合与流之间的差异就在于什么时候进行计算。<strong>集合是一个内存中的数据结构，它包含数据结构中目前所有的值——集合中的每个元素都得先算出来才能添加到集合中</strong>。（你可以往集合里加东西或者删东西，但是不管什么时候，集合中的每个元素都是放在内存里的，元素都得先算出来才能成为集合的一部分。）<br>相比之下，<strong>流则是在概念上固定的数据结构（你不能添加或删除元素），其元素则是按需计算的</strong>。</p>
+<p><img src="/images/stream03.png" alt=""></p>
+<h3 id="只能遍历一次"><a href="#只能遍历一次" class="headerlink" title="只能遍历一次"></a>只能遍历一次</h3><p>请注意，和迭代器类似，<strong>流只能遍历一次。遍历完之后，我们就说这个流已经被消费掉了</strong>。你可以从原始数据源那里再获得一个新的流来重新遍历一遍，就像迭代器一样</p>
+<h3 id="外部迭代与内部迭代"><a href="#外部迭代与内部迭代" class="headerlink" title="外部迭代与内部迭代"></a>外部迭代与内部迭代</h3><p><strong>使用Collection接口需要用户去做迭代（比如用for-each），这称为外部迭代。相反，Streams库使用内部迭代——它帮你把迭代做了，还把得到的流值存在了某个地方，你只要给出一个函数说要干什么就可以了</strong>。</p>
+<p>外部迭代一个集合，显式地取出每个项目再加以处理。内部迭代时，项目可以透明地并行处理，或者用更优化的顺序进行处理。要是用Java过去的那种外部迭代方法，这些优化都是很困难的。这似乎有点儿鸡蛋里挑骨头，但这差不多就是Java 8引入流的理由了——Streams库的内部迭代可以自动选择一种适合你硬件的数据表示和并行实现。与此相反，<strong>一旦通过写for-each而选择了外部迭代，那你基本上就要自己管理所有的并行问题了（自己管理实际上意味着“某个良辰吉日我们会把它并行化”或“开始了关于任务和synchronized的漫长而艰苦的斗争”）</strong>。Java  8需要一个类似于Collection却没有迭代器的接口，于是就有了Stream！<br><img src="/images/stream04.png" alt="内部迭代与外部迭代"></p>
+<h2 id="流操作"><a href="#流操作" class="headerlink" title="流操作"></a>流操作</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; names = menu.stream()      //获得流</span><br><span class="line">                         .filter(d -&gt; d.getCalories() &gt; 300)    //中间操作</span><br><span class="line">                         .map(Dish::getName)  </span><br><span class="line">                         .limit(3)  </span><br><span class="line">                         .collect(toList());    //将Stream转换为List</span><br></pre></td></tr></table></figure>
+<ul>
+<li>filter、map和limit可以连成一条流水线</li>
+<li>collect触发流水线执行并关闭它</li>
+</ul>
+<p><strong>可以连接起来的操作称为中间操作，关闭流的操作称为终端操作</strong></p>
+<h3 id="中间操作"><a href="#中间操作" class="headerlink" title="中间操作"></a>中间操作</h3><p>诸如filter或sorted等中间操作会返回另一个流。这让多个操作可以连接起来形成一个查询。<strong>重要的是，除非流水线上触发一个终端操作，否则中间操作不会执行任何处理</strong>——它们很懒。这是因为<strong>中间操作一般都可以合并起来，在终端操作时一次性全部处理</strong>。<br><img src="/images/stream05.png" alt=""></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">filtering pork </span><br><span class="line">mapping pork </span><br><span class="line">filtering beef </span><br><span class="line">mapping beef </span><br><span class="line">filtering chicken </span><br><span class="line">mapping chicken </span><br><span class="line">[pork, beef, chicken]</span><br></pre></td></tr></table></figure>
+<p>你会发现，有好几种优化利用了流的延迟性质。第一，尽管很多菜的热量都高于300卡路里，但只选出了前三个！这是因为limit操作和一种称为短路的技巧。第二，尽管filter和map是两个独立的操作，但它们合并到同一次遍历中了（我们把这种技术叫作循环合并）。</p>
+<h3 id="终端操作"><a href="#终端操作" class="headerlink" title="终端操作"></a>终端操作</h3><p><strong>终端操作会从流的流水线生成结果</strong>。其结果是任何不是流的值，比如List、Integer，甚至void。例如，在下面的流水线中，forEach是一个返回void的终端操作，它会对源中的每道菜应用一个Lambda。把System.out.println传递给forEach，并要求它打印出由menu生成的流中的每一个Dish：<br>        menu.stream().forEach(System.out::println); </p>
+<h3 id="使用流"><a href="#使用流" class="headerlink" title="使用流"></a>使用流</h3><p>流的使用一般包括三件事：</p>
+<ul>
+<li>一个数据源（如集合）来执行一个查询；</li>
+<li>一个中间操作链，形成一条流的流水线；</li>
+<li>一个终端操作，执行流水线，并能生成结果。</li>
+</ul>
+<p><strong>流的流水线背后的理念类似于构建器模式。在构建器模式中有一个调用链用来设置一套配置（对流来说这就是一个中间操作链），接着是调用built方法（对流来说就是终端操作）</strong>。</p>
+<p>中间操作：</p>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>类型</th>
+<th>返回类型</th>
+<th>操作参数</th>
+<th>函数描述符</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>filter</td>
+<td>中间</td>
+<td>Stream&lt;T></td>
+<td>Predicate&lt;T></td>
+<td>T -&gt; boolean</td>
+</tr>
+<tr>
+<td>map</td>
+<td>中间</td>
+<td>Stream&lt;T></td>
+<td>Function&lt;T,R></td>
+<td>T -&gt; R </td>
+</tr>
+<tr>
+<td>limit</td>
+<td>中间</td>
+<td>Stream&lt;T></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>sorted</td>
+<td>中间</td>
+<td>Stream&lt;T></td>
+<td>Comparator&lt;T></td>
+<td>(T,T) -&gt; int </td>
+</tr>
+<tr>
+<td>distinct</td>
+<td>中间</td>
+<td>Stream&lt;T></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>终端操作：</p>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>类型</th>
+<th>目的</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>forEach</td>
+<td>终端</td>
+<td>消费流中的每个元素并对其应用Lambda。这一操作返回void</td>
+</tr>
+<tr>
+<td>count</td>
+<td>终端</td>
+<td>返回流中元素的个数。这一操作返回long</td>
+</tr>
+<tr>
+<td>collect</td>
+<td>终端</td>
+<td>把流归约成一个集合，比如List、Map甚至是Integer</td>
+</tr>
+</tbody>
+</table>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><ul>
+<li>流是”从支持数据处理操作的源生成的一系列元素”</li>
+<li>流利用内部迭代： 迭代通过filter、map、sorted等操作被抽象掉了</li>
+<li>流操作有两类： 中间操作和终端操作</li>
+<li>filter和map等中间操作费返回一个流，并可以链接在一起。可以用它们来设置一条流水线，但并不会生成任何结果</li>
+<li>forEach和count等终端操作会返回一个非流的值，并处理流水线以返回结果</li>
+<li>流中的元素是按需计算的</li>
+</ul>
+<hr>
+<h2 id="使用流-1"><a href="#使用流-1" class="headerlink" title="使用流"></a>使用流</h2><h3 id="筛选"><a href="#筛选" class="headerlink" title="筛选"></a>筛选</h3><h4 id="使用谓词筛选"><a href="#使用谓词筛选" class="headerlink" title="使用谓词筛选"></a>使用谓词筛选</h4><p>Streams接口支持filter方法。该操作费接受一个谓词（一个返回boolean的函数）作为参数，并返回一个包括所有符合谓词的元素的流<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Dish&gt; vegetarianMenu = menu.stream() </span><br><span class="line">                                filter(Dish::isVegetarian)  //筛选出所有素菜</span><br><span class="line">                                .collect(toList());</span><br></pre></td></tr></table></figure></p>
+<h3 id="筛选各异的元素"><a href="#筛选各异的元素" class="headerlink" title="筛选各异的元素"></a>筛选各异的元素</h3><p>流还支持一个叫做distinct的方法，它会返回一个元素各异（根据流所生成元素的hashCode和equals方法实现）的流。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Integer&gt; numbers = Arrays.asList(1, 2, 1, 3, 3, 2, 4); </span><br><span class="line">numbers.stream()  </span><br><span class="line">       .filter(i -&gt; i % 2 == 0) </span><br><span class="line">       .distinct() </span><br><span class="line">       .forEach(System.out::println);</span><br></pre></td></tr></table></figure></p>
+<h3 id="截断流"><a href="#截断流" class="headerlink" title="截断流"></a>截断流</h3><p>流支持limit(n)方法，该方法会返回一个不超过给定长度的流<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Dish&gt; dishes = menu.stream() </span><br><span class="line">                        .filter(d -&gt; d.getCalories() &gt; 300) </span><br><span class="line">                        .limit(3) </span><br><span class="line">                        .collect(toList());</span><br></pre></td></tr></table></figure></p>
+<h3 id="跳过元素"><a href="#跳过元素" class="headerlink" title="跳过元素"></a>跳过元素</h3><p>流还支持skip(n)方法，返回一个扔掉了前n个元素的流。如果流中元素不足n个，则返回一个空流。</p>
+<hr>
+<h2 id="映射"><a href="#映射" class="headerlink" title="映射"></a>映射</h2><p>从某些对象中选择信息。（使用映射一词，是因为它和转换类似，但其中的细微差别在于它是“创建一个新的版本”而不是去“修改”）</p>
+<h3 id="对流中每一个元素应用函数"><a href="#对流中每一个元素应用函数" class="headerlink" title="对流中每一个元素应用函数"></a>对流中每一个元素应用函数</h3><p>流支持map方法，它会接受一个函数作为参数。这个函数会被应用到每个元素上，并将其映射成一个新的元素<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; dishNames = menu.stream() </span><br><span class="line">                             .map(Dish::getName) </span><br><span class="line">                             .collect(toList());</span><br></pre></td></tr></table></figure></p>
+<h3 id="流的扁平化"><a href="#流的扁平化" class="headerlink" title="流的扁平化"></a>流的扁平化</h3><p>对于一张单词表，如何返回一张列表，列出里面各不相同的字符呢？例如，给定单词列表[“Hello”,”World”]，你想要返回列表[“H”,”e”,”l”, “o”,”W”,”r”,”d”]。</p>
+<p>你可能会认为这很容易，你可以把每个单词映射成一张字符表，然后调用distinct来过滤重复的字符。第一个版本可能是这样的：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">words.stream() </span><br><span class="line">     .map(word -&gt; word.split(&quot;&quot;)) </span><br><span class="line">     .distinct() </span><br><span class="line">     .collect(toList());</span><br></pre></td></tr></table></figure></p>
+<p>这个方法的问题在于，传递给map方法的Lambda为每个单词返回了一个String[]（String列表）  。因此，map返回的流实际上是Stream&lt;String[]&gt;类型的。<br><img src="/images/stream06.png" alt="不正确地使用map找出单词列表中各不相同的字符"></p>
+<ol>
+<li>尝试使用map和Arrays.stream()<br><strong>Arrays.stream()可以接受一个数组并产生一个流</strong><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">words.stream() </span><br><span class="line">     .map(word -&gt; word.split(&quot;&quot;)) </span><br><span class="line">     .map(Arrays::stream)</span><br><span class="line">     .distinct() </span><br><span class="line">     .collect(toList());</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>当前的解决方案仍然搞不定！这是因为，你现在得到的是一个流的列表（更准确地说是Stream<string>）！的确，你先是把每个单词转换成一个字母数组，然后把每个数组变成了一个独立的流。</string></p>
+<ol start="2">
+<li>使用flatMap<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; uniqueCharacters = </span><br><span class="line">    words.stream() </span><br><span class="line">         .map(w -&gt; w.split(&quot;&quot;)) </span><br><span class="line">         .flatMap(Arrays::stream)  </span><br><span class="line">         .distinct() </span><br><span class="line">         .collect(Collectors.toList());</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p><strong>使用flatMap方法的效果是，各个数组并不是分别映射成一个流，而是映射成流的内容。</strong>所有使用map(Arrays::steam)时生成的单个流被合并起来，即扁平化为一个流。<br><img src="/images/stream07.png" alt=" 使用flatMap找出单词列表中各不相同的字符"></p>
+<p>总而言之，<strong>flatmap方法让你把一个流中的每个值都换成另一个流，然后把所有的流连接起来成为一个流。</strong></p>
+<hr>
+<h3 id="查找和匹配"><a href="#查找和匹配" class="headerlink" title="查找和匹配"></a>查找和匹配</h3><h4 id="检查谓词是否至少匹配一个元素"><a href="#检查谓词是否至少匹配一个元素" class="headerlink" title="检查谓词是否至少匹配一个元素"></a>检查谓词是否至少匹配一个元素</h4><p><strong>anyMatch方法“流中是否有一个元素能匹配给定的谓词”</strong>。比如，你可以用它来看看菜单里面是否有素食可选择：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">if(menu.stream().anyMatch(Dish::isVegetarian))&#123; </span><br><span class="line">    System.out.println(&quot;The menu is (somewhat) vegetarian friendly!!&quot;); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="检查谓词是否匹配所有元素"><a href="#检查谓词是否匹配所有元素" class="headerlink" title="检查谓词是否匹配所有元素"></a>检查谓词是否匹配所有元素</h4><p>allMatch方法的工作原理和anyMatch类似，但它会看看<strong>流中的元素是否都能匹配给定的谓词</strong></p>
+<h4 id="noneMatch"><a href="#noneMatch" class="headerlink" title="noneMatch"></a>noneMatch</h4><p>和allMatch相对的是noneMatch。它可以确保<strong>流中没有任何元素与给定的谓词匹配。</strong></p>
+<p>anyMatch、allMatch和noneMatch这三个操作都用到了我们所谓的短路，这就是大家熟悉的Java中&amp;&amp;和||运算符短路在流中的版本。</p>
+<blockquote>
+<p>短路求值<br>有些操作不需要处理整个流就能得到结果</p>
+</blockquote>
+<h4 id="查找元素"><a href="#查找元素" class="headerlink" title="查找元素"></a>查找元素</h4><p>findAny方法将返回当前流中的任意元素<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Optional&lt;Dish&gt; dish = </span><br><span class="line">    menu.stream() </span><br><span class="line">        .filter(Dish::isVegetarian) </span><br><span class="line">        .findAny();</span><br></pre></td></tr></table></figure></p>
+<p><strong>Optional</strong></p>
+<p><strong>Optional&lt;T>类（java.util.Optional）是一个容器类，代表一个值存在或不存在</strong></p>
+<ul>
+<li>isPresent()   将在Optional包含值的时候返回true，否则返回false</li>
+<li>ifPresent(Consumer&lt;T> block) 会在值存在的时候执行给定的代码块</li>
+<li>T get() 会在值存在时返回值，否则抛出一个NoSuchElement异常</li>
+<li>T orElse(T other) 会在值存在时返回值，否则返回一个默认值<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">menu.stream() </span><br><span class="line">    .filter(Dish::isVegetarian)  </span><br><span class="line">    .findAny() </span><br><span class="line">    .ifPresent(d -&gt; System.out.println(d.getName());</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="查找第一个元素"><a href="#查找第一个元素" class="headerlink" title="查找第一个元素"></a>查找第一个元素</h4><p>findFirst</p>
+<p>找到第一个元素在并行上限制更多。如果你不关心返回的元素是哪个，请使用findAny，因为它在使用并行流时限制较少。</p>
+<h3 id="归约"><a href="#归约" class="headerlink" title="归约"></a>归约</h3><p>将流中所有元素反复结合起来，得到一个值。用函数式编程语言的术语来说，这称为折叠（fold），因为你可以将这个操作看成把一张长长的纸（你的流）反复折叠成一个小方块，而这就是折叠操作的结果。</p>
+<h4 id="元素求和"><a href="#元素求和" class="headerlink" title="元素求和"></a>元素求和</h4><pre><code>int sum = numbers.stream() . reduce(0, (a,b) -&gt; a+b);
+</code></pre><p>reduce 接受两个参数：</p>
+<ul>
+<li>一个初始值，这里是0；</li>
+<li>一个BinaryOperator&lt;T>来将两个元素结合起来产生一个新值，这里我们用的是lambda(a,b) -&gt; a+b</li>
+</ul>
+<p><img src="/images/stream08.png" alt=" 使用reduce来对流中的数字求和"></p>
+<p>在Java8中，Integer类现在有了一个静态的sum方法来对两个数求和</p>
+<pre><code>int sum = numbers.stream().reduce(0, Integer::sum); 
+</code></pre><p>reduce还有一个重载的变体，它不接受初始值，但是会返回一个Optional对象：</p>
+<pre><code>Optional&lt;Integer&gt; sum = numbers.stream().reduce((a, b) -&gt; (a + b)); 
+</code></pre><p>为什么它返回一个Optional<integer>呢？考虑流中没有任何元素的情况。reduce操作无法返回其和，因为它没有初始值。这就是为什么结果被包裹在一个Optional对象里，以表明和可能不存在</integer></p>
+<h4 id="最大值和最小值"><a href="#最大值和最小值" class="headerlink" title="最大值和最小值"></a>最大值和最小值</h4><pre><code>Optional&lt;Integer&gt; max = numbers.stream().reduce(Integer::max); 
+</code></pre><p><img src="/images/stream09.png" alt="一个归约操作——计算最大值"></p>
+<h3 id="无状态和有状态"><a href="#无状态和有状态" class="headerlink" title="无状态和有状态"></a>无状态和有状态</h3><p>诸如map或filter等操作会从输入流中获取每一个元素，并在输出流中得到0或1个结果，这些操作一般都是<strong>无状态的：它们没有内部状态</strong></p>
+<p>但诸如reduce、sum、max等操作需要内部状态来积累结果，不管流中有多少元素要处理，内部状态都是有界的</p>
+<p>相反，诸如sort或distinct等操作一开始都和filter和map差不多——都是接受一个流，再生成一个流，但有一个关键的区别：从流中排序和删除重复项时都需要知道先前的历史。例如，排序要求所有元素都放入缓冲区后才能给输出流加入一个项目，这一操作的存储要求是无界的。要是流比较大或是无限的，就可能会有问题（把质数流倒序会做什么呢？它应当返回最大的质数，但数学告诉我们它不存在）。我们把这些操作叫作有状态操作</p>
+<p>中间操作和终端操作</p>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>类型</th>
+<th>返回类型</th>
+<th>使用的类型/函数式接口</th>
+<th>函数描述符</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>filter</td>
+<td>中间</td>
+<td>Stream&lt;T></td>
+<td>Predicate&lt;T></td>
+<td>T -&gt; boolean</td>
+</tr>
+<tr>
+<td>distinct</td>
+<td>中间<br> (有状态-无界)</td>
+<td>Stream&lt;T></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>skip</td>
+<td>中间<br>(有状态-有界)</td>
+<td>Stream&lt;T></td>
+<td>long</td>
+<td></td>
+</tr>
+<tr>
+<td>limit</td>
+<td>中间<br>(有状态-有界)</td>
+<td>Stream&lt;T></td>
+<td>long</td>
+<td></td>
+</tr>
+<tr>
+<td>map</td>
+<td>中间</td>
+<td>Stream&lt;T></td>
+<td>Function&lt;T,R></td>
+<td>T -&gt; R </td>
+</tr>
+<tr>
+<td>flatMap</td>
+<td>中间</td>
+<td>Stream&lt;T></td>
+<td>Function&lt;T,R></td>
+<td>T -&gt; Stream&lt;R> </td>
+</tr>
+<tr>
+<td>sorted</td>
+<td>中间<br>(有状态-无界)</td>
+<td>Stream&lt;T></td>
+<td>Comparator<t></t></td>
+<td>(T,T) -&gt; int </td>
+</tr>
+<tr>
+<td>anyMatch</td>
+<td>终端</td>
+<td>boolean</td>
+<td>Predicate&lt;T></td>
+<td>T -&gt; boolean</td>
+</tr>
+<tr>
+<td>noneMatch</td>
+<td>终端</td>
+<td>boolean</td>
+<td>Predicate&lt;T></td>
+<td>T -&gt; boolean</td>
+</tr>
+<tr>
+<td>allMatch</td>
+<td>终端</td>
+<td>boolean</td>
+<td>Predicate&lt;T></td>
+<td>T -&gt; boolean</td>
+</tr>
+<tr>
+<td>findAny</td>
+<td>终端</td>
+<td>Optional&lt;T></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>findFirst</td>
+<td>终端</td>
+<td>Optional&lt;T></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>forEach</td>
+<td>终端</td>
+<td>void</td>
+<td>Consumer&lt;T></td>
+<td>T -&gt; void</td>
+</tr>
+<tr>
+<td>collect</td>
+<td>终端</td>
+<td>R</td>
+<td>Collector&lt;T,A,R></td>
+<td></td>
+</tr>
+<tr>
+<td>reduce</td>
+<td>终端<br>(有状态-有界)</td>
+<td>Optional&lt;T></td>
+<td>BinaryOperator&lt;T></td>
+<td>(T,T) -&gt; T</td>
+</tr>
+<tr>
+<td>count</td>
+<td>终端</td>
+<td>long</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="数值流"><a href="#数值流" class="headerlink" title="数值流"></a>数值流</h2><h3 id="原始类型流特化"><a href="#原始类型流特化" class="headerlink" title="原始类型流特化"></a>原始类型流特化</h3><p>Java8引入了三个原始类型特化流接口：InputStream、DoubleStream和LongStream，分别将流中的元素特化为int、long和double，从而避免了暗含的装箱成本。每个接口都带来了进行常用数值归约的新方法，比如对数值流求和的sum，找到最大元素的max，求平均值average等。</p>
+<p><strong>映射到数值流</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">int calories = menu.stream() </span><br><span class="line">                           .mapToInt(Dish::getCalories)  </span><br><span class="line">                           .sum();</span><br></pre></td></tr></table></figure></p>
+<p><strong>转换回对象流</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">IntStream intStream = menu.stream().mapToInt(Dish::getCalories);</span><br><span class="line">//每个int都会装箱成一个Integer </span><br><span class="line">Stream&lt;Integer&gt; stream = intStream.boxed();</span><br></pre></td></tr></table></figure>
+<p><strong>默认值OptionalInt</strong><br>求和的那个例子很容易，因为它有一个默认值：0。但是，如果你要计算IntStream中的最大元素，就得换个法子了，因为0是错误的结果。如何区分没有元素的流和最大值真的是0的流呢？前面我们介绍了Optional类，这是一个可以表示值存在或不存在的容器。Optional可以用Integer、String等参考类型来参数化。对于三种原始流特化，也分别有一个Optional原始类型特化版本：OptionalInt、OptionalDouble和OptionalLong。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">OptionalInt maxCalories = menu.stream() </span><br><span class="line">                              .mapToInt(Dish::getCalories) </span><br><span class="line">                              .max();</span><br></pre></td></tr></table></figure></p>
+<p>现在，如果没有最大值的话，你就可以显式处理OptionalInt去定义一个默认值了：</p>
+<pre><code>int max = maxCalories.orElse(1);  
+</code></pre><h3 id="数值范围"><a href="#数值范围" class="headerlink" title="数值范围"></a>数值范围</h3><p>和数字打交道时，有一个常用的东西就是数值范围。比如，假设你想要生成1和100之间的所有数字。Java 8引入了两个可以用于IntStream和LongStream的静态方法，帮助生成这种范围：range和rangeClosed。这两个方法都是第一个参数接受起始值，第二个参数接受结束值。但range是不包含结束值的，而rangeClosed则包含结束值。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">IntStream evenNumbers = IntStream.rangeClosed(1, 100)</span><br><span class="line">                                 .filter(n -&gt; n % 2 == 0);</span><br><span class="line">System.out.println(evenNumbers.count());</span><br></pre></td></tr></table></figure></p>
+<h2 id="构建流"><a href="#构建流" class="headerlink" title="构建流"></a>构建流</h2><h3 id="由值创建流"><a href="#由值创建流" class="headerlink" title="由值创建流"></a>由值创建流</h3><p>可以使用静态方法Stream.of，通过显式值创建一个流。它可以接受任意数量的参数。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Stream&lt;String&gt; stream = Stream.of(&quot;Java 8 &quot;, &quot;Lambdas &quot;, &quot;In &quot;, &quot;Action&quot;); </span><br><span class="line">stream.map(String::toUpperCase).forEach(System.out::println);</span><br><span class="line"></span><br><span class="line">//使用empty得到一个空流</span><br><span class="line">Stream&lt;String&gt; emptyStream =  Stream.empty();</span><br></pre></td></tr></table></figure></p>
+<h3 id="由数组创建流"><a href="#由数组创建流" class="headerlink" title="由数组创建流"></a>由数组创建流</h3><p>可以使用静态方法Arrays.stream从数组创建一个流。它接受一个数组作为参数。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int[] numbers = &#123;2, 3, 5, 7, 11, 13&#125;; </span><br><span class="line">int sum = Arrays.stream(numbers).sum();</span><br></pre></td></tr></table></figure></p>
+<h3 id="由文件生成流"><a href="#由文件生成流" class="headerlink" title="由文件生成流"></a>由文件生成流</h3><p>Java中用于处理文件等I/O操作的NIO  API（非阻塞  I/O）已更新，以便利用Stream  API。java.nio.file.Files中的很多静态方Files.lines，它会返回一个由指定文件中的各行构成的字符串流<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">long uniqueWords = 0; </span><br><span class="line">try(Stream&lt;String&gt; lines = </span><br><span class="line">          Files.lines(Paths.get(&quot;data.txt&quot;), Charset.defaultCharset()))&#123; </span><br><span class="line">uniqueWords = lines.flatMap(line -&gt; Arrays.stream(line.split(&quot; &quot;)))</span><br><span class="line">                   .distinct() </span><br><span class="line">                   .count(); </span><br><span class="line">&#125;  </span><br><span class="line">catch(IOException e)&#123; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="由函数生成流：创建无限流"><a href="#由函数生成流：创建无限流" class="headerlink" title="由函数生成流：创建无限流"></a>由函数生成流：创建无限流</h3><p>Stream API提供了两个静态方法来从函数生成流：Stream.iterate和Stream.generate。这两个操作可以创建所谓的无限流：不像从固定集合创建的流那样有固定大小的流。由iterate和generate产生的流会用给定的函数按需创建值，因此可以无穷无尽地计算下去！一般来说，应该使用limit(n)来对这种流加以限制，以避免打印无穷多个值。</p>
+<p><strong>迭代</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Stream.iterate(0, n -&gt; n + 2) </span><br><span class="line">      .limit(10) </span><br><span class="line">      .forEach(System.out::println);</span><br></pre></td></tr></table></figure></p>
+<p>iterate方法生成了一个所有正偶数的流：流的第一个元素是初始值0。然后加上2来生成新的值2，再加上2来得到新的值4，以此类推。这种iterate操作基本上是顺序的，因为结果取决于前一次应用。请注意，此操作将生成一个无限流——这个流没有结尾，因为值是按需计算的，可以永远计算下去。我们说这个流是无界的。正如我们前面所讨论的，这是流和集合之间的一个关键区别。</p>
+<p><strong>生成</strong></p>
+<p>与iterate方法类似，generate方法也可让你按需生成一个无限流。但generate不是依次对每个新生成的值应用函数的。它接受一个Supplier<t>类型的Lambda提供新的值<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Stream.generate(Math::random) </span><br><span class="line">      .limit(5) </span><br><span class="line">      .forEach(System.out::println);</span><br></pre></td></tr></table></figure></t></p>
+<h2 id="小结-1"><a href="#小结-1" class="headerlink" title="小结"></a>小结</h2><ul>
+<li>Streams API可以表达复杂的数据处理查询。</li>
+<li>你可以使用filter、distinct、skip和limit对流做筛选和切片。</li>
+<li>你可以使用map和flatMap提取或转换流中的元素。</li>
+<li>你可以使用findFirst和findAny方法查找流中的元素。你可以用allMatch、noneMatch和anyMatch方法让流匹配给定的谓词。</li>
+<li>这些方法都利用了短路：找到结果就立即停止计算；没有必要处理整个流。</li>
+<li>你可以利用reduce方法将流中所有的元素迭代合并成一个结果，例如求和或查找最大元素。</li>
+<li>filter和map等操作是无状态的，它们并不存储任何状态。reduce等操作要存储状态才能计算出一个值。sorted和distinct等操作也要存储状态，因为它们需要把流中的所有元素缓存起来才能返回一个新的流。这种操作称为有状态操作。</li>
+<li>流有三种基本的原始类型特化：IntStream、DoubleStream和LongStream。它们的操作也有相应的特化。</li>
+<li>流不仅可以从集合创建，也可从值、数组、文件以及iterate与generate等特定方法创建。</li>
+<li>无限流是没有固定大小的流。</li>
+</ul>
+<hr>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="https://hsb786.github.io/2018/04/29/流【Java8实战】/" data-id="cjgku7kh6005wdomy704bwu95" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2018/04/29/Lambda表达式【Java8实战】/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">Lambda表达式【Java8实战】</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    
+        <section id="comments">
+    <div id="valine-thread"></div>
+</section>
+    
+
+</section>
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2018 HuShengBin<br>
+    </div>
+</footer>
+        
+    
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//cdn.jsdelivr.net/gh/xcss/valine@v1.1.6/dist/Valine.min.js"></script>
+    <script>
+        new Valine({
+            el: '#valine-thread' ,
+            notify:false,
+            verify:false,
+            app_id: 'eqjWlM0tCYgxhh8nvvV6DleG-gzGzoHsz',
+            app_key: 'CRXn0n9IAsJdOeMDUIxyh1Hb',
+            placeholder: '(。・∀・)ノ说一句吧'
+        });
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>
