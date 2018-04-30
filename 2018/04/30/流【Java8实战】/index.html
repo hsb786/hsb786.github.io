@@ -9,7 +9,7 @@
 <meta name="keywords" content="爪哇">
 <meta property="og:type" content="article">
 <meta property="og:title" content="流【Java8实战】">
-<meta property="og:url" content="https://hsb786.github.io/2018/04/29/流【Java8实战】/index.html">
+<meta property="og:url" content="https://hsb786.github.io/2018/04/30/流【Java8实战】/index.html">
 <meta property="og:site_name" content="HuShengBin’s blog">
 <meta property="og:description" content="流是Java API的新成员，它允许你以声明性方式处理数据集合（通过查询语句来表达，而不是临时编写一个实现）">
 <meta property="og:locale" content="zh-CN">
@@ -22,7 +22,12 @@
 <meta property="og:image" content="https://hsb786.github.io/images/stream07.png">
 <meta property="og:image" content="https://hsb786.github.io/images/stream08.png">
 <meta property="og:image" content="https://hsb786.github.io/images/stream09.png">
-<meta property="og:updated_time" content="2018-04-29T13:18:30.692Z">
+<meta property="og:image" content="https://hsb786.github.io/images/stream10.png">
+<meta property="og:image" content="https://hsb786.github.io/images/stream11.png">
+<meta property="og:image" content="https://hsb786.github.io/images/stream12.png">
+<meta property="og:image" content="https://hsb786.github.io/images/stream13.png">
+<meta property="og:image" content="https://hsb786.github.io/images/stream14.png">
+<meta property="og:updated_time" content="2018-04-30T07:23:26.347Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="流【Java8实战】">
 <meta name="twitter:description" content="流是Java API的新成员，它允许你以声明性方式处理数据集合（通过查询语句来表达，而不是临时编写一个实现）">
@@ -212,8 +217,8 @@
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/2018/04/29/流【Java8实战】/">
-            <time datetime="2018-04-29T08:02:22.000Z" itemprop="datePublished">2018-04-29</time>
+        <a href="/2018/04/30/流【Java8实战】/">
+            <time datetime="2018-04-30T04:02:22.000Z" itemprop="datePublished">2018-04-30</time>
         </a>
     </div>
 
@@ -587,6 +592,142 @@
 <li>无限流是没有固定大小的流。</li>
 </ul>
 <hr>
+<h2 id="用流收集数据"><a href="#用流收集数据" class="headerlink" title="用流收集数据"></a>用流收集数据</h2><p>举个栗子🎂<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">//对交易按照货币分组</span><br><span class="line">Map&lt;Currency, List&lt;Transaction&gt;&gt; transactionsByCurrencies = </span><br><span class="line">        transactions.stream().collect(groupingBy(Transaction::getCurrency));</span><br></pre></td></tr></table></figure></p>
+<p>函数式编程相对于指令式编程的一个主要优势：<strong>你只需要指出希望的结果——“做什么”，而不用操心执行的步骤——“如何做”</strong>。在上一个例子里，传递给collect方法的参数是Collector接口的一个实现</p>
+<p>对流调用collect方法将对流中的元素触发一个归约操作（由Collector来参数化）</p>
+<p>Collector接口中方法的实现决定了如何对流执行归约操作；Collectors类提供了很多静态工厂方法，可以方便地创建常见收集器实例</p>
+<h4 id="归约与汇总"><a href="#归约与汇总" class="headerlink" title="归约与汇总"></a>归约与汇总</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">import static java.util.stream.Collectors.*; </span><br><span class="line">long howManyDishes = menu.stream().collect(counting()); </span><br><span class="line">//或者</span><br><span class="line">long howManyDishes = menu.stream().count();</span><br></pre></td></tr></table></figure>
+<h4 id="查找流中的最大值和最小值"><a href="#查找流中的最大值和最小值" class="headerlink" title="查找流中的最大值和最小值"></a>查找流中的最大值和最小值</h4><p>Collectors.maxBy和Collectors.minBy，来计算流中的最大或最小值。这两个收集器接收一个Comparator参数来比较流中的元素。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Comparator&lt;Dish&gt; dishCaloriesComparator = </span><br><span class="line">    Comparator.comparingInt(Dish::getCalories); </span><br><span class="line">Optional&lt;Dish&gt; mostCalorieDish = </span><br><span class="line">    menu.stream() </span><br><span class="line">        .collect(maxBy(dishCaloriesComparator));</span><br></pre></td></tr></table></figure>
+<h4 id="汇总"><a href="#汇总" class="headerlink" title="汇总"></a>汇总</h4><p>Collectors.summingInt。它可接受一个把对象映射为求和所需int的函数，并返回一个收集器</p>
+<pre><code>int totalCalories = menu.stream().collect(summingInt(Dish::getCalories));
+</code></pre><p>Collectors.summingLong和Collectors.summingDouble方法的作用完全一样，可以用于求和字段为long或double的情况<br><img src="/images/stream10.png" alt="summingInt收集器的累积过程"></p>
+<p>汇总不仅仅是求和；还有Collectors.averagingInt，连同对应的averagingLong和averagingDouble可以计算数值的平均数</p>
+<p>你可能想要得到两个或更多这样的结果，而且你希望只需一次操作就可以完成。在这种情况下，你可以使用summarizingInt工厂方法返回的收集器。例如，通过一次summarizing操作你可以就数出菜单中元素的个数，并得到菜肴热量总和、平均值、最大值和最小值：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">IntSummaryStatistics menuStatistics = </span><br><span class="line">        menu.stream().collect(summarizingInt(Dish::getCalories));</span><br></pre></td></tr></table></figure></p>
+<p>这个收集器会把所有这些信息收集到一个叫作IntSummaryStatistics的类里，它提供了方便的取值（getter）方法来访问结果。打印menuStatisticobject会得到以下输出：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">IntSummaryStatistics&#123;count=9, sum=4300, min=120, </span><br><span class="line">                     average=477.777778, max=800&#125;</span><br></pre></td></tr></table></figure></p>
+<p>同样，相应的summarizingLong和summarizingDouble工厂方法有相关的LongSummary- Statistics和DoubleSummaryStatistics类型，适用于收集的属性是原始类型long或double的情况。</p>
+<h4 id="连接字符串"><a href="#连接字符串" class="headerlink" title="连接字符串"></a>连接字符串</h4><p>joining工厂方法返回的收集器会把对流中每一个对象应用toString方法得到的所有字符串连接成一个字符串，joining在内部使用了StringBuilder来把生成的字符串逐个追加起来</p>
+<pre><code>String shortMenu = menu.stream().map(Dish::getName).collect(joining()); 
+</code></pre><p>joining工厂方法有一个重载版本可以接受元素之间的分界符</p>
+<pre><code>String shortMenu = menu.stream().map(Dish::getName).collect(joining(&quot;, &quot;); 
+</code></pre><h4 id="广义的归约汇总"><a href="#广义的归约汇总" class="headerlink" title="广义的归约汇总"></a>广义的归约汇总</h4><p>事实上，我们已经讨论的所有收集器，都是一个可以用reducing工厂方法定义的归约过程的特殊情况而已。Collectors.reducing工厂方法是所有这些特殊情况的一般化<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int totalCalories = menu.stream().collect(reducing( </span><br><span class="line">                                   0, Dish::getCalories, (i, j) -&gt; i + j));</span><br></pre></td></tr></table></figure></p>
+<p>它需要三个参数。</p>
+<ul>
+<li>第一个参数是归约操作的起始值，也是流中没有元素时的返回值，所以很显然对于数值和而言0是一个合适的值。</li>
+<li>第二个参数就是将菜肴转换成一个表示其所含热量的int。</li>
+<li>第三个参数是一个BinaryOperator，将两个项目累积成一个同类型的值。这里它就是对两个int求和。</li>
+</ul>
+<p>同样，你可以使用下面这样单参数形式的reducing来找到热量最高的菜<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Optional&lt;Dish&gt; mostCalorieDish = </span><br><span class="line">    menu.stream().collect(reducing( </span><br><span class="line">        (d1, d2) -&gt; d1.getCalories() &gt; d2.getCalories() ? d1 : d2));</span><br></pre></td></tr></table></figure></p>
+<p>你可以把单参数reducing工厂方法创建的收集器看作三参数方法的特殊情况，它把流中的第一个项目作为起点，把恒等函数（即一个函数仅仅是返回其输入参数）作为一个转换函数。这也意味着，要是把单参数reducing收集器传递给空流的collect方法，收集器就没有起点；它将因此而返回一个Optional<dish>对象。</dish></p>
+<p><strong>reduce方法旨在把两个值结合起来生成一个新值，它是一个不可变的归约；于此相反，collect方法的设计就是要改变容器，从而累积要输出的结果</strong></p>
+<p><img src="/images/stream11.png" alt=""></p>
+<p><img src="/images/stream12.png" alt="计算菜单总热量的归约过程"></p>
+<p><strong>reducing接受的参数是一个BinaryOperator&lt;t>，也就是一个BiFunction&lt;T,T,T>。这就意味着它需要的函数必须能接受两个参数，然后返回一个相同类型的值</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">//就实际应用而言，不管是从可读性还是性能方面考虑，我们始终建议使用joining收集器。</span><br><span class="line">String shortMenu = menu.stream().map(Dish::getName).collect(joining());</span><br><span class="line"></span><br><span class="line">String shortMenu = menu.stream().map(Dish::getName)</span><br><span class="line">                                .collect( reducing     ( (s1, s2) -&gt; s1 + s2 ) ).get();</span><br><span class="line"></span><br><span class="line">String shortMenu = menu.stream()</span><br><span class="line">                                 .collect( reducing( &quot;&quot;,Dish::getName, (s1, s2) -&gt; s1 + s2 ) ); </span><br><span class="line"></span><br><span class="line">//无法编译，这里用的Lambda表达式接受的参数是两个菜，返回的却是一个字符串。</span><br><span class="line">String shortMenu = menu.stream()</span><br><span class="line">    .collect( reducing( (d1, d2) -&gt; d1.getName() + d2.getName() ) ).get();</span><br></pre></td></tr></table></figure>
+<h4 id="分组"><a href="#分组" class="headerlink" title="分组"></a>分组</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;Dish.Type, List&lt;Dish&gt;&gt; dishesByType = </span><br><span class="line">                      menu.stream().collect(groupingBy(Dish::getType));</span><br><span class="line"></span><br><span class="line">//结果</span><br><span class="line">&#123;FISH=[prawns, salmon], OTHER=[french fries, rice, season fruit, pizza],  </span><br><span class="line">MEAT=[pork, beef, chicken]&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/images/stream13.png" alt="分组过程中对流中的项目进行分类"></p>
+<p>分类函数不一定像方法引用那样可用，因为你想用以分类的条件可能比简单的属性访问器要复杂。例如，你可能想把热量不到400卡路里的菜划分为“低热量”（diet），热量400到700卡路里的菜划为“普通”（normal），高于700卡路里的划为“高热量”（fat）。由于Dish类的作者没有把这个操作写成一个方法，你无法使用方法引用，但你可以把这个逻辑写成Lambda表达式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public enum CaloricLevel &#123; DIET, NORMAL, FAT &#125; </span><br><span class="line"></span><br><span class="line">Map&lt;CaloricLevel, List&lt;Dish&gt;&gt; dishesByCaloricLevel = menu.stream().collect( </span><br><span class="line">        groupingBy(dish -&gt; &#123; </span><br><span class="line">               if (dish.getCalories() &lt;= 400) return CaloricLevel.DIET; </span><br><span class="line">               else if (dish.getCalories() &lt;= 700) return </span><br><span class="line">    CaloricLevel.NORMAL; </span><br><span class="line">        else return CaloricLevel.FAT; </span><br><span class="line">         &#125; ));</span><br></pre></td></tr></table></figure></p>
+<h4 id="多级分组"><a href="#多级分组" class="headerlink" title="多级分组"></a>多级分组</h4><p>要实现多级分组，我们可以使用一个由双参数版本的Collectors.groupingBy工厂方法创建的收集器，它除了普通的分类函数之外，还可以接受collector类型的第二个参数。那么要进行二级分组的话，我们可以把一个内层groupingBy传递给外层groupingBy，并定义一个为流中项目分类的二级标准</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;Dish.Type, Map&lt;CaloricLevel, List&lt;Dish&gt;&gt;&gt; dishesByTypeCaloricLevel = </span><br><span class="line">menu.stream().collect( </span><br><span class="line">      groupingBy(Dish::getType,  </span><br><span class="line">         groupingBy(dish -&gt; &#123;  </span><br><span class="line">            if (dish.getCalories() &lt;= 400) return CaloricLevel.DIET; </span><br><span class="line">                else if (dish.getCalories() &lt;= 700) return CaloricLevel.NORMAL;</span><br><span class="line">            else return CaloricLevel.FAT; </span><br><span class="line">          &#125; ) </span><br><span class="line">      ) </span><br><span class="line">); </span><br><span class="line"></span><br><span class="line">//结果</span><br><span class="line">&#123;MEAT=&#123;DIET=[chicken], NORMAL=[beef], FAT=[pork]&#125;,  </span><br><span class="line"> FISH=&#123;DIET=[prawns], NORMAL=[salmon]&#125;, </span><br><span class="line"> OTHER=&#123;DIET=[rice, seasonal fruit], NORMAL=[french fries, pizza]&#125;&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/images/stream14.png" alt="n层嵌套映射和n维分类表之间的等价关系"></p>
+<h4 id="分区"><a href="#分区" class="headerlink" title="分区"></a>分区</h4><p>分区是分组的特殊情况：<strong>由一个谓词（返回一个布尔值的函数）作为分类函数</strong>，称为分区函数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;Boolean, List&lt;Dish&gt;&gt; partitionedMenu = </span><br><span class="line">             menu.stream().collect(partioningBy(Dish::isVegetarian));</span><br></pre></td></tr></table></figure>
+<h2 id="Collectors类的静态工厂方法"><a href="#Collectors类的静态工厂方法" class="headerlink" title="Collectors类的静态工厂方法"></a>Collectors类的静态工厂方法</h2><table>
+<thead>
+<tr>
+<th>工厂方法</th>
+<th>返回类型</th>
+<th>用于</th>
+<th>使用示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>toList</td>
+<td>List<t></t></td>
+<td>把流中所有项目收集到一个List</td>
+<td>List<dish> dishes = menuStream.collect(toList());</dish></td>
+</tr>
+<tr>
+<td>toSet</td>
+<td>Set<t></t></td>
+<td>把流中所有项目收集到一个Set，删除重复项</td>
+<td>Set<dish> dishes = menuStream.collect(toSet());</dish></td>
+</tr>
+<tr>
+<td>toCollection</td>
+<td>Collection<t></t></td>
+<td>把流中所有项目收集到给定的供应源创建的集合</td>
+<td>Collection<dish> dishes = menuStream.collect(toCollection(), ArrayList::new); </dish></td>
+</tr>
+<tr>
+<td>counting</td>
+<td>Long</td>
+<td>计算流中元素的个数</td>
+<td>long howManyDishes = menuStream.collect(counting());</td>
+</tr>
+<tr>
+<td>summingInt</td>
+<td>Integer</td>
+<td>对流中项目的一个整数属性求和</td>
+<td>int totalCalories = menuStream.collect(summingInt(Dish::getCalories));</td>
+</tr>
+<tr>
+<td>averagingInt</td>
+<td>Double</td>
+<td>计算流中项目Integer属性的平均值</td>
+<td>double avgCalories = menuStream.collect(averagingInt(Dish::getCalories))</td>
+</tr>
+<tr>
+<td>summarizingInt</td>
+<td>IntSummaryStatistics</td>
+<td>收集关于流中项目Integer属性的统计值，例如最大、最小、总和与平均值</td>
+<td>IntSummaryStatistics menuStatistics =  menuStream.collect(summarizingInt(Dish::getCalories));</td>
+</tr>
+<tr>
+<td>joining</td>
+<td>String</td>
+<td>连接对流中每个项目调用toString方法所生成的字符串</td>
+<td>String shortMenu =  menuStream.map(Dish::getName).collect(joining(“, “));</td>
+</tr>
+<tr>
+<td>maxBy</td>
+<td>Optional<t></t></td>
+<td>一个包裹了流中按照给定比较器选出的最大元素的Optional，或如果流为空则为Optional.empty()</td>
+<td>Optional<dish> fattest =  menuStream.collect(maxBy(comparingInt(Dish::getCalories)));</dish></td>
+</tr>
+<tr>
+<td>minBy</td>
+<td>Optional<t></t></td>
+<td>一个包裹了流中按照给定比较器选出的最小元素的Optional，或如果流为空则为Optional.empty()</td>
+<td>Optional<dish> lightest =  menuStream.collect(minBy(comparingInt(Dish::getCalories)));</dish></td>
+</tr>
+<tr>
+<td>reducing</td>
+<td>归约操作产生的类型</td>
+<td>从一个作为累加器的初始值开始，利用BinaryOperator与流中的元素逐个结合，从而将流归约为单个值</td>
+<td>int totalCalories =   menuStream.collect(reducing(0, Dish::getCalories, Integer::sum));</td>
+</tr>
+<tr>
+<td>collectingAndThen</td>
+<td>转换函数返回的类型</td>
+<td>包裹另一个收集器，对其结果应用转换函数</td>
+<td>int howManyDishes =  menuStream.collect(collectingAndThen(toList(), List::size));</td>
+</tr>
+<tr>
+<td>groupingBy</td>
+<td>Map&lt;K, List<t>&gt;</t></td>
+<td>根据项目的一个属性的值对流中的项目作问组，并将属性值作为结果Map的键</td>
+<td>Map&lt;Dish.Type,List<dish>&gt; dishesByType =  menuStream.collect(groupingBy(Dish::getType));</dish></td>
+</tr>
+<tr>
+<td>partitioningBy</td>
+<td>Map&lt;Boolean,List<t>&gt;</t></td>
+<td>根据对流中每个项目应用谓词的结果来对项目进行分区</td>
+<td>Map&lt;Boolean,List<dish>&gt; vegetarianDishes =  menuStream.collect(partitioningBy(Dish::isVegetarian));</dish></td>
+</tr>
+</tbody>
+</table>
 
         
         </div>
@@ -597,7 +738,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/29/流【Java8实战】/" data-id="cjgku7kh6005wdomy704bwu95" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/30/流【Java8实战】/" data-id="cjgku7kh6005wdomy704bwu95" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding

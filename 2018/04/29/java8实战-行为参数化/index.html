@@ -14,7 +14,7 @@
 <meta property="og:description" content="行为参数化是指一个方法的功能，部分或全部由传递给这个方法的某个或多个参数决定，但这些参数不是一般意义上的值（一个字符串或数字），它代表了一个具体的行为，其本质是代码传递，表现可能有多种：对象、匿名类、java8里的Lambda表达式（或方法引用）等。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://hsb786.github.io/images/xwcsh01.png">
-<meta property="og:updated_time" content="2018-04-29T05:51:21.489Z">
+<meta property="og:updated_time" content="2018-04-29T13:31:52.933Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="行为参数化【java8实战】">
 <meta name="twitter:description" content="行为参数化是指一个方法的功能，部分或全部由传递给这个方法的某个或多个参数决定，但这些参数不是一般意义上的值（一个字符串或数字），它代表了一个具体的行为，其本质是代码传递，表现可能有多种：对象、匿名类、java8里的Lambda表达式（或方法引用）等。">
@@ -231,7 +231,7 @@
         
             
             <blockquote>
-<p>行为参数化是指一个方法的功能，部分或全部由传递给这个方法的某个或多个参数决定，但这些参数不是一般意义上的值（一个字符串或数字），它代表了一个具体的行为，其本质是代码传递，表现可能有多种：对象、匿名类、java8里的Lambda表达式（或方法引用）等。</p>
+<p>行为参数化是指一个方法的功能，部分或全部由传递给这个方法的某个或多个参数决定，但这些参数不是一般意义上的值（一个字符串或数字），<strong>它代表了一个具体的行为，其本质是代码传递</strong>，表现可能有多种：对象、匿名类、java8里的Lambda表达式（或方法引用）等。</p>
 </blockquote>
 <a id="more"></a>
 <h2 id="为什么需要行为参数化？"><a href="#为什么需要行为参数化？" class="headerlink" title="为什么需要行为参数化？"></a>为什么需要行为参数化？</h2><p>以前做外包项目的时候，似乎永远不知道客户会在什么时候提出新需求或需求变更，如果没有行为参数化或类似行为参数化的东西，客户的需求小有改动可能会带来代码上较大的变动，或为了一个小的新需求复制粘贴好几个类或方法，但行为参数化对于某些需求的变化或新增可以做到以不变应万变。</p>
