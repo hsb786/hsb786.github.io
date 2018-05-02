@@ -5,19 +5,19 @@
     
     <title>java基础总结 | HuShengBin’s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="初始化顺序 父类（静态变量，静态语句块） 子类（静态变量，静态语句块） 父类（实例变量，普通语句块） 父类（构造函数） 子类（实例变量，普通语句块） 子类（构造函数）">
+    <meta name="description" content="初始化顺序 父类（静态变量，静态语句块） 子类（静态变量，静态语句块） 父类（实例变量，普通语句块） 父类（构造方法） 子类（实例变量，普通语句块） 子类（构造方法）">
 <meta name="keywords" content="爪哇,长期更新">
 <meta property="og:type" content="article">
 <meta property="og:title" content="java基础总结">
 <meta property="og:url" content="https://hsb786.github.io/2018/04/09/java基础总结/index.html">
 <meta property="og:site_name" content="HuShengBin’s blog">
-<meta property="og:description" content="初始化顺序 父类（静态变量，静态语句块） 子类（静态变量，静态语句块） 父类（实例变量，普通语句块） 父类（构造函数） 子类（实例变量，普通语句块） 子类（构造函数）">
+<meta property="og:description" content="初始化顺序 父类（静态变量，静态语句块） 子类（静态变量，静态语句块） 父类（实例变量，普通语句块） 父类（构造方法） 子类（实例变量，普通语句块） 子类（构造方法）">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://hsb786.github.io/images/exception.jpg">
-<meta property="og:updated_time" content="2018-04-25T05:09:32.352Z">
+<meta property="og:updated_time" content="2018-05-02T04:32:48.586Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java基础总结">
-<meta name="twitter:description" content="初始化顺序 父类（静态变量，静态语句块） 子类（静态变量，静态语句块） 父类（实例变量，普通语句块） 父类（构造函数） 子类（实例变量，普通语句块） 子类（构造函数）">
+<meta name="twitter:description" content="初始化顺序 父类（静态变量，静态语句块） 子类（静态变量，静态语句块） 父类（实例变量，普通语句块） 父类（构造方法） 子类（实例变量，普通语句块） 子类（构造方法）">
 <meta name="twitter:image" content="https://hsb786.github.io/images/exception.jpg">
     
 
@@ -159,7 +159,7 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                77
+                78
                 <span>文章</span>
             </div>
             <div class="article-info-block">
@@ -234,9 +234,9 @@
 <li>父类（静态变量，静态语句块）</li>
 <li>子类（静态变量，静态语句块）</li>
 <li>父类（实例变量，普通语句块）</li>
-<li>父类（构造函数）</li>
+<li>父类（构造方法）</li>
 <li>子类（实例变量，普通语句块）</li>
-<li>子类（构造函数）<a id="more"></a>
+<li>子类（构造方法）<a id="more"></a>
 </li>
 </ol>
 <hr>
@@ -259,7 +259,7 @@
 <li>Class.forName(“类名”)</li>
 </ol>
 <hr>
-<h2 id="泛型-generics"><a href="#泛型-generics" class="headerlink" title="泛型(generics)"></a>泛型(generics)</h2><p>允许在定义类和接口的时候使用类型参数E(type parameter)。声明的类型参数在使用时用具体的类型来替换。</p>
+<h2 id="泛型-generics"><a href="#泛型-generics" class="headerlink" title="泛型(generics)"></a>泛型(generics)</h2><p><strong>允许在定义类和接口的时候使用类型参数E(type parameter)。声明的类型参数在使用时用具体的类型来替换</strong>。</p>
 <p>java集合有一个缺点是当把一个对象放入集合里面之后，集合就会”忘记”这个对象的数据类型，当再次取出该对象的时候，该对象的编译类型就变成了Object类型(该对象的运行时类型没变)。</p>
 <p>造成的问题：</p>
 <ol>
@@ -268,7 +268,7 @@
 </ol>
 <hr>
 <p>在Java7以前，如果使用带有泛型的接口，类定义常量，那么调用构造器创建对象时构造器的后面也必须带泛型，这显得有些多余了。</p>
-<p>从java7开始，java允许在构造器后不需要带完整的泛型信息，只要给出一对尖括号(&lt;&gt;)即可，Java可以推断括号里面应该是什么泛型信息。</p>
+<p><strong>从java7开始，java允许在构造器后不需要带完整的泛型信息，只要给出一对尖括号(&lt;&gt;)即可，Java可以推断括号里面应该是什么泛型信息</strong>。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; strList=new ArrayList&lt;&gt;();</span><br><span class="line">Map&lt;String,Integer&gt; scores=new HashMap&lt;&gt;();</span><br></pre></td></tr></table></figure>
 <table>
 <thead>
@@ -349,7 +349,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/09/java基础总结/" data-id="cjgm8t9ke003idcmydsab7ljr" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/09/java基础总结/" data-id="cjgmae6w4003o5gmytewhrpio" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding

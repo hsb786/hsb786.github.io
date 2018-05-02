@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://hsb786.github.io/"/>
-  <updated>2018-04-30T12:55:00.586Z</updated>
+  <updated>2018-04-30T13:36:50.196Z</updated>
   <id>https://hsb786.github.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>并行流【java8实战】</title>
+    <link href="https://hsb786.github.io/2018/04/30/%E5%B9%B6%E8%A1%8C%E6%B5%81%E3%80%90java8%E5%AE%9E%E6%88%98%E3%80%91/"/>
+    <id>https://hsb786.github.io/2018/04/30/并行流【java8实战】/</id>
+    <published>2018-04-30T13:14:14.000Z</published>
+    <updated>2018-04-30T13:36:50.196Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>并行流就是一个把内容分成多个数据块，并用不同的线程分别处理每个数据块的流</p></blockquote><a id="more"></a><p>在Java7之前，并行处理数据集合非常麻烦</p><ul><li>第一，你得明确地把包含数据的数据结构分成若干子部分</li><li>第二，你要把每个子部分分配一个独立的线程</li><li>第三，你需要在恰当的时候对它们进行同步来避免不希望出现的竞争条件，等待所有线程完成，最后把这些部分结果合并起来</li></ul><h2 id="并行流"><a href="#并行流" class="headerlink" title="并行流"></a>并行流</h2><p>可以通过对收集源调用parallelStream方法来把集合转换为并行流</p><p>对顺序流调用parallel方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public static long parallelSum(long n) &#123; </span><br><span class="line">    return Stream.iterate(1L, i -&gt; i + 1) </span><br><span class="line">                 .limit(n) </span><br><span class="line">                 .parallel() </span><br><span class="line">                 .reduce(0L, Long::sum); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p><img src="/images/parallel01.png" alt="并行归纳操作"></p><p>请注意，在现实中，对顺序流调用parallel方法并不意味着流本身有任何实际的变化。它在内部实际上就是设了一个boolean标志，表示你想让调用parallel之后进行的所有操作都并行执行。类似地，你只需要对并行流调用sequential方法就可以把它变成顺序流。请注意，你可能以为把这两个方法结合起来，就可以更细化地控制在遍历流时哪些操作要并行执行，哪些要顺序执行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">stream.parallel() </span><br><span class="line">      .filter(...) </span><br><span class="line">      .sequential() </span><br><span class="line">      .map(...) </span><br><span class="line">      .parallel() </span><br><span class="line">      .reduce();</span><br></pre></td></tr></table></figure></p><p><strong>但最后一次paraller或sequential调用会影响整个流水线。在本例中，流水线会并发执行，因为最后调用的是它</strong></p><p><strong>并行流内部使用了默认的ForkJoinPool</strong>，它默认的线程数量就是你的处理器数量</p><h2 id="高效使用并行流"><a href="#高效使用并行流" class="headerlink" title="高效使用并行流"></a>高效使用并行流</h2><ul><li>如果有疑问，测量。把顺序流转成并行流轻而易举，但却不一定是好事</li><li>留意装箱。自动装箱和拆箱操作会大大降低性能。Java8中有原始类型流(IntStream、LongStream、DoubleStream)来避免这种操作，但凡有可能都应该用这些流</li><li>有些操作本身在并行流上的性能就比顺序流差。特别是limit和findFirst等依赖于元素顺序的操作，它们在并行流上执行的代价非常大。例如，findAny会比findFirst性能好，因为它不一定要按顺序来执行。你总是可以调用unordered方法来把有序流变成无序流。那么，如果你需要流中的n个元素而不是专门要前n个的话，对无序并行流调用limit可能会比单个有序流（比如数据源是一个List）更高效</li><li>还要考虑流的操作流水线的总计算成本。设N是要处理的元素的总数，Q是一个元素通过流水线的大致处理成本，则N*Q就是这个对成本的一个粗略的定性估计。Q值较高就意味着使用并行流时性能好的可能性比较大。</li><li>对于较小的数据量，选择并行流几乎从来都不是一个好的决定。并行处理少数几个元素的好处还抵不上并行化造成的额外开销。</li><li>要考虑流背后的数据结构是否易于分解。例如，ArrayList的拆分效率比LinkedList高得多，因为前者用不着遍历就可以平均拆分，而后者则必须遍历。另外，用range工厂方法创建的原始类型流也可以快速分解</li><li>流自身的特点，以及流水线中的中间操作修改流的方式，都可能会改变分解过程的性能。例如，一个SIZED流可以分成大小相等的两部分，这样每个部分都可以比较高效地并行处理，但筛选操作可能丢弃的元素个数却无法预测，导致流本身的大小未知。</li><li>还要考虑终端操作中合并步骤的代价是大是小（例如Collector中的combiner方法）。如果这一步代价很大，那么组合每个子流产生的部分结果所付出的代价就可能会超出通过并行流得到的性能提升</li></ul><p>流的数据源和可分解性</p><table><thead><tr><th>源</th><th>可分解性</th></tr></thead><tbody><tr><td>ArrayList</td><td>极佳</td></tr><tr><td>LinkedList</td><td>差</td></tr><tr><td>IntStream.range</td><td>极佳</td></tr><tr><td>Stream.iterate</td><td>差</td></tr><tr><td>HashSet</td><td>好</td></tr><tr><td>TreeSet</td><td>好</td></tr></tbody></table>]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;并行流就是一个把内容分成多个数据块，并用不同的线程分别处理每个数据块的流&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="爪哇" scheme="https://hsb786.github.io/categories/%E7%88%AA%E5%93%87/"/>
+    
+      <category term="Java8实战" scheme="https://hsb786.github.io/categories/%E7%88%AA%E5%93%87/Java8%E5%AE%9E%E6%88%98/"/>
+    
+    
+      <category term="爪哇" scheme="https://hsb786.github.io/tags/%E7%88%AA%E5%93%87/"/>
+    
+  </entry>
   
   <entry>
     <title>Optional【java8实战】</title>
@@ -485,29 +511,6 @@
     
     
       <category term="算法" scheme="https://hsb786.github.io/tags/%E7%AE%97%E6%B3%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>代理模式</title>
-    <link href="https://hsb786.github.io/2018/04/17/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/"/>
-    <id>https://hsb786.github.io/2018/04/17/代理模式/</id>
-    <published>2018-04-17T10:21:28.000Z</published>
-    <updated>2018-04-20T13:20:26.051Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote><p>为其他对象提供一种代理以控制对这个对象的访问<br><a id="more"></a><br><img src="/images/design-pattern-proxy.png" alt=""></p></blockquote><h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><ul><li><p>代理对象可以在目标对象实现的基础上,增强额外的功能操作,即扩展目标对象的功能，符合开闭原则</p></li><li><p>代理对象可以在客户端和目标对象之间起到中介的作用，这样起到了中介的作用和保护了目标对象的作用。</p></li></ul><h2 id="代理类分类"><a href="#代理类分类" class="headerlink" title="代理类分类"></a>代理类分类</h2><ul><li><p>静态代理:静态定义代理类，我们自己静态定义的代理类。</p></li><li><p>动态代理:通过程序动态生成代理类，该代理类不是我们自己定义的，而是由程序自动生成，常用的动态代理技术有JDK自带的动态代理和CGLIB动态代理。</p></li></ul><hr><p>*参考</p><blockquote><p><a href="https://lujunqiu.github.io/2017/11/30/代理模式/" target="_blank" rel="noopener">代理模式</a></p></blockquote>]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;为其他对象提供一种代理以控制对这个对象的访问&lt;br&gt;
-    
-    </summary>
-    
-      <category term="设计模式" scheme="https://hsb786.github.io/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
-    
-    
-      <category term="设计模式" scheme="https://hsb786.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
     
   </entry>
   

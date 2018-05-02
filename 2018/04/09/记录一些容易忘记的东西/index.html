@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="HuShengBin’s blog">
 <meta property="og:description" content="接口不可以实现接口，可以继承多个接口 抽象类可以继承具体类 static不能被重写，重写是运行时动态绑定的 static变量发生在静态解析阶段，此时已经将字段的符号引用转换成了内存引用，将它与对应的类关联在了一起">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-04-28T06:05:08.864Z">
+<meta property="og:updated_time" content="2018-05-02T04:13:37.495Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="记录一些容易忘记的东西">
 <meta name="twitter:description" content="接口不可以实现接口，可以继承多个接口 抽象类可以继承具体类 static不能被重写，重写是运行时动态绑定的 static变量发生在静态解析阶段，此时已经将字段的符号引用转换成了内存引用，将它与对应的类关联在了一起">
@@ -157,7 +157,7 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                77
+                78
                 <span>文章</span>
             </div>
             <div class="article-info-block">
@@ -233,14 +233,14 @@
 <p>抽象类可以继承具体类</p>
 <p>static不能被重写，重写是运行时动态绑定的</p>
 <p>static变量发生在静态解析阶段，此时已经将字段的符号引用转换成了内存引用，将它与对应的类关联在了一起<br><a id="more"></a><br>子类构造方法默认会寻找父类无参构造方法，若没有，编译不通过</p>
-<p>关于抽象类<br>JDK 1.8以前，抽象类的方法默认访问权限为protected<br>JDK 1.8时，抽象类的方法默认访问权限变为default</p>
+<p>关于抽象类<br>JDK 1.8以前，抽象类的方法默认访问权限为protected<br>JDK 1.8时，抽象类的方法默认访问权限变为无修饰符</p>
 <p>关于接口<br>JDK 1.8以前，接口中的方法必须是public的<br>JDK 1.8时，接口中的方法可以是default，还可以是static<br>JDK 1.9时，接口中的方法可以是private的</p>
 <p>volatile 禁止指令重排序： 添加内存屏障，保证前面已经完成，后面都没开始（happens-before）</p>
 <p>内部类访问外部类      外部类.this.成员XX</p>
 <p>重载静态绑定，根据参数的静态类型而不是实际类型作为判断依据的</p>
 <p>java的8中基本类型，除了float和double之外，其它6种都实现了常量池</p>
 <p>boolean类型不允许进行任何类型的转换处理</p>
-<p>java7以后，常量池被放入到堆空间中。导致intern()函数的功能不同。intern()检查常量池是否存在该字符串，存在的话就直接返回；否则返回首次在堆中声明的相同字符串的引用</p>
+<p>java7以后，常量池被放入到堆空间中。<br>String#intern方法，如果存在堆中的对象，会直接保存对象的引用，而不会重新创建对象</p>
 <p>newInstance 低效率，只能调用<em>无参</em>构造。<br>将new这个方式分解为两步： 首先调用class的加载方式加载某个类，然后实例化  </p>
 <p>字符只有在内存中才会形成，其它都是以字节的方式进行的</p>
 <p>强引用： Object obj=new Object()，只要引用还在，就不会被回收<br>软引用： 内存不够才会被回收<br>弱引用： 下一次垃圾收集器工作时会被回收。<br>虚引用： 随时可能被回收，目的是能在这个对象被回收时收到一个系统通知</p>
@@ -287,7 +287,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/09/记录一些容易忘记的东西/" data-id="cjgm8t9m5006rdcmy0hwpuyje" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/09/记录一些容易忘记的东西/" data-id="cjgmae6xf006v5gmy3w7053z3" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
