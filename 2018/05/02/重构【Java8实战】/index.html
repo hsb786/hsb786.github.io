@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <meta charset="utf-8">
+    
+    <title>重构【Java8实战】 | HuShengBin’s blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="利用Java8的各种特性更有效地改善代码质量">
+<meta name="keywords" content="爪哇">
+<meta property="og:type" content="article">
+<meta property="og:title" content="重构【Java8实战】">
+<meta property="og:url" content="https://hsb786.github.io/2018/05/02/重构【Java8实战】/index.html">
+<meta property="og:site_name" content="HuShengBin’s blog">
+<meta property="og:description" content="利用Java8的各种特性更有效地改善代码质量">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://hsb786.github.io/images/java8-01.png">
+<meta property="og:image" content="https://hsb786.github.io/images/java8-02.png">
+<meta property="og:image" content="https://hsb786.github.io/images/java8-03.png">
+<meta property="og:image" content="https://hsb786.github.io/images/java8-04.png">
+<meta property="og:updated_time" content="2018-05-02T10:26:53.042Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="重构【Java8实战】">
+<meta name="twitter:description" content="利用Java8的各种特性更有效地改善代码质量">
+<meta name="twitter:image" content="https://hsb786.github.io/images/java8-01.png">
+    
+
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                
+                <span class="site-title">HuShengBin’s blog</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">Home</a>
+                
+                    <a class="main-nav-link" href="/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/tags">Tags</a>
+                
+                    <a class="main-nav-link" href="/about">About</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/css/images/txx.jpg" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">Tags</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/css/images/txx.jpg" />
+            <h2 id="name">hushengbin</h2>
+            <h3 id="title">JavaWeb Developer</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>Nanchang, Jiangxi, China</span>
+            <a id="follow" target="_blank" href="https://github.com/hsb786">关注我</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                73
+                <span>文章</span>
+            </div>
+            <div class="article-info-block">
+                14
+                <span>标签</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="https://github.com/hsb786" target="_blank" title="github" class=tooltip>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-重构【Java8实战】" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            重构【Java8实战】
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2018/05/02/重构【Java8实战】/">
+            <time datetime="2018-05-02T07:11:48.000Z" itemprop="datePublished">2018-05-02</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/爪哇/">爪哇</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/爪哇/Java8实战/">Java8实战</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/爪哇/">爪哇</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <blockquote>
+<p>利用Java8的各种特性更有效地改善代码质量</p>
+</blockquote>
+<a id="more"></a>
+<h2 id="从匿名类到Lambda表达式的转换"><a href="#从匿名类到Lambda表达式的转换" class="headerlink" title="从匿名类到Lambda表达式的转换"></a>从匿名类到Lambda表达式的转换</h2><p>匿名类极其繁琐且容易出错；采用Lambda表达式之后，你的代码会更简洁，可读性更好<br><img src="/images/java8-01.png" alt=""></p>
+<p>但是某些情况下，将匿名类转换成Lambda表达式可能是一个比较复杂的过程。首先，匿名类和Lambda表达式中的this和super的含义是不同的。<strong>在匿名类中，this代表的是类自身，但是在Lambda中，它代表的是包含类</strong>。其次，匿名类可以屏蔽包含类的常量，而Lambda表达式不能（它们会导致编译错误）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">int a = 10; </span><br><span class="line">Runnable r1 = () -&gt; &#123; </span><br><span class="line">    //编译错误</span><br><span class="line">    int a = 2;   </span><br><span class="line">    System.out.println(a); </span><br><span class="line">&#125;; </span><br><span class="line">Runnable r2 = new Runnable()&#123; </span><br><span class="line">    public void run()&#123; </span><br><span class="line">        //一切正常</span><br><span class="line">        int a = 2;  </span><br><span class="line">        System.out.println(a); </span><br><span class="line">    &#125; </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>最后，在涉及重载的上下文里，将匿名类转换为Lambda表达式可能导致最终的代码更加晦涩。<strong>实际上，匿名类的类型是在初始化时确定的，而Lambda的类型</strong>。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">//定义一个函数式接口</span><br><span class="line">interface Task&#123; </span><br><span class="line">    public void execute(); </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line">public static void doSomething(Runnable r)&#123; r.run(); &#125; </span><br><span class="line">public static void doSomething(Task a)&#123; a.execute(); &#125; </span><br><span class="line"></span><br><span class="line">//使用匿名类实现的Task，一切正常</span><br><span class="line">doSomething(new Task() &#123; </span><br><span class="line">    public void execute() &#123; </span><br><span class="line">        System.out.println(&quot;Danger danger!!&quot;); </span><br><span class="line">    &#125; </span><br><span class="line">&#125;); </span><br><span class="line"></span><br><span class="line">//使用Lambda表达式时，doSome-thing(Runnable)和doSomething(Task)都匹配该类型</span><br><span class="line">doSomething(() -&gt; System.out.println(&quot;Danger danger!!&quot;));  </span><br><span class="line"></span><br><span class="line">//你可以对Task尝试使用显式的类型转换来解决这种模棱两可的情况：</span><br><span class="line">doSomething((Task)() -&gt; System.out.println(&quot;Danger danger!!&quot;));</span><br></pre></td></tr></table></figure></p>
+<h2 id="使用Lambda重构面向对象的设计模式"><a href="#使用Lambda重构面向对象的设计模式" class="headerlink" title="使用Lambda重构面向对象的设计模式"></a>使用Lambda重构面向对象的设计模式</h2><h3 id="策略模式"><a href="#策略模式" class="headerlink" title="策略模式"></a>策略模式</h3><p><strong>策略模式代表了解决一类算法的通用解决方案，你可以在运行时选择使用哪种方案</strong></p>
+<p>策略模式包含三部分内容</p>
+<ul>
+<li>一个代表某个算法的接口（它是策略模式的接口）。</li>
+<li>一个或多个该接口的具体实现，它们代表了算法的多种实现（比如，实体类Concrete- StrategyA或者ConcreteStrategyB）。</li>
+<li>一个或多个使用策略对象的客户。<br><img src="/images/java8-02.png" alt=""></li>
+</ul>
+<p>我们假设你希望验证输入的内容是否根据标准进行了恰当的格式化（比如只包含小写字母或数字）。你可以从定义一个验证文本（以String的形式表示）的接口入手<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public interface ValidationStrategy &#123; </span><br><span class="line">    boolean execute(String s); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>其次，你定义了该接口的一个或多个具体实现：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public class IsAllLowerCase implements ValidationStrategy &#123; </span><br><span class="line">    public boolean execute(String s)&#123; </span><br><span class="line">        return s.matches(&quot;[a-z]+&quot;); </span><br><span class="line">    &#125; </span><br><span class="line">&#125; </span><br><span class="line">public class IsNumeric implements ValidationStrategy &#123; </span><br><span class="line">    public boolean execute(String s)&#123; </span><br><span class="line">        return s.matches(&quot;\\d+&quot;); </span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>之后，你就可以在你的程序中使用这些略有差异的验证策略了：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">public class Validator&#123; </span><br><span class="line">    private final ValidationStrategy strategy; </span><br><span class="line">    public Validator(ValidationStrategy v)&#123; </span><br><span class="line">        this.strategy = v; </span><br><span class="line">    &#125; </span><br><span class="line">    public boolean validate(String s)&#123; </span><br><span class="line">        return strategy.execute(s); </span><br><span class="line">    &#125; </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line">Validator numericValidator = new Validator(new IsNumeric()); </span><br><span class="line">boolean b1 = numericValidator.validate(&quot;aaaa&quot;);  </span><br><span class="line">Validator lowerCaseValidator = new Validator(new IsAllLowerCase ()); </span><br><span class="line">boolean b2 = lowerCaseValidator.validate(&quot;bbbb&quot;);</span><br></pre></td></tr></table></figure></p>
+<p>ValidationStrategy是一个函数接口了（除此之外，它还与Predicate<string>具有同样的函数描述）。这意味着我们不需要声明新的类来实现不同的策略，通过直接传递Lambda表达式就能达到同样的目的，并且还更简洁<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Validator numericValidator = </span><br><span class="line">    new Validator((String s) -&gt; s.matches(&quot;[a-z]+&quot;));  </span><br><span class="line">boolean b1 = numericValidator.validate(&quot;aaaa&quot;);  </span><br><span class="line">Validator lowerCaseValidator = </span><br><span class="line">    new Validator((String s) -&gt; s.matches(&quot;\\d+&quot;));  </span><br><span class="line">boolean b2 = lowerCaseValidator.validate(&quot;bbbb&quot;);</span><br></pre></td></tr></table></figure></string></p>
+<h3 id="模板方法"><a href="#模板方法" class="headerlink" title="模板方法"></a>模板方法</h3><p>如果你需要采用某个算法的框架，同时又希望有一定的灵活度，能对它的某些部分进行改进，那么采用模板方法设计模式是比较通用的方案。<br>定义：<strong>规定一个操作中的算法的骨架，而将步骤延迟到子类中。模板方法使得子类可以不改变一个算法的结构即可重定义算法的某些特定步骤。</strong></p>
+<p>假设你需要编写一个简单的在线银行应用。通常，  用户需要输入一个用户账户，之后应用才能从银行的数据库中得到用户的详细信息，最终完成一些让用户满意的操作。不同分行的在线银行应用让客户满意的方式可能还略有不同，比如给客户的账户发放红利，或者仅仅是少发送一些推广文件。你可能通过下面的抽象类方式来实现在线银行应用：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">abstract class OnlineBanking &#123; </span><br><span class="line">    public void processCustomer(int id)&#123; </span><br><span class="line">        Customer c = Database.getCustomerWithId(id); </span><br><span class="line">        makeCustomerHappy(c); </span><br><span class="line">    &#125; </span><br><span class="line">    abstract void makeCustomerHappy(Customer c); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>processCustomer方法搭建了在线银行算法的框架：获取客户提供的ID，然后提供服务让用户满意。不同的支行可以通过继承OnlineBanking类，对该方法提供差异化的实现。</p>
+<p>使用Lambda表达式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public void processCustomer(int id, Consumer&lt;Customer&gt; makeCustomerHappy)&#123; </span><br><span class="line">    Customer c = Database.getCustomerWithId(id); </span><br><span class="line">    makeCustomerHappy.accept(c); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>现在，你可以很方便地通过传递Lambda表达式，直接插入不同的行为，不再需要继承OnlineBanking类了：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">new OnlineBankingLambda().processCustomer(1337, (Customer c) -&gt; </span><br><span class="line">    System.out.println(&quot;Hello &quot; + c.getName());</span><br></pre></td></tr></table></figure></p>
+<h3 id="观察者模式"><a href="#观察者模式" class="headerlink" title="观察者模式"></a>观察者模式</h3><p>观察者模式是一种比较常见的方案，某些事件发生时（比如状态转变），如果一个对象（通常我们称之为主题）需要自动地通知其他多个对（称为观察者），就会采用该方案</p>
+<p><img src="/images/java8-03.png" alt=""></p>
+<p>你需要为Twitter这样的应用设计并实现一个定制化的通知系统。想法很简单：好几家报纸机构，比如《纽约时报》《卫报》以及《世界报》都订阅了新闻，他们希望当接收的新闻中包含他们感兴趣的关键字时，能得到特别通知。</p>
+<p>首先，你需要一个观察者接口，它将不同的观察者聚合在一起。它仅有一个名为notify的方法，一旦接收到一条新的新闻，该方法就会被调用：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">interface Observer &#123; </span><br><span class="line">    void notify(String tweet); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>现在，你可以声明不同的观察者（比如，这里是三家不同的报纸机构），依据新闻中不同的关键字分别定义不同的行为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">class NYTimes implements Observer&#123; </span><br><span class="line">    public void notify(String tweet) &#123; </span><br><span class="line">        if(tweet != null &amp;&amp; tweet.contains(&quot;money&quot;))&#123; </span><br><span class="line">            System.out.println(&quot;Breaking news in NY! &quot; + tweet); </span><br><span class="line">        &#125; </span><br><span class="line">    &#125; </span><br><span class="line">&#125; </span><br><span class="line">class Guardian implements Observer&#123; </span><br><span class="line">    public void notify(String tweet) &#123; </span><br><span class="line">        if(tweet != null &amp;&amp; tweet.contains(&quot;queen&quot;))&#123; </span><br><span class="line">            System.out.println(&quot;Yet another news in London... &quot; + tweet); </span><br><span class="line">        &#125; </span><br><span class="line">    &#125; </span><br><span class="line">&#125; </span><br><span class="line">class LeMonde implements Observer&#123; </span><br><span class="line">    public void notify(String tweet) &#123; </span><br><span class="line">        if(tweet != null &amp;&amp; tweet.contains(&quot;wine&quot;))&#123; </span><br><span class="line">            System.out.println(&quot;Today cheese, wine and news! &quot; + tweet); </span><br><span class="line">        &#125; </span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">interface Subject&#123; </span><br><span class="line">    void registerObserver(Observer o); </span><br><span class="line">    void notifyObservers(String tweet); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Subject使用registerObserver方法可以注册一个新的观察者，使用notifyObservers方法通知它的观察者一个新闻的到来。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">class Feed implements Subject&#123; </span><br><span class="line">    private final List&lt;Observer&gt; observers = new ArrayList&lt;&gt;(); </span><br><span class="line">    public void registerObserver(Observer o) &#123; </span><br><span class="line">        this.observers.add(o); </span><br><span class="line">    &#125; </span><br><span class="line">    public void notifyObservers(String tweet) &#123; </span><br><span class="line">        observers.forEach(o -&gt; o.notify(tweet)); </span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Feed类在内部维护了一个观察者列表，一条新闻到达时，它就进行通知。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Feed f = new Feed(); </span><br><span class="line">f.registerObserver(new NYTimes()); </span><br><span class="line">f.registerObserver(new Guardian()); </span><br><span class="line">f.registerObserver(new LeMonde()); </span><br><span class="line">f.notifyObservers(&quot;The queen said her favourite book is Java 8 in Action!&quot;);</span><br></pre></td></tr></table></figure></p>
+<p>Observer接口的所有实现类都提供了一个方法：notify。新闻到达时，它们都只是对同一段代码封装执行。Lambda表达式的设计初衷就是要消除这样的僵化代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">f.registerObserver((String tweet) -&gt; &#123; </span><br><span class="line">    if(tweet != null &amp;&amp; tweet.contains(&quot;money&quot;))&#123; </span><br><span class="line">        System.out.println(&quot;Breaking news in NY! &quot; + tweet); </span><br><span class="line">    &#125; </span><br><span class="line">&#125;); </span><br><span class="line">f.registerObserver((String tweet) -&gt; &#123; </span><br><span class="line">    if(tweet != null &amp;&amp; tweet.contains(&quot;queen&quot;))&#123; </span><br><span class="line">        System.out.println(&quot;Yet another news in London... &quot; + tweet); </span><br><span class="line">    &#125; </span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>那么，是否我们随时随地都可以使用Lambda表达式呢？答案是否定的！我们前文介绍的例子中，Lambda适配得很好，那是因为需要执行的动作都很简单，因此才能很方便地消除僵化代码。但是，观察者的逻辑有可能十分复杂，它们可能还持有状态，抑或定义了多个方法，诸如此类。在这些情形下，你还是应该继续使用类的方式。</p>
+<h3 id="责任链模式"><a href="#责任链模式" class="headerlink" title="责任链模式"></a>责任链模式</h3><p>责任链模式是一种创建处理对象序列（比如操作序列）的通用方案。<strong>一个处理对象可能需要在完成一些工作之后，将结果传递给另一个对象，这个对象接着做一些工作，再转交给下一个处理对象，以此类推</strong>。</p>
+<p><img src="/images/java8-04.png" alt=""><br>这就是之前介绍的模板方法设计模式。handle方法提供了如何进行工作处理的框架。不同的处理对象可以通过继承ProcessingObject类，提供handleWork方法来进行创建。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">public abstract class ProcessingObject&lt;T&gt; &#123; </span><br><span class="line">    protected ProcessingObject&lt;T&gt; successor; </span><br><span class="line">    public void setSuccessor(ProcessingObject&lt;T&gt; successor)&#123; </span><br><span class="line">        this.successor = successor; </span><br><span class="line">     &#125; </span><br><span class="line">    public T handle(T input)&#123; </span><br><span class="line">        T r = handleWork(input); </span><br><span class="line">        if(successor != null)&#123; </span><br><span class="line">            return successor.handle(r); </span><br><span class="line">        &#125; </span><br><span class="line">        return r; </span><br><span class="line">    &#125; </span><br><span class="line">    abstract protected T handleWork(T input); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public class HeaderTextProcessing extends ProcessingObject&lt;String&gt; &#123; </span><br><span class="line">    public String handleWork(String text)&#123; </span><br><span class="line">        return &quot;From Raoul, Mario and Alan: &quot; + text; </span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ProcessingObject&lt;String&gt; p1 = new HeaderTextProcessing(); </span><br><span class="line">ProcessingObject&lt;String&gt; p2 = new SpellCheckerProcessing(); </span><br><span class="line">p1.setSuccessor(p2);</span><br><span class="line">String result = p1.handle(&quot;Aren&apos;t labdas really sexy?!!&quot;); </span><br><span class="line">System.out.println(result); </span><br><span class="line">//打印输出“From  Raoul,  Marioand Alan: Aren&apos;t lambdas reallysexy?!!”</span><br></pre></td></tr></table></figure>
+<p>使用Lambda表达式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">UnaryOperator&lt;String&gt; headerProcessing = </span><br><span class="line">    (String text) -&gt; &quot;From Raoul, Mario and Alan: &quot; + text;</span><br><span class="line">UnaryOperator&lt;String&gt; spellCheckerProcessing = </span><br><span class="line">    (String text) -&gt; text.replaceAll(&quot;labda&quot;, &quot;lambda&quot;);  </span><br><span class="line">Function&lt;String, String&gt; pipeline = </span><br><span class="line">    headerProcessing.andThen(spellCheckerProcessing);   </span><br><span class="line">String result = pipeline.apply(&quot;Aren&apos;t labdas really sexy?!!&quot;);</span><br></pre></td></tr></table></figure></p>
+<h3 id="工厂模式"><a href="#工厂模式" class="headerlink" title="工厂模式"></a>工厂模式</h3><p>使用工厂模式，你无需向客户暴露实例化的逻辑就能完成对象的创建。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public class ProductFactory &#123; </span><br><span class="line">    public static Product createProduct(String name)&#123; </span><br><span class="line">        switch(name)&#123; </span><br><span class="line">            case &quot;loan&quot;: return new Loan(); </span><br><span class="line">            case &quot;stock&quot;: return new Stock(); </span><br><span class="line">            case &quot;bond&quot;: return new Bond(); </span><br><span class="line">            default: throw new RuntimeException(&quot;No such product &quot; + name); </span><br><span class="line">        &#125; </span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里贷款（Loan）、股票（Stock）和债券（Bond）都是产品（Product）的子类。createProduct方法可以通过附加的逻辑来设置每个创建的产品。但是带来的好处也显而易见，你在创建对象时不用再担心会将构造函数或者配置暴露给客户，这使得客户创建产品时更加简单<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Product p = ProductFactory.createProduct(&quot;loan&quot;);</span><br></pre></td></tr></table></figure></p>
+<p>使用Lambda表达式<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">final static Map&lt;String, Supplier&lt;Product&gt;&gt; map = new HashMap&lt;&gt;(); </span><br><span class="line">static &#123; </span><br><span class="line">    map.put(&quot;loan&quot;, Loan::new); </span><br><span class="line">    map.put(&quot;stock&quot;, Stock::new); </span><br><span class="line">    map.put(&quot;bond&quot;, Bond::new); </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line">public static Product createProduct(String name)&#123; </span><br><span class="line">    Supplier&lt;Product&gt; p = map.get(name); </span><br><span class="line">    if(p != null) return p.get(); </span><br><span class="line">    throw new IllegalArgumentException(&quot;No such product &quot; + name); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="https://hsb786.github.io/2018/05/02/重构【Java8实战】/" data-id="cjgp0bvk2006ynkmy8ri1ntgs" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2018/05/02/默认方法【Java8实战】/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">上一篇</strong>
+            <div class="article-nav-title">
+                
+                    默认方法【Java8实战】
+                
+            </div>
+        </a>
+    
+    
+        <a href="/2018/04/30/并行流【java8实战】/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">并行流【java8实战】</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    
+        <section id="comments">
+    <div id="valine-thread"></div>
+</section>
+    
+
+</section>
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2018 HuShengBin<br>
+    </div>
+</footer>
+        
+    
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//cdn.jsdelivr.net/gh/xcss/valine@v1.1.6/dist/Valine.min.js"></script>
+    <script>
+        new Valine({
+            el: '#valine-thread' ,
+            notify:false,
+            verify:false,
+            app_id: 'eqjWlM0tCYgxhh8nvvV6DleG-gzGzoHsz',
+            app_key: 'CRXn0n9IAsJdOeMDUIxyh1Hb',
+            placeholder: '(。・∀・)ノ说一句吧'
+        });
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>
