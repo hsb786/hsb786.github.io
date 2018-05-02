@@ -3,20 +3,25 @@
 <head>
     <meta charset="utf-8">
     
-    <title>Java虚拟机是如何执行线程同步的 | HuShengBin’s blog</title>
+    <title>IO/NIO | HuShengBin’s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="线程和共享数据 在JVM中，每个线程独享一块栈内存，其中包括局部变量、线程调用的每个方法的参数和返回值。其它线程无法读取到该栈内存块中的数据。栈中的数据仅限于基本类型和对象引用。 在JVM中，堆内存是所有线程共享的。对象在堆中。 还有一部分数据保存JVM中的方法区中，比如类的静态变量。方法区和栈类似，其中只包含基本类型和对象引用。和栈不同的是，方法区中的静态变量可以被所有线程访问到。">
-<meta name="keywords" content="多线程">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Java虚拟机是如何执行线程同步的">
-<meta property="og:url" content="https://hsb786.github.io/2018/04/08/Java虚拟机是如何执行线程同步的/index.html">
+    <meta name="description" content="IO字节IO字节流处理单元为1个字节，主要用在处理二进制数据，字节用来与文件打交道，所有文件的储存都是通过字节（byte）的方式，在磁盘上保留的并不是文件的字符而是先把字符编码成字节，再储存这些字节到磁盘。在读取文件（特别是文本文件）时，也是一个字节一个字节地读取形成字节序列。   字符IO实际中很多的数据是文本，因此有了字符流的概念，字符流只用于处理文字数据。字符流处理单元为2个字节的Unico">
+<meta name="keywords" content="爪哇">
+<meta property="og:type" content="website">
+<meta property="og:title" content="IO&#x2F;NIO">
+<meta property="og:url" content="https://hsb786.github.io/temp/IO-NIO.html">
 <meta property="og:site_name" content="HuShengBin’s blog">
-<meta property="og:description" content="线程和共享数据 在JVM中，每个线程独享一块栈内存，其中包括局部变量、线程调用的每个方法的参数和返回值。其它线程无法读取到该栈内存块中的数据。栈中的数据仅限于基本类型和对象引用。 在JVM中，堆内存是所有线程共享的。对象在堆中。 还有一部分数据保存JVM中的方法区中，比如类的静态变量。方法区和栈类似，其中只包含基本类型和对象引用。和栈不同的是，方法区中的静态变量可以被所有线程访问到。">
+<meta property="og:description" content="IO字节IO字节流处理单元为1个字节，主要用在处理二进制数据，字节用来与文件打交道，所有文件的储存都是通过字节（byte）的方式，在磁盘上保留的并不是文件的字符而是先把字符编码成字节，再储存这些字节到磁盘。在读取文件（特别是文本文件）时，也是一个字节一个字节地读取形成字节序列。   字符IO实际中很多的数据是文本，因此有了字符流的概念，字符流只用于处理文字数据。字符流处理单元为2个字节的Unico">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-04-20T13:24:46.656Z">
+<meta property="og:image" content="https://hsb786.github.io/images/IO01.png">
+<meta property="og:image" content="https://hsb786.github.io/images/IO02.png">
+<meta property="og:image" content="https://hsb786.github.io/images/IO03.png">
+<meta property="og:image" content="https://hsb786.github.io/images/IO04.png">
+<meta property="og:updated_time" content="2018-04-17T11:02:18.313Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java虚拟机是如何执行线程同步的">
-<meta name="twitter:description" content="线程和共享数据 在JVM中，每个线程独享一块栈内存，其中包括局部变量、线程调用的每个方法的参数和返回值。其它线程无法读取到该栈内存块中的数据。栈中的数据仅限于基本类型和对象引用。 在JVM中，堆内存是所有线程共享的。对象在堆中。 还有一部分数据保存JVM中的方法区中，比如类的静态变量。方法区和栈类似，其中只包含基本类型和对象引用。和栈不同的是，方法区中的静态变量可以被所有线程访问到。">
+<meta name="twitter:title" content="IO&#x2F;NIO">
+<meta name="twitter:description" content="IO字节IO字节流处理单元为1个字节，主要用在处理二进制数据，字节用来与文件打交道，所有文件的储存都是通过字节（byte）的方式，在磁盘上保留的并不是文件的字符而是先把字符编码成字节，再储存这些字节到磁盘。在读取文件（特别是文本文件）时，也是一个字节一个字节地读取形成字节序列。   字符IO实际中很多的数据是文本，因此有了字符流的概念，字符流只用于处理文字数据。字符流处理单元为2个字节的Unico">
+<meta name="twitter:image" content="https://hsb786.github.io/images/IO01.png">
     
 
     
@@ -185,7 +190,7 @@
 </aside>
 
             
-            <section id="main"><article id="post-Java虚拟机是如何执行线程同步的" class="article article-type-post" itemscope itemprop="blogPost">
+            <section id="main"><article id="page-" class="article article-type-page" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -193,34 +198,10 @@
                 
     
         <h1 class="article-title" itemprop="name">
-            Java虚拟机是如何执行线程同步的
+            IO/NIO
         </h1>
     
 
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2018/04/08/Java虚拟机是如何执行线程同步的/">
-            <time datetime="2018-04-08T09:48:41.000Z" itemprop="datePublished">2018-04-08</time>
-        </a>
-    </div>
-
-
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/JVM/">JVM</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/多线程/">多线程</a>
-    </div>
-
-                    </div>
                 
             </header>
         
@@ -228,35 +209,16 @@
         <div class="article-entry" itemprop="articleBody">
         
             
-            <hr>
-<p><strong>线程和共享数据</strong></p>
-<p>在JVM中，每个线程独享一块栈内存，其中包括局部变量、线程调用的每个方法的参数和返回值。其它线程无法读取到该栈内存块中的数据。栈中的数据仅限于基本类型和对象引用。</p>
-<p>在JVM中，堆内存是所有线程共享的。对象在堆中。</p>
-<p>还有一部分数据保存JVM中的方法区中，比如类的静态变量。方法区和栈类似，其中只包含基本类型和对象引用。和栈不同的是，方法区中的静态变量可以被所有线程访问到。<br><a id="more"></a></p>
+            <h2 id="IO"><a href="#IO" class="headerlink" title="IO"></a>IO</h2><h3 id="字节IO"><a href="#字节IO" class="headerlink" title="字节IO"></a>字节IO</h3><p>字节流处理单元为1个字节，主要用在处理二进制数据，字节用来与文件打交道，所有文件的储存都是通过字节（byte）的方式，在磁盘上保留的并不是文件的字符而是先把字符编码成字节，再储存这些字节到磁盘。在读取文件（特别是文本文件）时，也是一个字节一个字节地读取形成字节序列。</p>
+<p><img src="/images/IO01.png" alt=""></p>
+<p><img src="/images/IO02.png" alt=""></p>
+<h3 id="字符IO"><a href="#字符IO" class="headerlink" title="字符IO"></a>字符IO</h3><p>实际中很多的数据是文本，因此有了字符流的概念，字符流只用于处理文字数据。字符流处理单元为2个字节的Unicode字符。</p>
+<p>字符流中的对象融合了编码表，使用的是默认的编码，即当前系统的编码。在实际开发中出现的汉字乱码问题实际上都是在字符流和字节流之间转化不统一而造成的。</p>
+<p><img src="/images/IO03.png" alt=""></p>
+<p><img src="/images/IO04.png" alt=""></p>
 <hr>
-<p><strong>对象和类的锁</strong></p>
-<p>JMM中有两块区域可以被所有线程共享</p>
-<blockquote>
-<p>堆，存放着所有对象<br>方法区，存放着静态变量</p>
-</blockquote>
-<p>那么，如果有多个线程想要同时访问同一个对象或者静态变量，就需要被管控，否则可能出现不可预期的结果</p>
-<p>为了协调多个线程之间的共享数据访问，虚拟机给每个对象和类都分配了一个锁。这个锁就像一个特权，在同一时刻，只有一个线程可以“拥有”这个类或者对象。如果一个线程想要获得某个类或者对象的锁，需要询问虚拟机。当一个线程向虚拟机申请某个类或者对象的锁之后，也许很快或者很慢虚拟机可以把锁分配给这个线程，同时这个线程也许永远也无法获得锁。但线程不再需要锁的时候，他再把锁还给虚拟机。这时虚拟机就可以再把锁分配给其它申请锁的线程。</p>
-<p>类锁其实通过对象锁实现的。因为当虚拟机加载一个类的时候，会为这个类实例化一个java.lang.Class对象，当你锁住一个类的时候，其实锁住的是其对应的Class对象</p>
-<hr>
-<p><strong>监视器（Monitors）</strong></p>
-<p>锁其实是通过监视器实现的，监视器主要功能是监控一段代码，确保在同一时间只有一个线程在执行。</p>
-<p>每个监视器都与一个对象相关联。当线程执行到监视器监视下的代码块中的第一条指令时，线程必须获取对被引用对象的锁定。在线程获取锁之前，它是无法执行这段代码的，一旦获得锁，线程便可以进入“被保护”的代码开始执行。</p>
-<p>当线程离开代码块时，无论如何离开，都会释放所关联对象的锁</p>
-<hr>
-<p><strong>多次加锁</strong></p>
-<p>同一个线程可以对同一个对象进行多次加锁。每个对象维护着一个记录着被锁次数的计数器。未被锁定的对象的该计数器为0，当一个线程获得锁后，该计数器自增变为1，当同一个线程再次获得该对象的锁的时候，计数器再次自增。当同一个线程释放锁的时候，计数器再自减。当计数器为0的时候。锁将被释放，其它线程便可以获得锁。</p>
-<hr>
-<p><strong>同步</strong></p>
-<p>在Java中，当有多个线程都必须要对同一个共享数据进行访问时，有一种协调方式叫做同步。Java语言提供了两种内置方式来使线程同步的访问数据：同步代码块和同步方法。</p>
-<p><em>参考</em></p>
-<blockquote>
-<p><a href="http://www.hollischuang.com/archives/1876" target="_blank" rel="noopener">Java虚拟机是如何执行线程同步的</a></p>
-</blockquote>
+<h2 id="NIO"><a href="#NIO" class="headerlink" title="NIO"></a>NIO</h2><p><strong>Channel（通道），Buffer（缓存区），Selector（选择器）</strong></p>
+<h3 id="Channel（通道）"><a href="#Channel（通道）" class="headerlink" title="Channel（通道）"></a>Channel（通道）</h3><p>在传统IO中我们要读取一个文件中的内容时InputStream实际上就是为读取文件提供了一个通道，因此可以将NIO 中的Channel同传统IO中的Stream来类比。但是要注意的是，传统IO中的Stream是单向的，比如InputStream只能进行读取操作，OutputStream只能进行写操作；而<strong>Channel是双向的，既可用来进行读操作又可用来进行写操作。</strong></p>
 
         
         </div>
@@ -267,7 +229,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/08/Java虚拟机是如何执行线程同步的/" data-id="cjgmae6ut001i5gmyc2kronpv" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/temp/IO-NIO.html" data-id="cjgonc4v00001cwmyyvfpxpfp" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -340,25 +302,6 @@
     </div>
     
         
-<nav id="article-nav">
-    
-        <a href="/2018/04/08/一些小技巧/" id="article-nav-newer" class="article-nav-link-wrap">
-            <strong class="article-nav-caption">上一篇</strong>
-            <div class="article-nav-title">
-                
-                    一些小技巧
-                
-            </div>
-        </a>
-    
-    
-        <a href="/2018/04/08/lombok/" id="article-nav-older" class="article-nav-link-wrap">
-            <strong class="article-nav-caption">下一篇</strong>
-            <div class="article-nav-title">lombok</div>
-        </a>
-    
-</nav>
-
 
     
 </article>

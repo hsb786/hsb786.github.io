@@ -14,7 +14,7 @@
 <meta property="og:description" content="Enum类是java.lang包中的一个类，他是Java语言中所有枚举类型的公共基类">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://hsb786.github.io/images/enum01.png">
-<meta property="og:updated_time" content="2018-04-20T13:15:16.177Z">
+<meta property="og:updated_time" content="2018-05-02T05:47:31.262Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="enum">
 <meta name="twitter:description" content="Enum类是java.lang包中的一个类，他是Java语言中所有枚举类型的公共基类">
@@ -159,7 +159,7 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                78
+                71
                 <span>文章</span>
             </div>
             <div class="article-info-block">
@@ -240,7 +240,7 @@
 <p>定义一个Color枚举</p>
 <pre><code>enum Color {RED, GREEN, YELLOW}
 </code></pre><p>反编译后的结果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public final class EnumTest.Color extends java.lang.Enum&lt;EnumTest.Color&gt; &#123;</span><br><span class="line">  public static final EnumTest.Color RED;</span><br><span class="line">  public static final EnumTest.Color GREEN;</span><br><span class="line">  public static final EnumTest.Color YELLOW;</span><br><span class="line">  private static final EnumTest.Color[] ENUM$VALUES;</span><br><span class="line">  static &#123;&#125;;</span><br><span class="line">  private EnumTest.Color(java.lang.String, int);</span><br><span class="line">  public static EnumTest.Color[] values();</span><br><span class="line">  public static EnumTest.Color valueOf(java.lang.String);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>从反编译之后的代码中，我们发现，编译器不让我们继承Enum，但是当我们使用enum关键字定义一个枚举的时候，他会帮我们在编译后默认继承java.lang.Enum类，而不像其他的类一样默认继承Object类。且采用enum声明后，该类会被编译器加上final声明，故该类是无法继承的。</p>
+<p>从反编译之后的代码中，我们发现，编译器不让我们继承Enum，但是<strong>当我们使用enum关键字定义一个枚举的时候，他会帮我们在编译后默认继承java.lang.Enum类，而不像其他的类一样默认继承Object类。且采用enum声明后，该类会被编译器加上final声明，故该类是无法继承的</strong>。</p>
 <hr>
 <p>Enum实现了Serializable和Comparable接口，进行比较时只有同类型的enum才能进行比较，要想实现不同类型的enum之间的比较，只能重写compareTo方法</p>
 <p><strong>Enum&lt;E extends Enum&lt;E>></strong></p>

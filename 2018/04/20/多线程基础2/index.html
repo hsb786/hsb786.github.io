@@ -17,7 +17,7 @@
 <meta property="og:image" content="https://hsb786.github.io/images/Thread02.png">
 <meta property="og:image" content="https://hsb786.github.io/images/Thread03.png">
 <meta property="og:image" content="https://hsb786.github.io/images/Thread04.png">
-<meta property="og:updated_time" content="2018-04-24T06:20:42.586Z">
+<meta property="og:updated_time" content="2018-05-02T06:08:26.983Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="多线程基础2">
 <meta name="twitter:description" content="线程是一个操作系统级别的概念。JAVA语言（包括其他编程语言）本身不创建线程；而是调用操作系统层提供的接口创建、控制、销毁线程实例。">
@@ -162,7 +162,7 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                78
+                71
                 <span>文章</span>
             </div>
             <div class="article-info-block">
@@ -252,8 +252,6 @@
 <p>可以看出interrupted和isInterrupted区别在于传给ClearInterrupted的参数是true还是false。</p>
 <p><strong>ClearInterrupted参数向操作系统指明是否在获取状态后将当前线程的interrupted状态重置为false。</strong></p>
 <p>这就意味着当某个线程的isInterrupt属性成功被置为true后，如果您使用对象方法thread.isInterrupted()获取值，无论您获取多少次得到的返回值都是true；但是如果您使用静态方法Thread.interrupted()获取值，那么只有第一次获取的结果是true，随后线程的isInterrupt属性将被恢复成false，后续无论使用Thread.interrupted()调用还是使用thread.isInterrupted()调用，获取的结果都是false。</p>
-<p>wait和sleep都是让<strong>当前线程</strong>进入阻塞状态，yield是让主线程等待调用yield的线程执行完。</p>
-<p>sleep和yield都是public static native void方法</p>
 <hr>
 <p>Java语言为我们提供了两种基础线程池的选择：ScheduledThreadPoolExecutor和ThreadPoolExecutor。它们都实现了ExecutorService接口（注意，ExecutorService接口本身和“线程池”并没有直接关系，它的定义更接近“执行器”，而“使用线程管理的方式进行实现”只是其中的一种实现方式）。</p>
 <h2 id="JAVA主要线程池的继承结构"><a href="#JAVA主要线程池的继承结构" class="headerlink" title="JAVA主要线程池的继承结构"></a>JAVA主要线程池的继承结构</h2><p><img src="/images/Thread04.png" alt=""></p>

@@ -5,13 +5,13 @@
     
     <title>TCP/IP | HuShengBin’s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="感觉计算机网络课上学的东西忘得差不多了，怎么办？怎么办？ 还能怎么办，学啊。  TCP/IP百度百科上的解释  Transmission Control Protocol/Internet Protocol的简写，中译名为传输控制协议/因特网互联协议，又名网络通讯协议，是Internet最基本的协议、Internet国际互联网络的基础，由网络层的IP协议和传输层的TCP协议组成。TCP/IP 定">
+    <meta name="description" content="Transmission Control Protocol/Internet Protocol的简写，中译名为传输控制协议/因特网互联协议，又名网络通讯协议，是Internet最基本的协议、Internet国际互联网络的基础，由网络层的IP协议和传输层的TCP协议组成。TCP/IP 定义了电子设备如何连入因特网，以及数据如何在它们之间传输的标准。协议采用了4层的层级结构，每一层都呼叫它的下一层所">
 <meta name="keywords" content="HTTP">
 <meta property="og:type" content="article">
 <meta property="og:title" content="TCP&#x2F;IP">
 <meta property="og:url" content="https://hsb786.github.io/2018/04/16/TCP-IP/index.html">
 <meta property="og:site_name" content="HuShengBin’s blog">
-<meta property="og:description" content="感觉计算机网络课上学的东西忘得差不多了，怎么办？怎么办？ 还能怎么办，学啊。  TCP/IP百度百科上的解释  Transmission Control Protocol/Internet Protocol的简写，中译名为传输控制协议/因特网互联协议，又名网络通讯协议，是Internet最基本的协议、Internet国际互联网络的基础，由网络层的IP协议和传输层的TCP协议组成。TCP/IP 定">
+<meta property="og:description" content="Transmission Control Protocol/Internet Protocol的简写，中译名为传输控制协议/因特网互联协议，又名网络通讯协议，是Internet最基本的协议、Internet国际互联网络的基础，由网络层的IP协议和传输层的TCP协议组成。TCP/IP 定义了电子设备如何连入因特网，以及数据如何在它们之间传输的标准。协议采用了4层的层级结构，每一层都呼叫它的下一层所">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://hsb786.github.io/images/HTTP01.jpg">
 <meta property="og:image" content="https://hsb786.github.io/images/HTTP02.jpg">
@@ -19,10 +19,10 @@
 <meta property="og:image" content="https://hsb786.github.io/images/HTTP04.jpg">
 <meta property="og:image" content="https://hsb786.github.io/images/HTTP05.png">
 <meta property="og:image" content="https://hsb786.github.io/images/三次握手.png">
-<meta property="og:updated_time" content="2018-04-25T06:57:56.248Z">
+<meta property="og:updated_time" content="2018-05-02T05:49:53.067Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="TCP&#x2F;IP">
-<meta name="twitter:description" content="感觉计算机网络课上学的东西忘得差不多了，怎么办？怎么办？ 还能怎么办，学啊。  TCP/IP百度百科上的解释  Transmission Control Protocol/Internet Protocol的简写，中译名为传输控制协议/因特网互联协议，又名网络通讯协议，是Internet最基本的协议、Internet国际互联网络的基础，由网络层的IP协议和传输层的TCP协议组成。TCP/IP 定">
+<meta name="twitter:description" content="Transmission Control Protocol/Internet Protocol的简写，中译名为传输控制协议/因特网互联协议，又名网络通讯协议，是Internet最基本的协议、Internet国际互联网络的基础，由网络层的IP协议和传输层的TCP协议组成。TCP/IP 定义了电子设备如何连入因特网，以及数据如何在它们之间传输的标准。协议采用了4层的层级结构，每一层都呼叫它的下一层所">
 <meta name="twitter:image" content="https://hsb786.github.io/images/HTTP01.jpg">
     
 
@@ -164,7 +164,7 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                78
+                71
                 <span>文章</span>
             </div>
             <div class="article-info-block">
@@ -236,11 +236,6 @@
         
             
             <blockquote>
-<p>感觉计算机网络课上学的东西忘得差不多了，怎么办？怎么办？</p>
-<p>还能怎么办，学啊。</p>
-</blockquote>
-<h2 id="TCP-IP"><a href="#TCP-IP" class="headerlink" title="TCP/IP"></a>TCP/IP</h2><p>百度百科上的解释</p>
-<blockquote>
 <p>Transmission Control Protocol/Internet Protocol的简写，中译名为传输控制协议/因特网互联协议，又名网络通讯协议，是Internet最基本的协议、Internet国际互联网络的基础，由网络层的IP协议和传输层的TCP协议组成。TCP/IP 定义了电子设备如何连入因特网，以及数据如何在它们之间传输的标准。协议采用了4层的层级结构，每一层都呼叫它的下一层所提供的协议来完成自己的需求。通俗而言：TCP负责发现传输的问题，一有问题就发出信号，要求重新传输，直到所有数据安全正确地传输到目的地。而IP是给因特网的每一台联网设备规定一个地址。<br><a id="more"></a></p>
 </blockquote>
 <p>TCP/IP协议族就采用了分层的思想，自上而下分成了四层： 应用层，传输层，网络层，链路层，每一层的协议只约定了特定的功能，HTTP就位于应用层。利用TCP/IP协议族进行网络通信时，会通过分层顺序与对方进行通信。发送端从应用层往下走，接收端则往应用层往上走。一次HTTP请求的典型过程如下图所示</p>

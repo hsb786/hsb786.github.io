@@ -3,20 +3,23 @@
 <head>
     <meta charset="utf-8">
     
-    <title>Java虚拟机是如何执行线程同步的 | HuShengBin’s blog</title>
+    <title>ThreadGroup | HuShengBin’s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="线程和共享数据 在JVM中，每个线程独享一块栈内存，其中包括局部变量、线程调用的每个方法的参数和返回值。其它线程无法读取到该栈内存块中的数据。栈中的数据仅限于基本类型和对象引用。 在JVM中，堆内存是所有线程共享的。对象在堆中。 还有一部分数据保存JVM中的方法区中，比如类的静态变量。方法区和栈类似，其中只包含基本类型和对象引用。和栈不同的是，方法区中的静态变量可以被所有线程访问到。">
+    <meta name="description" content="看Thread源码时发现了ThreadGroup，以前都没看到过。">
 <meta name="keywords" content="多线程">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Java虚拟机是如何执行线程同步的">
-<meta property="og:url" content="https://hsb786.github.io/2018/04/08/Java虚拟机是如何执行线程同步的/index.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="ThreadGroup">
+<meta property="og:url" content="https://hsb786.github.io/temp/ThreadGroup.html">
 <meta property="og:site_name" content="HuShengBin’s blog">
-<meta property="og:description" content="线程和共享数据 在JVM中，每个线程独享一块栈内存，其中包括局部变量、线程调用的每个方法的参数和返回值。其它线程无法读取到该栈内存块中的数据。栈中的数据仅限于基本类型和对象引用。 在JVM中，堆内存是所有线程共享的。对象在堆中。 还有一部分数据保存JVM中的方法区中，比如类的静态变量。方法区和栈类似，其中只包含基本类型和对象引用。和栈不同的是，方法区中的静态变量可以被所有线程访问到。">
+<meta property="og:description" content="看Thread源码时发现了ThreadGroup，以前都没看到过。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-04-20T13:24:46.656Z">
+<meta property="og:image" content="https://hsb786.github.io/images/ThreadGroup01.png">
+<meta property="og:image" content="https://hsb786.github.io/images/ThreadGroup02.png">
+<meta property="og:updated_time" content="2018-04-24T13:13:01.044Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java虚拟机是如何执行线程同步的">
-<meta name="twitter:description" content="线程和共享数据 在JVM中，每个线程独享一块栈内存，其中包括局部变量、线程调用的每个方法的参数和返回值。其它线程无法读取到该栈内存块中的数据。栈中的数据仅限于基本类型和对象引用。 在JVM中，堆内存是所有线程共享的。对象在堆中。 还有一部分数据保存JVM中的方法区中，比如类的静态变量。方法区和栈类似，其中只包含基本类型和对象引用。和栈不同的是，方法区中的静态变量可以被所有线程访问到。">
+<meta name="twitter:title" content="ThreadGroup">
+<meta name="twitter:description" content="看Thread源码时发现了ThreadGroup，以前都没看到过。">
+<meta name="twitter:image" content="https://hsb786.github.io/images/ThreadGroup01.png">
     
 
     
@@ -185,7 +188,7 @@
 </aside>
 
             
-            <section id="main"><article id="post-Java虚拟机是如何执行线程同步的" class="article article-type-post" itemscope itemprop="blogPost">
+            <section id="main"><article id="page-" class="article article-type-page" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -193,34 +196,10 @@
                 
     
         <h1 class="article-title" itemprop="name">
-            Java虚拟机是如何执行线程同步的
+            ThreadGroup
         </h1>
     
 
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2018/04/08/Java虚拟机是如何执行线程同步的/">
-            <time datetime="2018-04-08T09:48:41.000Z" itemprop="datePublished">2018-04-08</time>
-        </a>
-    </div>
-
-
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/JVM/">JVM</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/多线程/">多线程</a>
-    </div>
-
-                    </div>
                 
             </header>
         
@@ -228,34 +207,34 @@
         <div class="article-entry" itemprop="articleBody">
         
             
-            <hr>
-<p><strong>线程和共享数据</strong></p>
-<p>在JVM中，每个线程独享一块栈内存，其中包括局部变量、线程调用的每个方法的参数和返回值。其它线程无法读取到该栈内存块中的数据。栈中的数据仅限于基本类型和对象引用。</p>
-<p>在JVM中，堆内存是所有线程共享的。对象在堆中。</p>
-<p>还有一部分数据保存JVM中的方法区中，比如类的静态变量。方法区和栈类似，其中只包含基本类型和对象引用。和栈不同的是，方法区中的静态变量可以被所有线程访问到。<br><a id="more"></a></p>
-<hr>
-<p><strong>对象和类的锁</strong></p>
-<p>JMM中有两块区域可以被所有线程共享</p>
-<blockquote>
-<p>堆，存放着所有对象<br>方法区，存放着静态变量</p>
+            <blockquote>
+<p>看Thread源码时发现了ThreadGroup，以前都没看到过。</p>
 </blockquote>
-<p>那么，如果有多个线程想要同时访问同一个对象或者静态变量，就需要被管控，否则可能出现不可预期的结果</p>
-<p>为了协调多个线程之间的共享数据访问，虚拟机给每个对象和类都分配了一个锁。这个锁就像一个特权，在同一时刻，只有一个线程可以“拥有”这个类或者对象。如果一个线程想要获得某个类或者对象的锁，需要询问虚拟机。当一个线程向虚拟机申请某个类或者对象的锁之后，也许很快或者很慢虚拟机可以把锁分配给这个线程，同时这个线程也许永远也无法获得锁。但线程不再需要锁的时候，他再把锁还给虚拟机。这时虚拟机就可以再把锁分配给其它申请锁的线程。</p>
-<p>类锁其实通过对象锁实现的。因为当虚拟机加载一个类的时候，会为这个类实例化一个java.lang.Class对象，当你锁住一个类的时候，其实锁住的是其对应的Class对象</p>
+<a id="more"></a>
+<blockquote>
+<p>A thread group represents a set of threads. In addition, a thread group can also include other thread groups. The thread groups form a tree in which every thread group except the initial thread group has a parent.<br>ThreadGroup用来存放线程的集合，一个threadGroup可以包含其他threadGroup。<br>线程组是一个树形结构，除了初始线程组之外，都有一个父结点。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">//java.lang.ThreadGroup</span><br><span class="line">public class ThreadGroup implements Thread.UncaughtExceptionHandler &#123;</span><br><span class="line">    private final ThreadGroup parent;  //父类ThreadGroup</span><br><span class="line">    String name;    //名称</span><br><span class="line">    int maxPriority;    //线程最大优先级</span><br><span class="line">    boolean destroyed;  //是否被销毁</span><br><span class="line">    boolean daemon; //是否为守护线程</span><br><span class="line">    boolean vmAllowSuspension;  //是否可以中断</span><br><span class="line"></span><br><span class="line">    int nUnstartedThreads = 0;  //还未启动的线程</span><br><span class="line">    int nthreads;   //ThreadGroup中线程数</span><br><span class="line">    Thread threads[];   //ThreadGroup中线程数组</span><br><span class="line"></span><br><span class="line">    int ngroups;    //线程组数  </span><br><span class="line">    ThreadGroup groups[];   //线程组数组</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * Creates an empty Thread group that is not in any Thread group.</span><br><span class="line">     * This method is used to create the system Thread group.</span><br><span class="line">     */</span><br><span class="line">    private ThreadGroup() &#123;     // called from C code</span><br><span class="line">        this.name = &quot;system&quot;;</span><br><span class="line">        this.maxPriority = Thread.MAX_PRIORITY;</span><br><span class="line">        this.parent = null;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    。。。。。。。</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>用户创建的所有线程都属于指定线程组，如果没有显示指定属于哪个线程组，那么该线程就属于默认线程组（即main线程组）。默认情况下，子线程和父线程处于同一个线程组。</p>
+<p>只有在创建线程时才能指定其所在的线程组，线程运行中途不能改变它所属的线程组，也就是说线程一旦指定所在的线程组，就直到该线程结束。</p>
+<p>先做个小测试<br><img src="/images/ThreadGroup01.png" alt=""><br><img src="/images/ThreadGroup02.png" alt=""></p>
 <hr>
-<p><strong>监视器（Monitors）</strong></p>
-<p>锁其实是通过监视器实现的，监视器主要功能是监控一段代码，确保在同一时间只有一个线程在执行。</p>
-<p>每个监视器都与一个对象相关联。当线程执行到监视器监视下的代码块中的第一条指令时，线程必须获取对被引用对象的锁定。在线程获取锁之前，它是无法执行这段代码的，一旦获得锁，线程便可以进入“被保护”的代码开始执行。</p>
-<p>当线程离开代码块时，无论如何离开，都会释放所关联对象的锁</p>
+<h2 id="UncaughtExceptionHandler"><a href="#UncaughtExceptionHandler" class="headerlink" title="UncaughtExceptionHandler"></a>UncaughtExceptionHandler</h2><p>在Thread类中定义了一个<code>UncaughtExceptionHandler</code>接口<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">//Thread.class</span><br><span class="line"> @FunctionalInterface</span><br><span class="line">    public interface UncaughtExceptionHandler &#123;</span><br><span class="line">        //Method invoked when the given thread terminates due to the given uncaught exception.</span><br><span class="line">        //但线程由于未捕捉的异常而中断时，会调用这个方法。</span><br><span class="line">        void uncaughtException(Thread t, Throwable e);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>举个栗子🎂<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">public class T01 &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        // 设置主线程的异常处理器</span><br><span class="line">        Thread.currentThread().setUncaughtExceptionHandler(new MyExHandler());</span><br><span class="line">        int a = 5 / 0;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 定义自己的异常处理器</span><br><span class="line">class MyExHandler implements Thread.UncaughtExceptionHandler &#123;</span><br><span class="line">	// 实现uncaughtException方法，该方法将处理线程的未处理异常</span><br><span class="line">	public void uncaughtException(Thread t, Throwable e) &#123;</span><br><span class="line">		System.out.println(t + &quot; 线程出现了异常：&quot; + e);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//output</span><br><span class="line">Thread[main,5,main] 线程出现了异常：java.lang.ArithmeticException: / by zero</span><br></pre></td></tr></table></figure></p>
+<h2 id="线程组和线程池的区别"><a href="#线程组和线程池的区别" class="headerlink" title="线程组和线程池的区别"></a>线程组和线程池的区别</h2><h3 id="线程组"><a href="#线程组" class="headerlink" title="线程组"></a>线程组</h3><ul>
+<li>线程组存在的意义，首要原因是安全。</li>
+<li>java默认创建的线程都是属于系统线程组，而同一个线程组的线程是可以相互修改对方的数据的。</li>
+<li>但如果在不同的线程组中，那么就不能“跨线程组”修改数据，可以从一定程度上保证数据安全。</li>
+</ul>
+<h3 id="线程池"><a href="#线程池" class="headerlink" title="线程池"></a>线程池</h3><ul>
+<li>线程池存在的意义，首要作用是效率。</li>
+<li>线程的创建和结束都需要耗费一定的系统时间（特别是创建），不停创建和删除线程会浪费大量的时间。所以，在创建出一条线程并使其在执行完任务后不结束，而是使其进入休眠状态，在需要用时再唤醒，那么 就可以节省一定的时间。</li>
+<li>如果这样的线程比较多，那么就可以使用线程池来进行管理。保证效率。</li>
+</ul>
 <hr>
-<p><strong>多次加锁</strong></p>
-<p>同一个线程可以对同一个对象进行多次加锁。每个对象维护着一个记录着被锁次数的计数器。未被锁定的对象的该计数器为0，当一个线程获得锁后，该计数器自增变为1，当同一个线程再次获得该对象的锁的时候，计数器再次自增。当同一个线程释放锁的时候，计数器再自减。当计数器为0的时候。锁将被释放，其它线程便可以获得锁。</p>
-<hr>
-<p><strong>同步</strong></p>
-<p>在Java中，当有多个线程都必须要对同一个共享数据进行访问时，有一种协调方式叫做同步。Java语言提供了两种内置方式来使线程同步的访问数据：同步代码块和同步方法。</p>
 <p><em>参考</em></p>
 <blockquote>
-<p><a href="http://www.hollischuang.com/archives/1876" target="_blank" rel="noopener">Java虚拟机是如何执行线程同步的</a></p>
+<p><a href="https://blog.csdn.net/Zen99T/article/details/50909099" target="_blank" rel="noopener">Java 多线程（七）——线程组与线程池 </a><br><a href="https://blog.csdn.net/evankaka/article/details/51627380" target="_blank" rel="noopener">Java并发编程与技术内幕:ThreadGroup线程组应用 </a></p>
 </blockquote>
 
         
@@ -267,7 +246,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/08/Java虚拟机是如何执行线程同步的/" data-id="cjgmae6ut001i5gmyc2kronpv" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/temp/ThreadGroup.html" data-id="cjgonc4v00002cwmyy6oqe1c0" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -340,25 +319,6 @@
     </div>
     
         
-<nav id="article-nav">
-    
-        <a href="/2018/04/08/一些小技巧/" id="article-nav-newer" class="article-nav-link-wrap">
-            <strong class="article-nav-caption">上一篇</strong>
-            <div class="article-nav-title">
-                
-                    一些小技巧
-                
-            </div>
-        </a>
-    
-    
-        <a href="/2018/04/08/lombok/" id="article-nav-older" class="article-nav-link-wrap">
-            <strong class="article-nav-caption">下一篇</strong>
-            <div class="article-nav-title">lombok</div>
-        </a>
-    
-</nav>
-
 
     
 </article>

@@ -3,20 +3,20 @@
 <head>
     <meta charset="utf-8">
     
-    <title>Java虚拟机是如何执行线程同步的 | HuShengBin’s blog</title>
+    <title>旋转数组的最小数字 | HuShengBin’s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="线程和共享数据 在JVM中，每个线程独享一块栈内存，其中包括局部变量、线程调用的每个方法的参数和返回值。其它线程无法读取到该栈内存块中的数据。栈中的数据仅限于基本类型和对象引用。 在JVM中，堆内存是所有线程共享的。对象在堆中。 还有一部分数据保存JVM中的方法区中，比如类的静态变量。方法区和栈类似，其中只包含基本类型和对象引用。和栈不同的是，方法区中的静态变量可以被所有线程访问到。">
-<meta name="keywords" content="多线程">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Java虚拟机是如何执行线程同步的">
-<meta property="og:url" content="https://hsb786.github.io/2018/04/08/Java虚拟机是如何执行线程同步的/index.html">
+    <meta name="description" content="把一个数组最开始的若干个元素搬到数组的末尾，我们称之为数组的旋转。输入一个递增排序数组的一个旋转，输出旋转数组的最小元素。">
+<meta name="keywords" content="算法">
+<meta property="og:type" content="website">
+<meta property="og:title" content="旋转数组的最小数字">
+<meta property="og:url" content="https://hsb786.github.io/temp/旋转数组的最小数字.html">
 <meta property="og:site_name" content="HuShengBin’s blog">
-<meta property="og:description" content="线程和共享数据 在JVM中，每个线程独享一块栈内存，其中包括局部变量、线程调用的每个方法的参数和返回值。其它线程无法读取到该栈内存块中的数据。栈中的数据仅限于基本类型和对象引用。 在JVM中，堆内存是所有线程共享的。对象在堆中。 还有一部分数据保存JVM中的方法区中，比如类的静态变量。方法区和栈类似，其中只包含基本类型和对象引用。和栈不同的是，方法区中的静态变量可以被所有线程访问到。">
+<meta property="og:description" content="把一个数组最开始的若干个元素搬到数组的末尾，我们称之为数组的旋转。输入一个递增排序数组的一个旋转，输出旋转数组的最小元素。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-04-20T13:24:46.656Z">
+<meta property="og:updated_time" content="2018-04-20T13:23:05.149Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java虚拟机是如何执行线程同步的">
-<meta name="twitter:description" content="线程和共享数据 在JVM中，每个线程独享一块栈内存，其中包括局部变量、线程调用的每个方法的参数和返回值。其它线程无法读取到该栈内存块中的数据。栈中的数据仅限于基本类型和对象引用。 在JVM中，堆内存是所有线程共享的。对象在堆中。 还有一部分数据保存JVM中的方法区中，比如类的静态变量。方法区和栈类似，其中只包含基本类型和对象引用。和栈不同的是，方法区中的静态变量可以被所有线程访问到。">
+<meta name="twitter:title" content="旋转数组的最小数字">
+<meta name="twitter:description" content="把一个数组最开始的若干个元素搬到数组的末尾，我们称之为数组的旋转。输入一个递增排序数组的一个旋转，输出旋转数组的最小元素。">
     
 
     
@@ -185,7 +185,7 @@
 </aside>
 
             
-            <section id="main"><article id="post-Java虚拟机是如何执行线程同步的" class="article article-type-post" itemscope itemprop="blogPost">
+            <section id="main"><article id="page-" class="article article-type-page" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -193,34 +193,10 @@
                 
     
         <h1 class="article-title" itemprop="name">
-            Java虚拟机是如何执行线程同步的
+            旋转数组的最小数字
         </h1>
     
 
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2018/04/08/Java虚拟机是如何执行线程同步的/">
-            <time datetime="2018-04-08T09:48:41.000Z" itemprop="datePublished">2018-04-08</time>
-        </a>
-    </div>
-
-
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/JVM/">JVM</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/多线程/">多线程</a>
-    </div>
-
-                    </div>
                 
             </header>
         
@@ -228,36 +204,12 @@
         <div class="article-entry" itemprop="articleBody">
         
             
-            <hr>
-<p><strong>线程和共享数据</strong></p>
-<p>在JVM中，每个线程独享一块栈内存，其中包括局部变量、线程调用的每个方法的参数和返回值。其它线程无法读取到该栈内存块中的数据。栈中的数据仅限于基本类型和对象引用。</p>
-<p>在JVM中，堆内存是所有线程共享的。对象在堆中。</p>
-<p>还有一部分数据保存JVM中的方法区中，比如类的静态变量。方法区和栈类似，其中只包含基本类型和对象引用。和栈不同的是，方法区中的静态变量可以被所有线程访问到。<br><a id="more"></a></p>
-<hr>
-<p><strong>对象和类的锁</strong></p>
-<p>JMM中有两块区域可以被所有线程共享</p>
-<blockquote>
-<p>堆，存放着所有对象<br>方法区，存放着静态变量</p>
-</blockquote>
-<p>那么，如果有多个线程想要同时访问同一个对象或者静态变量，就需要被管控，否则可能出现不可预期的结果</p>
-<p>为了协调多个线程之间的共享数据访问，虚拟机给每个对象和类都分配了一个锁。这个锁就像一个特权，在同一时刻，只有一个线程可以“拥有”这个类或者对象。如果一个线程想要获得某个类或者对象的锁，需要询问虚拟机。当一个线程向虚拟机申请某个类或者对象的锁之后，也许很快或者很慢虚拟机可以把锁分配给这个线程，同时这个线程也许永远也无法获得锁。但线程不再需要锁的时候，他再把锁还给虚拟机。这时虚拟机就可以再把锁分配给其它申请锁的线程。</p>
-<p>类锁其实通过对象锁实现的。因为当虚拟机加载一个类的时候，会为这个类实例化一个java.lang.Class对象，当你锁住一个类的时候，其实锁住的是其对应的Class对象</p>
-<hr>
-<p><strong>监视器（Monitors）</strong></p>
-<p>锁其实是通过监视器实现的，监视器主要功能是监控一段代码，确保在同一时间只有一个线程在执行。</p>
-<p>每个监视器都与一个对象相关联。当线程执行到监视器监视下的代码块中的第一条指令时，线程必须获取对被引用对象的锁定。在线程获取锁之前，它是无法执行这段代码的，一旦获得锁，线程便可以进入“被保护”的代码开始执行。</p>
-<p>当线程离开代码块时，无论如何离开，都会释放所关联对象的锁</p>
-<hr>
-<p><strong>多次加锁</strong></p>
-<p>同一个线程可以对同一个对象进行多次加锁。每个对象维护着一个记录着被锁次数的计数器。未被锁定的对象的该计数器为0，当一个线程获得锁后，该计数器自增变为1，当同一个线程再次获得该对象的锁的时候，计数器再次自增。当同一个线程释放锁的时候，计数器再自减。当计数器为0的时候。锁将被释放，其它线程便可以获得锁。</p>
-<hr>
-<p><strong>同步</strong></p>
-<p>在Java中，当有多个线程都必须要对同一个共享数据进行访问时，有一种协调方式叫做同步。Java语言提供了两种内置方式来使线程同步的访问数据：同步代码块和同步方法。</p>
-<p><em>参考</em></p>
-<blockquote>
-<p><a href="http://www.hollischuang.com/archives/1876" target="_blank" rel="noopener">Java虚拟机是如何执行线程同步的</a></p>
-</blockquote>
-
+            <p>把一个数组最开始的若干个元素搬到数组的末尾，我们称之为数组的旋转。<br>输入一个递增排序数组的一个旋转，输出旋转数组的最小元素。<br><a id="more"></a><br><strong>旋转数组的特点：</strong></p>
+<ol>
+<li>旋转之后的数组可以分为两个排序的子数组，且前面的子数组的元素都大于或等于后面子数组的元素。 </li>
+<li>最小或者最大元素位于两个子数组的分界</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 由于旋转数组的特点，前一个数组一定大于后一个数组。数组内部是升序的。</span><br><span class="line"> * 所以就可以使用二分查找。</span><br><span class="line"> * 定义minIndex为0，highIndex为length-1</span><br><span class="line"> * 若中间位大于array[minIndex]，则代表中间位处于前面部分,将minIndex设为midIndex；</span><br><span class="line"> * 小于则处于后面部分,将highIndex设为midIndex</span><br><span class="line"> * 最终minIndex位于前一个数组的最后一位，highIndex位于后一个数组的第一位</span><br><span class="line"> * 显然最小值就是highIndex所在的值。</span><br><span class="line"> * 特殊情况，但minIndex与highIndex上的值相等时，无法判断中间值是在前，还是在后。</span><br><span class="line"> * 所以只能用顺序查找</span><br><span class="line"> * @author: husb   </span><br><span class="line"> * @date: 2018年4月10日 下午2:56:26 </span><br><span class="line"> */</span><br><span class="line">public static int findMin(int[] array) &#123;</span><br><span class="line">	int lowIndex = 0;</span><br><span class="line">	int highIndex = array.length - 1;</span><br><span class="line">	int midIndex = (lowIndex + highIndex) / 2;</span><br><span class="line">	// 当代查找数组第一位大于最后一位时，代表是旋转数组</span><br><span class="line">	while (array[lowIndex] &gt;= array[highIndex]) &#123;</span><br><span class="line">		// 临界条件 前面最后一位，后面第一位。 后面第一位就是最小值</span><br><span class="line">		if (highIndex - lowIndex == 1) &#123;</span><br><span class="line">			return array[highIndex];</span><br><span class="line">		&#125;</span><br><span class="line">		// 当左下标的元素等于右下标的元素时，无法判断中间位是位于前面还是后面的。</span><br><span class="line">		// 只能用顺序查找</span><br><span class="line">		if (array[lowIndex] == array[highIndex]) &#123;</span><br><span class="line">			return findMinInOrder(array, lowIndex, highIndex);</span><br><span class="line">		&#125;</span><br><span class="line">		// 当中间位大于前面第一位时，代表处于前面</span><br><span class="line">		if (array[midIndex] &gt; array[lowIndex]) &#123;</span><br><span class="line">			lowIndex = midIndex;</span><br><span class="line">		&#125; else &#123;</span><br><span class="line">			// 否则处于后面</span><br><span class="line">			highIndex = midIndex;</span><br><span class="line">		&#125;</span><br><span class="line">		// 计算中间位</span><br><span class="line">		midIndex = (lowIndex + highIndex) / 2;</span><br><span class="line">	&#125;</span><br><span class="line">	//已排好序，返回低位即可</span><br><span class="line">	return array[lowIndex];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * @Description: 当有重复元素的时候，无法确定中间的元素是前面的还是后面的</span><br><span class="line"> * @author: husb</span><br><span class="line"> * @date: 2018年4月10日 下午2:33:52</span><br><span class="line"> */</span><br><span class="line">private static int findMinInOrder(int[] array, int lowIndex, int highIndex) &#123;</span><br><span class="line">	int result = array[lowIndex];</span><br><span class="line">	for (int i = lowIndex + 1; i &lt;= highIndex; i++) &#123;</span><br><span class="line">		if (result &gt; array[i]) &#123;</span><br><span class="line">			result = array[i];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	return result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
         
         </div>
         <footer class="article-footer">
@@ -267,7 +219,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/08/Java虚拟机是如何执行线程同步的/" data-id="cjgmae6ut001i5gmyc2kronpv" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/temp/旋转数组的最小数字.html" data-id="cjgonc4wq0007cwmy82dnp4nc" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -340,25 +292,6 @@
     </div>
     
         
-<nav id="article-nav">
-    
-        <a href="/2018/04/08/一些小技巧/" id="article-nav-newer" class="article-nav-link-wrap">
-            <strong class="article-nav-caption">上一篇</strong>
-            <div class="article-nav-title">
-                
-                    一些小技巧
-                
-            </div>
-        </a>
-    
-    
-        <a href="/2018/04/08/lombok/" id="article-nav-older" class="article-nav-link-wrap">
-            <strong class="article-nav-caption">下一篇</strong>
-            <div class="article-nav-title">lombok</div>
-        </a>
-    
-</nav>
-
 
     
 </article>
