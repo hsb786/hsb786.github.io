@@ -15,7 +15,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://hsb786.github.io/images/java8-05.png">
 <meta property="og:image" content="https://hsb786.github.io/images/java8-06.png">
-<meta property="og:updated_time" content="2018-05-02T11:18:01.079Z">
+<meta property="og:updated_time" content="2018-05-07T04:36:50.639Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="默认方法【Java8实战】">
 <meta name="twitter:description" content="Java8中的接口现在支持在声明方法的同时提供实现">
@@ -241,7 +241,7 @@
 </ul>
 <p><img src="/images/java8-05.png" alt="向接口添加方法"></p>
 <p>向接口添加方法是诸多问题的罪恶之源；一旦接口发生变化，实现这些接口的类往往也需要更新，提供新添方法的实现才能适配接口的变化。如果你对接口以及它所有相关的实现有完全的控制，这可能不是个大问题。但是这种情况是极少的。这就是引入默认方法的目的：它让类可以自动地继承接口的一个默认实现。</p>
-<h3 id="静态方法及接口"><a href="#静态方法及接口" class="headerlink" title="静态方法及接口"></a>静态方法及接口</h3><p> 同时定义接口以及工具辅助类（companion class）是Java语言常用的一种模式，工具类定义了与接口实例协作的很多静态方法。比如，Collections就是处理Collect对象的辅助类。由于静态方法可以存在于接口内部，你代码中的这些辅助类就没有了存在的必要，你<strong>可以把这些静态方法转移到接口内部</strong>。为了保证向后的兼容性，这些类依然会存在与Java应用程序的接口之中。</p>
+<h3 id="静态方法及接口"><a href="#静态方法及接口" class="headerlink" title="静态方法及接口"></a>静态方法及接口</h3><p> <strong>同时定义接口以及工具辅助类（companion class）是Java语言常用的一种模式，工具类定义了与接口实例协作的很多静态方法。比如，Collections就是处理Collect对象的辅助类</strong>。由于静态方法可以存在于接口内部，你代码中的这些辅助类就没有了存在的必要，你<strong>可以把这些静态方法转移到接口内部</strong>。为了保证向后的兼容性，这些类依然会存在与Java应用程序的接口之中。</p>
 <h3 id="不同类型的兼容性：二进制、源代码和函数行为"><a href="#不同类型的兼容性：二进制、源代码和函数行为" class="headerlink" title="不同类型的兼容性：二进制、源代码和函数行为"></a>不同类型的兼容性：二进制、源代码和函数行为</h3><ul>
 <li>二进制级的兼容性：现有的二进制执行文件能无缝持续链接（包括验证、准备和解析）和运行。比如，为接口添加一个方法就是二进制级的兼容，这种方式下，如果新添加的方法不被调用，接口已经实现的方法可以继续运行，不会出现错误</li>
 <li>源代码级的兼容性：引入变化之后，现有的程序依然能成功编译通过。比如，向接口添加新的方法就不是源码级的兼容，因为遗留代码并没有实现新引入的方法，所以它们无法顺利通过编译</li>
@@ -278,7 +278,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/05/02/默认方法【Java8实战】/" data-id="cjgt3o7g5006xdwmya8tzfzzr" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/05/02/默认方法【Java8实战】/" data-id="cjgvosqai007g1smye3epg90b" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding

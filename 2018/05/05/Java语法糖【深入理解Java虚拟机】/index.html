@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="HuShengBin’s blog">
 <meta property="og:description" content="语法糖可以看做是编译器实现的一些“小把戏”，这些“小把戏”可能会使得效率“大提升”，但我们也应该去了解这些“小把戏”背后的真实世界，那样才能利用好它们，而不是被它们所迷惑">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-05-05T08:05:06.366Z">
+<meta property="og:updated_time" content="2018-05-07T03:30:29.909Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java语法糖【深入理解Java虚拟机】">
 <meta name="twitter:description" content="语法糖可以看做是编译器实现的一些“小把戏”，这些“小把戏”可能会使得效率“大提升”，但我们也应该去了解这些“小把戏”背后的真实世界，那样才能利用好它们，而不是被它们所迷惑">
@@ -234,10 +234,10 @@
 <a id="more"></a>
 <h2 id="泛型与类型擦除"><a href="#泛型与类型擦除" class="headerlink" title="泛型与类型擦除"></a>泛型与类型擦除</h2><p>泛型是JDK1.5的一项新增特性，它的本质是参数化类型（Parametersized Type）的应用，也就是说所操作的数据类型被指定为一个参数。这种参数类型可以用在类、接口和方法的创建中，分别为泛型类、泛型接口和泛型方法。</p>
 <p>在Java语言处于还没有出现泛型的版本时，只能通过Object是所有类型的父类和类型强制转换两个特点的配合来实现泛型类型泛化。Object转换成任何对象都是有可能的，但是正因为有无限的可能性，就只有程序员和运行期的虚拟机才知道这个Object到底是个什么类型的对象。<strong>在编译期间，编译器无法检查这个Object的强制转型是否成功，如果仅仅依赖程序员去保障这项操作的正确性，许多ClassCastException的风险就会转嫁到程序运行期间。</strong></p>
-<p>Java语言的泛型只在程序源码中存在，在编译后的字节码文件中，已经替换为原来的原生类型（Raw Type，也成为裸类型）了，并且在相应的地方插入了强制转型代码。Java语言中的泛型实现方法称为类型擦除，基于这种方法实现的泛型称为伪泛型。</p>
+<p><strong>Java语言的泛型只在程序源码中存在，在编译后的字节码文件中，已经替换为原来的原生类型（Raw Type，也成为裸类型）了，并且在相应的地方插入了强制转型代码</strong>。Java语言中的泛型实现方法称为<strong>类型擦除</strong>，基于这种方法实现的泛型称为伪泛型。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;String, String&gt; map = new HashMap&lt;&gt;();</span><br><span class="line">map.put(&quot;Hello&quot;, &quot;you&quot;);</span><br><span class="line">System.out.println(map.get(&quot;Hello&quot;));</span><br></pre></td></tr></table></figure>
-<p>反编译后的代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//Map map=new HashMap();    书本上的答案,java7</span><br><span class="line">Map&lt;String, String&gt; map = new HashMap();</span><br><span class="line">//奇怪，我用jad反编译后，前面&lt;&gt;没有擦除，后面&lt;&gt;擦除了，难道是因为用的是java8的原因吗？</span><br><span class="line">map.put(&quot;Hello&quot;, &quot;you&quot;);</span><br><span class="line">System.out.println((String)map.get(&quot;Hello&quot;));</span><br><span class="line">//强制转型</span><br></pre></td></tr></table></figure></p>
-<p><strong>当泛型遇见重载1</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public static void method(List&lt;String&gt; list) &#123;</span><br><span class="line">		</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public static void method(List&lt;Integer&gt; list) &#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>反编译后的代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//Map map=new HashMap();    书本上的答案,java7</span><br><span class="line">Map&lt;String, String&gt; map = new HashMap();</span><br><span class="line">//奇怪，我用jad反编译后，前面&lt;&gt;没有擦除，后面&lt;&gt;擦除了，难道是因为用的是java8的原因吗？</span><br><span class="line">map.put(&quot;Hello&quot;, &quot;you&quot;);</span><br><span class="line">//强制转型</span><br><span class="line">System.out.println((String)map.get(&quot;Hello&quot;));</span><br></pre></td></tr></table></figure></p>
+<p><strong>当泛型遇见重载1</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public static void method(List&lt;String&gt; list) &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public static void method(List&lt;Integer&gt; list) &#123;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>编译不能通过，List&lt;String>和List&lt;Integer>都变成了原生类型List&lt;E></p>
 <p><strong>当泛型遇见重载2</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public static String method(List&lt;String&gt; list) &#123;</span><br><span class="line">    return &quot;1&quot;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public static int method(List&lt;Integer&gt; list) &#123;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>SUN JDK1.6的javac编译器进行编译，其它编译器仍然可能会拒绝编译这段代码</p>
@@ -263,7 +263,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/05/05/Java语法糖【深入理解Java虚拟机】/" data-id="cjgt3o7d4000pdwmyf70v2v7c" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/05/05/Java语法糖【深入理解Java虚拟机】/" data-id="cjgvosq7h001p1smytd7m3m6k" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding

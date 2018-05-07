@@ -17,7 +17,7 @@
 <meta property="og:image" content="https://hsb786.github.io/images/optional02.png">
 <meta property="og:image" content="https://hsb786.github.io/images/optional03.png">
 <meta property="og:image" content="https://hsb786.github.io/images/optional04.png">
-<meta property="og:updated_time" content="2018-04-30T12:55:00.586Z">
+<meta property="og:updated_time" content="2018-05-07T04:43:51.989Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Optional【java8实战】">
 <meta name="twitter:description" content="Null References: The Billion Dollar Mistake">
@@ -272,7 +272,7 @@
 <p><img src="/images/optional04.png" alt="使用Optional解引用串接的Person/Car/Insurance"></p>
 <p><strong>Optional无法序列化</strong></p>
 <blockquote>
-<p>Java语言的架构师Brian Goetz曾经非常明确地陈述过，Optional的设计初衷仅仅是要支持能返回Optional对象的语法。</p>
+<p>Java语言的架构师Brian Goetz曾经非常明确地陈述过，<strong>Optional的设计初衷仅仅是要支持能返回Optional对象的语法。</strong></p>
 </blockquote>
 <p>由于Optional类设计时就没特别考虑将其作为类的字段使用，所以它也并未实现Serializable接口。<br>如果你一定要实现序列化的域模型，可以使用下面的例子<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public class Person &#123; </span><br><span class="line">    private Car car; </span><br><span class="line">    public Optional&lt;Car&gt; getCarAsOptional() &#123; </span><br><span class="line">        return Optional.ofNullable(car); </span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h3 id="默认行为及解引用Optional对象"><a href="#默认行为及解引用Optional对象" class="headerlink" title="默认行为及解引用Optional对象"></a>默认行为及解引用Optional对象</h3><p>Optional类提供了多种方法读取Optional实例中的变量值</p>
@@ -367,7 +367,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/30/Optional【java8实战】/" data-id="cjgt3o7dz002edwmy61ssiaz5" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/30/Optional【java8实战】/" data-id="cjgvosq8c002r1smynnmgs0ba" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
