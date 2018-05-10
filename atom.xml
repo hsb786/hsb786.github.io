@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://hsb786.github.io/"/>
-  <updated>2018-05-07T03:30:29.909Z</updated>
+  <updated>2018-05-10T11:42:04.915Z</updated>
   <id>https://hsb786.github.io/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>面试笔记</title>
+    <link href="https://hsb786.github.io/2018/05/10/%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AE%B0/"/>
+    <id>https://hsb786.github.io/2018/05/10/面试笔记/</id>
+    <published>2018-05-10T11:17:07.000Z</published>
+    <updated>2018-05-10T11:42:04.915Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>前几天一直在搞论文，昨天的面试都没好好准备一下，现在回想起来犯了很多低级错误😔，希望能过吧。<br><a id="more"></a><br>union   用于合并多个select语句的结果集</p></blockquote><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT column_name(s) FROM table_name1</span><br><span class="line">UNION</span><br><span class="line">SELECT column_name(s) FROM table_name2</span><br></pre></td></tr></table></figure><hr><p>StringBuffer与StringBuilder的区别只在于StringBuffer方法用synchronized修饰</p><pre><code>append()</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">//StringBuffer</span><br><span class="line">@Override</span><br><span class="line">public synchronized StringBuffer append(String str) &#123;</span><br><span class="line">    toStringCache = null;</span><br><span class="line">    super.append(str);</span><br><span class="line">    return this;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//AbstractStringBuilder</span><br><span class="line">public AbstractStringBuilder append(String str) &#123;</span><br><span class="line">    if (str == null)</span><br><span class="line">        return appendNull();</span><br><span class="line">    int len = str.length();</span><br><span class="line">    //给value指定容量</span><br><span class="line">    ensureCapacityInternal(count + len);</span><br><span class="line">    //底层调用System.arraycopy()，将str添加到value后面</span><br><span class="line">    str.getChars(0, len, value, count);</span><br><span class="line">    count += len;</span><br><span class="line">    return this;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private void ensureCapacityInternal(int minimumCapacity) &#123;</span><br><span class="line">    // overflow-conscious code</span><br><span class="line">    if (minimumCapacity - value.length &gt; 0)</span><br><span class="line">        expandCapacity(minimumCapacity);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line">    * This implements the expansion semantics of ensureCapacity with no</span><br><span class="line">    * size check or synchronization.</span><br><span class="line">    */</span><br><span class="line">void expandCapacity(int minimumCapacity) &#123;</span><br><span class="line">    int newCapacity = value.length * 2 + 2;</span><br><span class="line">    if (newCapacity - minimumCapacity &lt; 0)</span><br><span class="line">        newCapacity = minimumCapacity;</span><br><span class="line">    if (newCapacity &lt; 0) &#123;</span><br><span class="line">        if (minimumCapacity &lt; 0) // overflow</span><br><span class="line">            throw new OutOfMemoryError();</span><br><span class="line">        newCapacity = Integer.MAX_VALUE;</span><br><span class="line">    &#125;</span><br><span class="line">    value = Arrays.copyOf(value, newCapacity);</span><br><span class="line">&#125;</span><br><span class="line">//String</span><br><span class="line">public void getChars(int srcBegin, int srcEnd, char dst[], int dstBegin) &#123;</span><br><span class="line">    if (srcBegin &lt; 0) &#123;</span><br><span class="line">        throw new StringIndexOutOfBoundsException(srcBegin);</span><br><span class="line">    &#125;</span><br><span class="line">    if (srcEnd &gt; value.length) &#123;</span><br><span class="line">        throw new StringIndexOutOfBoundsException(srcEnd);</span><br><span class="line">    &#125;</span><br><span class="line">    if (srcBegin &gt; srcEnd) &#123;</span><br><span class="line">        throw new StringIndexOutOfBoundsException(srcEnd - srcBegin);</span><br><span class="line">    &#125;</span><br><span class="line">    System.arraycopy(value, srcBegin, dst, dstBegin, srcEnd - srcBegin);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><hr><p>将新生代内存分为一块大的Eden区和两块小的Survivor；每次使用Eden和一个Survivor，回收时将Eden和Survivor存活的对象复制到另一个Survivor（HotSpot的比例Eden：Survivor = 8：1）</p><hr><p>ConcurrentHashMap实现原理暂时未看</p><hr><p>暂时只记住这些，现在回想起来，感觉很多问题都没回答好，面试官都多次提示我了，我竟然没察觉到。希望能过吧。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;前几天一直在搞论文，昨天的面试都没好好准备一下，现在回想起来犯了很多低级错误😔，希望能过吧。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="杂谈" scheme="https://hsb786.github.io/categories/%E6%9D%82%E8%B0%88/"/>
+    
+    
+      <category term="杂谈" scheme="https://hsb786.github.io/tags/%E6%9D%82%E8%B0%88/"/>
+    
+  </entry>
   
   <entry>
     <title>Java语法糖【深入理解Java虚拟机】</title>
@@ -493,33 +516,6 @@
     
     
       <category term="爪哇" scheme="https://hsb786.github.io/tags/%E7%88%AA%E5%93%87/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Metaspace</title>
-    <link href="https://hsb786.github.io/2018/04/21/Metaspace/"/>
-    <id>https://hsb786.github.io/2018/04/21/Metaspace/</id>
-    <published>2018-04-21T04:21:05.000Z</published>
-    <updated>2018-04-21T07:35:08.004Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote><p>现在java 10 都出来了，再看看自己，连java 8 都没搞定。Stay Hungry, Stay Foolish</p></blockquote><p>Java 8 彻底将永久代(PermGen)从HotSpot JVM移除。方法区移至Metaspace，字符串常量移至Java Heap</p><blockquote><p>In JDK 8, classes metadata is now stored in the native heap and this space is called Metaspace.<br>JDK 8 开始把类的元数据存放到本地堆内存（native heap）中，这一块区域就叫Metaspace。<br><a id="more"></a></p></blockquote><h2 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h2><ul><li>字符串存在永久代中，容易出现性能问题和内存溢出。</li><li>类及方法的信息等比较难确定其大小，因此对于永久代的大小指定比较困难，太小容易出现永久代溢出，太大则容易导致老年代溢出。</li><li>永久代会为 GC 带来不必要的复杂度，并且回收效率偏低。</li><li>Oracle 可能会将HotSpot 与 JRockit 合二为一。</li></ul><h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><p>避免了OutOfMemoryError的问题。类的元数据分配只受本地内存大小的限制。</p><h2 id="GC"><a href="#GC" class="headerlink" title="GC"></a>GC</h2><p>如果Metaspace的空间占用达到了设定的最大值，那么就会触发GC来收集死亡对象和类的加载器。根据JDK 8的特性，G1和CMS都会很好地收集Metaspace区（一般都伴随着Full GC）。</p><h2 id="JVM参数"><a href="#JVM参数" class="headerlink" title="JVM参数"></a>JVM参数</h2><ul><li>-XX:MetaspaceSize 是分配给类元数据空间（以字节计）的初始大小(Oracle逻辑存储上的初始高水位，the initial high-water-mark )，此值为估计值。MetaspaceSize的值设置的过大会延长垃圾回收时间。垃圾回收过后，引起下一次垃圾回收的类元数据空间的大小可能会变大。</li><li>-XX:MaxMetaspaceSize 是分配给类元数据空间的最大值，超过此值就会触发Full GC，此值默认没有限制，但应取决于系统内存的大小。JVM会动态地改变此值。</li><li>-XX:MinMetaspaceFreeRatio 表示一次GC以后，为了避免增加元数据空间的大小，空闲的类元数据的容量的最小比例，不够就会导致垃圾回收。</li><li>-XX:MaxMetaspaceFreeRatio 表示一次GC以后，为了避免增加元数据空间的大小，空闲的类元数据的容量的最大比例，不够就会导致垃圾回收。</li></ul><hr><p><em>参考</em></p><blockquote><p><a href="http://www.sczyh30.com/posts/Java/jvm-metaspace/" target="_blank" rel="noopener">深入探究JVM | 探秘 Metaspace </a></p><p><a href="https://www.cnblogs.com/paddix/p/5309550.html" target="_blank" rel="noopener">Java8内存模型—永久代(PermGen)和元空间(Metaspace)</a></p><p><a href="https://stackoverflow.com/questions/20563047/jdk-8-memory-layout-and-garbage-collection" target="_blank" rel="noopener">JDK 8 Memory Layout and garbage collection</a></p></blockquote>]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;现在java 10 都出来了，再看看自己，连java 8 都没搞定。Stay Hungry, Stay Foolish&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;Java 8 彻底将永久代(PermGen)从HotSpot JVM移除。方法区移至Metaspace，字符串常量移至Java Heap&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;In JDK 8, classes metadata is now stored in the native heap and this space is called Metaspace.&lt;br&gt;JDK 8 开始把类的元数据存放到本地堆内存（native heap）中，这一块区域就叫Metaspace。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="JVM" scheme="https://hsb786.github.io/categories/JVM/"/>
-    
-    
-      <category term="JVM" scheme="https://hsb786.github.io/tags/JVM/"/>
     
   </entry>
   

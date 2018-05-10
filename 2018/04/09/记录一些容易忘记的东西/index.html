@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="HuShengBin’s blog">
 <meta property="og:description" content="接口不可以实现接口，可以继承多个接口 抽象类可以继承具体类 static不能被重写，重写是运行时动态绑定的 static变量发生在静态解析阶段，此时已经将字段的符号引用转换成了内存引用，将它与对应的类关联在了一起">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-05-05T07:07:01.486Z">
+<meta property="og:updated_time" content="2018-05-08T13:11:34.148Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="记录一些容易忘记的东西">
 <meta name="twitter:description" content="接口不可以实现接口，可以继承多个接口 抽象类可以继承具体类 static不能被重写，重写是运行时动态绑定的 static变量发生在静态解析阶段，此时已经将字段的符号引用转换成了内存引用，将它与对应的类关联在了一起">
@@ -157,7 +157,7 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                77
+                78
                 <span>文章</span>
             </div>
             <div class="article-info-block">
@@ -244,7 +244,7 @@
 <p>newInstance 低效率，只能调用<em>无参</em>构造。<br>将new这个方式分解为两步： 首先调用class的加载方式加载某个类，然后实例化  </p>
 <p>字符只有在内存中才会形成，其它都是以字节的方式进行的</p>
 <p>强引用： Object obj=new Object()，只要引用还在，就不会被回收<br>软引用： 内存不够才会被回收<br>弱引用： 下一次垃圾收集器工作时会被回收。<br>虚引用： 随时可能被回收，目的是能在这个对象被回收时收到一个系统通知</p>
-<p>内加载器： JVM动态加载所需的类。  委托、可见、单一。<br>双亲委派，交给父加载器；父加载器加载的类子加载器都能看到；一个类只能被一个加载一次</p>
+<p>内加载器： JVM动态加载所需的类。  委托、可见、单一。<br>双亲委派，交给父加载器；父加载器加载的类子加载器都能看到；一个类只能被一个类加载器加载一次</p>
 <p>每个对象有两个队列： 就绪队列、阻塞队列</p>
 <p>ReentrantLock结合Condition可以有选择性地进行通知，在调度上更加灵活</p>
 <p>指令重排序： 编译器和处理器为了优化程序性能而对指令序列进行重新排序的一种手段</p>
@@ -288,7 +288,7 @@
 
 </div>
 
-    <a data-url="https://hsb786.github.io/2018/04/09/记录一些容易忘记的东西/" data-id="cjgvosqa2006h1smy0oek0ezm" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://hsb786.github.io/2018/04/09/记录一些容易忘记的东西/" data-id="cjh0gkqlw006bycmy9rwuprnr" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
